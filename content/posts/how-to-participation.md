@@ -27,4 +27,10 @@ title: '人狼知能大会への参加方法について'
 
 ### エージェントの開発ならびに実行
 
-執筆中
+エージェントの開発には、運営側が提供するゲームサーバに仕様を満たしたプロトコルで通信する必要があるため、サンプルプログラムを提供します。  
+人狼知能大会には自然言語部門とは別にプロトコル部門がありますが、仕様が異なるため注意が必要です。
+
+「13人村トラック」に向けた機能拡張を実施中です。
+
+ゲームサーバ: [kano-lab/aiwolf-nlp-server](https://github.com/kano-lab/aiwolf-nlp-server)
+エージェント: [kano-lab/aiwolf-nlp-agent](https://github.com/kano-lab/aiwolf-nlp-agent)

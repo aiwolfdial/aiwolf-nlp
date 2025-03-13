@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>人狼知能大会 自然言語部門</title>
-    <link>https://kano-lab.github.io/aiwolf-nlp/</link>
+    <link>http://localhost:1313/aiwolf-nlp/</link>
     <description>Recent content on 人狼知能大会 自然言語部門</description>
     <generator>Hugo -- 0.145.0</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 13 Mar 2025 16:55:23 +0900</lastBuildDate>
-    <atom:link href="https://kano-lab.github.io/aiwolf-nlp/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/aiwolf-nlp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>人狼知能大会への参加方法について</title>
-      <link>https://kano-lab.github.io/aiwolf-nlp/posts/how-to-participation/</link>
+      <link>http://localhost:1313/aiwolf-nlp/posts/how-to-participation/</link>
       <pubDate>Thu, 13 Mar 2025 16:55:23 +0900</pubDate>
-      <guid>https://kano-lab.github.io/aiwolf-nlp/posts/how-to-participation/</guid>
+      <guid>http://localhost:1313/aiwolf-nlp/posts/how-to-participation/</guid>
       <description>&lt;h2 id=&#34;概要&#34;&gt;概要&lt;/h2&gt;
 &lt;p&gt;人狼知能大会では、参加者が作成したエージェントを運営側が提供するゲームサーバにリモート接続し、対戦を行います。&lt;br&gt;
 参加者の方々には、大会への「参加登録」とエージェントの「開発」ならびに「実行」を行っていただく必要があります。&lt;/p&gt;
@@ -27,7 +27,11 @@
 &lt;h3 id=&#34;参加登録&#34;&gt;参加登録&lt;/h3&gt;
 &lt;p&gt;準備中&lt;/p&gt;
 &lt;h3 id=&#34;エージェントの開発ならびに実行&#34;&gt;エージェントの開発ならびに実行&lt;/h3&gt;
-&lt;p&gt;執筆中&lt;/p&gt;</description>
+&lt;p&gt;エージェントの開発には、運営側が提供するゲームサーバに仕様を満たしたプロトコルで通信する必要があるため、サンプルプログラムを提供します。&lt;br&gt;
+人狼知能大会には自然言語部門とは別にプロトコル部門がありますが、仕様が異なるため注意が必要です。&lt;/p&gt;
+&lt;p&gt;「13人村トラック」に向けた機能拡張を実施中です。&lt;/p&gt;
+&lt;p&gt;ゲームサーバ: &lt;a href=&#34;https://github.com/kano-lab/aiwolf-nlp-server&#34;&gt;kano-lab/aiwolf-nlp-server&lt;/a&gt;
+エージェント: &lt;a href=&#34;https://github.com/kano-lab/aiwolf-nlp-agent&#34;&gt;kano-lab/aiwolf-nlp-agent&lt;/a&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
