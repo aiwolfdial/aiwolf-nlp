@@ -2,17 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>人狼知能大会 自然言語部門</title>
-    <link>https://aiwolfdial.github.io/aiwolf-nlp/</link>
+    <link>http://localhost:1313/aiwolf-nlp/</link>
     <description>Recent content on 人狼知能大会 自然言語部門</description>
     <generator>Hugo -- 0.145.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 13 Mar 2025 16:55:23 +0900</lastBuildDate>
-    <atom:link href="https://aiwolfdial.github.io/aiwolf-nlp/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 23 Mar 2025 01:16:28 +0900</lastBuildDate>
+    <atom:link href="http://localhost:1313/aiwolf-nlp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>--- 次回大会 ---</title>
+      <link>http://localhost:1313/aiwolf-nlp/page/next/</link>
+      <pubDate>Sun, 23 Mar 2025 01:16:28 +0900</pubDate>
+      <guid>http://localhost:1313/aiwolf-nlp/page/next/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>--- 過去大会 ---</title>
+      <link>http://localhost:1313/aiwolf-nlp/page/past/</link>
+      <pubDate>Sun, 23 Mar 2025 01:08:57 +0900</pubDate>
+      <guid>http://localhost:1313/aiwolf-nlp/page/past/</guid>
+      <description></description>
+    </item>
     <item>
       <title>人狼知能大会への参加方法について</title>
-      <link>https://aiwolfdial.github.io/aiwolf-nlp/posts/how-to-participation/</link>
+      <link>http://localhost:1313/aiwolf-nlp/posts/how-to-participation/</link>
       <pubDate>Thu, 13 Mar 2025 16:55:23 +0900</pubDate>
-      <guid>https://aiwolfdial.github.io/aiwolf-nlp/posts/how-to-participation/</guid>
+      <guid>http://localhost:1313/aiwolf-nlp/posts/how-to-participation/</guid>
       <description>&lt;h2 id=&#34;概要&#34;&gt;概要&lt;/h2&gt;
 &lt;p&gt;人狼知能大会では、参加者が作成したエージェントを運営側が提供するゲームサーバにリモート接続し、対戦を行います。&lt;br&gt;
 参加者の方々には、大会への「参加登録」とエージェントの「開発」ならびに「実行」を行っていただく必要があります。&lt;/p&gt;
@@ -32,6 +46,22 @@
 &lt;p&gt;「13人村トラック」に向けた機能拡張を実施中です。&lt;/p&gt;
 &lt;p&gt;ゲームサーバ: &lt;a href=&#34;https://github.com/kano-lab/aiwolf-nlp-server&#34;&gt;kano-lab/aiwolf-nlp-server&lt;/a&gt;
 エージェント: &lt;a href=&#34;https://github.com/kano-lab/aiwolf-nlp-agent&#34;&gt;kano-lab/aiwolf-nlp-agent&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AIWolfDial2024-winter-jp</title>
+      <link>http://localhost:1313/aiwolf-nlp/page/aiwolfdial2024winterjp/</link>
+      <pubDate>Mon, 09 Dec 2024 23:32:54 +0900</pubDate>
+      <guid>http://localhost:1313/aiwolf-nlp/page/aiwolfdial2024winterjp/</guid>
+      <description>&lt;h2 id=&#34;サイトリンク&#34;&gt;サイトリンク&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://sites.google.com/view/aiwolfdial2024winterjp/&#34;&gt;https://sites.google.com/view/aiwolfdial2024winterjp/&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AIWolfDial2024workshop-INLG</title>
+      <link>http://localhost:1313/aiwolf-nlp/page/inlg_2024/</link>
+      <pubDate>Thu, 26 Sep 2024 23:41:36 +0900</pubDate>
+      <guid>http://localhost:1313/aiwolf-nlp/page/inlg_2024/</guid>
+      <description>&lt;h2 id=&#34;サイトリンク&#34;&gt;サイトリンク&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://sites.google.com/view/aiwolfdial2024-inlg&#34;&gt;https://sites.google.com/view/aiwolfdial2024-inlg&lt;/a&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
