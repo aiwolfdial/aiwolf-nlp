@@ -57,7 +57,9 @@
 {{- $class := "post-entry" }}
 
 {{- $user_preferred := or site.Params.disableSpecial1stPost site.Params.homeInfoParams }}
-{{- if (or (and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0) (not $user_preferred)) (.Param "divContent")) }}
+{{- if .Param "divContent" }}
+{{- $class = "div-content-entry" }}
+{{- else if (and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0) (not $user_preferred)) }}
 {{- $class = "first-entry" }}
 {{- else if $term }}
 {{- $class = "post-entry tag-entry" }}
@@ -91,7 +93,7 @@
   {{- end }}
 
   {{- if not (.Param "divContent") }}
-    <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+    <a class="entry-link" aria-label="post link to to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
   {{- end }}
 
 </article>
