@@ -2,3 +2,19 @@ baseURL: https://aiwolfdial.github.io/aiwolf-nlp/
 languageCode: en-us
 title: 人狼知能大会 自然言語部門
 theme: ["PaperMod"]
+
+languages:
+  ja:
+    languageName: "日本語"
+    weight: 1
+    taxonomies:
+      category: カテゴリ
+      tag: タグ
+      series: シリーズ
+  en:
+    languageName: "English"
+    weight: 2
+    taxonomies:
+      category: categories
+      tag: tags
+      series: series
