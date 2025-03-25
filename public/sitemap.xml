@@ -1,36 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url>
-    <loc>http://localhost:1313/aiwolf-nlp/page/next/</loc>
-    <lastmod>2025-03-23T01:16:28+09:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/aiwolf-nlp/page/</loc>
-    <lastmod>2025-03-23T01:16:28+09:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/aiwolf-nlp/</loc>
-    <lastmod>2025-03-23T01:16:28+09:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/aiwolf-nlp/page/coming_soon/</loc>
-    <lastmod>2025-03-22T02:57:14+09:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/aiwolf-nlp/page/past/</loc>
-    <lastmod>2025-03-21T01:08:57+09:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/aiwolf-nlp/posts/</loc>
-    <lastmod>2025-03-13T16:55:23+09:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/aiwolf-nlp/posts/how-to-participation/</loc>
-    <lastmod>2025-03-13T16:55:23+09:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/aiwolf-nlp/page/aiwolfdial2024winterjp/</loc>
-    <lastmod>2024-12-09T23:32:54+09:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/aiwolf-nlp/page/inlg_2024/</loc>
-    <lastmod>2024-09-26T23:41:36+09:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/aiwolf-nlp/categories/</loc>
-  </url><url>
-    <loc>http://localhost:1313/aiwolf-nlp/tags/</loc>
-  </url>
-</urlset>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <sitemap>
+    <loc>http://localhost:1313/aiwolf-nlp/ja/sitemap.xml</loc>
+    
+      <lastmod>2025-03-23T01:16:28+09:00</lastmod>
+    
+  </sitemap>
+  
+  <sitemap>
+    <loc>http://localhost:1313/aiwolf-nlp/en/sitemap.xml</loc>
+    
+      <lastmod>2025-03-23T01:16:28+09:00</lastmod>
+    
+  </sitemap>
+  
+</sitemapindex>

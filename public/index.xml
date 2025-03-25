@@ -5,11 +5,11 @@
     <link>http://localhost:1313/aiwolf-nlp/</link>
     <description>Recent content on 人狼知能大会 自然言語部門</description>
     <generator>Hugo -- 0.145.0</generator>
-    <language>en-us</language>
+    <language>ja</language>
     <lastBuildDate>Sun, 23 Mar 2025 01:16:28 +0900</lastBuildDate>
     <atom:link href="http://localhost:1313/aiwolf-nlp/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>--- 次回大会 ---</title>
+      <title>次回大会</title>
       <link>http://localhost:1313/aiwolf-nlp/page/next/</link>
       <pubDate>Sun, 23 Mar 2025 01:16:28 +0900</pubDate>
       <guid>http://localhost:1313/aiwolf-nlp/page/next/</guid>
@@ -23,7 +23,7 @@
       <description></description>
     </item>
     <item>
-      <title>--- 過去大会 ---</title>
+      <title>過去大会</title>
       <link>http://localhost:1313/aiwolf-nlp/page/past/</link>
       <pubDate>Fri, 21 Mar 2025 01:08:57 +0900</pubDate>
       <guid>http://localhost:1313/aiwolf-nlp/page/past/</guid>
