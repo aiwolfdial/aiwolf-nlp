@@ -1,8 +1,8 @@
 baseURL: https://aiwolfdial.github.io/aiwolf-nlp/
-languageCode: en-us
 title: 人狼知能大会 自然言語部門
 theme: ["PaperMod"]
 
+defaultContentLanguage: ja
 languages:
   ja:
     languageName: "日本語"
