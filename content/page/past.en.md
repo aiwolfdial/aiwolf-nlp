@@ -1,7 +1,7 @@
 ---
-date: '2025-03-23T01:16:28+09:00'
+date: '2025-03-21T01:08:57+09:00'
 draft: false
-title: '次回大会'
+title: 'Past tournaments'
 divContent: true
 addSeparator: true
 hideMeta: true
