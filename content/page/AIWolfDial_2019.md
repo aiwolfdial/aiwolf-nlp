@@ -1,8 +1,8 @@
 ---
 date: '2019-10-29T19:06:30+09:00'
 draft: false
-title: 'AIWolfDial2019'
+title: 'AIWolfDial_2019'
 ---
 
 ## サイトリンク
-https://aiwolfdial.kanolab.net/home
+[https://aiwolfdial.kanolab.net/日本語](https://aiwolfdial.kanolab.net/日本語)
