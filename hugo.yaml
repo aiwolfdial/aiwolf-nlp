@@ -11,6 +11,17 @@ languages:
       category: カテゴリ
       tag: タグ
       series: シリーズ
+    menu:
+      main:
+        - name: "トップ"
+          url: /
+          weight: 1
+        - name: "大会参加の流れ"
+          url: /menu/tournament_flow
+          weight: 2
+        - name: "大会レギュレーション"
+          url: /menu/regulation
+          weight: 3
   en:
     languageName: "English"
     title: AIWolfDial
