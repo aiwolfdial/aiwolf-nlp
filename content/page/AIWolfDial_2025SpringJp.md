@@ -4,7 +4,8 @@ draft: false
 title: '2025春季 国内大会 自然言語処理部門'
 ---
 
-
+## 参加申請フォーム
+準備中
 
 ## 日程と参加方法について
 [AIWolfDial2024WinterJp/schedule_participation](/menu/AIWolfDial2024WinterJp/schedule_participation)
