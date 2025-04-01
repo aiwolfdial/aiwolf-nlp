@@ -5,7 +5,7 @@ title: '2025春季 国内大会 自然言語処理部門'
 ---
 
 ## 参加申請フォーム
-準備中
+[GoogleForms](https://docs.google.com/forms/d/e/1FAIpQLSfmxdM1Op5jM5dIi3ViElr6O3_JwQ5GnbWu7_FJSX7lxeOqBg/viewform?usp=dialog)
 
 ## 日程と参加方法について
 [AIWolfDial2025_SpringJp/schedule_participation](/menu/AIWolfDial2025_SpringJp/schedule_participation)
