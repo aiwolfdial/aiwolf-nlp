@@ -8,10 +8,10 @@ title: '2025春季 国内大会 自然言語処理部門'
 準備中
 
 ## 日程と参加方法について
-[AIWolfDial2024WinterJp/schedule_participation](/menu/AIWolfDial2024WinterJp/schedule_participation)
+[AIWolfDial2025_SpringJp/schedule_participation](/menu/AIWolfDial2025_SpringJp/schedule_participation)
 
 ## エージェントの作成と対戦方法について
-[AIWolfDial2024WinterJp/agent](/menu/AIWolfDial2024WinterJp/agent)
+[AIWolfDial2025_SpringJp/agent](/menu/AIWolfDial2025_SpringJp/agent)
 
 ## リンク・運営委員
-[AIWolfDial2024WinterJp/organizer](/menu/AIWolfDial2024WinterJp/organizer)
+[AIWolfDial2025_SpringJp/organizer](/menu/AIWolfDial2025_SpringJp/organizer)
