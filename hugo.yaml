@@ -11,6 +11,20 @@ languages:
       category: カテゴリ
       tag: タグ
       series: シリーズ
+    menu:
+      main:
+        - name: "トップ"
+          url: /
+          weight: 1
+        - name: "日程と参加方法"
+          url: /menu/AIWolfDial2024WinterJp/schedule_participation
+          weight: 2
+        - name: "エージェントの作成と対戦方法"
+          url: /menu/AIWolfDial2024WinterJp/agent
+          weight: 3
+        - name: "リンク・運営委員"
+          url: /menu/AIWolfDial2024WinterJp/organizer
+          weight: 4
   en:
     languageName: "English"
     title: AIWolfDial
