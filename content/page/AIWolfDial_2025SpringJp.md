@@ -14,6 +14,9 @@ title: '2025春季 国内大会 自然言語処理部門'
 ## エージェントの作成と対戦方法について
 [AIWolfDial2025_SpringJp/agent](/menu/AIWolfDial2025_SpringJp/agent)
 
+## 大会レギュレーション
+[レギュレーション](/menu/regulation)
+
 ## リンク・運営委員
 [AIWolfDial2025_SpringJp/organizer](/menu/AIWolfDial2025_SpringJp/organizer)
 
