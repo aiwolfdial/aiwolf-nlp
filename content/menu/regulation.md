@@ -72,17 +72,17 @@ custom_style: 'documentPage'
 ## １発話あたりの発話上限について
 会話パートでの発言には発話上限が設定されており、上限を超えた文字数はゲームサーバ上でカットされて扱われます。
 
-## 通常の発話
+### 通常の発話
 ゲームサーバから送信される`base_length`はメンションが無い通常の発話の部分の文字数を制限する物です。\
 下記画像のように超過した分は切り捨てられます。
 ![base_length](https://aiwolfdial.github.io/aiwolf-nlp/images/base_length.png#center)
 
-## メンションの発話
+### メンションの発話
 ゲームサーバから送信される`mention_length`はメンションしている発話の部分の文字数を制限する物です。\
 メンションの部分は文字数としてカウントされることはなく、通常の発話と同様に超過した分は切り捨てられます。
 ![mention_length](https://aiwolfdial.github.io/aiwolf-nlp/images/mention_length.png#center)
 
-## 通常の会話とメンションが混合した発話
+### 通常の会話とメンションが混合した発話
 下記画像のように、`base_length`はメンションの手前までの発話に適応され超過した分は破棄されます。\
 同様に`mention_length`はメンションしている発話部分のみの適応となり超過した分は破棄されます。
 ![base_mention_length](https://aiwolfdial.github.io/aiwolf-nlp/images/base_mention_length.png#center)
