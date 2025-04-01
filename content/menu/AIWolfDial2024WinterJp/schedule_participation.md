@@ -2,6 +2,7 @@
 date: '2025-04-01T14:08:21+09:00'
 draft: false
 title: '日程と参加方法'
+category: schedule
 ---
 
 

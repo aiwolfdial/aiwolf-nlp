@@ -2,6 +2,7 @@
 date: '2025-04-01T14:26:04+09:00'
 draft: false
 title: 'リンク・運営委員'
+category: organizer
 ---
 
 
