@@ -2,6 +2,7 @@
 date: '2025-03-30T23:15:39+09:00'
 draft: false
 title: '大会レギュレーション'
+ShowToc: true
 custom_style: 'documentPage'
 ---
 
