@@ -13,8 +13,8 @@ languages:
       series: シリーズ
     menu:
       main:
-        - name: "トップ"
-          url: /
+        - name: "大会ページトップ"
+          url: /page/AIWolfDial_2025SpringJp
           weight: 1
         - name: "日程と参加方法"
           url: /menu/AIWolfDial2025_SpringJp/schedule_participation
