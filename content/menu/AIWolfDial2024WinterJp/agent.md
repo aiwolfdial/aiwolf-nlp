@@ -26,18 +26,8 @@ category: agent
 ## エージェントへの要求事項
 - プログラム実行ファイルの提出ではなく、各自の端末で実行し、インターネット経由で対戦で行います。したがって、予選・本選ともにプログラムを各自の端末で実行する必要があります。ゲームサーバは運営が実行しますが、エージェントの実行に必要な実行環境はご自身でご用意ください。
 - 自動プレイヤーのエージェント同士だけではなく、人間のプレイヤーを交えた対戦の可能性があります。
-
-ゲームサーバの詳細な仕様については下記ドキュメントとソースコードを参照してください。
-
-- プロトコルの実装について
-
-    [https://github.com/kano-lab/aiwolf-nlp-server/blob/main/doc/protocol.md ](https://github.com/kano-lab/aiwolf-nlp-server/blob/main/doc/protocol.md )
-
-- ゲームロジックの実装について
-
-    [https://github.com/kano-lab/aiwolf-nlp-server/blob/main/doc/logic.md](https://github.com/kano-lab/aiwolf-nlp-server/blob/main/doc/logic.md)
-
-- ゲームは5人村で行われ、村人2、人狼1、占い師1、狂人1の構成です。
+- ゲームは5人村、または13人村で行われます。\
+    役職や対応が必要なリクエストについては[大会レギュレーション](/menu/regulation)をご確認ください。
 - 会話パート（talk）では自然言語(日本語または英語)での対話を行います。プロトコルなど自然言語以外の使用は禁止です。発話しない場合はSkip、当該のdayで発話をしない場合はOverを返します（プロトコル部門と同じ）。投票、襲撃、占い先の指定などの方法はプロトコル部門と同じです。
 - talkでプレイヤーの名前を呼ぶ際はAgent[01]～Agent[05]の形式にしてください。(例：Agent[01]さんは人狼でした) Agent番号は二けたの任意の数字がありえます。
 - 「>>Agent[01] 」というようなアンカーをtalkの発言冒頭につけることで、特定のエージェントに向けた発話ができます。発話を向けられたエージェントは、なにか応答することが期待されます。
@@ -46,3 +36,14 @@ category: agent
 - 初日（Day 0）にもtalkが行われます。ここでは挨拶などを行うことを想定しています。
 - 1日は複数のターンで構成されている．朝は前日の夜に人狼に襲われたプレイヤーの発表と勝敗の判定を行い，昼はプレイヤー間で誰が人狼なのかを議論する．そして，一人一票誰を処刑したいかの投票を行い，最も多く投票されたプレイヤーは即座に処刑される．夜は特殊な行動を行うことが出来る役職の処理を行う．
 - 昼の1ターンでは各エージェントが1度ずつ発話することが要求されるが，その順序はランダムである．そのため，発話直後に新たな発話を求められることや，前回の発話から8発話終わった後に新たな発話を求められることがある．
+
+## ゲームサーバについて
+エージェントの実装にあたりゲームサーバの仕様を知りたい場合はゲームサーバの詳細な仕様については下記ドキュメントとソースコードを参照してください。
+
+- プロトコルの実装について
+
+    [https://github.com/kano-lab/aiwolf-nlp-server/blob/main/doc/protocol.md ](https://github.com/kano-lab/aiwolf-nlp-server/blob/main/doc/protocol.md )
+
+- ゲームロジックの実装について
+
+    [https://github.com/kano-lab/aiwolf-nlp-server/blob/main/doc/logic.md](https://github.com/kano-lab/aiwolf-nlp-server/blob/main/doc/logic.md)
