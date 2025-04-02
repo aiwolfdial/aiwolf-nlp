@@ -1,7 +1,7 @@
 ---
 date: '2022-03-29T22:24:50+09:00'
 draft: false
-title: 'AIWolfDial_2022'
+title: 'AIWolfDial-2022'
 ---
 
 ## サイトリンク

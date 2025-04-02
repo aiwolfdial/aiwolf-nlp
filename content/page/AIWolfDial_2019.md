@@ -1,7 +1,7 @@
 ---
 date: '2019-10-29T19:06:30+09:00'
 draft: false
-title: 'AIWolfDial_2019'
+title: 'AIWolfDial-2019'
 ---
 
 ## サイトリンク
