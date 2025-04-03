@@ -35,6 +35,7 @@ jobs:
     steps:
       - name: List directory contents
         run: ls /home/runner/work/aiwolf-nlp/
+        run: ls /home/runner/work/aiwolf-nlp/aiwolf-nlp/
       - name: Check Markdown
         uses: DavidAnson/markdownlint-cli2-action@v19
         with:
