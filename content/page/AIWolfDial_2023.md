@@ -8,7 +8,7 @@ title: 'AIWolfDial-2023'
 
 [aiwolf.org/5th-international-ai-werewolf-competition](https://aiwolf.org/5th-international-ai-werewolf-competition)
 
-## 　概要 
+## 概要
 
 ​第5回国際AI人狼コンペティションは、2023年9月11日から15日にチェコ・プラハで開催されたINLG 2023 の Generation Challenges の一つとして開催内で実施されました。​
 

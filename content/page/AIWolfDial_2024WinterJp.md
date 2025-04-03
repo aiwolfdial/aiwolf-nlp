@@ -8,7 +8,7 @@ title: 'AIWolfDial2024-winter-jp'
 
 [sites.google.com/view/aiwolfdial2024winterjp/](https://sites.google.com/view/aiwolfdial2024winterjp/)
 
-## 　概要 
+## 概要
 
 ​『人狼知能コンテスト2024冬季 国内大会 自然言語部門（AIWolfDial2024-winter-jp）』は、​2024年冬に日本語での対戦を行う国内大会として開催されました。​
 
@@ -24,4 +24,3 @@ title: 'AIWolfDial2024-winter-jp'
 参加登録方法: フォームから、チーム名、代表者の氏名とメールアドレス、メンバーおよび所属、氏名・所属公開の可否を入力して登録。​
 
 大会の詳細: 詳細なルールやエージェント作成のガイドラインについては、大会公式サイトをご参照ください。
-
