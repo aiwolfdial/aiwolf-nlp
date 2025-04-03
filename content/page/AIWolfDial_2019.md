@@ -5,4 +5,5 @@ title: 'AIWolfDial-2019'
 ---
 
 ## サイトリンク
-[https://aiwolfdial.kanolab.net/日本語](https://aiwolfdial.kanolab.net/日本語)
+
+[aiwolfdial.kanolab.net/日本語](https://aiwolfdial.kanolab.net/日本語)

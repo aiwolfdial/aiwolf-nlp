@@ -5,4 +5,5 @@ title: 'AIWolfDial-2020'
 ---
 
 ## Site Links
-https://sites.google.com/view/aiwolfdial2020/home
+
+[sites.google.com/view/aiwolfdial2020](https://sites.google.com/view/aiwolfdial2020)

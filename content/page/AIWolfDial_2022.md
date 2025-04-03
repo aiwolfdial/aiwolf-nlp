@@ -5,4 +5,5 @@ title: 'AIWolfDial-2022'
 ---
 
 ## サイトリンク
-https://aiwolf.org/4th-international-aiwolf-contest
+
+[aiwolf.org/4th-international-aiwolf-contest](https://aiwolf.org/4th-international-aiwolf-contest)

@@ -5,4 +5,5 @@ title: 'AIWolfDial-2019'
 ---
 
 ## Site Links
-https://aiwolfdial.kanolab.net/home
+
+[aiwolfdial.kanolab.net](https://aiwolfdial.kanolab.net)

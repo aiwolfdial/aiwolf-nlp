@@ -5,4 +5,5 @@ title: 'AIWolfDial-2021'
 ---
 
 ## サイトリンク
-https://aiwolf.org/3rd-international-aiwolf-contest
+
+[aiwolf.org/3rd-international-aiwolf-contest](https://aiwolf.org/3rd-international-aiwolf-contest)

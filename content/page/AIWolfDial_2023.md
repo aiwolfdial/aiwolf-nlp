@@ -5,4 +5,5 @@ title: 'AIWolfDial-2023'
 ---
 
 ## サイトリンク
-https://aiwolf.org/5th-international-ai-werewolf-competition
+
+[aiwolf.org/5th-international-ai-werewolf-competition](https://aiwolf.org/5th-international-ai-werewolf-competition)

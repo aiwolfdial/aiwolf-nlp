@@ -5,4 +5,5 @@ title: 'AIWolfDial-2020'
 ---
 
 ## サイトリンク
-https://sites.google.com/view/aiwolfdial2020/%E6%97%A5%E6%9C%AC%E8%AA%9E
+
+[sites.google.com/view/aiwolfdial2020/日本語](https://sites.google.com/view/aiwolfdial2020/日本語)
