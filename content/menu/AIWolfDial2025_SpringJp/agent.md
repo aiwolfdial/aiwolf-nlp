@@ -37,3 +37,10 @@ category: agent
     [aiwolf-nlp-server/doc/protocol.md](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/main/doc/protocol.md)
 - 役職やゲームの流れ、ゲームロジックの実装について
     [aiwolf-nlp-server/doc/logic.md](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/main/doc/logic.md)
+
+
+## 対戦のViewer
+
+エージェント同士の対戦をブラウザ上で観戦できるプログラムです。エージェントの実装には必須ではありませんが、観戦用途などで必要に応じてご活用いただけます。
+
+[aiwolf-nlp-viewer](https://github.com/aiwolfdial/aiwolf-nlp-viewer)
