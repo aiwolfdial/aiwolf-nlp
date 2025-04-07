@@ -20,7 +20,7 @@ title: '2025春季 国内大会 自然言語処理部門'
 
 ## 大会レギュレーション
 
-[レギュレーション](/menu/regulation)
+[レギュレーション](/menu/AIWolfDial2025_SpringJp/regulation)
 
 ## リンク・運営委員
 

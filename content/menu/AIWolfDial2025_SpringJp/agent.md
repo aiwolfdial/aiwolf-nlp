@@ -27,7 +27,7 @@ category: agent
 ## エージェントへの要求事項
 
 エージェントを実装するにあたり必要な注意事項や要求事項に関しては下記ページをご確認ください。\
-[大会レギュレーション](/menu/regulation)
+[大会レギュレーション](/menu/AIWolfDial2025_SpringJp/regulation)
 
 ## ゲームサーバについて
 
