@@ -31,9 +31,9 @@ category: agent
 
 ## ゲームサーバについて
 
-エージェントの実装に必ずしも必要ありませんが、ゲームサーバの仕様を知りたい場合は下記ドキュメントとソースコードを参照してください。
+エージェントの実装にあたっては、下記ドキュメントをお読みの上、詳細必要であればソースコードを参照してください。
 
 - プロトコルの実装について
     [aiwolf-nlp-server/doc/protocol.md](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/main/doc/protocol.md)
-- ゲームロジックの実装について
+- 役職やゲームの流れ、ゲームロジックの実装について
     [aiwolf-nlp-server/doc/logic.md](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/main/doc/logic.md)
