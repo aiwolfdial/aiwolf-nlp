@@ -17,14 +17,17 @@ languages:
           url: /page/AIWolfDial_2025SpringJp
           weight: 1
         - name: "日程と参加方法"
-          url: /menu/AIWolfDial2025_SpringJp/schedule_participation
+          url: /menu/AIWolfDial2025_SpringJp/schedule_participation 
           weight: 2
+        - name: "レギュレーション"
+          url: /menu/AIWolfDial2025_SpringJp/regulation
+          weight: 3
         - name: "エージェントの作成と対戦方法"
           url: /menu/AIWolfDial2025_SpringJp/agent
-          weight: 3
+          weight: 4
         - name: "リンク・運営委員"
           url: /menu/AIWolfDial2025_SpringJp/organizer
-          weight: 4
+          weight: 5
   en:
     languageName: "English"
     title: AIWolfDial
