@@ -43,4 +43,4 @@ AIWolfDial 2020は、人狼ゲームを題材として、対話システムと�
 - 準優勝: Team B
 - 3位: Team C
 
-詳細な情報や発表資料については、[公式サイト](https://sites.google.com/view/aiwolfdial2020/日本語)をご参照ください。 
+詳細な情報や発表資料については、[公式サイト](https://sites.google.com/view/aiwolfdial2020/日本語)をご参照ください。
