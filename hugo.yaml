@@ -1,7 +1,7 @@
 baseURL: https://aiwolfdial.github.io/aiwolf-nlp/
 theme: ["PaperMod"]
 
-defaultContentLanguage: ja
+defaultContentLanguage: jp
 languages:
   ja:
     languageName: "日本語"
@@ -33,9 +33,29 @@ languages:
           weight: 6
   en:
     languageName: "English"
-    title: AIWolfDial
+    title: AIWolfDial NLP
     weight: 2
     taxonomies:
       category: categories
       tag: tags
       series: series
+    menu:
+      main:
+        - name: "Contest Home"
+          url: /page/INLG_2025
+          weight: 1
+        - name: "Schedule and Participation"
+          url: /menu/INLG_2025_en/schedule_participation
+          weight: 2 
+        - name: "Presentation Program"
+          url: /menu/INLG_2025_en/program
+          weight: 3
+        - name: "Competition Regulations"
+          url: /menu/INLG_2025_en/regulation
+          weight: 4
+        - name: "Agent Development and Match Guide"
+          url: /menu/INLG_2025_en/agent
+          weight: 5
+        - name: "Links & Organizing Committee"
+          url: /menu/INLG_2025/organizer
+          weight: 6
