@@ -22,7 +22,7 @@ category: schedule
 ## How to Participate & Evaluation Criteria
 
 - Participation is open to teams of one or more people. There are no specific eligibility requirements — anyone is welcome to join. After the contest, each team will be asked to submit a document describing their system in detail.
-- Each team must fill out the [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSfmxdM1Op5jM5dIi3ViElr6O3_JwQ5GnbWu7_FJSX7lxeOqBg/viewform?usp=dialog). Required information includes: team name, contact email for the representative, names and affiliations of all members, whether to make the names/affiliations public (if not, only the team name will be used), and the email address used for Slack registration.
+- Each team must fill out the [Google Form](https://docs.google.com/forms/d/e/1FAIpQLScNC8IJGh20MQb_8lzaYrdpVuMxnEgBuxZwpaouRyEnWmTH7g/viewform?usp=header). Required information includes: team name, contact email for the representative, names and affiliations of all members, whether to make the names/affiliations public (if not, only the team name will be used), and the email address used for Slack registration.
 - There is no registration fee.
 - Participants are encouraged to attend INLG 2025 either on-site or online.
 <!-- - Top-ranked teams may receive cash prizes and gifts sponsored by Spiral.AI Inc., a developer of conversational LLMs. -->

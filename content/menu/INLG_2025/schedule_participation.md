@@ -22,7 +22,7 @@ category: schedule
 ## 参加方法と評価基準
 
 - 一名以上のチーム。参加資格は特にありません。どなたでも参加できます。参加者には大会後にシステムの詳細を記述したドキュメントをご提出いただきます。
-- チームごとに[Google フォーム](https://docs.google.com/forms/d/e/1FAIpQLSfmxdM1Op5jM5dIi3ViElr6O3_JwQ5GnbWu7_FJSX7lxeOqBg/viewform?usp=dialog)に入力をお願いいたします．必要事項は、チーム名、代表連絡先メールアドレス、代表者（および他のメンバー）氏名、所属名、氏名所属の公開可否（不可の場合はチーム名のみを用います）、Slack登録メールアドレスです。
+- チームごとに[Google フォーム](https://docs.google.com/forms/d/e/1FAIpQLScNC8IJGh20MQb_8lzaYrdpVuMxnEgBuxZwpaouRyEnWmTH7g/viewform?usp=header)に入力をお願いいたします．必要事項は、チーム名、代表連絡先メールアドレス、代表者（および他のメンバー）氏名、所属名、氏名所属の公開可否（不可の場合はチーム名のみを用います）、Slack登録メールアドレスです。
 - 参加チームの登録費は無料です。
 - 参加者にはINLG 2025への現地・オンライン参加を推奨します。
 <!-- - 上位入賞チームには、口語マルチターン会話型の独自大規模言語モデルを開発しているSpiral.AI社より金一封と景品が贈呈されます。 -->

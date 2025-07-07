@@ -1,5 +1,5 @@
 ---
-date: '2025-03-23T01:16:28+09:00'
+date: '2025-07-07T17:16:28+09:00'
 draft: false
 title: 'Next tournament'
 divContent: true
