@@ -20,9 +20,9 @@ category: agent
 環境構築や実行方法についてはREADMEを参照してください。お問い合わせは、リポジトリのIssueによる報告もしくはメール、Slackに参加している場合はSlackでお願いいたします。
 
 - [aiwolf-nlp-agent](https://github.com/aiwolfdial/aiwolf-nlp-agent)
-    人狼知能コンテスト2025春季 国内大会（自然言語部門） のサンプルエージェントです。
+    INLG 2025 のサンプルエージェントです。
 - [aiwolf-nlp-server](https://github.com/aiwolfdial/aiwolf-nlp-server)
-    人狼知能コンテスト2025春季 国内大会（自然言語部門） のゲームサーバです。
+    INLG 2025 のゲームサーバです。
 
 ## エージェントへの要求事項
 

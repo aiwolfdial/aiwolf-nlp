@@ -57,5 +57,5 @@ languages:
           url: /menu/INLG_2025_en/agent
           weight: 5
         - name: "Links & Organizing Committee"
-          url: /menu/INLG_2025/organizer
+          url: /menu/INLG_2025_en/organizer
           weight: 6
