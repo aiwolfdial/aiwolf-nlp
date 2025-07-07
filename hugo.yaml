@@ -31,6 +31,9 @@ languages:
         - name: "リンク・運営委員"
           url: /menu/INLG_2025/organizer
           weight: 6
+        - name: "論文提出"
+          url: /menu/INLG_2025/paper_submission
+          weight: 7
   en:
     languageName: "English"
     title: AIWolfDial NLP
@@ -59,3 +62,6 @@ languages:
         - name: "Links & Organizing Committee"
           url: /menu/INLG_2025_en/organizer
           weight: 6
+        - name: "Paper Submission"
+          url: /menu/INLG_2025_en/paper_submission
+          weight: 7
