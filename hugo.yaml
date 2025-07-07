@@ -14,22 +14,22 @@ languages:
     menu:
       main:
         - name: "大会ページトップ"
-          url: /page/AIWolfDial_2025SpringJp
+          url: /page/INLG_2025
           weight: 1
         - name: "日程と参加方法"
-          url: /menu/AIWolfDial2025_SpringJp/schedule_participation
+          url: /menu/INLG_2025/schedule_participation
           weight: 2 
         - name: "大会発表プログラム"
-          url: /menu/AIWolfDial2025_SpringJp/program
+          url: /menu/INLG_2025/program
           weight: 3
         - name: "レギュレーション"
-          url: /menu/AIWolfDial2025_SpringJp/regulation
+          url: /menu/INLG_2025/regulation
           weight: 4
         - name: "エージェントの作成と対戦方法"
-          url: /menu/AIWolfDial2025_SpringJp/agent
+          url: /menu/INLG_2025/agent
           weight: 5
         - name: "リンク・運営委員"
-          url: /menu/AIWolfDial2025_SpringJp/organizer
+          url: /menu/INLG_2025/organizer
           weight: 6
   en:
     languageName: "English"
