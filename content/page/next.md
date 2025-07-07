@@ -1,5 +1,5 @@
 ---
-date: '2025-04-01T01:16:28+09:00'
+date: '2025-07-07T13:36:28+09:00'
 draft: false
 title: '次回大会'
 divContent: true
