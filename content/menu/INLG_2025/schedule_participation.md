@@ -7,7 +7,8 @@ category: schedule
 
 ## 日程
 
-※論文提出日程については[paper_submission]を参照
+※論文提出日程については[paper_submission](/menu/INLG_2025/paper_submission)を参照
+
 - 2025/07/31: 参加登録〆切
 - 2025/08/09: 予選(自己対戦) 結果提出〆切
 - 2025/08/中旬: 本戦（オンライン）
