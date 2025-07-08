@@ -13,26 +13,26 @@ languages:
       series: シリーズ
     menu:
       main:
-        - name: "大会ページトップ"
+        - name: "ホーム"
           url: /page/INLG_2025
           weight: 1
-        - name: "日程と参加方法"
-          url: /menu/INLG_2025/schedule_participation
-          weight: 2 
-        - name: "大会発表プログラム"
-          url: /menu/INLG_2025/program
-          weight: 3
-        - name: "レギュレーション"
-          url: /menu/INLG_2025/regulation
-          weight: 4
-        - name: "エージェントの作成と対戦方法"
-          url: /menu/INLG_2025/agent
-          weight: 5
-        - name: "リンク・運営委員"
-          url: /menu/INLG_2025/organizer
-          weight: 6
         - name: "論文提出"
           url: /menu/INLG_2025/paper_submission
+          weight: 2
+        - name: "ワークショップ"
+          url: /menu/INLG_2025/program
+          weight: 3
+        - name: "スケジュールと参加"
+          url: /menu/INLG_2025/schedule_participation
+          weight: 4
+        - name: "レギュレーション"
+          url: /menu/INLG_2025/regulation
+          weight: 5
+        - name: "開発"
+          url: /menu/INLG_2025/agent
+          weight: 6
+        - name: "リンク・実行委員会"
+          url: /menu/INLG_2025/organizer
           weight: 7
   en:
     languageName: "English"
@@ -44,24 +44,24 @@ languages:
       series: series
     menu:
       main:
-        - name: "Contest Home"
+        - name: "Home"
           url: /page/INLG_2025
           weight: 1
-        - name: "Schedule and Participation"
-          url: /menu/INLG_2025_en/schedule_participation
-          weight: 2 
-        - name: "Presentation Program"
-          url: /menu/INLG_2025_en/program
-          weight: 3
-        - name: "Competition Regulations"
-          url: /menu/INLG_2025_en/regulation
-          weight: 4
-        - name: "Agent Development and Match Guide"
-          url: /menu/INLG_2025_en/agent
-          weight: 5
-        - name: "Links & Organizing Committee"
-          url: /menu/INLG_2025_en/organizer
-          weight: 6
         - name: "Paper Submission"
           url: /menu/INLG_2025_en/paper_submission
+          weight: 2
+        - name: "Workshop"
+          url: /menu/INLG_2025_en/program
+          weight: 3
+        - name: "Schedule and Participation"
+          url: /menu/INLG_2025_en/schedule_participation
+          weight: 4 
+        - name: "Regulations"
+          url: /menu/INLG_2025_en/regulation
+          weight: 5
+        - name: "Development"
+          url: /menu/INLG_2025_en/agent
+          weight: 6
+        - name: "Links & Organizing Committee"
+          url: /menu/INLG_2025_en/organizer
           weight: 7

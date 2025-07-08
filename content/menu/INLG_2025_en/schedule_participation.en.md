@@ -7,7 +7,7 @@ category: schedule
 
 ## Schedule
 
-※For paper submission dates, please refer to [paper_submission](/menu/INLG_2025/paper_submission).
+※For paper submission dates, please refer to [paper_submission](/menu/INLG_2025_en/paper_submission).
 
 - 2025/07/31: Registration deadline
 - 2025/08/09: Deadline for submitting preliminary (self-play) results
