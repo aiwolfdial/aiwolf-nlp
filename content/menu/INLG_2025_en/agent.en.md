@@ -34,7 +34,7 @@ For important implementation notes and detailed agent requirements, please refer
 To implement your agent, please read the documents below and refer to the source code as needed for further details:
 
 - For protocol implementation:
-[aiwolf-nlp-server/doc/protocol.md](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/main/doc/doc_en/logic.en.md)
+[aiwolf-nlp-server/doc/protocol.md](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/main/doc/doc_en/protocol.en.md)
 - For game flow, roles, and logic implementation:
 [aiwolf-nlp-server/doc/logic.md](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/main/doc/doc_en/logic.en.md)
 
