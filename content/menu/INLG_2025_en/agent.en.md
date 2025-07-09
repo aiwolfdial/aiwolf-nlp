@@ -19,15 +19,15 @@ Each agent (automated player) can participate in a game by connecting to the gam
 
 Please refer to the README for environment setup and execution instructions. For any questions, feel free to open an Issue in the repository, contact via email, or reach out on Slack if you're a member.
 
-- [aiwolf-nlp-agent](https://github.com/aiwolfdial/aiwolf-nlp-agent)
+- [aiwolf-nlp-agent](https://github.com/aiwolfdial/aiwolf-nlp-agent/blob/main/README.en.md)
 A sample agent for INLG 2025
-- [aiwolf-nlp-server](https://github.com/aiwolfdial/aiwolf-nlp-server)
+- [aiwolf-nlp-server](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/main/README.en.md)
 The game server for INLG 2025
 
 ## Agent Requirements
 
 For important implementation notes and detailed agent requirements, please refer to the following page:
-[Competition Regulations](/menu/AIWolfDial2025_SpringJp/regulation)
+[Competition Regulations](/menu/INLG_2025_en/regulation)
 
 ## Agent Implementation and Game Server Details
 
