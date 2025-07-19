@@ -15,7 +15,7 @@ The workshop will be held in a hybrid format: both on-site and online presentati
 
 ## Important Dates
 
-- July 31, 2025: Competition Registration Deadline
+- August 9, 2025: Competition Registration Deadline
 - August 9, 2025: Preliminary Round (Self-play) Result Submission Deadline
 - Mid August 2025: Final Round (Online Matches)
 - August 26, 2025: Paper Submission Deadline
