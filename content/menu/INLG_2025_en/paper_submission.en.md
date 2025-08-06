@@ -21,7 +21,7 @@ The workshop will be held in a hybrid format: both on-site and online presentati
 - September 10, 2025: Paper Submission Deadline
 - September 24, 2025: Notification of Acceptance
 - October 1, 2025: Camera-ready Submission Deadline
-- October 30, 2025 (afternoon): Workshop (Paper Presentations and Competition Results)
+- October 30, 2025 (AM): Workshop (Paper Presentations and Competition Results)
 
 ## Page Limits and Format
 

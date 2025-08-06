@@ -12,7 +12,7 @@ category: schedule
 - 2025/08/20: Registration deadline
 - 2025/08/20: Deadline for submitting preliminary (self-play) results
 - Late-August 2025: Main round (online)
-- 2025/10/30 (afternoon): Results announcement and awards ceremony
+- 2025/10/30 (AM): Results announcement and awards ceremony
 
 ## Preliminary and Main Rounds
 
