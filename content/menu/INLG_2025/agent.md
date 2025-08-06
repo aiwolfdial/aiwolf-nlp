@@ -31,7 +31,7 @@ category: agent
 
 ## エージェント実装の詳細とゲームサーバについて
 
-エージェントの実装にあたっては、下記ドキュメントをお読みの上、詳細必要であればソースコードを参照してください。
+エージェントの実装にあたっては、下記ドキュメントをお読みの上、詳細必要であればソースコードを参照して下さい。
 
 - プロトコルの実装について
     [aiwolf-nlp-server/doc/protocol.md](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/main/doc/protocol.md)
