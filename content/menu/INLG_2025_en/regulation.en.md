@@ -26,6 +26,7 @@ The following explains the regulations for the general public. If you are a part
 - Talk is also conducted on the first day (Day 0). This is intended for greetings, etc.
 - A day consists of multiple turns. In the morning, the player attacked by werewolves during the previous night is announced and win/loss is checked. During the day, players discuss who the werewolves are. Then everyone votes for one player to execute; the player with the most votes is executed immediately. At night, roles with special actions take their turns.
 - In each daytime turn, each agent is required to speak once, but the order is random. Therefore, you may be prompted to speak again immediately after speaking, or only after eight other utterances have occurred since your previous one.
+- Do not include half-width commas (`,`) in utterances.
 
 ## Roles Used in Hosted Games
 
