@@ -5,8 +5,6 @@ title: '人狼知能運営アウトライン'
 category: organizer_guide
 ---
 
-## 人狼知能運営アウトライン
-
 1. [運営を始める前に](./preparing.md)
 2. [人狼知能大会ウェブサイト更新](./edit_website.md)
 3. [参加登録フォームの作成](./registration_form.md)
