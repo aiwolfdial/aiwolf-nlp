@@ -1,4 +1,5 @@
 # 人狼知能人手評価手順
+
 <details>
 <summary>本戦が完了次第、本戦で行われた試合の中から適当な試合数ピックする</summary>
 
@@ -18,6 +19,7 @@
 <summary>ピックしたログファイルは.log形式であることを確認してログビュアーへ更新</summary>
 
 [aiwolf-nlp-viewer](https://github.com/aiwolfdial/aiwolf-nlp-viewer)
+
 - `aiwolf-nlp-viewer/static/assets/` 以下に保存
 - 5人村ログフォルダ：`_truck5`、13人村ログフォルダ：`_truck13` で識別
 - 国際大会の場合は英語版も更新：`_en` で識別
@@ -43,7 +45,7 @@
 分担評価も可能：[参考フォーム](https://docs.google.com/forms/d/1dLSN6w_gLY7MZeUxOtjVfWIj8cJn4GrBEgH0ZHqD5tc/edit)
 
 </details>
-    
+
 <details>
 <summary>slackで案内</summary>
     GoogleFormのリンクを評価者へ配布する<br>
@@ -82,18 +84,18 @@
 
 <details>
 <summary>※ 備考：gsコードの使いかた</summary>
-    
+
     拡張機能→AppScript
-    
+
     該当コードエディタに移動後実行をクリック
-    
+
     初回実行の場合：
-    
+
     承認が必要です：権限を確認
-    
+
     アカウントの選択：kanolab.share@gmail.com
-    
+
     このアプリはGoogleで確認されていません：詳細→無題のプロジェクト（安全ではないページ）に移動
-    
+
     無題のプロジェクトがGoogleアカウントへのアクセスを求めています：すべて選択→続行
 </details>

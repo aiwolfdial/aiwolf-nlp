@@ -16,9 +16,9 @@
     <details>
     <summary>参考画像</summary>
     <img src="../../../static/images/organizer/slack_invitation/image%202.png" alt="名前またはメールアドレスで" width="800">
-    
+
     1. 参加登録GoogleFormに入力されたメールアドレスを入力
-    
+
     2. 参加者が過去に出場したことがあった場合は検索結果にユーザが表示される
     </details>
 
@@ -50,13 +50,13 @@
     <details>
     <summary>参考画像</summary>
     <img src="../../../static/images/organizer/slack_invitation/image%207.png" alt="送信" width="400">
-    
+
     1. 送信先に参加登録GoogleFormに入力されたメールアドレスを入力
-    
+
     2. 招待の種類は「ゲスト」
-    
+
     3. チームのチャンネルに追加する「該当大会のチャンネル」
-    
+
     4. 「送信」
     </details>
 
