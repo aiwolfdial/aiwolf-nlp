@@ -5,7 +5,7 @@ title: '予選・本戦実行のコマンド一覧'
 category: organizer_guide
 ---
 
-# 予選・本戦実行のコマンド一覧
+## 予選・本戦実行のコマンド一覧
 
 <details>
 <summary>実行コマンドおよびサーバの説明</summary>
