@@ -1,3 +1,10 @@
+---
+date: '2025-10-04T14:00:00+09:00'
+draft: false
+title: '予選・本戦実行のコマンド一覧'
+category: organizer_guide
+---
+
 # 予選・本戦実行のコマンド一覧
 
 <details>
