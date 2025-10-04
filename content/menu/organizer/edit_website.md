@@ -5,9 +5,6 @@ title: '人狼知能大会ウェブサイト更新'
 category: organizer_guide
 ---
 
-
-## 人狼知能大会ウェブサイト更新
-
 主に以下のフォルダ内を編集・ページを追加
 
 https://github.com/aiwolfdial/aiwolf-nlp/tree/main/content/menu
