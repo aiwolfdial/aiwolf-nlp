@@ -10,8 +10,6 @@
 8. [win_ratesまとめ手順](./win_rates.md)
 9. [overview作成手伝い](./overview.md)
 
-
-
 ※上記ページ内に添付されているすべてのGoogleサービスは
 
 kanolab.share@gmail.com
