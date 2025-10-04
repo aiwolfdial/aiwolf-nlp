@@ -5,8 +5,6 @@ title: 'Slack招待方法'
 category: organizer_guide
 ---
 
-## Slack招待方法
-
 - 歯車マークの「管理者」
     <details>
     <summary>参考画像</summary>
