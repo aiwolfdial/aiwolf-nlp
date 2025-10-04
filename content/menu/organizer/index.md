@@ -1,3 +1,10 @@
+---
+date: '2025-10-04T09:00:00+09:00'
+draft: false
+title: '人狼知能運営アウトライン'
+category: organizer_guide
+---
+
 # 人狼知能運営アウトライン
 
 1. [運営を始める前に](./preparing.md)
