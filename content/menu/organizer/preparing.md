@@ -5,8 +5,6 @@ title: '運営を始める前に'
 category: organizer_guide
 ---
 
-## 運営を始める前に
-
 wsl上にaiwoldialのフォルダを作成
 
 ```bash
