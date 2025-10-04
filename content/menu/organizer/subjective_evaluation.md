@@ -1,4 +1,11 @@
-# 人狼知能人手評価手順
+---
+date: '2025-10-04T14:00:00+09:00'
+draft: false
+title: '人狼知能人手評価手順'
+category: organizer_guide
+---
+
+## 人狼知能人手評価手順
 
 <details>
 <summary>本戦が完了次第、本戦で行われた試合の中から適当な試合数ピックする</summary>
