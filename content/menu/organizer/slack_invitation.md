@@ -1,4 +1,11 @@
-# Slack招待方法
+---
+date: '2025-10-04T14:00:00+09:00'
+draft: false
+title: 'Slack招待方法'
+category: organizer_guide
+---
+
+## Slack招待方法
 
 - 歯車マークの「管理者」
     <details>
