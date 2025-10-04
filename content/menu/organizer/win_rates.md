@@ -1,4 +1,5 @@
 # win_ratesまとめ手順
+
 <details>
 <summary>サーバーからゲームの結果を取得</summary>
 
@@ -13,6 +14,7 @@
 <summary>役職ごと、トータルの勝率を計算</summary>
 
 役職ごとの勝率とすべてのゲームでの勝率を計算。csv形式でまとめる。
+
 ```csv
 Team,BODYGUARD,MEDIUM,POSSESSED,SEER,VILLAGER,WEREWOLF,BODYGUARD (%),MEDIUM (%),POSSESSED (%),SEER (%),VILLAGER (%),WEREWOLF (%),TOTAL
 ```
@@ -24,6 +26,7 @@ Team,BODYGUARD,MEDIUM,POSSESSED,SEER,VILLAGER,WEREWOLF,BODYGUARD (%),MEDIUM (%),
 <summary>Macro, Micro, Weighted Microを計算</summary>
 
 以下のコードを参考。
+
 ```python
 import pandas as pd
 from pathlib import Path
