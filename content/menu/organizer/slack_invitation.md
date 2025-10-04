@@ -5,7 +5,7 @@
     <summary>参考画像</summary>
     <img src="../../../static/images/organizer/slack_invitation/image.png" alt="管理者" width="200">
     </details>
-    
+
 - 「メンバーを管理する」
     <details>
     <summary>参考画像</summary>
