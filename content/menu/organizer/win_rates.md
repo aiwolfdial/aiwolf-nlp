@@ -1,4 +1,11 @@
-# win_ratesまとめ手順
+---
+date: '2025-10-04T14:00:00+09:00'
+draft: false
+title: 'win_ratesまとめ手順'
+category: organizer_guide
+---
+
+## win_ratesまとめ手順
 
 <details>
 <summary>サーバーからゲームの結果を取得</summary>
