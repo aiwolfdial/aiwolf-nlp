@@ -5,8 +5,6 @@ title: 'win_ratesまとめ手順'
 category: organizer_guide
 ---
 
-## win_ratesまとめ手順
-
 <details>
 <summary>サーバーからゲームの結果を取得</summary>
 
