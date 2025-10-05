@@ -25,9 +25,11 @@ https://github.com/aiwolfdial/aiwolf-nlp/tree/main/content/page
     1. ~~開発はわざわざブランチは切らなくて良い~~ \
         ↑ 多少の文言修正などでは全然切らなくてもよいと思います。ただし、`layouts`などの変更で大幅に変わる場合や、新規大会向けにページを作る際など、大きく変わる際はブランチ切って作業した方が良いかなとも思います。
     1. 必ずローカルホストで確認してからデプロイ
+
         ```bash
         hugo server -D
         ```
+
     1. ページはmd形式で作成。作成の際には以下のルールを守ること。
         - [公式ルール](https://raw.githubusercontent.com/DavidAnson/markdownlint/main/doc/Rules.md)
         - [カスタム](https://github.com/aiwolfdial/aiwolf-nlp/blob/main/config/custom.markdownlint.jsonc)
