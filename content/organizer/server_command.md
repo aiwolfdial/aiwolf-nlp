@@ -14,5 +14,5 @@ category: organizer_guide
 
 <details>
   <summary>aiwolfサーバの主要なパスの構造</summary>
-  <img src="../../../static/images/organizer/server_command/server_path.png" alt="サーバーパス" width="800">
+  <img src="../../static/images/organizer/server_command/server_path.png" alt="サーバーパス" width="800">
 </details>
