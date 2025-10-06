@@ -9,7 +9,7 @@ ShowToc: true
 wsl上にaiwoldialのフォルダを作成
 
 ```bash
-mkdir aiwolfdial
+$ mkdir aiwolfdial
 ```
 
 ## 主要なリポジトリ説明
@@ -82,7 +82,7 @@ mkdir aiwolfdial
     - 実行コマンド
 
     ```bash
-    nano ~/.ssh/config
+    $ nano ~/.ssh/config
     ```
 
     - 追記する内容
@@ -101,7 +101,7 @@ mkdir aiwolfdial
     下記コマンドを実行し、人狼サーバに接続ができることを確認する
 
     ```bash
-    ssh aiwolf
+    $ ssh aiwolf
     ```
 
 ### 人狼運営のGitHub Organizationに参加する
