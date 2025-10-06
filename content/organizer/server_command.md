@@ -15,7 +15,6 @@ category: organizer_guide
 
 ![サーバーパス](../../static/images/organizer/server_command/server_path.png)
 
-
 [outlineへ戻る](./outline.md)
 [前: Slackメッセージ一覧](./slack_message.md)
 [次: 人狼知能人手評価手順](./subjective_evaluation.md)

@@ -72,7 +72,7 @@ mkdir aiwolfdial
     1. 下記コマンド実行で公開鍵を配置する
 
     ```bash
-    $ echo "[公開鍵]" >> ~/.ssh/authorized_keys 
+    echo "[公開鍵]" >> ~/.ssh/authorized_keys 
     ```
 
 1. ssh接続が可能になるように設定ファイルを記述する
