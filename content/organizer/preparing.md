@@ -45,7 +45,6 @@ mkdir aiwolfdial
 
 上記の中から必要に応じてaiwolfdialフォルダにクローンし管理していくとやりやすい。
 
-
 ## 必要な初期設定
 
 これから人狼の運営に参加するにあたって必要な設定について書いていきます。
@@ -61,7 +60,7 @@ mkdir aiwolfdial
     - 新しく参加する人の手順
 
         作成した公開鍵を運営の人に何らかの方法で渡してください。
-    
+
     - 運営の手順
 
     1. 新しく参加する人から公開鍵を受け取る
@@ -83,7 +82,7 @@ mkdir aiwolfdial
     - 実行コマンド
 
     ```bash
-    $ nano ~/.ssh/config
+    nano ~/.ssh/config
     ```
 
     - 追記する内容
@@ -102,7 +101,7 @@ mkdir aiwolfdial
     下記コマンドを実行し、人狼サーバに接続ができることを確認する
 
     ```bash
-    $ ssh aiwolf
+    ssh aiwolf
     ```
 
 ### 人狼運営のGitHub Organizationに参加する
