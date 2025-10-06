@@ -32,3 +32,6 @@ overviewをよりスムーズに先生が作成できるように各種リンク
 </details>
 
 その他、適宜任されたタスクをこなしていく。
+
+[outlineへ戻る](./outline.md)
+[前: win_ratesまとめ手順](./win_rates.md)

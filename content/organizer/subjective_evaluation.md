@@ -5,23 +5,16 @@ title: '人狼知能人手評価手順'
 category: organizer_guide
 ---
 
-<details>
-<summary>本戦が完了次第、本戦で行われた試合の中から適当な試合数ピックする</summary>
+## 本戦が完了次第、本戦で行われた試合の中から適当な試合数ピックする
 
 [aiwolf-nlp-log-picker](https://github.com/aiwolfdial/aiwolf-nlp-log-picker)
 各チームの出場回数と役職担当回数がなるべく均一になるように設定済み
 
-</details>
-
-<details>
-<summary>国際大会の場合、ピックした試合のログを日本語へ翻訳する</summary>
+## 国際大会の場合、ピックした試合のログを日本語へ翻訳する
 
 [aiwolf-nlp-log-translator](https://github.com/aiwolfdial/aiwolf-nlp-log-translator)
 
-</details>
-
-<details>
-<summary>ピックしたログファイルは.log形式であることを確認してログビュアーへ更新</summary>
+## ピックしたログファイルは.log形式であることを確認してログビュアーへ更新
 
 [aiwolf-nlp-viewer](https://github.com/aiwolfdial/aiwolf-nlp-viewer)
 
@@ -29,10 +22,7 @@ category: organizer_guide
 - 5人村ログフォルダ：`_truck5`、13人村ログフォルダ：`_truck13` で識別
 - 国際大会の場合は英語版も更新：`_en` で識別
 
-</details>
-
-<details>
-<summary> 評価者へ配るGoogleFormの作成</summary>
+## 評価者へ配るGoogleFormの作成
 
 フォームの作成はこちらの
 [スプレッドシート](https://docs.google.com/spreadsheets/d/1VQLYCpSdBoyq1TxWM9OeoZue4oXOtPjFTQEpDMKnf98/edit?usp=sharing) から AppScripts を実行。
@@ -49,15 +39,11 @@ category: organizer_guide
 
 分担評価も可能：[参考フォーム](https://docs.google.com/forms/d/1dLSN6w_gLY7MZeUxOtjVfWIj8cJn4GrBEgH0ZHqD5tc/edit)
 
-</details>
+## slackで案内
 
-<details>
-<summary>slackで案内</summary>
-    GoogleFormのリンクを評価者へ配布する<br>
-</details>
+GoogleFormのリンクを評価者へ配布する
 
-<details>
-<summary>結果集計</summary>
+## 結果集計
 
 [5人村分析](https://docs.google.com/spreadsheets/d/19LyLTa02Sv2CSXgGT4vA6PpOBDRpAxprxeWU_6qTMW8/edit?usp=sharing)
 
@@ -79,16 +65,11 @@ category: organizer_guide
   `-A` や `-B` など複数エージェントを出場させたチームがいた場合は、それらを**統合させた場合の表も作成**する。
   詳細はリンクの `totalling` シート参照。
 
-</details>
-
-<details>
-<summary>評価者アンケートの実施</summary>
+## 評価者アンケートの実施
 
 [こちら](https://docs.google.com/forms/d/16gtDxyZttEbWw7cErXPTTNV-_UdK-Z5h0QCB-rYYjKY/edit)を適宜編集して配布。
-</details>
 
-<details>
-<summary>※ 備考：gsコードの使いかた</summary>
+## ※ 備考：gsコードの使いかた
 
     拡張機能→AppScript
 
@@ -103,4 +84,7 @@ category: organizer_guide
     このアプリはGoogleで確認されていません：詳細→無題のプロジェクト（安全ではないページ）に移動
 
     無題のプロジェクトがGoogleアカウントへのアクセスを求めています：すべて選択→続行
-</details>
+
+[outlineへ戻る](./outline.md)
+[前: 予選・本戦実行のコマンド一覧](./server_command.md)
+[次: win_ratesまとめ手順](./win_rates.md)

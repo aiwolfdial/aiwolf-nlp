@@ -82,7 +82,7 @@ mkdir aiwolfdial
     - 実行コマンド
 
     ```bash
-    $ nano ~/.ssh/config
+    nano ~/.ssh/config
     ```
 
     - 追記する内容
@@ -101,10 +101,13 @@ mkdir aiwolfdial
     下記コマンドを実行し、人狼サーバに接続ができることを確認する
 
     ```bash
-    $ ssh aiwolf
+    ssh aiwolf
     ```
 
 ### 人狼運営のGitHub Organizationに参加する
 <!-- ToDo -->
 
 <!-- このサイトを書くためにMarkDownLintの拡張機能を入れる説明も入れたい... -->
+
+[outlineへ戻る](./outline.md)
+[次: 人狼知能大会ウェブサイト更新](./edit_website.md)

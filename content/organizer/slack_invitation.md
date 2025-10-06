@@ -6,21 +6,13 @@ category: organizer_guide
 ---
 
 - 歯車マークの「管理者」
-    <details>
-    <summary>参考画像</summary>
-    <img src="../../static/images/organizer/slack_invitation/image.png" alt="管理者" width="200">
-    </details>
+![管理者](../../static/images/organizer/slack_invitation/image.png)
 
 - 「メンバーを管理する」
-    <details>
-    <summary>参考画像</summary>
-    <img src="../../static/images/organizer/slack_invitation/image%201.png" alt="メンバーを管理する" width="200">
-    </details>
+![メンバーを管理する](../../static/images/organizer/slack_invitation/image%201.png)
 
 - 「名前またはメールアドレスで」
-    <details>
-    <summary>参考画像</summary>
-    <img src="../../static/images/organizer/slack_invitation/image%202.png" alt="名前またはメールアドレスで" width="800">
+![名前またはメールアドレスで](../../static/images/organizer/slack_invitation/image%202.png)
 
     1. 参加登録GoogleFormに入力されたメールアドレスを入力
 
@@ -28,33 +20,19 @@ category: organizer_guide
     </details>
 
 - 「･･･」→「アカウントを有効かする」
-    <details>
-    <summary>参考画像</summary>
-    <img src="../../static/images/organizer/slack_invitation/image%203.png" alt="アカウントを有効化する" width="400">
-    </details>
+![アカウントを有効化する](../../static/images/organizer/slack_invitation/image%203.png)
 
 - 「シングルチャンネルゲスト」→「次へ」
-    <details>
-    <summary>参考画像</summary>
-    <img src="../../static/images/organizer/slack_invitation/image%204.png" alt="シングルチャンネルゲスト" width="400">
-    </details>
+![シングルチャンネルゲスト](../../static/images/organizer/slack_invitation/image%204.png)
 
 - 「チャンネルを選択する」→「該当大会のチャンネル」→「シングルチャンネルゲストにする」
-    <details>
-    <summary>参考画像</summary>
-    <img src="../../static/images/organizer/slack_invitation/image%205.png" alt="チャンネルを選択する" width="400">
-    </details>
+![チャンネルを選択する](../../static/images/organizer/slack_invitation/image%205.png)
 
 - 「メンバーを招待する」
-    <details>
-    <summary>参考画像</summary>
-    <img src="../../static/images/organizer/slack_invitation/image%206.png" alt="メンバーを招待する" width="600">
-    </details>
+![メンバーを招待する](../../static/images/organizer/slack_invitation/image%206.png)
 
 - 「送信」
-    <details>
-    <summary>参考画像</summary>
-    <img src="../../static/images/organizer/slack_invitation/image%207.png" alt="送信" width="400">
+![送信](../../static/images/organizer/slack_invitation/image%207.png)
 
     1. 送信先に参加登録GoogleFormに入力されたメールアドレスを入力
 
@@ -68,3 +46,7 @@ category: organizer_guide
 ===
 
 GoogleFormに参加登録があるたびにこれらの作業を行う
+
+[outlineへ戻る](./outline.md)
+[前: 参加登録フォームの作成](./registration_form.md)
+[次: Slackメッセージ一覧](./slack_message.md)
