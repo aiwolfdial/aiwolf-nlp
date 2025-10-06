@@ -5,18 +5,14 @@ title: 'win_ratesまとめ手順'
 category: organizer_guide
 ---
 
-<details>
-<summary>サーバーからゲームの結果を取得</summary>
+## サーバーからゲームの結果を取得
 
 ```bash
 ./aiwolf-nlp-server-linux-amd64 -c ./default5.yml -a
 ./aiwolf-nlp-server-linux-amd64 -c ./default13.yml -a
 ```
 
-</details>
-
-<details>
-<summary>役職ごと、トータルの勝率を計算</summary>
+## 役職ごと、トータルの勝率を計算
 
 役職ごとの勝率とすべてのゲームでの勝率を計算。csv形式でまとめる。
 
@@ -25,10 +21,8 @@ Team,BODYGUARD,MEDIUM,POSSESSED,SEER,VILLAGER,WEREWOLF,BODYGUARD (%),MEDIUM (%),
 ```
 
 の形式でまとめる
-</details>
 
-<details>
-<summary>Macro, Micro, Weighted Microを計算</summary>
+## Macro, Micro, Weighted Microを計算
 
 以下のコードを参考。
 
@@ -108,10 +102,10 @@ if __name__ == "__main__":
     main()
 ```
 
-</details>
-
-<details>
-<summary>csvデータのアップロード</summary>
+## csvデータのアップロード
 
 [aiwolf-nlp-viewer/static/assets/](https://github.com/aiwolfdial/aiwolf-nlp-viewer/tree/main/static/assets)直下に今大会分の勝率csvファイルを追加する。
-</details>
+
+[outlineへ戻る](./outline.md)
+[前: 人狼知能人手評価手順](./subjective_evaluation.md)
+[次: overview作成手伝い](./overview.md)

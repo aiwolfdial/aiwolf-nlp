@@ -74,3 +74,7 @@ Hugo では、同じパスで自サイトの `layouts` フォルダにファイ�
     1. 大会一覧を見やすくするための区切りを追加\
         [aiwolf-nlp](https://aiwolfdial.github.io/aiwolf-nlp/)にアクセスすると過去大会の一覧が出てくると思うのですが、初見だとどれを見たら良いか絶対に分からないと思ったので、区別する文字が欲しいなと思って`----- 次回大会-----`などの文字を追加しました。(より良い方法があればそちらにしてください。)\
         [aiwolf-nlp/commit/](https://github.com/aiwolfdial/aiwolf-nlp/commit/eb0145ae0752977fc004b5d0c0f45d1816f9edde#diff-d1e7544294c58d71d0a3493b08bc1552015d5e88dfcfefac92cf48c42011a1f1R93)
+
+[outlineへ戻る](./outline.md)
+[前: 運営を始める前に](./preparing.md)
+[次: 参加登録フォームの作成](./registration_form.md)
