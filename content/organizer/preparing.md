@@ -3,6 +3,7 @@ date: '2025-10-04T14:00:00+09:00'
 draft: false
 title: '運営を始める前に'
 category: organizer_guide
+ShowToc: true
 ---
 
 wsl上にaiwoldialのフォルダを作成
@@ -11,7 +12,7 @@ wsl上にaiwoldialのフォルダを作成
 mkdir aiwolfdial
 ```
 
-主要なリポジトリ説明
+## 主要なリポジトリ説明
 
 ### ウェブサイト運営
 
@@ -43,3 +44,68 @@ mkdir aiwolfdial
 | aiwolf-nlp-llm-judge | 主観評価と同じ項目の順位をLLMによってつけさせる。 |
 
 上記の中から必要に応じてaiwolfdialフォルダにクローンし管理していくとやりやすい。
+
+
+## 必要な初期設定
+
+これから人狼の運営に参加するにあたって必要な設定について書いていきます。
+
+### 人狼サーバに公開鍵を登録
+
+1. 公開鍵・秘密鍵を作成する
+
+    以下を参考に自分のPCで公開鍵・秘密鍵のペアを作成する\
+    参考: [SSH鍵を生成するコマンドと全手順解説](https://qiita.com/to3izo/items/9b5b80430e43cd3c4e3c)
+1. 人狼サーバに公開鍵を設置する
+
+    - 新しく参加する人の手順
+
+        作成した公開鍵を運営の人に何らかの方法で渡してください。
+    
+    - 運営の手順
+
+    1. 新しく参加する人から公開鍵を受け取る
+    1. 人狼サーバに接続する
+    1. (新しくユーザの作成を行うなら、そのユーザの作成と切り替えを行う)
+
+        ユーザの作成: [Ubuntuでユーザを作成する方法](https://vpslife.server-memo.net/ubuntu_adduser/)\
+        ユーザの切り替え: [sudo suって？](https://qiita.com/takegons/items/adc79b83b3df7e632851)
+    1. 下記コマンド実行で公開鍵を配置する
+
+    ```bash
+    $ echo "[公開鍵]" >> ~/.ssh/authorized_keys 
+    ```
+
+1. ssh接続が可能になるように設定ファイルを記述する
+
+    下記コマンドを実行し、次の内容を追記する
+
+    - 実行コマンド
+
+    ```bash
+    $ nano ~/.ssh/config
+    ```
+
+    - 追記する内容
+
+    ```bash
+    Host aiwolf
+    HostName [人狼サーバのipアドレス (運営の人に聞いてください)]
+    User aiwolf (もし新しくユーザを作成したならそのユーザ名に変更)
+    IdentityFile ~/.ssh/[作成した公開鍵に対応する秘密鍵のファイル名]
+    ```
+
+    参考: [~/.ssh/config](https://qiita.com/passol78/items/2ad123e39efeb1a5286b)
+
+1. ssh接続をテストする
+
+    下記コマンドを実行し、人狼サーバに接続ができることを確認する
+
+    ```bash
+    $ ssh aiwolf
+    ```
+
+### 人狼運営のGitHub Organizationに参加する
+<!-- ToDo -->
+
+<!-- このサイトを書くためにMarkDownLintの拡張機能を入れる説明も入れたい... -->
