@@ -6,4 +6,4 @@ title: '大会発表プログラム'
 
 ## プログラム
 
-未定
+ [英語版のプログラム](https://aiwolfdial.github.io/aiwolf-nlp/en/menu/inlg_2025_en/program/) をご参照ください。
