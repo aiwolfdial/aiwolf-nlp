@@ -13,7 +13,7 @@ Registered participants will be invited to our formal Slack channel.
 
 09:30-09:35 Opening
 
-- Opening: what is AIWolf? (Yoshinobu Kano) 
+- Opening: what is AIWolf? (Yoshinobu Kano)
 
 09:35-10:35 Oral presentations (3): peer reviewed papers
 
