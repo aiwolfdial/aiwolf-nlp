@@ -8,6 +8,7 @@ title: 'Presentation Program'
 
 October 30th Tuesday 2025, at Vietnam Institute for Advanced Study in Mathematics, Hanoi, Vietnam / online
 https://2025.inlgmeeting.org/local-info.html
+All times are in the Indochina Time (ICT), UTC+7.
 
 Registered participants will be invited to our formal Slack channel.
 
