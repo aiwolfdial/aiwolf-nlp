@@ -38,4 +38,3 @@ Registered participants will be invited to our formal Slack channel.
 11:45-12:25 Demonstration and Discussion
 
 12:25-12:30 Closing
-
