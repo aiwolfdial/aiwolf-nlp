@@ -20,11 +20,11 @@ Registered participants will be invited to our formal Slack channel.
 - Influence of Utterance Impressions on Decision-Making in LLM-to-LLM Discussions (Neo Watanabe and Yoshinobu Kano) (Team kanolab-nw)
 
 10:35-11:10 System presentation (5): non-archival AIWolf agent descriptions
--  CamelliaDragons (Reon Ohashi, Momoka Kato, Yugo Kato, Koki Sato, Joji Suzuki, Shinma Tsuboi, and Kazuya Tsubokura)
--  CanisLupus (Yu Sugawara)
--  Character-Lab (Kun Kerdthaisong, Pasin Buakhaw Peerapat, Pitikorn Khlaisamniang and Supasate Vorathammathorn)
--  mille (Katsuki Ohto)
--  sunamelli (Satoko Natsuori, Koya Kamada, Ryo Kamiyama, and Hiroki Nakanishi)
+- CamelliaDragons (Reon Ohashi, Momoka Kato, Yugo Kato, Koki Sato, Joji Suzuki, Shinma Tsuboi, and Kazuya Tsubokura)
+- CanisLupus (Yu Sugawara)
+- Character-Lab (Kun Kerdthaisong, Pasin Buakhaw Peerapat, Pitikorn Khlaisamniang and Supasate Vorathammathorn)
+- mille (Katsuki Ohto)
+- sunamelli (Satoko Natsuori, Koya Kamada, Ryo Kamiyama, and Hiroki Nakanishi)
 
 11:10-11:20 Short break
 
