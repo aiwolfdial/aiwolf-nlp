@@ -2,6 +2,9 @@ baseURL: https://aiwolfdial.github.io/aiwolf-nlp/
 theme: ["PaperMod"]
 
 defaultContentLanguage: ja
+mainSections:
+  - page
+
 languages:
   ja:
     languageName: "日本語"
