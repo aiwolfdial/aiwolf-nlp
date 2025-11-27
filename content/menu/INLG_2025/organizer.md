@@ -36,3 +36,7 @@ aiwolf at kanolab.net (at を @に置き換えてください) \
 
 人狼知能プロジェクト公式ウェブサイト [aiwolf.org](https://aiwolf.org/) \
 INLG 2025 [2025.inlgmeeting.org](https://2025.inlgmeeting.org/)
+
+## 論文一覧
+
+{{< include-snippet path="snippets/papers" >}}
