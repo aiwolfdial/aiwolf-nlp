@@ -32,7 +32,7 @@ languages:
           url: /menu/AIWolfDial2026_SpringJP/regulation
           weight: 4
         - name: "開発"
-          url: /menu/AIWolfDial2026_SpringJP/agent.md
+          url: /menu/AIWolfDial2026_SpringJP/agent
           weight: 5
         - name: "リンク・実行委員会"
           url: /menu/AIWolfDial2026_SpringJP/organizer
