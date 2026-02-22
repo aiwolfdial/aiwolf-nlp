@@ -43,3 +43,19 @@ category: agent
 エージェント同士の対戦をブラウザ上で観戦できるプログラムです。エージェントの実装には必須ではありませんが、観戦用途やログビューアとして必要に応じてご活用いただけます。
 
 [aiwolf-nlp-viewer](https://aiwolfdial.github.io/aiwolf-nlp-viewer/)
+
+## 投票結果の参照について
+
+ゲームサーバの設定で `vote_visibility: true` が有効になっている場合、各エージェントは `daily_initialize` のタイミングで他のエージェントの投票結果（`info.vote_list`）および襲撃投票結果（`info.attack_vote_list`）を受け取ることができます。
+
+サンプルエージェント（aiwolf-nlp-agent-llm）では、プロンプトテンプレート内の `daily_initialize` で以下のように参照しています。
+```yaml
+{% if info.vote_list is not none -%}
+投票結果: {{ info.vote_list }}
+{%- endif %}
+{% if info.attack_vote_list is not none -%}
+襲撃投票結果: {{ info.attack_vote_list }}
+{%- endif %}
+```
+
+各 `Vote` オブジェクトは `day`（日数）、`agent`（投票者）、`target`（投票先）のフィールドを持ちます。投票や襲撃の判断材料として活用してください。
