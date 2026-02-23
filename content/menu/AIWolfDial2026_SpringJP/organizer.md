@@ -1,5 +1,5 @@
 ---
-date: '2025-07-07T13:29:24+09:00'
+date: '2026-02-19T13:29:24+09:00'
 draft: false
 title: 'リンク・運営委員'
 category: organizer
@@ -24,9 +24,9 @@ aiwolf at kanolab.net (at を @に置き換えてください) \
 
 ## ローカルオーガナイザー
 
+- 原田悠矢（静岡大学）
 - 佐橋優人（静岡大学）
 - 渡邉嶺王（静岡大学）
-- 原田悠矢（静岡大学）
 
 ## スポンサー
 
@@ -35,7 +35,9 @@ aiwolf at kanolab.net (at を @に置き換えてください) \
 ## 関連リンク
 
 人狼知能プロジェクト公式ウェブサイト [aiwolf.org](https://aiwolf.org/) \
-INLG 2025 [2025.inlgmeeting.org](https://2025.inlgmeeting.org/)
+人工知能学会全国大会2026 (JSAI2026) [2025.inlgmeeting.org](https://www.ai-gakkai.or.jp/jsai2026/)
+<!-- 同　万博連携企画セッション「人狼知能コンテスト2025春季国内大会自然言語部門」
+[confit.atlas.jp/guide/event/jsai2025/session/4C01-01/tables](https://confit.atlas.jp/guide/event/jsai2025/session/4C01-01/tables) -->
 
 ## 論文一覧
 

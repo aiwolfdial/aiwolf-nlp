@@ -1,0 +1,6 @@
+{{- $path := .Get "path" -}}
+{{- with site.GetPage $path -}}
+{{ .Content | safeHTML }}
+{{- else -}}
+<p><strong>Snippet not found:</strong> {{ $path }}</p>
+{{- end -}}
