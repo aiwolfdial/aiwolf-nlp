@@ -8,31 +8,75 @@ ShowToc: true
 
 ## 新規ページ作成
 
-主に以下のフォルダ内を編集・ページを追加
+主に以下のフォルダ内を編集・ページを追加します。
 
-https://github.com/aiwolfdial/aiwolf-nlp/tree/main/content/menu
+### content/menu/{{contest_name}}/
 
-https://github.com/aiwolfdial/aiwolf-nlp/tree/main/content/page
+<https://github.com/aiwolfdial/aiwolf-nlp/tree/main/content/menu>
 
-- 方法
-    <!-- ToDo: hugo newで作成する方法の説明を書く -->
-    上記のリポジトリのフォルダに前回大会分のコピーを作成
+大会の参加者に向けた詳細情報をまとめたページ群です。
+前回大会のフォルダをコピーし、以下のファイルを作成します（論文投稿がある場合は `paper_submission.md` も追加）。
 
-    今回大会用に日時等修正する
+- `agent.md`
+- `organizer.md`
+- `program.md`
+- `regulation.md`
+- `schedule_participation.md`
 
-- 注意点
+各ファイルの修正箇所は以下の通りです。
 
-    1. ~~開発はわざわざブランチは切らなくて良い~~ \
-        ↑ 多少の文言修正などでは全然切らなくてもよいと思います。ただし、`layouts`などの変更で大幅に変わる場合や、新規大会向けにページを作る際など、大きく変わる際はブランチ切って作業した方が良いかなとも思います。
-    1. 必ずローカルホストで確認してからデプロイ
+- **全ファイル共通**
+    - フロントマターの `date` を今回大会の日付に更新する
+    - コピー元の大会名称・年度でファイル内検索をかけ、今回大会のものに修正する
+- **organizer.md**
+    - スポンサー情報は確定するまではコメントアウトしておく（先生に確認をとり、確定したらコメントアウトを外す）
+- **program.md**
+    - 基本的に全て入れ替える。確定するたびに更新する
+- **schedule_participation.md**
+    - 日程セクションを修正する
+    - Googleフォームのリンクを新しいものに置き換える
+    - スポンサー情報は確定するまではコメントアウトしておく
 
-        ```bash
-        hugo server -D
-        ```
+### content/page/{{contest_name}}.md
 
-    1. ページはmd形式で作成。作成の際には以下のルールを守ること。
-        - [公式ルール](https://raw.githubusercontent.com/DavidAnson/markdownlint/main/doc/Rules.md)
-        - [カスタム](https://github.com/aiwolfdial/aiwolf-nlp/blob/main/config/custom.markdownlint.jsonc)
+<https://github.com/aiwolfdial/aiwolf-nlp/tree/main/content/page>
+
+大会のトップページです。前回大会のファイルをコピーして作成します。
+
+- 前回からサーバやエージェントおよび大会ルール等で更新した箇所があれば、更新情報セクションに追記する
+- Googleフォームのリンクを新しいものに置き換える
+- コピー元の大会名称・年度でファイル内検索をかけ、今回大会のものに修正する
+
+### content/page/ の仕切りページ
+
+以下のファイルを編集し、大会一覧の表示を整えます。
+
+- `next.md` / `next.en.md`
+- `past.md` / `past.en.md`
+- `coming_soon.md` / `coming_soon.en.md`
+
+サイトのトップページで大会一覧が表示される際に、過去大会と次回大会の仕切りとして機能しています。
+フロントマターの `date` の値を調整し、一覧上で適切な位置に表示されるようにしてください。
+`coming_soon` は次大会の予定がない場合のみ、フロントマターの `draft` を `false` に変更します。
+
+### hugo.yaml
+
+- 次回大会のリンクに修正する
+- 論文提出のページを使わない場合はコメントアウトする
+- `ja` では国内大会のページを扱い、`en` では国際大会のページを扱う
+
+## 注意点
+
+1. 軽微な文言修正などではブランチを切らなくてもOKです。ただし、`layouts` の変更や新規大会向けのページ作成など、大きな変更を行う場合はブランチを切って作業してください。
+
+1. 必ずローカルホストで確認してからデプロイ
+     ```bash
+    hugo server -D
+    ```
+
+1. ページはmd形式で作成。作成の際には以下のルールを守ること。
+    - [公式ルール](https://raw.githubusercontent.com/DavidAnson/markdownlint/main/doc/Rules.md)
+    - [カスタム](https://github.com/aiwolfdial/aiwolf-nlp/blob/main/config/custom.markdownlint.jsonc)
 
 ## Webサイトの技術について
 <!-- ざっくり説明してチャッピーに書いてもらいました。 -->
