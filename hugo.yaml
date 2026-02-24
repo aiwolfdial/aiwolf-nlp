@@ -1,6 +1,9 @@
 baseURL: https://aiwolfdial.github.io/aiwolf-nlp/
 theme: ["PaperMod"]
 
+params:
+  env: production
+
 defaultContentLanguage: ja
 mainSections:
   - page
