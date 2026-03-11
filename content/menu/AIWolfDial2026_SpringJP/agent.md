@@ -27,16 +27,16 @@ category: agent
 ## エージェントへの要求事項
 
 エージェントを実装するにあたり必要な注意事項や要求事項に関しては下記ページをご確認ください。\
-[大会レギュレーション](/menu/JSAI_2026/regulation)
+[大会レギュレーション](/menu/AIWolfDial2026_SpringJP/regulation)
 
 ## エージェント実装の詳細とゲームサーバについて
 
 エージェントの実装にあたっては、下記ドキュメントをお読みの上、詳細必要であればソースコードを参照して下さい。
 
 - プロトコルの実装について
-    [aiwolf-nlp-server/doc/protocol.md](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/main/doc/protocol.md)
+    [aiwolf-nlp-server/doc/protocol.md](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/doc/ja/protocol.md)
 - 役職やゲームの流れ、ゲームロジックの実装について
-    [aiwolf-nlp-server/doc/logic.md](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/main/doc/logic.md)
+    [aiwolf-nlp-server/doc/logic.md](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/doc/ja/logic.md)
 
 ## 対戦のビューア
 
