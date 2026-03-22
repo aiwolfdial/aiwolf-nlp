@@ -39,6 +39,10 @@ aiwolf at kanolab.net (at を @に置き換えてください) \
 <!-- 同　万博連携企画セッション「人狼知能コンテスト2025春季国内大会自然言語部門」
 [confit.atlas.jp/guide/event/jsai2025/session/4C01-01/tables](https://confit.atlas.jp/guide/event/jsai2025/session/4C01-01/tables) -->
 
+## SNS
+
+公式X [aiwolfdial_nlp](https://x.com/aiwolfdial_nlp)
+
 ## 論文一覧
 
 {{< include-snippet path="snippets/papers" >}}

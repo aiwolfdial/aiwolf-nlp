@@ -5,6 +5,11 @@ enableRobotsTXT: true
 params:
   env: production
   description: "人狼知能大会 自然言語部門（AIWolfDial）の公式サイト。マルチエージェント対話によるAI人狼ゲームの研究・大会情報を掲載しています。"
+  socialIcons:
+    - name: "x"
+      url: https://x.com/aiwolfdial_nlp
+    - name: "github"
+      url: https://github.com/aiwolfdial
 
 defaultContentLanguage: ja
 mainSections:

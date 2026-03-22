@@ -1,0 +1,9 @@
+{{- with site.Params.socialIcons }}
+<div style="text-align:center; margin-top: 8px;">
+  {{- range . }}
+  <a href="{{ trim .url " " }}" target="_blank" rel="noopener noreferrer" style="margin: 0 6px; display:inline-block; width:24px; height:24px;">
+    {{- partial "svg.html" . }}
+  </a>
+  {{- end }}
+</div>
+{{- end }}
