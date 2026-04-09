@@ -11,7 +11,9 @@ title: '2026春季 国内大会 自然言語処理部門'
 
 ## 更新情報
 
-- **2026/03/22**: **5人村、9人村に加え、いつでも発話トラック（による5人村**の人狼大会を新たに開始予定です。対応の雛形エージェント・ビューアは4月中を目処に公開予定です。詳細は[レギュレーション](/menu/AIWolfDial2026_SpringJp/regulation#いつでも発話トラック新方式)・[開発](/menu/AIWolfDial2026_SpringJp/agent#いつでも発話トラックへの対応)をご確認ください。
+- **2026/04/09**: **いつでも発話トラック**対応のサンプルエージェントおよびサーバが公開されました。詳細は[レギュレーション](/menu/AIWolfDial2026_SpringJp/regulation#いつでも発話トラック新方式)・[開発](/menu/AIWolfDial2026_SpringJp/agent#いつでも発話トラックへの対応)をご確認ください。サンプルエージェントは[こちら](https://github.com/aiwolfdial/aiwolf-nlp-agent-llm)、対応サーバは[こちら](https://github.com/aiwolfdial/aiwolf-nlp-server)からご利用ください。
+
+- **2026/03/22**: **5人村、9人村に加え、いつでも発話トラックによる5人村**の人狼大会を新たに開始予定です。対応のサンプルエージェント・ビューアは4月中を目処に公開予定です。詳細は[レギュレーション](/menu/AIWolfDial2026_SpringJp/regulation#いつでも発話トラック新方式)・[開発](/menu/AIWolfDial2026_SpringJp/agent#いつでも発話トラックへの対応)をご確認ください。
 
 - **2026/03/22**: 公式X（[@aiwolfdial_nlp](https://x.com/aiwolfdial_nlp)）を開設しました！
 大会情報やサイトの更新情報を発信していきますので、ぜひフォローをお願いします！
