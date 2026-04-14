@@ -1,37 +1,35 @@
 ---
 date: '2025-10-30T14:00:00+09:00'
 draft: false
-title: 'LLM Judgeの使いかた'
+title: 'LLM Judgeの使い方'
 category: participants_guide
 ---
 
-**AIWolf NLP LLM Judge** は、ゲームの進行ログ（`.log`）を **生成AI（LLM）** で評価し、**項目別のランキング** や **チーム別の集計** を出力するバッチツールで、5人村、13人村の両方に対応しています。
-こちらのページではこのLLM Judgeの使いかたについて解説していきます。
+**AIWolf NLP LLM Judge** は、ゲームログをLLMに読ませて、発話の質やチームワークなどを **項目別にランキング** してくれるツールです。5人戦と13人戦に対応しています（デフォルト設定では9人戦は評価対象外です）。
 
-> 参考リポジトリ：`aiwolfdial/aiwolf-nlp-llm-judge`
+* リポジトリ：[aiwolfdial/aiwolf-nlp-llm-judge](https://github.com/aiwolfdial/aiwolf-nlp-llm-judge)
+
+このページでは、LLM Judge の導入から実行・結果確認までを順番に説明します。
 
 ---
 
-## 事前準備（前提）
+## 事前に必要なもの
 
 * **Python 3.11 以上**
-* **OpenAI API キー**（環境変数または `.env` に `OPENAI_API_KEY` を設定）
+* **OpenAI API キー**（`OPENAI_API_KEY` を環境変数か `.env` に設定）
 * **評価したいゲームログ（`.log`）** と **同名のキャラクター情報（`.json`）**
 
-  * 例：`2025-10-12_..._game.log` と `2025-10-12_..._game.json`（拡張子以外が同一名）
-
-> `.log` は **サーバを起動したフォルダ** の `log/game/` に生成されます（詳しくは `evaluation/game_log_guide.md`）。
-> `.json` は「キャラクター情報」用のファイルです。**ログと同じファイル名**にして `data/input/json/` に置きます。
+> `.log` は、サーバを起動したフォルダの `log/game/` に生成されたものをそのまま使えます。
+> `.json` はキャラクター情報用のファイルで、`.log` と **同じベース名**（拡張子だけ違う）にそろえます。
 
 ---
 
 ## インストール
 
-リポジトリを取得し、依存関係をインストールします。
-本プロジェクトは **uv** の利用を前提としています。
+本プロジェクトは `uv` を前提としています。
 
 ```bash
-# uv が未インストールなら
+# uv をまだ入れていなければ
 pip install uv
 
 # リポジトリを取得
@@ -42,160 +40,131 @@ cd aiwolf-nlp-llm-judge
 uv sync
 ```
 
-> `uv` が使えない環境の場合は、プロジェクトのルートにある設定に従って `pip` を用いたインストールを試してください。
-> ただし公式手順は `uv sync` 推奨です。
+`uv` が使えない環境では、代わりに `pip` で `pyproject.toml` の依存関係をインストールしてください。
 
 ---
 
-## データを配置する（最重要）
+## データを配置する
 
-以下のディレクトリ構成で **入力** と **出力** を準備します。
+次のような構成で入力ファイルを置きます。
 
 ```text
 aiwolf-nlp-llm-judge/
 └── data/
     ├── input/
-    │   ├── log/     # ゲームログ (*.log)
-    │   └── json/    # キャラクター情報 (*.json)  ← *.log とファイル名（拡張子除く）を合わせる
-    └── output/      # 評価結果の出力先（自動生成）
+    │   ├── log/     # .log ファイルをここに置く
+    │   └── json/    # .log と同じベース名の .json をここに置く
+    └── output/      # 評価結果が自動で書き出される
 ```
 
-### よくある配置例
+たとえば次のように配置します。
 
 ```bash
-# 例：サーバを ~/aiwolfdial/aiwolf-nlp-game-logs で起動した場合
-#     生成された .log を Judge 側の data/input/log へコピー
 mkdir -p data/input/log data/input/json
 cp ~/aiwolfdial/aiwolf-nlp-game-logs/log/game/*.log data/input/log/
-
-# キャラクター情報 .json を data/input/json/ へ
-# （*.log と同じファイル名にして保存すること）
-# 例：
-#   data/input/log/  : 2025-10-12_..._game.log
-#   data/input/json/ : 2025-10-12_..._game.json
+# .json も data/input/json/ に同名で配置する
 ```
 
-> **重要**：`.log` と `.json` は **同じベース名**（拡張子だけ違う）である必要があります。
-> これが一致しないと **評価できません**。
+> **重要**：`.log` と `.json` のベース名（拡張子を除いた部分）が一致していないと評価できません。
 
 ---
 
-## 設定ファイルを確認する
+## 設定ファイル
 
-### メイン設定（`config/settings.yaml`）
+### メイン設定：`config/settings.yaml`
 
 ```yaml
+path:
+  env: config/.env                              # .envファイルのパス
+  evaluation_criteria: config/evaluation_criteria.yaml
+
 llm:
-  model: "gpt-4o"          # 使用するLLMモデル（OpenAI系）
+  prompt_yml: config/prompts.yaml               # プロンプト定義ファイル
+  model: "gpt-4o"                               # 使うLLMモデル
 
 game:
-  format: "main_match"     # ゲーム形式（任意の文字列を運用で定義）
-  player_count: 13         # プレイヤー数（5 または 13 など、ログに合わせる）
+  format: "main_match"                          # main_match または self_match
+  player_count: 13                              # ログの人数に合わせる（5 または 13）
 
 processing:
-  max_workers: 4           # 並列処理数（I/Oや前処理）
-  evaluation_workers: 8    # LLM評価の並列数（APIレートに注意）
+  input_dir: "data/input"                       # 入力ディレクトリ
+  output_dir: "data/output"                     # 出力ディレクトリ
+  encoding: "utf-8"
+  max_workers: 4                                # ゲーム間並列処理数（プロセス）
+  evaluation_workers: 8                         # 評価基準並列処理数（スレッド）
+  max_retries: 5                                # LLMバリデーション失敗時の再試行回数
 ```
 
-* **player_count** は **ログの実態に合わせる**（5人戦のログなら `5`）。
-* 並列数はマシン性能・API レートに応じて調整。最初は小さめ（例：`2` / `2`）から。
+* **player_count は必ずログの人数に合わせてください**（5人戦のログなら `5`）。
+* 並列数はAPIのレート制限に注意して、最初は小さめから始めましょう。
 
-### 評価基準（`config/evaluation_criteria.yaml`）
+### 評価基準：`config/evaluation_criteria.yaml`
 
-```yaml
-common_criteria:               # 全ゲーム共通
-  - name: "natural_expression"
-    description: "発話表現は自然か"
-    ranking_type: "ordinal"    # 順位付け型（1 が最上位の想定）
-    order: 1
-
-game_specific_criteria:        # 形式固有（例：13人戦）
-  13_player:
-    - name: "team_play"
-      description: "チームプレイができているか"
-      ranking_type: "ordinal"
-      applicable_games: [13]
-      order: 6
-```
-
-* **common_criteria** と **game_specific_criteria** を組み合わせて評価します。
-* `ranking_type: ordinal` は **順位** での評価（通常は **1 が最上位**）。
-* `applicable_games` で該当するプレイヤー数にのみ適用できます。
+評価項目はこのファイルで定義されています。
+共通項目（全ゲーム共通で評価）と、ゲーム形式別の項目（例：13人戦だけのチームプレイ評価）を組み合わせて指定できます。
 
 ---
 
-## API キーの設定
+## APIキーの設定
 
-**OpenAI API キー** が必要です。以下のどちらかで設定します。
-
-### 方法 A：環境変数で設定（推奨）
+OpenAI APIキーを環境変数または `.env` に設定します。
 
 ```bash
-# macOS / Linux
+# Linux / macOS / WSL
 export OPENAI_API_KEY="sk-..."
 
 # Windows PowerShell
 setx OPENAI_API_KEY "sk-..."
 ```
 
-### 方法 B：`.env` に記述
-
-プロジェクトルートに `.env` を作成して、下記を記載します。
-
-```dotenv
-OPENAI_API_KEY=sk-...
-```
-
-> ※ `.env` の読み込みはプロジェクト側の実装に依存します。環境変数での設定が確実です。
-> 既にエージェント側で `.env` をお使いでも、**Judge 用の `.env` は Judge リポジトリに**用意してください。
+`.env` を使う場合は、LLM Judge のプロジェクトルートに `.env` を作成してください。
 
 ---
 
-## 実行
+## 実行する
 
-### 基本実行
+### 通常の実行
 
 ```bash
 uv run python main.py -c config/settings.yaml
 ```
 
-### デバッグモード
+### デバッグモード（少数のログで動作確認）
 
 ```bash
 uv run python main.py -c config/settings.yaml --debug
 ```
 
-### 集計のみ再生成（LLM呼び出しなし）
+### 集計だけ再生成（LLM呼び出しなし）
 
 ```bash
 uv run python main.py -c config/settings.yaml --regenerate-aggregation
 ```
 
-> 再集計は、`data/output/` に **既存の個別評価結果（`*_result.json`）** があるときのみ実行されます。
-> 「チーム集計ファイルを消してしまった」「集計ロジックだけ変えた」場合に便利です。
+> 再集計は、`data/output/` に過去の評価結果が残っているときだけ動きます。
+> 集計ロジックを変えたい、チーム集計ファイルだけ作り直したいときに便利です。
 
 ---
 
-## 出力結果の見方
+## 結果の見方
 
-出力は `data/output/` に生成されます。
+結果は `data/output/` に書き出されます。
 
-### 個別ゲーム（JSON）
+### 個別ゲームの評価（JSON）
 
-各ゲームの詳細評価。**項目ごとのランキングと理由**が含まれます。
+各ゲームについて、**項目ごとのランキングと理由** が記録されます。
 
 ```json
 {
-  "game_id": "01K3T3XN1SHBHSBHV1JWDDVS7W",
-  "game_info": { "format": "main_match", "player_count": 13 },
+  "game_id": "01K3T3XN...",
   "evaluations": {
     "team_play": {
       "rankings": [
         {
-          "player_name": "Takumi",
-          "team": "sunamelli-b",
+          "player_name": "タクミ",
+          "team": "kanolab",
           "ranking": 1,
-          "reasoning": "優れたチームプレイを実現..."
+          "reasoning": "仲間との役割分担を明確にしており…"
         }
       ]
     }
@@ -203,56 +172,26 @@ uv run python main.py -c config/settings.yaml --regenerate-aggregation
 }
 ```
 
-* `ranking`: **順位**（通常 1 が最上位）
-* `reasoning`: LLM が出した **根拠説明**（改善のヒントに）
-
 ### チーム集計（JSON / CSV）
 
-複数ゲームの結果を **チーム平均** で集計します。
+複数ゲームをまとめた **チームごとの平均値** が出力されます。
 
-* `team_aggregation.json`
-
-  ```json
-  {
-    "team_averages": {
-      "kanolab": { "発話表現は自然か": 3.9, "文脈を踏まえた対話は自然か": 3.4 }
-    },
-    "team_sample_counts": {
-      "kanolab": { "発話表現は自然か": 10, "文脈を踏まえた対話は自然か": 10 }
-    }
-  }
-  ```text
-* `team_aggregation.csv`
-
-  ```csv
-  Team,発話表現は自然か,文脈を踏まえた対話は自然か
-  kanolab,3.900000,3.400000
-  GPTaku,4.200000,3.800000
-  ```
-
-> **平均値の解釈**は評価基準に依存します。
-> `ranking_type: ordinal` の場合は **順位の平均** になるため、**数値が小さいほど良い**（＝上位）解釈が一般的です。
+> `ranking_type: ordinal` の項目は **順位の平均** なので、**数値が小さいほど良い** という点に注意してください。
 
 ---
 
-## ワークフローのおすすめ
+## おすすめのワークフロー
 
-1. **ログを集める**：`log/game/*.log` をまとめる
-2. **キャラ情報を用意**：それぞれに対応する **同名の `.json`** を作成
-3. **設定を合わせる**：`player_count`、評価基準、並列数
-4. **スモールデータで試走**：`--debug` で 1〜2本のログから確認
-5. **本番評価**：全ログを `data/input/` に入れて実行
-6. **集計・比較**：`team_aggregation.*` を基に改善ポイントを抽出
-
----
-
-以上で **LLM Judge の基本的な使い方** は完了です。
-まずは少数のログで動作を確認し、評価基準をチーム方針に合わせて調整しながら、
-**`team_aggregation.*` を定点観測**して改善サイクルに活かしてください。
+1. **ログを集める**：`log/game/*.log` を集める
+2. **同名の `.json` を用意する**
+3. **`player_count` をログに合わせる**
+4. **`--debug` で小さく試す**
+5. **本番実行して `data/output/` を確認する**
+6. **チーム集計を比較して改善ポイントを探す**
 
 ---
 
 [参加者マニュアルトップへ](../_index.md)\
 [確認・評価トップへ](./_index.md)\
-[前へ（winrate計算方法）](./winrate_calculation.md)\
-[次へ（人狼知能エージェントの課題点）](../enhancement/improvement_tips.md)
+[前へ（勝率の計算方法）](./winrate_calculation.md)\
+[次へ（改良・拡張）](../enhancement/_index.md)

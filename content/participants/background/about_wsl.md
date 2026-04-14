@@ -1,7 +1,7 @@
 ---
 date: '2025-10-30T14:00:00+09:00'
 draft: false
-title: 'wslとは'
+title: 'WSLとターミナル'
 category: participants_guide
 ShowToc: true
 ---
@@ -254,5 +254,4 @@ cut -d';' -f1 input.csv | sort | uniq -c | sort -nr
 
 [参加者マニュアルトップへ](../_index.md)\
 [背景知識トップへ](./_index.md)\
-[前へ（サーバ編集・ローカル対戦環境構築）](../extras/local_battle_setup.md)\
-[次へ（GitHubとは）](./about_github.md)
+[次へ（GitとGitHub）](./about_github.md)

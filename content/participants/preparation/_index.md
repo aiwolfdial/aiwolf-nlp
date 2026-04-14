@@ -6,22 +6,21 @@ title: '準備'
 
 ## このセクションについて
 
-**準備** では、エージェント開発を始めるための**必須準備**をまとめています。
+エージェントを動かすために必要な **開発環境** を整えます。
+初めてPythonを使う方でも進められるように、手順を順番にまとめています。
 
 ---
 
 ## 目次
 
-1. **[事前準備](./setup.md)**
-   必須バージョンの確認、仮想環境（venv）の作成までを手順化。
+1. **[開発環境の準備](./setup.md)**\
+   Python と `uv`（高速なPython環境ツール）のインストールを行います。
 
-2. **[リポジトリのクローン](./clone_repo.md)**
-   `aiwolf-nlp-agent-llm` を **自分のGitHubにFork → ローカルへClone → upstream登録**。
-   併せてログ置き場・評価ツールのフォルダ構成も提案。
+2. **[リポジトリのクローン](./clone_repo.md)**\
+   サンプルエージェントを自分のGitHubにFork → ローカルにClone → 依存関係をインストールするまでを説明します。
 
-3. **[API取得方法](./get_api_key.md)**
-   Google AI Studio で **APIキー作成 → `config/.env` 設定**。
-   使うLLMは `config.yml` の `llm.type`（`google` / `openai` / `ollama`）で切替。
+3. **[APIキーの取得と設定](./get_api_key.md)**\
+   Google AI Studio でAPIキーを取得し、`config/.env` に書き込みます。どのLLMを使うかも切り替え可能です。
 
 ---
 

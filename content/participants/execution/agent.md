@@ -1,15 +1,16 @@
 ---
 date: '2025-10-30T14:00:00+09:00'
 draft: false
-title: 'エージェント起動方法'
+title: 'エージェントの起動方法'
 category: participants_guide
 ---
 
-このページでは、仮想環境を有効化し、`aiwolf-nlp-agent-llm` のエージェントを起動する手順を説明します。
+このページでは、サンプルエージェントを起動してサーバに接続する手順を説明します。
+前のページで **サーバを起動したまま** にしておいてください。
 
 ---
 
-## 1. リポジトリへ移動
+## 1. エージェントのフォルダへ移動
 
 ```bash
 cd ~/aiwolfdial/aiwolf-nlp-agent-llm
@@ -17,71 +18,81 @@ cd ~/aiwolfdial/aiwolf-nlp-agent-llm
 
 ---
 
-## 2. 仮想環境を有効化する
+## 2. `config.yml` を確認する
 
-仮想環境が有効化されると、プロンプトの先頭に `(.venv)` のように**環境名**が表示されます。表示がない場合は仮想環境の外です。
-
-```bash
-# 環境の外の場合は有効化（bash / zsh）
-user@host:~/aiwolfdial/aiwolf-nlp-agent-llm$ source .venv/bin/activate
-
-# 環境が有効化
-(.venv) user@host:~/aiwolfdial/aiwolf-nlp-agent-llm$
-```
-
----
-
-## 5. 起動前チェック（サーバ接続先・エージェント数）
-
-起動前に、**サーバ接続設定** と **エージェント起動数** を `config/config.yml`（または指定する設定ファイル）で確認してください。
+起動前に、エージェント側の設定を軽く確認しておきましょう。`config/config.yml` を開くと、次のような項目があります。
 
 ```yaml
 web_socket:
-  url: ws://127.0.0.1:8080/ws   # サーバの WebSocket URL
-  token:                        # 認証が必要な場合に設定
-  auto_reconnect: false         # 切断時の自動再接続
+  url: ws://127.0.0.1:8080/ws   # 接続先のサーバURL
+  token:                        # 大会参加時に配布されるトークン（通常は空）
+  auto_reconnect: false         # 切断時に自動で再接続するかどうか
 
 agent:
-  num: 5                        # 起動するエージェント数（5または13）
-  team: kanolab                 # チーム名（ログや表示で利用）
-  kill_on_timeout: true         # タイムアウト時にプロセスを落とすか
+  num: 5                        # 同時に起動するエージェント数（サーバの人数設定に合わせる）
+  team: kanolab                 # チーム名（接続時の名前の先頭に使われます）
+  kill_on_timeout: true         # タイムアウト時に処理を強制停止するかどうか
 ```
 
-* **`web_socket.url`**：`execution/server.md` の手順で起動した **サーバの URL** を設定します。
-  マニュアル通りであれば **デフォルトのままで動く**ように設定済みですが、将来的に変更する可能性があるため項目の存在と役割を把握しておいてください。
-* **`agent.num`**：同時に起動するエージェント数（ローカル対戦の規模に合わせて調整）。
-* **`team` / `kill_on_timeout` / `auto_reconnect`**：運用ポリシーに応じて調整。
+**ここだけチェックしておけばOK**
 
-> 例：サーバの URL を変更した場合や起動したサーバの人数設定を変更した場合は、上記を**必ず**合わせて更新してください。トークンが必要な構成にした場合は `token` を設定します。
+* **`agent.num`**：起動したサーバが5人戦なら `5`、9人戦なら `9`、13人戦なら `13` に合わせます。
+* **`agent.team`**：自分で好きなチーム名にしてください。ログや表示名の先頭に使われます。
+* **`web_socket.url`**：ローカルで動かす場合はそのままでOKです。
 
 ---
 
-## 6. エージェントを起動する
+## 3. エージェントを起動する
+
+### uv を使っている場合
 
 ```bash
+uv run python src/main.py
+```
+
+### 仮想環境（venv）を使っている場合
+
+```bash
+source .venv/bin/activate
 python src/main.py
 ```
 
-デフォルトでは **`config/config.yml`** の設定を参照して起動します。
-指定して起動する方法や、複数の設定ファイルを同時に実行する方法は以下のとおりです。
+---
+
+## 起動時のオプション
+
+設定ファイルを明示したり、複数の設定ファイルを同時に起動することもできます。
 
 ```bash
-# 単一の設定ファイルを指定
-python src/main.py -c config/config_1.yml
+# 特定の設定ファイルを指定
+uv run python src/main.py -c config/config.yml
 
-# 複数の設定ファイルを同時指定
-python src/main.py -c config/config_1.yml config/config_2.yml
+# 複数の設定ファイルを同時に起動（別々のチームで対戦させたいときなど）
+uv run python src/main.py -c config/team_a.yml config/team_b.yml
 
-# ワイルドカード指定
-python src/main.py -c config/config_*.yml
+# ワイルドカードで一括指定
+uv run python src/main.py -c config/team_*.yml
 ```
 
-* 成功すると、ターミナルに初期化ログやサーバ接続の試行が表示されます。
-* 停止は **`Ctrl + C`**。
+停止するときは **`Ctrl + C`** を押します。
+
+---
+
+## うまく動かないときのチェックポイント
+
+* **APIキーを設定したか？**：`config/.env` に `GOOGLE_API_KEY` または `OPENAI_API_KEY` が書かれているか確認してください。
+* **サーバが起動しているか？**：別ターミナルで [サーバの起動方法](./server.md) が完了しているか確認してください。
+* **人数が一致しているか？**：サーバの設定ファイル（`default_5.yml` など）とエージェントの `agent.num` を合わせてください。
+* **接続エラーが出る**：`[Errno 61] Connection refused` が出る場合、サーバ側がまだ起動していないか、URLが違う可能性があります。
+
+---
+
+接続に成功すると、ターミナルに初期化ログや、LLMに送られたプロンプト・返答が次々と流れます。
+ゲームが終わると、ログが `log/` フォルダに保存されます。ログの見方は次のセクションで説明します。
 
 ---
 
 [参加者マニュアルトップへ](../_index.md)\
 [実行トップへ](./_index.md)\
-[前へ（サーバ起動方法）](./server.md)\
-[次へ（ゲームサーバからのデータ）](../evaluation/server_data.md)
+[前へ（サーバの起動方法）](./server.md)\
+[次へ（ゲームログの見方）](../evaluation/game_log_guide.md)

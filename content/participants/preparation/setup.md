@@ -1,62 +1,36 @@
 ---
 date: '2025-10-30T14:00:00+09:00'
 draft: false
-title: '事前準備'
+title: '開発環境の準備'
 category: participants_guide
 ---
 
-## 開発前に揃えておきたいもの
+このページでは、エージェントを動かすために必要な **Python環境** を準備します。
+初めてPythonを使う方でも進められるように、できるだけシンプルな手順にしています。
 
-人狼知能大会のエージェント開発では **Python 3.11以上** が必須です。  
-Pythonのバージョンが古いと、依存ライブラリのインストールや実行時にエラーが出ることがあります。  
-まずは、Python 3.11 以降の環境を整えることから始めましょう。
+> Windowsで開発する方は、先に [WSLとターミナル](../background/about_wsl.md) をひととおり読んで、Ubuntu ターミナルを用意しておくとスムーズです。
 
 ---
 
-### Python と仮想環境の準備
+## Python 3.11以上を用意する
 
-エージェントの開発には Python 3.11 以上が必要です。  
-まだインストールしていない場合は、次の手順で環境を整えましょう。
+サンプルエージェントは **Python 3.11以上** が必要です。まずは手元のPythonのバージョンを確認しましょう。
 
 ```bash
-# システムを最新状態に更新
+python3 --version
+```
+
+`Python 3.11.x` のように表示されれば問題ありません。
+もし古いバージョンしか入っていない場合は、次の手順でインストールします。
+
+### Ubuntu / WSL の場合
+
+```bash
 sudo apt update
-
-# Python コマンドを python3 と同じにする
-sudo apt install -y python-is-python3
-
-# Python の仮想環境を作るためのツールをインストール
-sudo apt install -y python3-venv
+sudo apt install -y python3 python3-venv
 ```
 
----
-
-### コマンドの意味を簡単に解説
-
-| コマンド                                    | 説明                                                           |
-| --------------------------------------- | ------------------------------------------------------------ |
-| `sudo apt update`                       | パッケージ情報を最新に更新します。新しいソフトを入れる前の基本操作です。                         |
-| `sudo apt install -y python-is-python3` | `python` コマンドを `python3` と同じ動作にします。これで `python` と入力するだけでOK。  |
-| `sudo apt install -y python3-venv`      | Python の仮想環境（venv）を作るための機能をインストールします。プロジェクトごとに環境を分けるために重要です。 |
-
----
-
-### Python のバージョンを確認しよう
-
-次のコマンドで、Python が正しくインストールされているか確認します。
-
-```bash
-python --version
-```
-
-結果の例：
-
-```bash
-Python 3.11.9
-```
-
-上記のように **Python 3.11 以上** が表示されればOKです。
-もし 3.10 以下の場合は、以下のように新しいバージョンをインストールしてください。
+それでもバージョンが古い場合は、新しい Python を追加でインストールします。
 
 ```bash
 sudo add-apt-repository ppa:deadsnakes/ppa
@@ -64,23 +38,50 @@ sudo apt update
 sudo apt install -y python3.11 python3.11-venv
 ```
 
-その後、`python3.11 --version` でバージョンを再確認しましょう。
+### macOS の場合
+
+[Homebrew](https://brew.sh/index_ja) を使うのがおすすめです。
+
+```bash
+brew install python@3.11
+```
 
 ---
 
-### まとめ
+## uv をインストールする
 
-* 人狼知能エージェントの開発には **Python 3.11 以上が必須**
-* `python3-venv` で仮想環境を使えるようにしておく
-* 以降の手順（クローンやAPI設定など）はこの環境で進めます
+本プロジェクトは **[uv](https://docs.astral.sh/uv/)** というツールを使って Python 環境を整えます。
+`uv` は依存関係のインストールを自動化してくれる高速なツールで、`pip` や `venv` の操作を覚える必要がなくなります。
+
+次のコマンドでインストールできます。
+
+```bash
+# Linux / macOS / WSL
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+```powershell
+# Windows (PowerShell)
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+インストール後、ターミナルを開き直して次のコマンドでバージョンを確認します。
+
+```bash
+uv --version
+```
+
+バージョン番号が表示されれば準備完了です。
 
 ---
 
-以上で事前準備の解説を完了します。
+## uv を使わずに進めたい場合
+
+会社や学校の環境で `uv` が使えない場合は、従来の `venv` + `pip` でも開発できます。
+次のページでは両方の手順を併記しているので、都合のよい方を選んでください。
 
 ---
 
 [参加者マニュアルトップへ](../_index.md)\
 [準備トップへ](./_index.md)\
-[前へ（事前準備）](../overview/aiwolfdial_repo.md)\
 [次へ（リポジトリのクローン）](./clone_repo.md)

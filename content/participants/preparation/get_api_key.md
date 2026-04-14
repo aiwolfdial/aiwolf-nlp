@@ -1,64 +1,62 @@
 ---
 date: '2025-10-30T14:00:00+09:00'
 draft: false
-title: 'API取得方法'
+title: 'APIキーの取得と設定'
 category: participants_guide
 ---
 
-このページでは、**Google AI Studio で API キーを作成**し、**ローカルの `aiwolf-nlp-agent-llm` に設定**するまでを説明します。
-基本は無料の **Gemini（Google）API** を前提にしていますが、`OPENAI_API_KEY` などの他ベンダー用キーも同様の手順で追加できます。
+このページでは、LLM（大規模言語モデル）を呼び出すためのAPIキーを取得して、エージェントに設定する方法を説明します。
+
+サンプルエージェントは次の3つのLLMに対応しています。
+
+* **Google Gemini**（無料枠あり・初心者におすすめ）
+* **OpenAI（GPT系）**
+* **Ollama**（ローカルで動くLLM）
+
+ここではいちばん始めやすい **Google Gemini** の取得方法を説明します。他のLLMを使う場合も、最後の `config.yml` の切り替え方は同じです。
 
 ---
 
-## Google AI Studio で API キーを作成する
+## Google AI Studio でAPIキーを作る
 
-1. ブラウザで **Google AI Studio** のキー管理ページを開く：
-   `https://aistudio.google.com/api-keys`
-2. **「APIキーを作成」** をクリック
-3. **キー名** と **インポートするプロジェクト** を任意に設定
+1. ブラウザで [Google AI Studio のAPIキーページ](https://aistudio.google.com/api-keys) を開きます。
+2. **「APIキーを作成」** をクリックします。
+3. キー名（例：`aiwolf-nlp-agent-llm`）とプロジェクト名を入力します。
+4. 作成後に表示された APIキー を **コピー** しておきましょう。
 
-   * 例：キー名 **`aiwolf-nlp-agent-llm`**、プロジェクト名 **`aiwolfdial`**
-4. **「キーを作成」** をクリック
-5. **APIキー** 一覧の表から、今作成したキー名をクリック → **「キーをコピー」** を押してクリップボードにコピー
-
-> セキュリティ：API キーは外部に公開しないでください。Git にコミットしないよう注意してください（`aiwolf-nlp-agent-llm` では`.env` は `.gitignore` 済みに設定済みです）。
+> **重要**：APIキーは絶対に他人に見せたり、GitHubに公開したりしないでください。
+> `aiwolf-nlp-agent-llm` の `config/.env` は最初から `.gitignore` に入っているので、そこに書き込めば安全です。
 
 ---
 
-## `.env` に API キーを設定する
+## `.env` に書き込む
 
-`aiwolf-nlp-agent-llm` ディレクトリの `config/.env` に先ほど取得したAPIキーを貼り付けます。
-
-1. aiwolf-nlp-agent-llmをコードエディタで開く
+`aiwolf-nlp-agent-llm` のフォルダに移動して、`config/.env` を開きます。
 
 ```bash
 cd ~/aiwolfdial/aiwolf-nlp-agent-llm
-code aiwolf-nlp-agent-llm
 ```
 
-1. エディタで `config/.env` を開き、以下の **`YOUR_API_KEY`** を **先ほどコピーしたキー** に置き換えます。
+エディタで `config/.env` を開くと、次のようになっているはずです。
 
 ```dotenv
-# 例（必要に応じて使うものだけ設定）
 OPENAI_API_KEY=YOUR_API_KEY
 GOOGLE_API_KEY=YOUR_API_KEY
 ```
 
-* **Gemini（Google）を使う場合**：最低でも `GOOGLE_API_KEY` を設定してください。
-* **OpenAI を併用する場合**：`OPENAI_API_KEY` も設定します。
+`GOOGLE_API_KEY=` の右側を、先ほどコピーしたAPIキーに置き換えて保存してください。
+OpenAI を使うときは `OPENAI_API_KEY` の方を書き換えます。両方設定しても問題ありません。
 
 ---
 
-## `config.yml` で使用する LLM を選ぶ
+## どのLLMを使うかを選ぶ
 
-どのベンダーの API を使うか、どのモデルを使うかを **`config/config.yml`（または `config/config.jp.yml`）** で指定します。
-
-初期の `config/config.yml` では、以下のように設定してあります：
+`config/config.yml` の `llm.type` で、実際に使うLLMを指定します。
 
 ```yaml
 llm:
-  type: google   # ← まずは Google(Gemini) を使うなら 'google'
-  sleep_time: 3  # API 呼び出し間隔の秒数（レート制限対策）
+  type: google   # google / openai / ollama のどれか
+  sleep_time: 3  # APIを呼ぶ前の待機秒数（レート制限対策）
 
 openai:
   model: gpt-4o-mini
@@ -74,25 +72,24 @@ ollama:
   base_url: http://localhost:11434
 ```
 
-* **Gemini の無料枠で始める**なら、`llm.type: google` のままで OK（モデルもそのままで問題ありません）。
-* **OpenAI を使う**場合は、`.env` に `OPENAI_API_KEY` を入れ、`llm.type: openai` に切り替え、`openai.model` を好みに合わせて調整します。
-* **Ollama（ローカル LLM）** を使う場合は、`llm.type: ollama` にし、`base_url` と `model` を手元の環境に合わせてください。
+* **Gemini を使う**：`type: google` のまま、GeminiのAPIキーを `.env` に書いておけばOKです。
+* **OpenAI を使う**：`type: openai` に変更し、`.env` の `OPENAI_API_KEY` を設定します。
+* **Ollama を使う**：ローカルでOllamaを起動した上で、`type: ollama` に変更し、`base_url` と `model` を環境に合わせます。
 
-> ⚙️ どの設定を使うかは **`llm.type`** が決め手です。`.env` に複数ベンダーのキーを入れておいても問題ありませんが、**実際に使うのは `llm.type` で指定したもの**になります。
+モデルの名前（`gemini-2.0-flash-lite` など）は自由に変更できます。利用可能なモデルは各サービスの公式ドキュメントを確認してください。
 
 ---
 
-## まとめ
+## これで準備は完了です
 
-* **Google AI Studio** で API キーを作成 → **`config/.env` に貼り付け**
-* **`config.yml` の `llm.type`** で使用するベンダーを選択（まずは `google` 推奨）
-* モデル名や `temperature` は後でチューニング可能。まずはデフォルトで OK
+* `.env` にAPIキーを書き込んだ
+* `config.yml` で使うLLMを選んだ
 
-これで **API キーの取得と設定は完了** です。
+次はいよいよエージェントを動かしてみましょう。
 
 ---
 
 [参加者マニュアルトップへ](../_index.md)\
 [準備トップへ](./_index.md)\
 [前へ（リポジトリのクローン）](./clone_repo.md)\
-[次へ（サーバ起動方法）](../execution/server.md)
+[次へ（サーバの起動方法）](../execution/server.md)

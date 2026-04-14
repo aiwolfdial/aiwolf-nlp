@@ -202,5 +202,5 @@ git push origin main
 
 [参加者マニュアルトップへ](../_index.md)\
 [背景知識トップへ](./_index.md)\
-[前へ（WSLとは）](./about_wsl.md)\
+[前へ（WSLとターミナル）](./about_wsl.md)\
 [次へ（仮想環境とは）](./virtual_env.md)

@@ -5,82 +5,117 @@ title: 'config.ymlの説明'
 category: participants_guide
 ---
 
-このページでは、`config.yml` の各セクションを説明します。
+このページでは、エージェントの設定ファイル `config/config.yml` の各項目を説明します。
+まずはデフォルトのままで問題なく動きますが、**プロンプトとログ** を調整するだけでも、エージェントの挙動はかなり変わります。
 
 ---
 
-## 重要5項目
+## まず押さえておきたい5つ
 
-* **web_socket.url**：`ws://127.0.0.1:8080/ws`（ローカルサーバならそのまま）
-* **web_socket.token**：大会運営から配布された **接続トークン**（必要な場合のみ）
-* **agent.team / agent.num**：チーム名と起動数（自己対戦はデフォルトで可）
-* **APIキー**：`config/.env` に `GOOGLE_API_KEY` / `OPENAI_API_KEY`（使うLLMに合わせて）
-* **log.output_dir / level**：ログ保存先とレベル（不具合調査は `DEBUG` 推奨）
+最初はこれだけ覚えておけばOKです。
 
----
-
-## セクション別の設定
-
-### 1. `web_socket`（ゲームサーバ接続）
-
-| キー               | 説明                  | 典型値 / メモ                       |
-| ---------------- | ------------------- | ------------------------------ |
-| `url`            | サーバの WebSocket URL。 | ローカル: `ws://127.0.0.1:8080/ws` |
-| `token`          | 接続トークン（必要な大会時のみ）。   | 未使用なら空でOK                      |
-| `auto_reconnect` | 対戦終了後に自動再接続するか。     | 練習: `true` / 単発実行: `false`     |
-
-> `auto_reconnect=true` のときは、試合終了後に同設定で**すぐ再接続**します。
+1. **`web_socket.url`**：接続先のサーバURL。ローカルなら `ws://127.0.0.1:8080/ws`
+2. **`web_socket.token`**：大会運営から配布されたトークン（ローカル対戦では空でOK）
+3. **`agent.num` / `agent.team`**：起動するエージェント数と、チーム名
+4. **`config/.env`**：APIキーを書く場所（`GOOGLE_API_KEY` / `OPENAI_API_KEY`）
+5. **`log.level`**：不具合調査をするときは `debug` にしておく
 
 ---
 
-### 2. `agent`（エージェント起動）
+## セクション別の説明
 
-| キー                | 説明                            | 典型値 / メモ                               |
-| ----------------- | ----------------------------- | -------------------------------------- |
-| `num`             | 起動するエージェント数。                  | 5人または13人（起動したサーバに合わせて）                           |
-| `team`            | チーム名（`NAME` 応答の接頭に使用）。        | 例: `kanolab` → `kanolab1`, `kanolab2`… |
-| `kill_on_timeout` | アクションのタイムアウト時に**処理を強制停止**するか。 | 本番は `true` 推奨                          |
+### `web_socket`：サーバ接続設定
 
----
+```yaml
+web_socket:
+  url: ws://127.0.0.1:8080/ws
+  token:
+  auto_reconnect: false
+```
 
-### 3. `llm` / `openai` / `google` / `ollama`（モデル設定）
+| キー | 説明 |
+|---|---|
+| `url` | サーバのWebSocket URL |
+| `token` | 接続トークン（必要な場合のみ） |
+| `auto_reconnect` | 対戦終了後に自動で再接続するか |
 
-| セクション    | 主なキー                               | 説明                                        |
-| -------- | ---------------------------------- | ----------------------------------------- |
-| `llm`    | `type`                             | 使用するプロバイダ（`google` / `openai` / `ollama`） |
-| 〃        | `sleep_time`                       | LLM呼び出し前の**待ち時間（秒）**。レート制御に便利             |
-| `openai` | `model`, `temperature`             | 例: `gpt-4o-mini`, `0.7`                   |
-| `google` | `model`, `temperature`             | 例: `gemini-2.0-flash-lite`, `0.7`         |
-| `ollama` | `model`, `temperature`, `base_url` | 例: `llama3.1`, `http://localhost:11434`   |
-
-> APIキーは **`config/.env`** に保存：
->
-> * OpenAI → `OPENAI_API_KEY`
-> * Google → `GOOGLE_API_KEY`
+> 練習時や大会本戦では `auto_reconnect: true` にしておくと、一度設定しておけば試合終了後も自動で次に繋がります。
 
 ---
 
-### 4. `prompt`（プロンプト一括管理）
+### `agent`：エージェントの起動設定
 
-* 各リクエスト種別に対応する **Jinja2 テンプレート** を定義します。
-  キー名は **小文字** の `initialize`, `daily_initialize`, `talk`, `whisper`, `daily_finish`, `vote`, `divine`, `guard`, `attack`。
-* よく使う埋め込み変数（抜粋）：
+```yaml
+agent:
+  num: 5
+  team: kanolab
+  kill_on_timeout: true
+```
 
-  * `info.*`：ゲーム状態（例：`info.agent`, `info.day`, `info.status_map`）
-  * `setting.*`：ゲーム設定
-  * `talk_history` / `whisper_history`：履歴（差分提供）
-  * `role.value`：自分の役職名
-  * `sent_talk_count` / `sent_whisper_count`：**自分がすでに発話/囁きした回数**（履歴の差分取得に使用）
-
-#### ポイント
-
-* `talk_history[sent_talk_count:]` や `whisper_history[sent_whisper_count:]` のように、**未読分だけ**を LLM に渡すテンプレが用意されています。
-* `name` / `finish` はサーバへ**文字列を返さない**ため、プロンプトは不要です（定義しても使われません）。
-* プロンプトに **余計な説明文** を入れるとそのまま送信されるため、**ゲームに必要な最小限**に保つのがおすすめです。
+| キー | 説明 |
+|---|---|
+| `num` | 同時に起動するエージェント数（5 / 9 / 13）。サーバの人数に合わせる |
+| `team` | チーム名。接続時の名前の先頭として使われる（例：`kanolab1`） |
+| `kill_on_timeout` | アクションがタイムアウトしたときに処理を強制停止するかどうか |
 
 ---
 
-### 5) `log`（ロギング）
+### `llm` ／ `openai` ／ `google` ／ `ollama`：LLMの設定
+
+```yaml
+llm:
+  type: google   # google / openai / ollama のいずれか
+  sleep_time: 3  # LLMを呼ぶ前の待機秒数
+```
+
+| セクション | 設定項目 | 説明 |
+|---|---|---|
+| `llm` | `type` | 使うLLMのプロバイダ |
+| `llm` | `sleep_time` | LLMを呼ぶ前に待つ秒数（レート制限対策） |
+| `openai` | `model` / `temperature` | OpenAIのモデル設定 |
+| `google` | `model` / `temperature` | Geminiのモデル設定 |
+| `ollama` | `model` / `temperature` / `base_url` | Ollama（ローカルLLM）の設定 |
+
+APIキーは `config/.env` に置きます。
+
+```dotenv
+OPENAI_API_KEY=sk-...
+GOOGLE_API_KEY=...
+```
+
+---
+
+### `prompt`：LLMへの指示文（★いちばん触りがいのある場所）
+
+`prompt` セクションには、リクエストごとにLLMに渡す **指示文（Jinja2テンプレート）** が書かれています。
+
+使えるキー名はすべて小文字で、以下の通りです。
+
+```text
+initialize / daily_initialize / talk / whisper / daily_finish /
+vote / divine / guard / attack
+```
+
+テンプレート内では、次のような変数が使えます。
+
+| 変数 | 内容 |
+|---|---|
+| `info.agent` | 自分の名前 |
+| `info.day` | 今が何日目か |
+| `info.status_map` | 各プレイヤーの生死 |
+| `info.profile` | 自分のキャラクタープロフィール |
+| `role.value` | 自分の役職名 |
+| `talk_history` / `whisper_history` | これまでの会話履歴 |
+| `sent_talk_count` / `sent_whisper_count` | 自分がすでに読み込んだ履歴の位置 |
+
+> **ポイント**：`talk_history[sent_talk_count:]` のように書くと、「まだLLMに渡していない新しい発言だけ」を取り出せます。
+> サンプルはそのように書かれているので、改造する際もこのパターンを踏襲するのがおすすめです。
+
+LLMの応答は **そのままサーバに送られる** ので、不要な前置きやコードブロック装飾が出力されないようにプロンプトで明示しておきましょう。
+
+---
+
+### `log`：ログの出力設定
 
 ```yaml
 log:
@@ -102,28 +137,38 @@ log:
     finish: false
 ```
 
-* **出力先**
+| キー | 説明 |
+|---|---|
+| `console_output` | ターミナルに出力するかどうか |
+| `file_output` | ファイルに出力するかどうか |
+| `output_dir` | ログの保存先フォルダ |
+| `level` | ログレベル（`debug` / `info` / `warning` / `error` / `critical`） |
+| `request.*` | リクエストごとに「最終返答」をログに残すかどうか |
 
-  * コンソール：`console_output`
-  * ファイル：`file_output`（`./log/<ULIDタイムスタンプ>/<エージェント名>.log` に保存）
-* **レベル**
-
-  * `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`（小文字でもOK）
-* **`log.request`**（重要）
-
-  * リクエストごとの**最終返答ログ**を出す/出さないの切り替えです（キーは**小文字**）。
-  * `whisper` / `talk` など、必要なものだけ `true` に。
-  * **LLM 入出力ログ**はこのフラグでは消せません（レベル/出力先で制御）。
+> **補足**：`log.request.*` は「サーバに送った最終返答」のログだけを制御するフラグです。
+> LLMへの入出力ログは `level` と `console_output` / `file_output` で制御されます。
 
 ---
 
-最初はデフォルトのconfig.ymlをしようすれば問題ありません。
-必要に応じてプロンプトとログ出力の粒度を調整し、挙動を確認してください。
-以上でconfig.ymlの解説は完了です。
+## キャラクター名について
+
+大会標準のサーバ設定では、プレイヤーに **日本語のキャラクター名**（例：ミナト・サクラ・ケンジ）と性格・年齢などのプロフィールが自動で割り当てられます。
+プロンプト内で `info.profile` を使うと、このキャラクター情報をLLMに伝えられます。
+
+---
+
+## まずはデフォルト、そして少しずつ
+
+最初はサンプル通りの `config.yml` で動かして、ゲームの流れを確認しましょう。
+その後、改良するときは次の順番がおすすめです。
+
+1. `prompt` を調整する（いちばん効果が出やすい）
+2. `log` を `info` → `debug` に切り替えて詳細を確認する
+3. `llm.type` や `model` を変えて、モデルによる違いを比べる
 
 ---
 
 [参加者マニュアルトップへ](../_index.md)\
 [改良・拡張トップへ](./_index.md)\
-[前へ（サンプルエージェントの構成と主要ファイル）](./nlp_agent_structure.md)\
+[前へ（ソースコードの構成）](./nlp_agent_structure.md)\
 [次へ（エージェントのカスタマイズ方法）](./customize_agent.md)

@@ -5,137 +5,133 @@ title: 'リポジトリのクローン'
 category: participants_guide
 ---
 
-このページでは、公式リポジトリ aiwolfdial/aiwolf-nlp-agent-llm を 自分の GitHub アカウントへ Fork し、その Fork をローカルへクローン、さらに 配布元を upstream として登録 するまでを説明します。
+このページでは、公式のサンプルエージェント [aiwolf-nlp-agent-llm](https://github.com/aiwolfdial/aiwolf-nlp-agent-llm) を手元に持ってきて、依存関係をインストールするまでの流れを説明します。
+
+手順はおおまかに次の3段階です。
+
+1. **Fork**：公式リポジトリを自分のGitHubアカウントにコピーする
+2. **Clone**：自分のForkをローカルに取ってくる
+3. **依存関係のインストール**：Pythonのライブラリを入れる
+
+> GitHubの基礎知識があやしい方は、先に [GitとGitHub](../background/about_github.md) をご覧ください。
 
 ---
 
-## 作業用ディレクトリを作る
+## 作業用のフォルダを作る
 
-今後の管理を楽にするため、まずは上位フォルダを用意しておきます。
+まずは関連ファイルをまとめる場所を作っておきます。
 
 ```bash
 mkdir -p ~/aiwolfdial
 cd ~/aiwolfdial
 ```
 
-> 以降のクローンは、基本的にこの `~/aiwolfdial` の直下で行います。
+以降のコマンドは、基本的にこの `~/aiwolfdial` の中で実行してください。
 
 ---
 
-## GitHub 上で Fork を作成する
+## GitHub で Fork する
 
-1. ブラウザで公式リポジトリにアクセス：
-   `https://github.com/aiwolfdial/aiwolf-nlp-agent-llm`
-2. 右上の **Fork** ボタンを押して、自分のアカウントに Fork を作成します。
-   （リポジトリ名はデフォルトのままで OK）
+1. ブラウザで公式リポジトリを開きます：[aiwolfdial/aiwolf-nlp-agent-llm](https://github.com/aiwolfdial/aiwolf-nlp-agent-llm)
+2. 右上の **Fork** ボタンを押します。
+3. 自分のアカウント名の下にコピーが作成されれば成功です。
 
-> Fork を使うと、`origin` が最初から **自分のリポジトリ** になるため、push 先の変更作業が不要で分かりやすいです。
+> Fork しておくと、自分が書いたコードを `git push` で気軽に保存できますし、大会終了後に他の参加者に公開することもできます。
 
 ---
 
-## 自分の Fork をローカルへクローン
+## 自分の Fork をクローンする
 
-GitHub で自分のアカウント側にできた Fork のページを開き、**自分のリポジトリ URL** を使ってクローンします（`username` は自分のユーザー名に置き換え）。
+GitHub の自分の Fork ページから、クローン用のURLをコピーして実行します（`<username>` は自分のGitHubユーザー名に置き換えてください）。
 
 ```bash
 cd ~/aiwolfdial
-
-# HTTPS 例（推奨）
 git clone https://github.com/<username>/aiwolf-nlp-agent-llm.git
-
-# プロジェクトフォルダへ移動
 cd aiwolf-nlp-agent-llm
 ```
 
-> SSH を使う場合は `git@github.com:<username>/aiwolf-nlp-agent-llm.git` を利用します。
+> SSH接続を設定している方は `git@github.com:<username>/aiwolf-nlp-agent-llm.git` を使ってください。
 
 ---
 
-## 配布元を upstream として登録（更新の取り込み用）
+## 公式の更新を取り込めるようにする（任意）
 
-配布元（公式）からの更新を取り込めるよう、`upstream` を追加します。
+大会期間中、公式リポジトリに修正が入ることがあります。
+公式側の更新を後から取り込めるように、`upstream` という名前で公式を登録しておきましょう。
 
 ```bash
 git remote add upstream https://github.com/aiwolfdial/aiwolf-nlp-agent-llm.git
 git remote -v
 ```
 
-出力例（`origin` が自分、`upstream` が公式になっていればOK）:
+出力に `origin`（自分のFork）と `upstream`（公式）の両方が並んでいればOKです。
+
+公式の更新を取り込みたくなったら、以下のコマンドで取得できます。
 
 ```bash
-origin    https://github.com/<username>/aiwolf-nlp-agent-llm.git (fetch)
-origin    https://github.com/<username>/aiwolf-nlp-agent-llm.git (push)
-upstream  https://github.com/aiwolfdial/aiwolf-nlp-agent-llm.git (fetch)
-upstream  https://github.com/aiwolfdial/aiwolf-nlp-agent-llm.git (push)
-```
-
----
-
-## 公式の更新を取り込むとき
-
-Fork で作業していると、公式リポジトリに更新が入ることがあります。
-定期的に取り込んで差分を解消しましょう。
-
-```bash
-# 公式から取得
 git fetch upstream
-
-# 例：main ブランチに取り込む
-git checkout main
-git merge upstream/main    # あるいは git rebase upstream/main
+git merge upstream/main
 ```
-
-> コンフリクト（衝突）が出た場合は、該当ファイルを手で解消してコミットします。
 
 ---
 
-## 環境構築
+## 設定ファイルを準備する
 
-以下のコマンドで環境を構築します。
+エージェントは `config/config.yml` を読み込んで動きます。サンプル設定をコピーしてファイルを作りましょう。
 
 ```bash
-# 日本語のプロンプトを使用したい場合
+# 日本語プロンプトを使う場合（おすすめ）
 cp config/config.jp.yml.example config/config.yml
-# 英語のプロンプトを使用したい場合
+
+# 英語プロンプトを使いたい場合はこちら
 # cp config/config.en.yml.example config/config.yml
+```
+
+APIキーを書き込むための `.env` ファイルも準備しておきます。
+
+```bash
 cp config/.env.example config/.env
-python -m venv .venv
+```
+
+> `.env` に書き込むキーの取得方法は次のページ [APIキーの取得と設定](./get_api_key.md) で説明します。
+
+---
+
+## 依存関係をインストールする
+
+### uv を使う場合（おすすめ）
+
+```bash
+uv sync
+```
+
+これだけで必要なPythonのライブラリがすべて入ります。あとから `uv run python src/main.py` のように実行するだけでエージェントが動きます。
+
+### uv を使わない場合
+
+従来の `venv` + `pip` でもインストールできます。
+
+```bash
+python3 -m venv .venv
 source .venv/bin/activate
 pip install -e .
 ```
 
-## フォルダ構成の目安（推奨セットアップ）
+この場合、以降の作業では毎回 `source .venv/bin/activate` で仮想環境を有効化してから実行してください。
 
-将来的に「実行」「評価」「強化」の各ドキュメントと行き来しやすいよう、**同じ親ディレクトリ（`~/aiwolfdial`）に関連ツールを並べる**構成を推奨します。
-まずは、ログ置き場と、ローカル対戦サーバ／評価ツールをこのタイミングで用意しておくとスムーズです。
+---
 
-```bash
-# 作業用ルートへ
-cd ~/aiwolfdial
+## ここまでで完了したこと
 
-# 1) ログ置き場（execution/server.md で詳説）
-mkdir -p aiwolf-nlp-game-logs
+* 公式リポジトリを Fork してクローンできた
+* `config/config.yml` と `config/.env` を用意した
+* Pythonの依存関係をインストールできた
 
-# 2) ローカル対戦サーバ（extras/local_battle_setup.md で詳説）
-git clone https://github.com/<username>/aiwolf-nlp-server.git
-
-# 3) LLM Judge（evaluation/llm_judge_usage.md で詳説）
-git clone https://github.com/<username>/aiwolf-nlp-llm-judge.git
-```
-
-フォルダ構成イメージは以下の通りです。
-
-```text
-~/aiwolfdial/
-├── aiwolf-nlp-agent-llm/   # ← 本ページの手順で Fork & Clone したメイン開発用
-├── aiwolf-nlp-game-logs/   # ゲームログファイルの置き場（Git管理外 推奨）
-├── aiwolf-nlp-server/      # ローカル対戦・検証用サーバ
-└── aiwolf-nlp-llm-judge/   # 主観評価用ツール
-```
+次はAPIキーを取得して `.env` に書き込みます。
 
 ---
 
 [参加者マニュアルトップへ](../_index.md)\
 [準備トップへ](./_index.md)\
-[前へ（事前準備）](./setup.md)\
-[次へ（API取得方法）](./get_api_key.md)
+[前へ（開発環境の準備）](./setup.md)\
+[次へ（APIキーの取得と設定）](./get_api_key.md)

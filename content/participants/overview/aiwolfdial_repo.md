@@ -1,101 +1,77 @@
 ---
 date: '2025-10-30T14:00:00+09:00'
 draft: false
-title: 'AIWolfDialリポジトリの説明'
+title: '関連リポジトリの紹介'
 category: participants_guide
 ---
 
-こちらのページでは人狼知能（AIWolfDial）GitHubのリポジトリの説明をします。どのようなリポジトリがあり、どのリポジトリがどのような働きをしているのか、開発をする際にぜひ参考にしてください。
-
-## はじめに
-
-人狼知能エージェントの開発で**必ず目を通しておきたい**のは
-**`aiwolf-nlp-agent-llm`／`aiwolf-nlp-common`／`aiwolf-nlp-server`** の3つです。
-実行後の**ログ確認・評価**では **`aiwolf-nlp-viewer`／`aiwolf-nlp-llm-judge`** を使います。
-
-> まずは下の表で全体像を掴み、必要なものから順にクローンしてください。
+このページでは、人狼知能大会の開発・運営に使われている主要なリポジトリを紹介します。
+最初からすべてを把握する必要はありません。**まずは必須の3つ** を覚えて、必要になったら他のリポジトリも使ってみてください。
 
 ---
 
-## ウェブサイト
+## 最初に押さえておきたい3つ
 
-| リポジトリ          | 概要                         |
-| -------------- | -------------------------- |
-| **aiwolf-nlp** | 大会・イベント情報の公開サイト。最新情報への入口。 |
+この3つが本大会の中心です。どれも [AIWolfDial の GitHub](https://github.com/aiwolfdial) 上にあります。
 
----
+| リポジトリ | 役割 |
+|---|---|
+| **[aiwolf-nlp-agent-llm](https://github.com/aiwolfdial/aiwolf-nlp-agent-llm)** | LLMを使うサンプルエージェント。**これを改造して大会に参加します** |
+| **[aiwolf-nlp-server](https://github.com/aiwolfdial/aiwolf-nlp-server)** | ゲームサーバ。ローカル対戦・自己対戦・本戦の接続先になる |
+| **[aiwolf-nlp-common](https://github.com/aiwolfdial/aiwolf-nlp-common)** | サーバとのやり取りで使う型定義（Python）。`pip` で導入できます |
 
-## サンプルエージェント関連
-
-| リポジトリ                    | 概要                                            | 使いどころ                |
-| ------------------------ | --------------------------------------------- | -------------------- |
-| **aiwolf-nlp-agent**     | ルールベース寄りの**非LLM**サンプル。テンプレ発話のランダム生成。          | サーバ起動直後の動作確認・最小実験に最適 |
-| **aiwolf-nlp-agent-llm** | **LLMで発話生成**するサンプルエージェント。今回の開発対象。             | ここをベースにプロンプト/ロジックを改造 |
-| **aiwolf-nlp-common**    | 役職や接続方式に関するプログラムが定義されているPythonパッケージ | 受信データ構造を安全に扱う／解析に利用  |
-
-> `aiwolf-nlp-common` は **`pip install aiwolf-nlp-common`** でも利用可能。改造したい場合のみリポジトリをクローン。
+> `aiwolf-nlp-common` は通常 `pip` でインストールするだけで十分です。改造したい場合だけクローンしてください。
 
 ---
 
-## 大会の実行（ゲームサーバ）
+## 確認・評価で使うツール
 
-| リポジトリ                 | 概要                                 | 使いどころ                |
-| --------------------- | ---------------------------------- | -------------------- |
-| **aiwolf-nlp-server** | WebSocketベースの**ゲームサーバ**。5人／13人に対応。 | ローカル対戦・自己対戦・大会用の対戦環境 |
+対戦が終わったあと、結果を見るための便利なツールです。
 
-> リリース済みバイナリ＋設定ファイルを取得して起動するだけで使えます（詳細は「サーバ起動方法」を参照）。
-
----
-
-## 結果の集計・分析
-
-| リポジトリ                         | 概要                                    | 使いどころ                |
-| ----------------------------- | ------------------------------------- | -------------------- |
-| **aiwolf-nlp-log-picker**     | 評価サンプル用に、出場回数・役職バランス等を考慮して**ログをピック**。 | 評価セットの公正な抽出          |
-| **aiwolf-nlp-log-translator** | **ログの多言語翻訳**。                         | 国際大会用         |
-| **aiwolf-nlp-viewer**         | ログ（`.log`）を**可視化**するWebビューア。  | ゲームの流れ・発話を素早く俯瞰      |
-| **aiwolf-nlp-llm-judge**      | LLMにより**主観評価と同等の順位付け**を自動化。           | 大量ログの**自動評価**・チーム別集計 |
+| リポジトリ | 役割 |
+|---|---|
+| **[aiwolf-nlp-viewer](https://aiwolfdial.github.io/aiwolf-nlp-viewer/)** | ゲームログをブラウザで可視化できます。**クローン不要、Webから直接使えます** |
+| **[aiwolf-nlp-llm-judge](https://github.com/aiwolfdial/aiwolf-nlp-llm-judge)** | ログをLLMに評価させて、項目ごとのランキングを出力します |
 
 ---
 
-## どう使い分ける？（最短ルート）
+## 運営向け・研究向けのツール
 
-1. **開発**：`aiwolf-nlp-agent-llm` を改造（`aiwolf-nlp-common` で受信構造を扱う）
-2. **対戦**：`aiwolf-nlp-server` をローカル起動 → エージェント接続
-3. **確認**：生成されたログを `aiwolf-nlp-viewer` で可視化
-4. **評価**：必要に応じて `aiwolf-nlp-llm-judge`（試合数が多い場合は`log-picker`で確認するゲームをピック / 国際大会用のエージェントであれば`log-translator`で翻訳）
+大会運営や研究目的で使われるリポジトリです。通常の参加では触らなくて構いません。
+
+| リポジトリ | 役割 |
+|---|---|
+| **aiwolf-nlp-log-picker** | 評価用にログをバランスよく抽出する |
+| **aiwolf-nlp-log-translator** | ログを多言語翻訳する |
+| **aiwolf-nlp** | 大会公式サイト（このマニュアルを公開しているサイト） |
 
 ---
 
-## 推奨フォルダ構成（例）
+## 開発の流れ（最短ルート）
+
+1. **開発する**：`aiwolf-nlp-agent-llm` を改造する
+2. **動かす**：`aiwolf-nlp-server` をローカルで起動してエージェントを接続する
+3. **見る**：`aiwolf-nlp-viewer` でゲームログを確認する
+4. **評価する**：必要に応じて `aiwolf-nlp-llm-judge` で自動評価する
+
+---
+
+## おすすめのフォルダ構成
+
+後々のドキュメントを読みやすくするため、次のようにまとめておくことをおすすめします。
 
 ```text
 ~/aiwolfdial/
-├── aiwolf-nlp-agent-llm/     # 開発のメイン（本リポジトリ）
-├── aiwolf-nlp-server/        # ゲームサーバ
-├── aiwolf-nlp-game-logs/     # ログ置き場（サーバ起動ディレクトリにすると便利）
-├── aiwolf-nlp-llm-judge/     # 自動評価
-└── (任意) aiwolf-nlp-common/ # 共通パッケージを改造する場合のみ
+├── aiwolf-nlp-agent-llm/   # 開発のメイン（必須）
+├── aiwolf-nlp-server/      # ゲームサーバ（あると便利）
+└── aiwolf-nlp-game-logs/   # ログ置き場（サーバをここで起動するとログがたまる）
 ```
 
-> `aiwolf-nlp-viewer` はWeb版があるため**クローン不要**でも利用可能（詳細は「ビュアーの使い方」を参照）。
-
----
-
-## 最初に入れておくと楽なセット
-
-* 必須：**`aiwolf-nlp-agent-llm`**, **`aiwolf-nlp-server`**
-* ログ確認：**`aiwolf-nlp-viewer`**（WebでOK）
-* 自動評価：**`aiwolf-nlp-llm-judge`**
-* 共通型定義：**`aiwolf-nlp-common`**（pipで導入／改造時のみクローン）
-
----
-
-以上でAIWolfDialのGitHubリポジトリの解説を完了します。
+> まずは `aiwolf-nlp-agent-llm` だけあれば動き始められます。他のリポジトリは必要になったタイミングで追加しましょう。
 
 ---
 
 [参加者マニュアルトップへ](../_index.md)\
 [概要トップへ](./_index.md)\
-[前へ（エージェントとサーバの仕組み）](./system_mechanism.md)\
-[次へ（事前準備）](../preparation/setup.md)
+[前へ（サーバから届くデータ）](./server_data.md)\
+[次へ（準備）](../preparation/_index.md)
