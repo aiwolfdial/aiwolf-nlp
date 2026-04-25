@@ -1,5 +1,5 @@
 ---
-date: '2025-10-30T14:00:00+09:00'
+date: '2026-04-26T14:00:00+09:00'
 draft: false
 title: '背景知識'
 ---
@@ -26,6 +26,18 @@ title: '背景知識'
 
 4. **[WebSocketとは](./about_websocket.md)**\
    サーバとエージェントの通信に使われている WebSocket について、HTTPとの違いも交えて説明します。
+
+5. **[Jinja2テンプレートとは](./about_jinja2.md)**\
+   `config.yml` の `prompt` で使われているテンプレートエンジン Jinja2 の基本文法（`{{ }}` ・`{% %}`・ハイフンによる空白制御など）を解説します。
+
+6. **[YAMLとは](./about_yaml.md)**\
+   `config.yml` の文法であるYAMLの基本（辞書・リスト・複数行文字列・インデントの罠）を解説します。
+
+7. **[LangChainとは](./about_langchain.md)**\
+   サンプルエージェントが LLM 呼び出しに使っている LangChain の最低限の語彙（`ChatModel` / `HumanMessage` / `\|` チェーン）を解説します。
+
+8. **[環境変数と.envファイル](./about_env_vars.md)**\
+   APIキーの管理に使われている環境変数の概念、`.env` ファイルの書き方、隠しファイル慣習、`python-dotenv`、`.gitignore` での除外などをまとめます。
 
 ---
 

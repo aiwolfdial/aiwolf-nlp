@@ -1,5 +1,5 @@
 ---
-date: '2025-10-30T14:00:00+09:00'
+date: '2026-04-26T14:00:00+09:00'
 draft: false
 title: 'config.ymlの説明'
 category: participants_guide
@@ -171,4 +171,4 @@ log:
 [参加者マニュアルトップへ](../_index.md)\
 [改良・拡張トップへ](./_index.md)\
 [前へ（ソースコードの構成）](./nlp_agent_structure.md)\
-[次へ（エージェントのカスタマイズ方法）](./customize_agent.md)
+[次へ（エージェントの内部状態とデータの流れ）](./agent_state.md)

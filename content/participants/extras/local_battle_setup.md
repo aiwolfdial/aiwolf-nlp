@@ -1,5 +1,5 @@
 ---
-date: '2025-10-30T14:00:00+09:00'
+date: '2026-04-26T14:00:00+09:00'
 draft: false
 title: 'サーバ設定の編集方法'
 category: participants_guide
@@ -173,5 +173,5 @@ game_logger:
 
 [参加者マニュアルトップへ](../_index.md)\
 [応用編トップへ](./_index.md)\
-[前へ（大会での対戦方法）](../competition/competition.md)\
+[前へ（本戦編）](../competition/main_round.md)\
 [次へ（playground：人狼以外の議論にも使える環境）](./playground.md)

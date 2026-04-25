@@ -1,6 +1,7 @@
 baseURL: https://aiwolfdial.github.io/aiwolf-nlp/
 theme: ["PaperMod"]
 enableRobotsTXT: true
+enableGitInfo: true
 
 params:
   env: production

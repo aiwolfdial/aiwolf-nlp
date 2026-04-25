@@ -1,5 +1,5 @@
 ---
-date: '2025-10-30T14:00:00+09:00'
+date: '2026-04-26T14:00:00+09:00'
 draft: false
 title: 'ゲームログの見方'
 category: participants_guide

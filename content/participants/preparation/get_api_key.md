@@ -1,5 +1,5 @@
 ---
-date: '2025-10-30T14:00:00+09:00'
+date: '2026-04-26T14:00:00+09:00'
 draft: false
 title: 'APIキーの取得と設定'
 category: participants_guide
@@ -26,6 +26,8 @@ category: participants_guide
 
 > **重要**：APIキーは絶対に他人に見せたり、GitHubに公開したりしないでください。
 > `aiwolf-nlp-agent-llm` の `config/.env` は最初から `.gitignore` に入っているので、そこに書き込めば安全です。
+>
+> 「`.env` って何？」「なぜコードに直接書かないの？」という背景は [背景知識 ＞ 環境変数と.envファイル](../background/about_env_vars.md) に体系的にまとめてあります。
 
 ---
 

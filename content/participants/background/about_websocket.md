@@ -1,5 +1,5 @@
 ---
-date: '2026-04-13T14:00:00+09:00'
+date: '2026-04-26T14:00:00+09:00'
 draft: false
 title: 'WebSocketとは'
 category: participants_guide
@@ -57,4 +57,5 @@ ws://127.0.0.1:8080/ws
 
 [参加者マニュアルトップへ](../_index.md)\
 [背景知識トップへ](./_index.md)\
-[前へ（仮想環境とは）](./virtual_env.md)
+[前へ（仮想環境とは）](./virtual_env.md)\
+[次へ（Jinja2テンプレートとは）](./about_jinja2.md)

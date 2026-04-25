@@ -1,5 +1,5 @@
 ---
-date: '2025-10-30T14:00:00+09:00'
+date: '2026-04-26T14:00:00+09:00'
 draft: false
 title: 'エージェントのカスタマイズ方法'
 category: participants_guide
@@ -141,6 +141,93 @@ def talk(self) -> str:
 
 ---
 
+## 独自キーのプロンプトを追加する
+
+`config.yml` の `prompt.*` は、サーバから届くリクエスト種別（`talk` / `vote` / `divine` …）と **1 対 1 で固定的に結び付いて** います（詳しくは [プロンプトエンジニアリング §2.1](./prompt_engineering.md#21-configpromptキー-の名前はどうやって決まっているか) を参照）。
+そのため、「昼の発言を作る前にもう一度 LLM に戦略を整理させたい」「自分用のふりかえりプロンプトを差し込みたい」のように、**リクエスト名と無関係なプロンプト** を使いたいときは、`config.yml` に独自キーを書くだけでは動かず、`agent.py` にも手を入れる必要があります。
+
+手順はシンプルに2ステップです。
+
+### 手順1：`config.yml` に独自キーを追加する
+
+`prompt` セクションに、好きな名前でキーを作ります。使える変数（`info` / `talk_history` など）は既存のプロンプトと同じです。
+
+```yaml
+prompt:
+  talk: |-
+    ...
+  my_strategy: |-                         # ← 独自キー
+    あなたは{{ info.agent }}です。{{ info.day }}日目の議論中です。
+    これまでの会話:
+    {% for w in talk_history[sent_talk_count:] -%}
+    {{ w.agent }}: {{ w.text }}
+    {% endfor %}
+    誰を疑うべきか、3行以内で整理してください。
+```
+
+### 手順2：`agent.py` にヘルパーを追加する
+
+まず、テンプレートを描画するヘルパー `_render_prompt` を基底クラスに追加します。**既存の `_send_message_to_llm` には手を加えず、新しいメソッドを1つ足すだけ** にしておくと、既存のリクエスト処理を壊さずに済みます。
+
+```python
+# src/agent/agent.py
+# 既存の import に以下が入っていることを確認（無ければ追加）
+from jinja2 import Template
+from langchain_core.messages import HumanMessage
+
+
+class Agent:
+    # ... 既存の __init__ / set_packet / _send_message_to_llm などはそのまま ...
+
+    # ▼▼▼ ここから新規メソッドを追加（クラス内ならどこでもOK）
+    def _render_prompt(self, key_name: str) -> str:
+        """任意のキー名のプロンプトを描画して返す."""
+        prompt = self.config["prompt"][key_name]
+        key = {
+            "info": self.info,
+            "setting": self.setting,
+            "talk_history": self.talk_history,
+            "whisper_history": self.whisper_history,
+            "role": self.role,
+            "sent_talk_count": self.sent_talk_count,
+            "sent_whisper_count": self.sent_whisper_count,
+        }
+        return Template(prompt).render(**key).strip()
+    # ▲▲▲ 新規メソッドここまで
+```
+
+### 手順3：使いたいメソッドから呼び出す
+
+次に、独自プロンプトを挟みたいメソッドで `self._render_prompt("my_strategy")` を呼びます。
+ここでは「昼の発言前に戦略整理を挟む」例として、**既存の `talk()` をオーバーライド** するパターンを示します（基底クラス側を直接編集するより、役職クラスで拡張する方が影響範囲を絞れます）。
+
+```python
+# src/agent/villager.py  （他の役職クラスでも同じ要領）
+class Villager(Agent):
+    # ... 既存の __init__ などはそのまま ...
+
+    # ▼▼▼ talk() をオーバーライドして独自プロンプトを差し込む
+    def talk(self) -> str:
+        # --- 追加：発言を作る前に戦略整理プロンプトをLLM履歴に積む ---
+        strategy = self._render_prompt("my_strategy")
+        self.llm_message_history.append(HumanMessage(content=strategy))
+        # --- 追加ここまで ---
+
+        # 既存の talk 処理（基底クラスの _send_message_to_llm 経由）に委譲
+        return super().talk()
+    # ▲▲▲ オーバーライドここまで
+```
+
+ポイントは、**新規追加**（`_render_prompt`）と **既存メソッドの拡張**（`talk` のオーバーライド）を分けて書くことです。こうしておくと、動かなくなったときに「どの変更が原因か」を切り分けやすくなります。
+
+### 補足：注意点
+
+* 独自キーのプロンプトは **サーバからのリクエストに自動では紐付きません**。「いつ・どのメソッドで呼ぶか」は自分で設計する必要があります。
+* 既存の `_send_message_to_llm` を書き換えて「`Request` の代わりに文字列キーを受け取れる」ようにする手もありますが、まずは **別メソッドを足す** 方が既存処理を壊さずに安全です。
+* 追加したキーで参照できる変数を増やしたい場合は、[エージェントの内部状態とデータの流れ §6](./agent_state.md#6-増やした状態をプロンプトから参照できるようにする) と同じ要領で `key` 辞書にエントリを足してください。
+
+---
+
 ## プロンプト改善の具体例
 
 コードを触らずに `config.yml` の `prompt.*` を書き換えるだけでも、エージェントの振る舞いは大きく変わります。
@@ -267,6 +354,8 @@ class Seer(Agent):
 
 `agent.py` 側で投票履歴を蓄積しておき、プロンプトで参照できるようにします。`_send_message_to_llm` のテンプレート変数を増やすイメージです。これにより、「誰が誰に投票したか」の時系列をLLMに見せられるようになります。
 
+> 具体的な手順（`__init__` で属性を作る → `set_packet` で更新 → `key` 辞書に登録）は [エージェントの内部状態とデータの流れ §5〜§6](./agent_state.md#5-自分で内部状態を増やしたいとき) にコード例つきで示しています。
+
 ---
 
 ## 最初の一歩として
@@ -278,5 +367,5 @@ class Seer(Agent):
 
 [参加者マニュアルトップへ](../_index.md)\
 [改良・拡張トップへ](./_index.md)\
-[前へ（config.ymlの説明）](./config_explanation.md)\
-[次へ（大会での対戦方法）](../competition/competition.md)
+[前へ（プロンプトエンジニアリング）](./prompt_engineering.md)\
+[次へ（LLMとのやり取りパターン）](./llm_interaction_patterns.md)
