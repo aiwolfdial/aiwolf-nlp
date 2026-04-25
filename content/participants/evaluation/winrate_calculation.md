@@ -1,5 +1,5 @@
 ---
-date: '2026-04-26T14:00:00+09:00'
+date: '2026-04-20T14:00:00+09:00'
 draft: false
 title: '勝率の計算方法'
 category: participants_guide
