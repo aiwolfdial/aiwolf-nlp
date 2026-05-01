@@ -11,6 +11,8 @@ title: '2026春季 国内大会 自然言語処理部門'
 
 ## 更新情報
 
+* **2026/05/01**: **予選の位置づけおよび予選ログの取り扱いについて追記**しました。予選は主にエージェントの動作確認を目的としたものであり、予選ログは他チームが閲覧・利用する可能性があります。詳細は[レギュレーション](/menu/AIWolfDial2026_SpringJp/regulation)及び[日程と参加方法](/menu/AIWolfDial2026_SpringJp/schedule_participation)をご確認ください。
+
 - **2026/04/15**: **大会参加登録〆切の期間を延長**しました。5/1まで参加登録を受け付けておりますので、ぜひご応募ください。今後のスケジュールについて詳細は[スケジュールと参加](/menu/AIWolfDial2026_SpringJp/schedule_participation#日程)をご確認ください。
 
 - **2026/04/09**: **いつでも発話トラック**対応のサンプルエージェントおよびサーバが公開されました。詳細は[レギュレーション](/menu/AIWolfDial2026_SpringJp/regulation#いつでも発話トラック新方式)・[開発](/menu/AIWolfDial2026_SpringJp/agent#いつでも発話トラックへの対応)をご確認ください。サンプルエージェントは[こちら](https://github.com/aiwolfdial/aiwolf-nlp-agent-llm)、対応サーバは[こちら](https://github.com/aiwolfdial/aiwolf-nlp-server)からご利用ください。
