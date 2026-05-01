@@ -6,7 +6,7 @@ category: participants_guide
 ShowToc: true
 ---
 
-このページでは、本プロジェクトで `config.yml` に使われている **YAML** の基本を説明します。
+こちらのページでは、本プロジェクトで `config.yml` に使われている **YAML** の基本を説明します。
 「コロンとインデントだけで書かれている、あのテキストファイルって何？」というところから押さえていきたい方向けのページです。
 
 > YAML を **どう書き換えてエージェントの挙動を変えるか** は [改良・拡張 ＞ config.ymlの説明](../enhancement/config_explanation.md) で扱います。

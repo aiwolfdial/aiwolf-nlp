@@ -6,7 +6,7 @@ category: participants_guide
 ShowToc: true
 ---
 
-このページでは、本プロジェクトの `config.yml` の `prompt` セクションで使われている **Jinja2** の基本を説明します。
+こちらのページでは、本プロジェクトの `config.yml` の `prompt` セクションで使われている **Jinja2** の基本を説明します。
 「`{% for %}` とか `{{ ... }}` ってそもそも何？」というところから押さえていきたい方向けのページです。
 
 > Jinja2 をどう使ってプロンプトを組み立てているかは [改良・拡張 ＞ プロンプトエンジニアリング](../enhancement/prompt_engineering.md) 側で扱います。

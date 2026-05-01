@@ -6,7 +6,7 @@ category: participants_guide
 ShowToc: true
 ---
 
-このページでは、サンプルエージェントが LLM とのやり取りに使っている **LangChain** の最低限の語彙と仕組みを説明します。
+こちらのページでは、サンプルエージェントが LLM とのやり取りに使っている **LangChain** の最低限の語彙と仕組みを説明します。
 「`llm_model.invoke(...)` とか `HumanMessage(...)` って何？」というところから押さえていきたい方向けのページです。
 
 > LangChain を使った **設計の選択肢**（マルチターンとシングルターンの違いなど）は [改良・拡張 ＞ LLMとのやり取りパターン](../enhancement/llm_interaction_patterns.md) で扱います。

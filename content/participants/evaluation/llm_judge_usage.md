@@ -14,7 +14,7 @@ category: participants_guide
 > 自分のエージェント評価に使いたい場合は、**リポジトリを clone か fork** して、評価したいログのトラック・人数・評価項目に合わせて `config/settings.yaml` や `config/evaluation_criteria.yaml` を **適宜書き換えてからご利用ください**。
 > 本ページでは、リポジトリで現在公開されている標準的なフローを説明します。
 
-このページでは、LLM Judge の導入から実行・結果確認までを順番に説明します。
+こちらのページでは、LLM Judge の導入から実行・結果確認までを順番に説明します。
 
 ---
 

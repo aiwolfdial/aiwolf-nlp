@@ -1,11 +1,11 @@
 ---
-date: '2026-04-26T14:00:00+09:00'
+date: '2026-04-20T14:00:00+09:00'
 draft: false
 title: 'リポジトリのクローン'
 category: participants_guide
 ---
 
-このページでは、公式のサンプルエージェント [aiwolf-nlp-agent-llm](https://github.com/aiwolfdial/aiwolf-nlp-agent-llm) を手元に持ってきて、依存関係をインストールするまでの流れを説明します。
+こちらのページでは、公式のサンプルエージェント [aiwolf-nlp-agent-llm](https://github.com/aiwolfdial/aiwolf-nlp-agent-llm) を手元に持ってきて、依存関係をインストールするまでの流れを説明します。
 
 手順はおおまかに次の3段階です。
 

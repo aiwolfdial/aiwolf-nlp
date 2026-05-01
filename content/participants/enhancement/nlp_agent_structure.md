@@ -5,7 +5,7 @@ title: 'ソースコードの構成'
 category: participants_guide
 ---
 
-このページでは、サンプルエージェント `aiwolf-nlp-agent-llm` の **どこに何があるか** を説明します。
+こちらのページでは、サンプルエージェント `aiwolf-nlp-agent-llm` の **どこに何があるか** を説明します。
 「コードを読む前の地図」として使ってください。
 
 ---
