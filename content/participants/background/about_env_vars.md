@@ -124,7 +124,7 @@ config/.env
 > **重要**：自分でファイル名を変えたり、別の場所に `.env` を置いたりすると、`.gitignore` のパターンから外れて **誤ってコミットされる危険** があります。
 > 既存の `.gitignore` の指定通りの場所に置くのが安全です。
 
-`.gitignore` の書き方そのものは、[GitとGitHub ＞ .gitignore](./about_github.md#gitignore) を参照してください。
+`.gitignore` の書き方そのものは、[GitとGitHub ＞ .gitignore](./about_github.md#gitignore送ってはいけないものを除外する) を参照してください。
 
 ---
 

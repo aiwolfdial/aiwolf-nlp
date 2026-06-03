@@ -139,7 +139,7 @@ def set_packet(self, packet: Packet) -> None:
 > **注意**：`talk_history` と `llm_message_history` は **名前が似ていますが別物** です。
 > `talk_history` は「ゲーム内で他プレイヤーが何を話したか」のログ（`Talk` のリスト）で、プロンプトに埋め込んで LLM に見せる素材です。
 > 一方の `llm_message_history` は「自分が LLM とどうやり取りしたか」の記録（LangChain の `BaseMessage` のリスト）で、`invoke()` にそのまま渡されるものです。
-> 詳しくは [背景知識 ＞ LangChainとは ＞ `llm_message_history` と `talk_history` は別物です](../background/about_langchain.md#llm_message_history-と-talk_history-は別物です) を参照してください。
+> 詳しくは [背景知識 ＞ サンプルの履歴管理 ＞ `llm_message_history` と `talk_history` は別物です](../background/about_history.md#llm_message_history-と-talk_history-は別物です) を参照してください。
 
 ---
 

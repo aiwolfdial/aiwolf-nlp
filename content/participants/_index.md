@@ -54,7 +54,10 @@ cascade:
 | | | [WebSocketとは](./background/about_websocket.md) |
 | | | [Jinja2テンプレートとは](./background/about_jinja2.md) |
 | | | [YAMLとは](./background/about_yaml.md) |
+| | | [LLMとのチャットはどうなっている？](./background/about_llm_chat.md) |
 | | | [LangChainとは](./background/about_langchain.md) |
+| | | [【実習】OpenRouter APIを追加する](./background/exercise_openrouter.md) |
+| | | [サンプルの履歴管理](./background/about_history.md) |
 | | | [環境変数と.envファイル](./background/about_env_vars.md) |
 
 ---

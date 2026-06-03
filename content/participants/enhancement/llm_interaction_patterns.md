@@ -199,7 +199,7 @@ response = (model | StrOutputParser()).invoke(messages)
 本格的に書き換える前に、次の流れで小さく検証するとリスクを抑えられます。
 
 1. 役職クラスのうち1つだけ（たとえば `villager.py`）で `_send_message_to_llm` をオーバーライド
-2. ログを `level: debug` にして [config.ymlの説明 ＞ log](./config_explanation.md#log) のとおり LLM への入出力を確認
+2. ログを `level: debug` にして [config.ymlの説明 ＞ log](./config_explanation.md#logログの出力設定) のとおり LLM への入出力を確認
 3. ローカル対戦（[応用編 ＞ ローカル対戦のセットアップ](../extras/local_battle_setup.md)）で挙動を比較
 4. 良ければ基底クラスへ反映、悪ければ戻す
 
