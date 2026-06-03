@@ -26,21 +26,37 @@ ShowToc: true
 
 ## 1. データの流れ：サーバ → packet → エージェント
 
-サーバから届く JSON は、`aiwolf-nlp-common` の `Packet` オブジェクトに変換されてから、エージェントに渡されます。
+サーバから届く JSON は、`aiwolf-nlp-common` の `Packet` オブジェクトに変換されてから、エージェントに渡されます。受信から保存までは **3つの関数が連鎖** しており、それぞれの責務は次のようになっています。
 
 ```text
-サーバ ──(JSON)──▶ Packet.from_dict()        # aiwolf-nlp-common 側
-                       │
-                       ├─ Info.from_dict()        # 現状態
-                       ├─ Setting.from_dict()     # ゲーム設定
-                       ├─ Talk.from_dict() × N    # 会話・囁き履歴
-                       │
-                       ▼
-                   agent.set_packet(packet)     # ★ここで内部状態に保存
-                       │
-                       ▼
-                   agent.action()               # 保存済みの状態を使って応答
+サーバ ──(WebSocket / JSON文字列)──▶ Client.receive()           # aiwolf-nlp-common/client.py
+                                          │ recv() → json.loads
+                                          │ Packet.from_dict()
+                                          │   ├─ Info.from_dict()      # 現状態
+                                          │   ├─ Setting.from_dict()   # ゲーム設定
+                                          │   └─ Talk.from_dict() × N  # 会話・囁き履歴
+                                          ▼
+                                       Packet オブジェクト
+                                          │
+                                          ▼
+                              starter.handle_game_session_async()      # src/starter.py
+                                          │ packet = await asyncio.to_thread(client.receive)
+                                          ▼
+                                   agent.set_packet(packet)             # src/agent/agent.py ★保存
+                                          │
+                                          ▼
+                                   agent.action()                       # 保存済みの状態で応答
 ```
+
+それぞれの関数が担当するのは次の通りです。
+
+| 関数 | 場所 | やっていること |
+|---|---|---|
+| `Client.receive()` | `aiwolf-nlp-common/src/aiwolf_nlp_common/client.py` | WebSocketから1メッセージ受信 → JSONパース → `Packet.from_dict()` で型付きオブジェクトに変換して返す |
+| `starter.handle_game_session_async()` | `aiwolf-nlp-agent-llm/src/starter.py` | `client.receive` をループで呼び、得た `Packet` を `agent.set_packet(packet)` に渡してから `agent.action()` を呼ぶ |
+| `Agent.set_packet()` | `aiwolf-nlp-agent-llm/src/agent/agent.py` | `Packet` の各フィールドを **エージェントインスタンスの属性** にコピーして保持する（次の §2 で詳述） |
+
+> **どこに保存されているか**：保存先は **エージェントインスタンスのメモリ上（属性）だけ** です。サーバから届いたパケットそのものをファイルに書き出す処理はサンプルエージェントには入っていません。受信内容を `.log` に残しているのは `agent_logger`（[ソースコードの構成 ＞ `src/utils/agent_logger.py`](./nlp_agent_structure.md#srcutilsagent_loggerpy)）の **ログ目的の副次的な出力** で、ゲーム進行に使われる状態は常にインスタンス属性から読み出されます。プロセスを落とすと状態は失われます。
 
 `Packet` は次の構造を持っています（`aiwolf_nlp_common.packet.Packet`）。
 
@@ -55,6 +71,8 @@ ShowToc: true
 | `new_whisper` | `Talk \| None` | グループチャット方式での新着囁き |
 
 > **ポイント**：`talk_history` / `whisper_history` は **その時点までの差分** であって、ゲーム全体の履歴ではありません。「全体の履歴」を保つのはエージェント側の責任です（次の節で見ます）。
+>
+> どのリクエストで `info` / `setting` / `talk_history` / `whisper_history` が届くか（リクエスト別の中身）は、[サーバから届くデータ](../overview/server_data.md) の表を参照してください。
 
 ---
 
@@ -352,7 +370,8 @@ prompt:
 
 ## まとめ
 
-* サーバから届いた `Packet` は、`set_packet` で `self.info` / `self.setting` / `self.talk_history` などに保存される
+* サーバからのデータは `Client.receive()`（aiwolf-nlp-common）→ `starter.handle_game_session_async()`（starter.py）→ `agent.set_packet()`（agent.py）の順で **3つの関数を経由** してエージェントに届く
+* 保存先は **エージェントインスタンスの属性のみ**（`self.info` / `self.setting` / `self.talk_history` / `self.whisper_history` ほか）。サンプルエージェントは状態をファイルに永続化していない（`agent_logger` のログ出力はあくまで副次的）
 * プロンプトから参照できる変数は、`_send_message_to_llm` の `key` 辞書に入っているもの（既定では7つ）
 * 既定の7つは、common 由来のオブジェクトをそのまま渡しているもの（5つ）と、agent が計算したカウンタ（2つ）の混合
 * 新しい情報を渡したいときは、**`__init__` で属性を作り → `set_packet` で更新 → `key` 辞書に登録** の3ステップ

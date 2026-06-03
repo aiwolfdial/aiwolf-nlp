@@ -272,4 +272,4 @@ prompt:
 [参加者マニュアルトップへ](../_index.md)\
 [背景知識トップへ](./_index.md)\
 [前へ（Jinja2テンプレートとは）](./about_jinja2.md)\
-[次へ（LangChainとは）](./about_langchain.md)
+[次へ（LLMとのチャットはどうなっている？）](./about_llm_chat.md)

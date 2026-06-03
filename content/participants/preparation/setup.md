@@ -8,7 +8,7 @@ category: participants_guide
 こちらのページでは、エージェントを動かすために必要な **Python環境** を準備します。
 初めてPythonを使う方でも進められるように、できるだけシンプルな手順にしています。
 
-> Windowsで開発する方は、先に [WSLとターミナル](../background/about_wsl.md) をひととおり読んで、Ubuntu ターミナルを用意しておくとスムーズです。
+> Windowsで開発する方は、先に [WSLとLinux](../background/about_wsl.md) をひととおり読んで Ubuntu ターミナルを用意しておくとスムーズです（操作に慣れたい方は [ターミナル操作とコマンド](../background/about_terminal.md) も）。
 
 ---
 
@@ -49,6 +49,8 @@ brew install python@3.11
 ---
 
 ## uv をインストールする
+
+> 「`uv` って何？`venv` とどう違うの？」という方は、先に [仮想環境とは](../background/virtual_env.md) を読んでおくと全体像が掴めます。
 
 本プロジェクトは **[uv](https://docs.astral.sh/uv/)** というツールを使って Python 環境を整えます。
 `uv` は依存関係のインストールを自動化してくれる高速なツールで、`pip` や `venv` の操作を覚える必要がなくなります。

@@ -64,8 +64,10 @@ aiwolf-nlp-agent-llm/
 
 * `create_client(config)`：`web_socket.url` / `token` からWebSocketクライアントを作成
 * `connect_to_server`：接続に失敗したら15秒待って再試行
-* `handle_game_session_async`：パケットを1つずつ受信 → 必要に応じてエージェントに処理させる
+* `handle_game_session_async`：`client.receive()` を1パケットずつ呼び（実体は `aiwolf-nlp-common` の `Client.receive()`：WebSocketからの受信とJSON→`Packet` 変換を担当）、得た `Packet` を `agent.set_packet(packet)` に渡してから `agent.action()` を実行
 * `connect`：1ゲーム分の流れを実行。`auto_reconnect` が有効なら繰り返す
+
+> 受信から保存までの3関数チェーン（`Client.receive` → `handle_game_session_async` → `Agent.set_packet`）と、状態が **インスタンス属性にだけ** 保持されることの整理は [エージェントの内部状態とデータの流れ §1](./agent_state.md#1-データの流れサーバ--packet--エージェント) を参照してください。
 
 ### `src/agent/agent.py`
 

@@ -47,7 +47,8 @@ cascade:
 | | | [本戦編](./competition/main_round.md) |
 | [**応用編**](./extras/_index.md) | サーバを自分で編集する／別用途に使う | [サーバ設定の編集方法](./extras/local_battle_setup.md) |
 | | | [playground：人狼以外の議論にも使える環境](./extras/playground.md) |
-| [**背景知識**](./background/_index.md) | 開発の基礎知識（任意） | [WSLとターミナル](./background/about_wsl.md) |
+| [**背景知識**](./background/_index.md) | 開発の基礎知識（任意） | [WSLとLinux](./background/about_wsl.md) |
+| | | [ターミナル操作とコマンド](./background/about_terminal.md) |
 | | | [GitとGitHub](./background/about_github.md) |
 | | | [仮想環境とは](./background/virtual_env.md) |
 | | | [WebSocketとは](./background/about_websocket.md) |
