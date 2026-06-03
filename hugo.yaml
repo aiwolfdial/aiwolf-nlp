@@ -33,7 +33,7 @@ languages:
         # - name: "論文提出"
         #   url: /menu/AIWolfDial2026_SpringJP/paper_submission
         #   weight: 2
-        - name: "ワークショップ"
+        - name: "企画セッション"
           url: /menu/AIWolfDial2026_SpringJP/program
           weight: 2
         - name: "スケジュールと参加"
@@ -59,23 +59,23 @@ languages:
     menu:
       main:
         - name: "Home"
-          url: /page/INLG_2025
+          url: /page/INLG_2026
           weight: 1
         - name: "Paper Submission"
-          url: /menu/INLG_2025_en/paper_submission
+          url: /menu/INLG_2026_en/paper_submission
           weight: 2
         - name: "Workshop"
-          url: /menu/INLG_2025_en/program
+          url: /menu/INLG_2026_en/program
           weight: 3
         - name: "Schedule and Participation"
-          url: /menu/INLG_2025_en/schedule_participation
+          url: /menu/INLG_2026_en/schedule_participation
           weight: 4 
         - name: "Regulations"
-          url: /menu/INLG_2025_en/regulation
+          url: /menu/INLG_2026_en/regulation
           weight: 5
         - name: "Development"
-          url: /menu/INLG_2025_en/agent
+          url: /menu/INLG_2026_en/agent
           weight: 6
         - name: "Links & Organizing Committee"
-          url: /menu/INLG_2025_en/organizer
+          url: /menu/INLG_2026_en/organizer
           weight: 7
