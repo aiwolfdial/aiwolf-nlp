@@ -1,7 +1,7 @@
 ---
-date: '2026-02-19T17:15:28+09:00'
+date: '2026-05-20T17:15:28+09:00'
 draft: false
-title: 'Next tournament'
+title: 'Next Contest'
 divContent: true
 addSeparator: true
 hideMeta: true
