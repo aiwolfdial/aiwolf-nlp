@@ -63,7 +63,7 @@ This contest has two tracks: the **Turn-Based Track** and the **Anytime Speech T
 
 ### Character Settings
 
-- Use the character settings sent by the game server for your agent's persona. (See [Character Settings](#character-settings) for details.)
+- Use the character settings sent by the game server for your agent's persona. (See [Character Settings](#about-character-settings) for details.)
 
 ## Game Roles
 
@@ -92,7 +92,7 @@ The AIWolf Contest (Natural Language Division) is held in 5-player and 9-player 
 With the additional roles in the 9-player village, you will need to implement the Knight's `guard` action and the Werewolf's `whisper` action.\
 For implementation details, see [aiwolf-nlp-agent](https://github.com/aiwolfdial/aiwolf-nlp-agent/blob/main/README.en.md#how-to-customize-agents).
 
-## Character Settings
+## About Character Settings
 
 <!-- A different character profile is automatically generated using generative AI for each game and sent from the game server to the agents.\ -->
 The following four elements are included in each character profile. Character settings are drawn from a pre-created set.

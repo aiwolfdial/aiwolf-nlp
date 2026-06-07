@@ -7,7 +7,7 @@ category: schedule
 
 ## Schedule
 
-※ For paper-related dates (submission deadline, acceptance notification, camera-ready, and presentation), please refer to [paper_submission](/menu/INLG_2026/paper_submission).
+※ For paper-related dates (submission deadline, acceptance notification, camera-ready, and presentation), please refer to [paper_submission](/menu/INLG_2026_en/paper_submission).
 
 <!-- Registration, preliminary, and main round dates are being finalized and will be updated once decided.
 - 2026/07/20: Registration deadline
@@ -20,7 +20,7 @@ category: schedule
 ## Preliminary Round and Main Round
 
 - The competition will be conducted in English.
-- The competition consists of three divisions based on the combination of speech mode (turn-based / free-talk) and village size (5-player / 9-player). Please choose the division(s) you wish to enter (multiple divisions allowed). For the detailed rules of each division, see the [Competition Regulations](/menu/INLG_2026/regulation).
+- The competition consists of three divisions based on the combination of speech mode (turn-based / free-talk) and village size (5-player / 9-player). Please choose the division(s) you wish to enter (multiple divisions allowed). For the detailed rules of each division, see the [Competition Regulations](/menu/INLG_2026_en/regulation).
   - Turn-based × 5-player village
   - Turn-based × 9-player village
   - Free-talk × 5-player village
@@ -67,4 +67,4 @@ Turn-based 5-player games run quickly, so more matches are scheduled for that di
 - Detailed instructions for connecting to the preliminary server will be provided to registered participants via Slack.
 - Please submit 5 self-play logs per division you are entering (e.g., if entering all 3 divisions, 15 logs in total). Send the links to the generated game logs to the submission address announced on Slack.
 - Please check the [Schedule](#schedule) for the submission deadline.
-- For further technical details, see [Creating an Agent and How to Play](/menu/INLG_2026/agent).
+- For further technical details, see [Creating an Agent and How to Play](/menu/INLG_2026_en/agent).
