@@ -16,7 +16,7 @@ custom_style: 'documentPage'
 
 - **ターン式トラック**：ゲームサーバからリクエストが送られてきたタイミングで、エージェントが発話・行動を行います。
 - **いつでも発話トラック**：各日の開始の合図とともに、エージェントが自由なタイミングで発話を行います（一日あたりの発話回数に上限があります）。
-- いずれのトラックも5人村・9人村で実施されます。役職の詳細は[ゲームの役職について](#開催するゲームの役職について)をご確認ください。
+- ターン式トラックは5人村・9人村で実施されます。いつでも発話トラックは5人村のみの実施となります。役職の詳細は[ゲームの役職について](#開催するゲームの役職について)をご確認ください。
 
 ### 参加・実行について
 
@@ -121,7 +121,6 @@ custom_style: 'documentPage'
 - 5人村: [aiwolf-nlp-server/config/default_5.yml](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/config/default_5.yml#L16)
 - 9人村: [aiwolf-nlp-server/config/default_9.yml](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/config/default_9.yml#L16)
 - いつでも発話トラック5人村: [aiwolf-nlp-server/config/freeform_5.yml](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/config/freeform_5.yml)
-- いつでも発話トラック5人村: [aiwolf-nlp-server/config/freeform_9.yml](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/config/freeform_9.yml)
 
 <!-- ### キャラクター生成時のプロンプトについて
 

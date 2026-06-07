@@ -13,13 +13,16 @@ We plan to notify authors of the AIWolf International Contest evaluation results
 Note that paper submission is not required to participate in the contest, but it is strongly encouraged.
 Presentations will be held in a hybrid format combining in-person and online participation.
 
-👉 **Submit your paper here**: [Submission Link](https://softconf.com/p/AIWolfDial2026)
+<!-- 👉 **Submit your paper here**: [Submission Link](https://softconf.com/p/AIWolfDial2026) -->
 
 ## Important Dates
 
+<!-- Registration, preliminary, and main round dates are being finalized and will be updated once decided.
 - July 20, 2026: Registration deadline
 - August 1, 2026: Preliminary round (self-play) results submission deadline
 - Early August 2026: Main tournament (online matches)
+-->
+- Registration, preliminary, and main round dates are being finalized and will be updated once decided.
 <!-- - September 10, 2026: Paper submission deadline
 - September 24, 2026: Notification of acceptance
 - October 1, 2026: Camera-ready paper deadline -->

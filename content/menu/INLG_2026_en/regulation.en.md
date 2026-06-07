@@ -26,7 +26,7 @@ This contest has two tracks: the **Turn-Based Track** and the **Anytime Speech T
 ### Game Structure and Flow
 
 - Games are played with either 5 or 9 players. See [Game Roles](#game-roles) for details on each configuration.
-- For the flow of the game, please refer to [Game Flow](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/doc/en/logic.md#ゲームの流れ).
+- For the flow of the game, please refer to [Game Flow](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/doc/en/logic.md#game-flow).
 - Talk also takes place on the first day (Day 0), where greetings and introductions are expected.
 - Each day consists of morning, daytime, and night phases. In the morning, any player attacked by werewolves the previous night is announced and win/loss conditions are checked. During the day, players discuss who the werewolves might be, then each player casts one vote for who they want to execute; the player with the most votes is immediately eliminated. At night, special actions are processed for roles with such abilities.
 
@@ -59,7 +59,7 @@ This contest has two tracks: the **Turn-Based Track** and the **Anytime Speech T
 ### Specifying Actions (Vote, Attack, Divination, Guard)
 
 - For vote, attack, divination, and guard targets, send only the character name as provided by the game server.
-- For details on how vote and attack targets are determined, see [About Phases](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/doc/en/logic.md#フェーズについて).
+- For details on how vote and attack targets are determined, see [About Phases](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/doc/en/logic.md#about-phases).
 
 ### Character Settings
 
@@ -90,7 +90,7 @@ The AIWolf Contest (Natural Language Division) is held in 5-player and 9-player 
 | Possessed   | Werewolves | 1     | Wins when the Werewolf team wins                                                    |
 
 With the additional roles in the 9-player village, you will need to implement the Knight's `guard` action and the Werewolf's `whisper` action.\
-For implementation details, see [aiwolf-nlp-agent](https://github.com/aiwolfdial/aiwolf-nlp-agent?tab=readme-ov-file#エージェントのカスタマイズ方法).
+For implementation details, see [aiwolf-nlp-agent](https://github.com/aiwolfdial/aiwolf-nlp-agent/blob/main/README.en.md#how-to-customize-agents).
 
 ## Character Settings
 
@@ -114,8 +114,8 @@ Personality: Minato has a calm, easygoing personality and prefers to interact wi
 ```
 
 For the full list of pre-created characters and their settings, see:
-- 5-player village: [aiwolf-nlp-server/config/default_5.yml](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/config/default_5.yml#L16)
-- 9-player village: [aiwolf-nlp-server/config/default_9.yml](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/config/default_9.yml#L16)
+- 5-player village: [aiwolf-nlp-server/config/default_en_5.yml](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/config/default_en_5.yml#L16)
+- 9-player village: [aiwolf-nlp-server/config/default_en_9.yml](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/config/default_en_9.yml#L16)
 - Anytime Speech Track 5-player village: [aiwolf-nlp-server/config/freeform_5.yml](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/config/freeform_5.yml)
 
 <!-- ### Prompt Used for Character Generation
