@@ -2,7 +2,7 @@
 date: '2025-11-12T23:41:36+09:00'
 draft: false
 title: 'AIWolfDial-2024-workshop-INLG'
-_build:
+build:
     render: never
     list: never
 ---
