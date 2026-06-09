@@ -28,25 +28,25 @@ languages:
     menu:
       main:
         - name: "ホーム"
-          url: /page/AIWolfDial_2026SpringJP
+          url: /page/INLG_2026
           weight: 1
-        # - name: "論文提出"
-        #   url: /menu/AIWolfDial2026_SpringJP/paper_submission
-        #   weight: 2
+        - name: "論文提出"
+          url: /menu/INLG_2026/paper_submission
+          weight: 2
         - name: "企画セッション"
-          url: /menu/AIWolfDial2026_SpringJP/program
+          url: /menu/INLG_2026/program
           weight: 2
         - name: "スケジュールと参加"
-          url: /menu/AIWolfDial2026_SpringJP/schedule_participation
+          url: /menu/INLG_2026/schedule_participation
           weight: 3
         - name: "レギュレーション"
-          url: /menu/AIWolfDial2026_SpringJP/regulation
+          url: /menu/INLG_2026/regulation
           weight: 4
         - name: "開発"
-          url: /menu/AIWolfDial2026_SpringJP/agent
+          url: /menu/INLG_2026/agent
           weight: 5
         - name: "リンク・実行委員会"
-          url: /menu/AIWolfDial2026_SpringJP/organizer
+          url: /menu/INLG_2026/organizer
           weight: 6
   en:
     languageName: "English"
