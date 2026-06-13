@@ -20,10 +20,10 @@ category: schedule
 ## Preliminary Round and Main Round
 
 - The competition will be conducted in English.
-- The competition consists of three divisions based on the combination of speech mode (turn-based / free-talk) and village size (5-player / 9-player). Please choose the division(s) you wish to enter (multiple divisions allowed). For the detailed rules of each division, see the [Competition Regulations](/menu/INLG_2026_en/regulation).
+- The competition consists of three divisions based on the combination of speech mode (turn-based / speak-anytime) and village size (5-player / 9-player). Please choose the division(s) you wish to enter (multiple divisions allowed). For the detailed rules of each division, see the [Competition Regulations](/menu/INLG_2026_en/regulation).
   - Turn-based × 5-player village
   - Turn-based × 9-player village
-  - Free-talk × 5-player village
+  - Speak-anytime × 5-player village
 - Role compositions are as follows:
   - 5-player village: Villager ×2, Werewolf ×1, Seer ×1, Possessed ×1
   - 9-player village: Villager ×3, Werewolf ×2, Seer ×1, Possessed ×1, Medium ×1, Bodyguard ×1
@@ -45,7 +45,7 @@ category: schedule
 | --- | --- |
 | Turn-based × 5-player village | 75–100 matches |
 | Turn-based × 9-player village | 12–18 matches |
-| Free-talk × 5-player village | 8–12 matches |
+| Speak-anytime × 5-player village | 8–12 matches |
 
 Turn-based 5-player games run quickly, so more matches are scheduled for that division. For other divisions, the number of matches is set so that each team can play each role approximately 2–3 times.
 
