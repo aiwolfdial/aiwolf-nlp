@@ -63,11 +63,11 @@ Attack vote results: {{ info.attack_vote_list }}
 
 Each `Vote` object has the fields `day` (day number), `agent` (voter), and `target` (vote target). Use these as input for voting and attack decisions.
 
-## Support for the Anytime Speech Track
+## Support for the Speak-Anytime Track
 
 ### Differences from Turn-Based
 
-In the conventional method, the server sends a `TALK` request to each agent in turn and waits for a response. In the Anytime Speech track, agents proactively send speech without waiting for a server request.
+In the conventional method, the server sends a `TALK` request to each agent in turn and waits for a response. In the Speak-Anytime track, agents proactively send speech without waiting for a server request.
 
 - After receiving `TALK_PHASE_START`, agents send speech proactively without waiting for a server request
 - Other agents' speech is delivered in real time via `TALK_BROADCAST` (refer to the `new_talk` field)
