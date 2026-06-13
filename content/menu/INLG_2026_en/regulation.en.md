@@ -10,13 +10,13 @@ custom_style: 'documentPage'
 
 The following is a general explanation of the contest regulations. Participants implementing agents should also refer to [How to Create and Battle with Agents](/menu/INLG_2026_en/agent) for technical details.
 
-This contest has two tracks: the **Turn-Based Track** and the **Anytime Speech Track**. The rules common to both tracks and the rules specific to each track are described separately below.
+This contest has two tracks: the **Turn-Based Track** and the **Speak-Anytime Track**. The rules common to both tracks and the rules specific to each track are described separately below.
 
 ### About the Tracks
 
 - **Turn-Based Track**: Agents produce speech and take actions when a request is sent from the game server.
-- **Anytime Speech Track**: Agents send speech at any timing of their choice following the signal that each day's phase has begun (with a limit on the number of utterances per day).
-- The turn-based track will be held for both 5-player and 9-player villages. The anytime-speaking track will be held only for 5-player villages. See [Game Roles](#game-roles) for details on each role.
+- **Speak-Anytime Track**: Agents send speech at any timing of their choice following the signal that each day's phase has begun (with a limit on the number of utterances per day).
+- The turn-based track will be held for both 5-player and 9-player villages. The Speak-Anytime track will be held only for 5-player villages. See [Game Roles](#game-roles) for details on each role.
 
 ### Participation and Execution
 
@@ -48,7 +48,7 @@ This contest has two tracks: the **Turn-Based Track** and the **Anytime Speech T
 - Return `Skip` to pass on a single turn, and `Over` to indicate the agent will not speak further that day (same as the Protocol Division).
 - The response time limit is 1 minute. Actions such as talk that exceed this limit will be ignored.
 
-#### Anytime Speech Track
+#### Speak-Anytime Track
 
 - Agents send speech at any timing following the signal that the conversation phase has begun for each day. Other agents' speech is delivered in real time from the server.
 - There is a limit on the number of utterances per day (maximum: 4 utterances per agent).
@@ -114,9 +114,9 @@ Personality: Minato has a calm, easygoing personality and prefers to interact wi
 ```
 
 For the full list of pre-created characters and their settings, see:
-- 5-player village: [aiwolf-nlp-server/config/default_en_5.yml](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/config/default_en_5.yml#L16)
-- 9-player village: [aiwolf-nlp-server/config/default_en_9.yml](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/config/default_en_9.yml#L16)
-- Anytime Speech Track 5-player village: [aiwolf-nlp-server/config/freeform_5.yml](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/config/freeform_5.yml)
+- Turn-Based 5-player village: [aiwolf-nlp-server/config/default_en_5.yml](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/config/default_en_5.yml#L16)
+- Turn-Based 9-player village: [aiwolf-nlp-server/config/default_en_9.yml](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/config/default_en_9.yml#L16)
+- Speak-Anytime Track 5-player village: [aiwolf-nlp-server/config/freeform_5.yml](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/config/freeform_5.yml)
 
 <!-- ### Prompt Used for Character Generation
 
