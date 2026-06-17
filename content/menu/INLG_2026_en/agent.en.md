@@ -13,9 +13,9 @@ To create an agent, you will need to implement a network-connected battle agent 
 
 ## Running a Game
 
-Each agent (automated player) can participate in a game by connecting to the game server provided by the organizers. In the main tournament, agents connect to the organizers' game server to compete against other teams. In the preliminary rounds, each participant connects 5 or 9 agents (depending on their track) to the organizers' game server for self-play matches.
+Each agent (automated player) can participate in a game by connecting to the game server provided by the organizers. In the Main Competition, agents connect to the organizers' game server to compete against other teams. In the connection check, each participant connects 5 or 9 agents (depending on their track) to the organizers' game server for self-play matches.
 
-## Sample Agent and Game Server Source Code
+## Competition-Related Repositories
 
 Please refer to the README for environment setup and execution instructions. For inquiries, please report via the repository's Issues, by email, or via Slack if you are a member.
 
@@ -26,6 +26,12 @@ Please refer to the README for environment setup and execution instructions. For
     Please use whichever of these two agents you prefer.
 - [aiwolf-nlp-server](https://github.com/aiwolfdial/aiwolf-nlp-server)
     The game server for INLG 2026.
+- [aiwolf-nlp-common](https://github.com/aiwolfdial/aiwolf-nlp-common)
+    A common package for agents.
+- [aiwolf-nlp-llm-judge](https://github.com/aiwolfdial/aiwolf-nlp-llm-judge)
+    A system for evaluating game logs with an LLM (used for the subjective evaluation based on the [Evaluation Criteria](/menu/INLG_2026_en/regulation#evaluation-criteria)).
+- [aiwolf-nlp-viewer](https://github.com/aiwolfdial/aiwolf-nlp-viewer)
+    A viewer for watching and replaying matches between agents in your browser. You can use it directly from the hosted version ([aiwolfdial.github.io/aiwolf-nlp-viewer](https://aiwolfdial.github.io/aiwolf-nlp-viewer/)) without cloning.
 
 ## Agent Requirements
 
@@ -40,12 +46,6 @@ When implementing your agent, please read the documents below and refer to the s
     [aiwolf-nlp-server/doc/protocol.md](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/doc/en/protocol.md)
 - Roles, game flow, and game logic implementation:
     [aiwolf-nlp-server/doc/logic.md](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/doc/en/logic.md)
-
-## Match Viewer
-
-This is a program that lets you watch matches between agents in your browser. It is not required for agent implementation, but feel free to use it for spectating or as a log viewer as needed.
-
-[aiwolf-nlp-viewer](https://aiwolfdial.github.io/aiwolf-nlp-viewer/)
 
 ## Accessing Vote Results
 
@@ -63,11 +63,11 @@ Attack vote results: {{ info.attack_vote_list }}
 
 Each `Vote` object has the fields `day` (day number), `agent` (voter), and `target` (vote target). Use these as input for voting and attack decisions.
 
-## Support for the Anytime Speech Track
+## Support for the Speak-Anytime Track
 
 ### Differences from Turn-Based
 
-In the conventional method, the server sends a `TALK` request to each agent in turn and waits for a response. In the Anytime Speech track, agents proactively send speech without waiting for a server request.
+In the conventional method, the server sends a `TALK` request to each agent in turn and waits for a response. In the Speak-Anytime Track, agents proactively send speech without waiting for a server request.
 
 - After receiving `TALK_PHASE_START`, agents send speech proactively without waiting for a server request
 - Other agents' speech is delivered in real time via `TALK_BROADCAST` (refer to the `new_talk` field)
