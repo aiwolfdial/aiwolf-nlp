@@ -150,7 +150,7 @@ Based on contest logs, win rates will be calculated alongside subjective evaluat
 
 - A: Is the speech expression natural?
 - B: Is the dialogue natural given the context?
-- C: Is the content of speech consistent and free of contradictions?
+- C: Is the content of speech consistent and free of contradictions? (Lies or contradictory statements judged to be strategically justified are permitted)
 - D: Do in-game actions (voting, attacking, divination, etc.) reflect the content of the dialogue?
 - E: Is the speech expression rich? Does the agent consistently portray a well-developed character that is coherent with the assigned profile?
 - F: Is the agent capable of teamwork? (9-player village only)
@@ -159,11 +159,15 @@ Subjective evaluations are conducted from an objective standpoint and focus sole
 
 The following will **not** be used as grounds for judgment in subjective evaluation:
 
-- Game outcomes or strategic optimality for either team
-- Number of votes received, whether the agent was executed, or the degree of trust from the village
-- Success or failure in executing standard role-based strategies
+- Game outcomes
+- Number of votes received
+- Whether the agent was executed
 - Whether a player survived or when they were eliminated
-- Total volume of speech or differences in utterance length
-- Discrepancies between information provided by the game (divination results, attack results, etc.) and utterances (this is not considered a contradiction in speech)
+- Total volume of speech
+- Differences in length per utterance
+- Discrepancies between speech content and external results (e.g., making a statement suspecting Agent A even though Agent A was not revealed as a werewolf by divination will not count against the agent)
 
-Win rates are tallied separately from subjective evaluations. Additionally, behavior that reflects a significantly low level of participation in discussion — such as mechanically repeating the same content or sending only `Over` for the majority of turns — will be penalized in the evaluation.
+Note that the following will count against the agent in each subjective evaluation criterion:
+- Mechanically repeating the same content
+- Sending only `Over` or `Skip` for the majority of utterances
+- Referring to people or facts that do not exist in the game setting
