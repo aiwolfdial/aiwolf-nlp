@@ -15,19 +15,19 @@ This contest has two tracks: the **Turn-Based Track** and the **Speak-Anytime Tr
 ### About the Tracks
 
 - **Turn-Based Track**: Agents produce speech and take actions when a request is sent from the game server.
-- **Speak-Anytime Track**: Agents send speech at any timing of their choice following the signal that each day's phase has begun (with a limit on the number of utterances per day).
-- The turn-based track will be held for both 5-player and 9-player villages. The Speak-Anytime track will be held only for 5-player villages. See [Game Roles](#game-roles) for details on each role.
+- **Anytime Speech Track**: Agents send speech at any timing of their choice following the signal that each day's phase has begun (with a limit on the number of utterances per day).
+- The turn-based track will be held for both 5-player and 9-player villages. The anytime-speaking track will be held only for 5-player villages. See [Game Roles](#game-roles) for details on each role.
 
 ### Participation and Execution
 
-- In the AIWolf Contest (Natural Language Division), participants do not submit an executable file; instead, they run their agents on their own machines and compete over the internet. Therefore, agents must be running on participants' own machines during both the preliminary and main rounds. The organizers will run the game server, but participants are responsible for providing their own execution environment for their agents. The main tournament is expected to span approximately one week in total, with each track running for about one to two days. Participants will be notified when each track begins, but in principle, agents are expected to remain running continuously throughout the main tournament period for the tracks they are entered in. If continuous operation for approximately one week is not feasible in your environment, please contact us individually — we will do our best to accommodate you.
+- In the AIWolf Contest (Natural Language Division), participants do not submit an executable file; instead, they run their agents on their own machines and compete over the internet. Therefore, agents must be running on participants' own machines during both the connection check and the Main Competition. The organizers will run the game server, but participants are responsible for providing their own execution environment for their agents. The Main Competition period is expected to span approximately one week in total, with each track running for about one to two days. Participants will be notified when each track begins, but in principle, agents are expected to remain running continuously throughout the Main Competition period for the tracks they are entered in. If continuous operation for approximately one week is not feasible in your environment, please contact us individually — we will do our best to accommodate you.
 <!-- - Matches may include human players in addition to automated agent players. -->
 
 ### Game Structure and Flow
 
 - Games are played with either 5 or 9 players. See [Game Roles](#game-roles) for details on each configuration.
 - For the flow of the game, please refer to [Game Flow](https://github.com/aiwolfdial/aiwolf-nlp-server/blob/develop/doc/en/logic.md#game-flow).
-- Talk also takes place on the first day (Day 0), where greetings and introductions are expected.
+- Talk also takes place on the first day (Day 0). Use it however your team sees fit — for greetings, ice-breaking, discussing your strategy for the following days, and so on.
 - Each day consists of morning, daytime, and night phases. In the morning, any player attacked by werewolves the previous night is announced and win/loss conditions are checked. During the day, players discuss who the werewolves might be, then each player casts one vote for who they want to execute; the player with the most votes is immediately eliminated. At night, special actions are processed for roles with such abilities.
 
 ### Talk Rules (Common to Both Tracks)
@@ -85,11 +85,11 @@ The AIWolf Contest (Natural Language Division) is held in 5-player and 9-player 
 | Villager    | Villagers  | 3     | None                                                                                |
 | Seer        | Villagers  | 1     | Each night, select one player to learn which team they belong to                    |
 | Medium      | Villagers  | 1     | Can learn the team affiliation of the player most recently eliminated by vote       |
-| Knight      | Villagers  | 1     | Each night, select one player to protect from werewolf attack                       |
+| Bodyguard      | Villagers  | 1     | Each night, select one player to protect from werewolf attack                       |
 | Werewolf    | Werewolves | 2     | Each night, select one player to attack and eliminate from the game                 |
 | Possessed   | Werewolves | 1     | Wins when the Werewolf team wins                                                    |
 
-With the additional roles in the 9-player village, you will need to implement the Knight's `guard` action and the Werewolf's `whisper` action.\
+With the additional roles in the 9-player village, you will need to implement the Bodyguard's `guard` action and the Werewolf's `whisper` action.\
 For implementation details, see [aiwolf-nlp-agent](https://github.com/aiwolfdial/aiwolf-nlp-agent/blob/main/README.en.md#how-to-customize-agents).
 
 ## About Character Settings

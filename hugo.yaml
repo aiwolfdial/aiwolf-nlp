@@ -33,11 +33,11 @@ languages:
         - name: "論文提出"
           url: /menu/INLG_2026/paper_submission
           weight: 2
-        - name: "企画セッション"
+        - name: "ワークショップ"
           url: /menu/INLG_2026/program
           weight: 2
-        - name: "スケジュールと参加"
-          url: /menu/INLG_2026/schedule_participation
+        - name: "参加方法"
+          url: /menu/INLG_2026/participation
           weight: 3
         - name: "レギュレーション"
           url: /menu/INLG_2026/regulation
@@ -67,8 +67,8 @@ languages:
         - name: "Workshop"
           url: /menu/INLG_2026_en/program
           weight: 3
-        - name: "Schedule and Participation"
-          url: /menu/INLG_2026_en/schedule_participation
+        - name: "How to Participate"
+          url: /menu/INLG_2026_en/participation
           weight: 4 
         - name: "Regulations"
           url: /menu/INLG_2026_en/regulation
