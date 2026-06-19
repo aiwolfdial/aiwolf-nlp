@@ -155,9 +155,12 @@ Based on contest logs, win rates will be calculated alongside subjective evaluat
 - E: Is the speech expression rich? Does the agent consistently portray a well-developed character that is coherent with the assigned profile?
 - F: Is the agent capable of teamwork? (9-player village only)
 
-Subjective evaluations are conducted from an objective standpoint and focus solely on the perspective indicated by each criterion. No criteria beyond those defined will be introduced.
+*For criteria C and D, we also check whether the statements and actions are appropriate for the agent's role and faction.
 
-The following will **not** be used as grounds for judgment in subjective evaluation:
+Subjective evaluations are conducted for each criterion from an objective standpoint, focusing solely on the perspective indicated by that criterion, and no criteria beyond those defined will be introduced.
+In addition, for those of the subjective evaluation criteria A–F that can be measured quantitatively, we plan to also use quantitative evaluation.
+
+Note that the following will **not** be used as grounds for judgment in subjective evaluation:
 
 - Game outcomes
 - Number of votes received
@@ -165,9 +168,9 @@ The following will **not** be used as grounds for judgment in subjective evaluat
 - Whether a player survived or when they were eliminated
 - Total volume of speech
 - Differences in length per utterance
-- Discrepancies between speech content and external results (e.g., making a statement suspecting Agent A even though Agent A was not revealed as a werewolf by divination will not count against the agent)
+- Discrepancies between speech content and external results (e.g., a case where the agent makes a statement suspecting Agent A, but the divination result shows that A is not a werewolf, will not count against the agent)
 
-Note that the following will count against the agent in each subjective evaluation criterion:
+On the other hand, the following will count against the agent in each subjective evaluation criterion:
 - Mechanically repeating the same content
 - Sending only `Over` or `Skip` for the majority of utterances
 - Referring to people or facts that do not exist in the game setting
