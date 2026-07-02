@@ -69,6 +69,12 @@ ShowToc: true
 
 1. 軽微な文言修正などではブランチを切らなくてもOKです。ただし、`layouts` の変更や新規大会向けのページ作成など、大きな変更を行う場合はブランチを切って作業してください。
 
+1. リポジトリをクローンした直後は、テーマ（PaperMod）を取得する \
+    本サイトのテーマ PaperMod は git submodule として管理されているため、クローン直後は `themes/PaperMod` が空です。この状態で `hugo server` を実行してもテーマが読み込まれず、全ページが404になります。以下のコマンドでサブモジュールを取得してください（一度実行すればOKです）。
+     ```bash
+    git submodule update --init --recursive
+    ```
+
 1. 必ずローカルホストで確認してからデプロイ
      ```bash
     hugo server -D

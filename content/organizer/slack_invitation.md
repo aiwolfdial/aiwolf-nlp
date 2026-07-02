@@ -6,13 +6,13 @@ category: organizer_guide
 ---
 
 - 歯車マークの「管理者」
-![管理者](../../static/images/organizer/slack_invitation/image.png)
+![管理者](https://aiwolfdial.github.io/aiwolf-nlp/images/organizer/slack_invitation/image.png)
 
 - 「メンバーを管理する」
-![メンバーを管理する](../../static/images/organizer/slack_invitation/image%201.png)
+![メンバーを管理する](https://aiwolfdial.github.io/aiwolf-nlp/images/organizer/slack_invitation/image%201.png)
 
 - 「名前またはメールアドレスで」
-![名前またはメールアドレスで](../../static/images/organizer/slack_invitation/image%202.png)
+![名前またはメールアドレスで](https://aiwolfdial.github.io/aiwolf-nlp/images/organizer/slack_invitation/image%202.png)
 
     1. 参加登録GoogleFormに入力されたメールアドレスを入力
 
@@ -20,19 +20,19 @@ category: organizer_guide
     </details>
 
 - 「･･･」→「アカウントを有効かする」
-![アカウントを有効化する](../../static/images/organizer/slack_invitation/image%203.png)
+![アカウントを有効化する](https://aiwolfdial.github.io/aiwolf-nlp/images/organizer/slack_invitation/image%203.png)
 
 - 「シングルチャンネルゲスト」→「次へ」
-![シングルチャンネルゲスト](../../static/images/organizer/slack_invitation/image%204.png)
+![シングルチャンネルゲスト](https://aiwolfdial.github.io/aiwolf-nlp/images/organizer/slack_invitation/image%204.png)
 
 - 「チャンネルを選択する」→「該当大会のチャンネル」→「シングルチャンネルゲストにする」
-![チャンネルを選択する](../../static/images/organizer/slack_invitation/image%205.png)
+![チャンネルを選択する](https://aiwolfdial.github.io/aiwolf-nlp/images/organizer/slack_invitation/image%205.png)
 
 - 「メンバーを招待する」
-![メンバーを招待する](../../static/images/organizer/slack_invitation/image%206.png)
+![メンバーを招待する](https://aiwolfdial.github.io/aiwolf-nlp/images/organizer/slack_invitation/image%206.png)
 
 - 「送信」
-![送信](../../static/images/organizer/slack_invitation/image%207.png)
+![送信](https://aiwolfdial.github.io/aiwolf-nlp/images/organizer/slack_invitation/image%207.png)
 
     1. 送信先に参加登録GoogleFormに入力されたメールアドレスを入力
 

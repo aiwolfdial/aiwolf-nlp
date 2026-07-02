@@ -13,7 +13,7 @@ category: organizer_guide
 
 ## aiwolfサーバの主要なパスの構造
 
-![サーバーパス](../../static/images/organizer/server_command/server_path.png)
+![サーバーパス](https://aiwolfdial.github.io/aiwolf-nlp/images/organizer/server_command/server_path.png)
 
 [outlineへ戻る](./outline.md)
 [前: Slackメッセージ一覧](./slack_message.md)
