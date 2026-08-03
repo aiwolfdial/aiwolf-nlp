@@ -18,7 +18,7 @@ The contest is conducted in two rounds, Round 1 and Round 2. For both, evaluatio
 Note that paper submission is not required to participate in the contest, but it is strongly encouraged.
 The presentation format for the AIWolfDial 2026 workshop is planned to be hybrid, combining in-person and online participation. (The presentation format for the INLG main conference is determined by INLG.)
 
-<!-- 👉 **Submit your paper here**: [Submission Link](https://softconf.com/p/AIWolfDial2026) -->
+👉 **Submit your paper here**: [Submission Link](https://easychair.org/conferences/?conf=aiwolfdial2026)
 
 ## Schedule
 

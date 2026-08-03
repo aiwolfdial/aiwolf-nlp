@@ -18,7 +18,7 @@ AIWolfDial 2026 ワークショップでは、本ワークショップ論文と�
 大会への参加にあたって論文提出は必須ではありませんが、提出を強く推奨します。
 なお、AIWolfDial 2026 ワークショップの発表形式は、現地対面とオンラインのハイブリッドを予定しています（INLG main conference の発表形式は INLG 側の定めによります）。
 
-<!-- 👉 **論文提出はこちらから**： [Submission Link](https://softconf.com/p/AIWolfDial2026) -->
+👉 **論文提出はこちらから**： [Submission Link](https://easychair.org/conferences/?conf=aiwolfdial2026)
 
 ## 日程
 
