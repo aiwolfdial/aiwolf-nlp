@@ -3,6 +3,7 @@ date: '2025-07-07T13:29:24+09:00'
 draft: false
 title: 'Links & Organizing Committee'
 category: organizer
+translationKey: menu-inlg_2025-organizer
 ---
 
 ## Contact for the AI Wolf Project – Natural Language Division

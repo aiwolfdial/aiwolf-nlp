@@ -3,6 +3,7 @@ date: '2026-05-15T13:29:24+09:00'
 draft: false
 title: 'How to Participate'
 category: schedule
+translationKey: menu-inlg_2026-participation
 ---
 
 ## Connection Check and Main Competition

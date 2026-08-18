@@ -48,6 +48,68 @@ languages:
         - name: "リンク・実行委員会"
           url: /menu/INLG_2026/organizer
           weight: 6
+      # 過去大会ページを開いたときに表示する大会別メニュー
+      # （メニュー名は content/menu/ のディレクトリ名を小文字にしたもの）
+      inlg_2025:
+        - name: "ホーム"
+          url: /page/INLG_2025
+          weight: 1
+        - name: "論文提出"
+          url: /menu/INLG_2025/paper_submission
+          weight: 2
+        - name: "ワークショップ"
+          url: /menu/INLG_2025/program
+          weight: 3
+        - name: "日程と参加方法"
+          url: /menu/INLG_2025/schedule_participation
+          weight: 4
+        - name: "レギュレーション"
+          url: /menu/INLG_2025/regulation
+          weight: 5
+        - name: "開発"
+          url: /menu/INLG_2025/agent
+          weight: 6
+        - name: "リンク・実行委員会"
+          url: /menu/INLG_2025/organizer
+          weight: 7
+      aiwolfdial2026_springjp:
+        - name: "ホーム"
+          url: /page/AIWolfDial_2026SpringJP
+          weight: 1
+        - name: "ワークショップ"
+          url: /menu/AIWolfDial2026_SpringJP/program
+          weight: 2
+        - name: "スケジュールと参加"
+          url: /menu/AIWolfDial2026_SpringJP/schedule_participation
+          weight: 3
+        - name: "レギュレーション"
+          url: /menu/AIWolfDial2026_SpringJP/regulation
+          weight: 4
+        - name: "開発"
+          url: /menu/AIWolfDial2026_SpringJP/agent
+          weight: 5
+        - name: "リンク・実行委員会"
+          url: /menu/AIWolfDial2026_SpringJP/organizer
+          weight: 6
+      aiwolfdial2025_springjp:
+        - name: "ホーム"
+          url: /page/AIWolfDial_2025SpringJp
+          weight: 1
+        - name: "ワークショップ"
+          url: /menu/AIWolfDial2025_SpringJp/program
+          weight: 2
+        - name: "スケジュールと参加"
+          url: /menu/AIWolfDial2025_SpringJp/schedule_participation
+          weight: 3
+        - name: "レギュレーション"
+          url: /menu/AIWolfDial2025_SpringJp/regulation
+          weight: 4
+        - name: "開発"
+          url: /menu/AIWolfDial2025_SpringJp/agent
+          weight: 5
+        - name: "リンク・実行委員会"
+          url: /menu/AIWolfDial2025_SpringJp/organizer
+          weight: 6
   en:
     languageName: "English"
     title: AIWolfDial NLP
@@ -78,4 +140,26 @@ languages:
           weight: 6
         - name: "Links & Organizing Committee"
           url: /menu/INLG_2026_en/organizer
+          weight: 7
+      inlg_2025:
+        - name: "Home"
+          url: /page/INLG_2025
+          weight: 1
+        - name: "Paper Submission"
+          url: /menu/INLG_2025_en/paper_submission
+          weight: 2
+        - name: "Workshop"
+          url: /menu/INLG_2025_en/program
+          weight: 3
+        - name: "Schedule and Participation"
+          url: /menu/INLG_2025_en/schedule_participation
+          weight: 4
+        - name: "Regulations"
+          url: /menu/INLG_2025_en/regulation
+          weight: 5
+        - name: "Development"
+          url: /menu/INLG_2025_en/agent
+          weight: 6
+        - name: "Links & Organizing Committee"
+          url: /menu/INLG_2025_en/organizer
           weight: 7

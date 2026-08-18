@@ -3,6 +3,7 @@ date: '2026-05-15T13:29:24+09:00'
 draft: false
 title: '論文提出'
 category: paper_submission
+translationKey: menu-inlg_2026-paper_submission
 ---
 
 ## 査読付き国際会議論文の投稿募集

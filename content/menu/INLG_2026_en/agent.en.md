@@ -3,6 +3,7 @@ date: '2026-05-15T13:29:24+09:00'
 draft: false
 title: 'How to Create and Battle with Agents'
 category: agent
+translationKey: menu-inlg_2026-agent
 ---
 
 In the AIWolf Intelligence Contest, participants create agents (automated players) that remotely connect to a game server provided by the organizers to run automated matches. The game server is publicly available as described below, so you can also set up your own game server locally for testing.

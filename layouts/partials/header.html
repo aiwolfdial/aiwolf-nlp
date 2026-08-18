@@ -39,6 +39,24 @@
 </script>
 {{- end }}
 
+{{- $currentPage := . }}
+{{- /* 開いているページの大会に対応するメニューを選択（見つからなければ main = 最新大会、none は非表示） */}}
+{{- $menuName := "main" }}
+{{- with $currentPage.Params.menu_id }}
+{{- $menuName = lower . }}
+{{- else }}
+{{- with $currentPage.File }}
+{{- $parts := split (strings.TrimSuffix "/" .Dir) "/" }}
+{{- if and (ge (len $parts) 2) (eq (index $parts 0) "menu") }}
+{{- $menuName = strings.TrimSuffix "_en" (lower (index $parts 1)) }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- $menuItems := slice }}
+{{- if ne $menuName "none" }}
+{{- $menuItems = index site.Menus $menuName | default site.Menus.main }}
+{{- end }}
+
 <header class="header">
     <nav class="nav">
         <div class="logo">
@@ -103,13 +121,18 @@
                     {{- if $separator }}<li>|</li>{{ end }}
                     {{- range . -}}
                     {{- if ne $lang .Lang }}
+                    {{- /* 現在のページに同言語の翻訳があればそのページへ、無ければトップへ */}}
+                    {{- $target := . }}
+                    {{- range $currentPage.Translations }}
+                    {{- if eq .Lang $target.Lang }}{{ $target = . }}{{ end }}
+                    {{- end }}
                     <li>
-                        <a href="{{- .Permalink -}}" title="{{ .Language.Params.languageAltTitle | default (.Language.LanguageName | emojify) | default (.Lang | title) }}"
-                            aria-label="{{ .Language.LanguageName | default (.Lang | title) }}">
-                            {{- if (and site.Params.displayFullLangName (.Language.LanguageName)) }}
-                            {{- .Language.LanguageName | emojify -}}
+                        <a href="{{- $target.Permalink -}}" title="{{ $target.Language.Params.languageAltTitle | default ($target.Language.LanguageName | emojify) | default ($target.Lang | title) }}"
+                            aria-label="{{ $target.Language.LanguageName | default ($target.Lang | title) }}">
+                            {{- if (and site.Params.displayFullLangName ($target.Language.LanguageName)) }}
+                            {{- $target.Language.LanguageName | emojify -}}
                             {{- else }}
-                            {{- .Lang | title -}}
+                            {{- $target.Lang | title -}}
                             {{- end -}}
                         </a>
                     </li>
@@ -119,17 +142,17 @@
                 {{- end }}
             </div>
         </div>
-        {{- $currentPage := . }}
+        {{- if $menuItems }}
         <ul id="menu">
             {{- $basePath := "/aiwolf-nlp/" }}
             {{- $enPath := "/aiwolf-nlp/en/" }}
             {{- $currentURL := $currentPage.Permalink }}
-            {{- range site.Menus.main }}
+            {{- range $menuItems }}
             {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) }}
             {{- if in $currentURL $enPath }}
                 {{- $menu_item_url = replace $menu_item_url $basePath $enPath }}
             {{- end }}
-            {{- $page_url:= $currentPage.Permalink }}
+            {{- $page_url:= $currentPage.RelPermalink }}
             {{- $is_search := eq (site.GetPage .KeyName).Layout `search` }}
             <li>
                 <a href="{{ $menu_item_url }}" title="{{ .Title | default .Name }} {{- cond $is_search (" (Alt + /)" | safeHTMLAttr) ("" | safeHTMLAttr ) }}"
@@ -151,5 +174,6 @@
             </li>
             {{- end }}
         </ul>
+        {{- end }}
     </nav>
 </header>

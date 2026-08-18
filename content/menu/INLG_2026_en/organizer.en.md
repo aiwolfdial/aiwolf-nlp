@@ -3,6 +3,7 @@ date: '2026-05-15T13:29:24+09:00'
 draft: false
 title: 'Links & Organizers'
 category: organizer
+translationKey: menu-inlg_2026-organizer
 ---
 
 ## Contact for the AIWolf Project – Natural Language Division

@@ -2,6 +2,7 @@
 date: '2025-07-07T13:29:24+09:00'
 draft: false
 title: 'Presentation Program'
+translationKey: menu-inlg_2025-program
 ---
 
 ## Workshop Program

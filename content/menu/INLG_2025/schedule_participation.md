@@ -3,6 +3,7 @@ date: '2025-07-07T13:29:24+09:00'
 draft: false
 title: '日程と参加方法'
 category: schedule
+translationKey: menu-inlg_2025-schedule_participation
 ---
 
 ## 日程

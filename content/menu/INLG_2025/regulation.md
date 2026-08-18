@@ -4,6 +4,7 @@ draft: false
 title: '大会レギュレーション'
 ShowToc: true
 custom_style: 'documentPage'
+translationKey: menu-inlg_2025-regulation
 ---
 
 ## 注意事項

@@ -4,6 +4,7 @@ draft: false
 title: 'Competition Regulations'
 ShowToc: true
 custom_style: 'documentPage'
+translationKey: menu-inlg_2025-regulation
 ---
 
 ## Notes

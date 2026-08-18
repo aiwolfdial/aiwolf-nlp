@@ -3,6 +3,7 @@ date: '2025-07-07T13:29:24+09:00'
 draft: false
 title: 'Paper Submission'
 category: paper_submission
+translationKey: menu-inlg_2025-paper_submission
 ---
 
 ## Call for Peer-Reviewed Paper Submissions

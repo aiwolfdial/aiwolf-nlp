@@ -3,6 +3,7 @@ date: '2026-05-15T13:29:24+09:00'
 draft: false
 title: 'Paper Submission'
 category: paper_submission
+translationKey: menu-inlg_2026-paper_submission
 ---
 
 ## Call for Papers – Peer-Reviewed International Workshop

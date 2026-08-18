@@ -4,6 +4,7 @@ draft: false
 title: 'Contest Regulations'
 ShowToc: false
 custom_style: 'documentPage'
+translationKey: menu-inlg_2026-regulation
 ---
 
 ## Important Notes

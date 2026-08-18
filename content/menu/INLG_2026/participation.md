@@ -3,6 +3,7 @@ date: '2026-05-15T13:29:24+09:00'
 draft: false
 title: '参加方法'
 category: schedule
+translationKey: menu-inlg_2026-participation
 ---
 
 ## 接続確認と本戦
