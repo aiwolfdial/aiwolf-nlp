@@ -31,6 +31,10 @@ menu_id: aiwolfdial2026_springjp
 
 - **2026/02/22**: ゲームサーバの設定で `vote_visibility: true` が有効になりました。各エージェントは `daily_initialize` のタイミングで他のエージェントの投票結果（`info.vote_list`、`info.attack_vote_list`）を受け取ることができます。詳細は[エージェント作成 - 投票結果の参照について](/menu/AIWolfDial2026_SpringJp/agent#投票結果の参照について)を参照してください。
 
+## 結果・ログ
+
+本戦の対戦ログは[結果・ログ](/menu/AIWolfDial2026_SpringJP/result)に掲載しています。
+
 ## 参加申請フォーム
 
 [Google フォーム](https://forms.gle/6XxcmLrtNrAKZ5nP6)

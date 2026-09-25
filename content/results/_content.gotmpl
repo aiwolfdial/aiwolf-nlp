@@ -1,0 +1,35 @@
+{{- /*
+  結果・ログタブ (/results/) の子ページを自動生成する content adapter。
+  content/menu/<大会>/result.md (英語は <大会>_en/result.en.md) を読み、
+  同じ本文を /results/<大会>/ にサイト全体メニューの下で表示する。
+  大会側の result.md を書けば、ここに手を入れなくてもタブに現れる。
+*/}}
+{{- .EnableAllLanguages }}
+{{- $lang := .Site.Language.Lang }}
+{{- range $dir := os.ReadDir "content/menu" }}
+  {{- if $dir.IsDir }}
+    {{- $name := $dir.Name }}
+    {{- $isEn := strings.HasSuffix $name "_en" }}
+    {{- if eq $isEn (eq $lang "en") }}
+      {{- $file := printf "content/menu/%s/%s" $name (cond $isEn "result.en.md" "result.md") }}
+      {{- if fileExists $file }}
+        {{- $raw := os.ReadFile $file }}
+        {{- $m := findRESubmatch `(?s)\A---\n(.*?)\n---\n(.*)\z` $raw }}
+        {{- if $m }}
+          {{- $fm := transform.Unmarshal (index (index $m 0) 1) }}
+          {{- $body := index (index $m 0) 2 }}
+          {{- $slug := lower (strings.TrimSuffix "_en" $name) }}
+          {{- $.AddPage (dict
+                "path" $slug
+                "kind" "page"
+                "layout" "result"
+                "title" ($fm.contest | default $fm.title)
+                "dates" (dict "date" (time.AsTime $fm.date))
+                "params" (dict "contest" $fm.contest "source_menu" $name "menu_slug" $slug)
+                "content" (dict "mediaType" "text/markdown" "value" $body)
+              ) }}
+        {{- end }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}

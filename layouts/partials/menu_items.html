@@ -1,0 +1,38 @@
+{{- /* ヘッダーのメニュー項目を描画する。dict: items, page, id ("menu" | "menu-sub"), topActive ("home" | "results" | "") */}}
+{{- $currentPage := .page }}
+{{- $topActive := .topActive }}
+{{- $basePath := "/aiwolf-nlp/" }}
+{{- $enPath := "/aiwolf-nlp/en/" }}
+{{- $currentURL := $currentPage.Permalink }}
+{{- $page_url := $currentPage.RelPermalink }}
+{{- $home := site.Home.RelPermalink }}
+<ul id="{{ .id }}" class="header-menu">
+    {{- range .items }}
+    {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) }}
+    {{- if in $currentURL $enPath }}
+        {{- $menu_item_url = replace $menu_item_url $basePath $enPath }}
+    {{- end }}
+    {{- $active := eq $menu_item_url $page_url }}
+    {{- if and (not $active) (eq $topActive "home") (eq $menu_item_url $home) }}{{ $active = true }}{{ end }}
+    {{- if and (not $active) (eq $topActive "results") (eq $menu_item_url (printf "%sresults/" $home)) }}{{ $active = true }}{{ end }}
+    {{- $is_search := eq (site.GetPage .KeyName).Layout `search` }}
+    <li>
+        <a href="{{ $menu_item_url }}" title="{{ .Title | default .Name }} {{- cond $is_search (" (Alt + /)" | safeHTMLAttr) ("" | safeHTMLAttr ) }}"
+        {{- cond $is_search (" accesskey=/" | safeHTMLAttr) ("" | safeHTMLAttr ) }}>
+            <span {{- if $active }} class="active" {{- end }}>
+                {{- .Pre }}
+                {{- .Name -}}
+                {{ .Post -}}
+            </span>
+            {{- if (findRE "://" .URL) }}&nbsp;
+            <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
+                stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="12" width="12">
+                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 012-2V8a2 2 0 012-2h6"></path>
+                <path d="M15 3h6v6"></path>
+                <path d="M10 14L21 3"></path>
+            </svg>
+            {{- end }}
+        </a>
+    </li>
+    {{- end }}
+</ul>

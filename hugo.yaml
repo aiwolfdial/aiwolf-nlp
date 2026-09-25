@@ -26,7 +26,21 @@ languages:
       tag: タグ
       series: シリーズ
     menu:
+      # main はサイト全体のメニュー（トップページ・results・organizer など大会に属さないページで表示）
+      # 大会ページを開いたときは、その大会のメニューに切り替わる
+      # （メニュー名は content/menu/ のディレクトリ名を小文字にし、末尾の _en を除いたもの。
+      #   大会トップページ content/page/*.md には front matter で menu_id: <メニュー名> を書く）
       main:
+        - name: "大会情報"
+          url: /
+          weight: 1
+        - name: "結果・ログ"
+          url: /results/
+          weight: 2
+        - name: "リンク"
+          url: /links/
+          weight: 3
+      inlg_2026:
         - name: "ホーム"
           url: /page/INLG_2026
           weight: 1
@@ -35,21 +49,22 @@ languages:
           weight: 2
         - name: "ワークショップ"
           url: /menu/INLG_2026/program
-          weight: 2
+          weight: 3
         - name: "参加方法"
           url: /menu/INLG_2026/participation
-          weight: 3
+          weight: 4
         - name: "レギュレーション"
           url: /menu/INLG_2026/regulation
-          weight: 4
+          weight: 5
         - name: "開発"
           url: /menu/INLG_2026/agent
-          weight: 5
+          weight: 6
         - name: "リンク・実行委員会"
           url: /menu/INLG_2026/organizer
-          weight: 6
-      # 過去大会ページを開いたときに表示する大会別メニュー
-      # （メニュー名は content/menu/ のディレクトリ名を小文字にしたもの）
+          weight: 7
+        - name: "結果・ログ"
+          url: /menu/INLG_2026/result
+          weight: 8
       inlg_2025:
         - name: "ホーム"
           url: /page/INLG_2025
@@ -72,6 +87,9 @@ languages:
         - name: "リンク・実行委員会"
           url: /menu/INLG_2025/organizer
           weight: 7
+        - name: "結果・ログ"
+          url: /menu/INLG_2025/result
+          weight: 8
       aiwolfdial2026_springjp:
         - name: "ホーム"
           url: /page/AIWolfDial_2026SpringJP
@@ -91,6 +109,9 @@ languages:
         - name: "リンク・実行委員会"
           url: /menu/AIWolfDial2026_SpringJP/organizer
           weight: 6
+        - name: "結果・ログ"
+          url: /menu/AIWolfDial2026_SpringJP/result
+          weight: 7
       aiwolfdial2025_springjp:
         - name: "ホーム"
           url: /page/AIWolfDial_2025SpringJp
@@ -110,6 +131,30 @@ languages:
         - name: "リンク・実行委員会"
           url: /menu/AIWolfDial2025_SpringJp/organizer
           weight: 6
+        - name: "結果・ログ"
+          url: /menu/AIWolfDial2025_SpringJp/result
+          weight: 7
+      aiwolfdial2024_winterjp:
+        - name: "ホーム"
+          url: /page/AIWolfDial_2024WinterJp
+          weight: 1
+        - name: "結果・ログ"
+          url: /menu/AIWolfDial2024_WinterJp/result
+          weight: 2
+      inlg_2024:
+        - name: "ホーム"
+          url: /page/INLG_2024
+          weight: 1
+        - name: "結果・ログ"
+          url: /menu/INLG_2024/result
+          weight: 2
+      aiwolfdial2024_springjp:
+        - name: "ホーム"
+          url: /page/AIWolfDial_2024jp
+          weight: 1
+        - name: "結果・ログ"
+          url: /menu/AIWolfDial2024_SpringJp/result
+          weight: 2
   en:
     languageName: "English"
     title: AIWolfDial NLP
@@ -120,6 +165,16 @@ languages:
       series: series
     menu:
       main:
+        - name: "Contests"
+          url: /
+          weight: 1
+        - name: "Results & Logs"
+          url: /results/
+          weight: 2
+        - name: "Links"
+          url: /links/
+          weight: 3
+      inlg_2026:
         - name: "Home"
           url: /page/INLG_2026
           weight: 1
@@ -131,7 +186,7 @@ languages:
           weight: 3
         - name: "How to Participate"
           url: /menu/INLG_2026_en/participation
-          weight: 4 
+          weight: 4
         - name: "Regulations"
           url: /menu/INLG_2026_en/regulation
           weight: 5
@@ -141,6 +196,9 @@ languages:
         - name: "Links & Organizing Committee"
           url: /menu/INLG_2026_en/organizer
           weight: 7
+        - name: "Results & Logs"
+          url: /menu/INLG_2026_en/result
+          weight: 8
       inlg_2025:
         - name: "Home"
           url: /page/INLG_2025
@@ -163,3 +221,13 @@ languages:
         - name: "Links & Organizing Committee"
           url: /menu/INLG_2025_en/organizer
           weight: 7
+        - name: "Results & Logs"
+          url: /menu/INLG_2025_en/result
+          weight: 8
+      inlg_2024:
+        - name: "Home"
+          url: /page/INLG_2024
+          weight: 1
+        - name: "Results & Logs"
+          url: /menu/INLG_2024_en/result
+          weight: 2

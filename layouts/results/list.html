@@ -1,0 +1,22 @@
+{{- define "main" }}
+{{- /* 結果・ログタブ: content/results/_content.gotmpl が生成した大会ごとのページを新しい順にカードで並べる */}}
+<header class="page-header">
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}
+  <div class="post-description">{{ . | markdownify }}</div>
+  {{- end }}
+</header>
+{{- with .Content }}
+<div class="post-content">{{ . }}</div>
+{{- end }}
+
+{{- range .RegularPages.ByDate.Reverse }}
+<article class="post-entry">
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">{{ .Title }}</h2>
+  </header>
+  <div class="entry-content"><p>{{ .Date.Format "2006" }}</p></div>
+  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+</article>
+{{- end }}
+{{- end }}{{/* end main */}}

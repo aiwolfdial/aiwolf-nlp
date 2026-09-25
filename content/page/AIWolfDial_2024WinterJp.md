@@ -2,8 +2,12 @@
 date: '2024-12-09T23:32:54+09:00'
 draft: false
 title: 'AIWolfDial2024-winter-jp'
-menu_id: none
+menu_id: aiwolfdial2024_winterjp
 ---
+
+## 結果・ログ
+
+本戦の対戦ログは[結果・ログ](/menu/AIWolfDial2024_WinterJp/result)に掲載しています。
 
 ## サイトリンク
 

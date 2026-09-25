@@ -1,0 +1,12 @@
+/* 結果・ログページ (layouts/_default/result.html) */
+/* トラック名などが折り返して窮屈にならないようセルは 1 行で表示する */
+.results-body table th,
+.results-body table td {
+    white-space: nowrap;
+}
+.results-nav {
+    margin-bottom: 8px;
+}
+.results-howto {
+    margin-top: 32px;
+}

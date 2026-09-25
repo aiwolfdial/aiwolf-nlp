@@ -1,0 +1,35 @@
+/* ヘッダー 2 段目: 開いている大会のメニュー (layouts/partials/header.html) */
+.nav-sub {
+    line-height: 40px;
+    justify-content: flex-end;
+    border-top: 1px solid var(--border);
+}
+.nav-sub-label {
+    margin: auto var(--gap);
+    margin-inline-end: auto;
+    color: var(--secondary);
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 40%;
+}
+/* PaperMod の #menu と同じ見た目を下段にも適用 */
+#menu-sub {
+    display: flex;
+    margin: auto var(--gap);
+    list-style: none;
+    word-break: keep-all;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+#menu-sub li + li {
+    margin-inline-start: var(--gap);
+}
+#menu-sub a {
+    font-size: 15px;
+}
+#menu-sub .active {
+    font-weight: 500;
+    border-bottom: 2px solid currentColor;
+}
