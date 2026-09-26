@@ -28,54 +28,23 @@
     </div>
     {{- end }}
   </header>
-  {{- /* /results/<大会>/ (自動生成) には大会ページへの案内を付ける */}}
-  {{- with .Params.menu_slug }}
-  {{- $slug := . }}
-  {{- with index (where site.RegularPages "Params.menu_id" $slug) 0 }}
-  <div class="post-content results-nav">
-    <p><a href="{{ .Permalink }}">{{ cond (eq site.Language.Lang "en") "Open the contest page →" "この大会のページを開く →" }}</a></p>
-  </div>
-  {{- end }}
-  {{- end }}
-
   {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false }}
   {{- partial "cover.html" (dict "cxt" . "IsSingle" true "isHidden" $isHidden) }}
   {{- if (.Param "ShowToc") }}
   {{- partial "toc.html" . }}
   {{- end }}
 
+  {{- /* 大会横断まとめ: summary_kind に応じた partial を描画 */}}
+  <div class="post-content results-body">
+    {{ partial (printf "results/summary_%s.html" .Params.summary_kind) . }}
+  </div>
+
   {{- if .Content }}
-  <div class="post-content results-body {{ .Params.custom_style }}">
+  <div class="post-content {{ .Params.custom_style }}">
     {{- if not (.Param "disableAnchoredHeadings") }}
     {{- partial "anchored_headings.html" .Content -}}
     {{- else }}{{ .Content }}{{ end }}
   </div>
-  {{- end }}
-
-  {{- /* data/results/<key>.yaml から表彰・勝率・評価・ログの表を描画 */}}
-  {{- with .Params.results_data }}
-  {{- with index site.Data.results . }}
-  <div class="post-content results-body">
-    {{ partial "results/tables.html" (dict "data" . "page" $) }}
-  </div>
-  {{- end }}
-  {{- end }}
-
-  {{- /* data/results/<key>.yaml から表彰・勝率・評価・ログの表を描画 */}}
-  {{- with .Params.results_data }}
-  {{- with index site.Data.results . }}
-  <div class="post-content results-body">
-    {{ partial "results/tables.html" (dict "data" . "page" $) }}
-  </div>
-  {{- end }}
-  {{- end }}
-
-  {{- /* 結果・ログページ共通: ログの見方 */}}
-  {{- with site.GetPage "snippets/log_howto" }}
-  <section class="post-content results-howto">
-    <h2>{{ cond (eq site.Language.Lang "en") "How to view logs" "ログの見方" }}</h2>
-    {{ .Content }}
-  </section>
   {{- end }}
 
   <footer class="post-footer">

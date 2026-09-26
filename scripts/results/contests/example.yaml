@@ -1,0 +1,27 @@
+# build_contest_yaml.py の設定例。実際の大会では <slug>.yaml として保存する。
+# slug は content/menu/<大会ディレクトリ名> を小文字にし末尾の _en を除いたもの (= result.md の results_data)。
+slug: inlg_2027
+contest: 2027 国際大会（INLG 2027）
+contest_en: International Contest 2027 (INLG 2027)
+announced: 表彰は AIWolfDial 2027 ワークショップで発表予定です。
+announced_en: Awards will be announced at the AIWolfDial 2027 workshop.
+availability:
+  human_eval: none        # ok | none | pending
+  llm_judge: ok           # ok | none | pending | posthoc (大会後に事後実施)
+human_eval_short: null    # 例: 学生評価者 3 名 (評価方法ページの表に出る短い表記)
+human_eval_short_en: null # 例: 3 student judges
+team_names: {}            # ログ上の名前 -> 表示名 (例: {UECIL: UEC-IL})
+awards: []                # 例: - {title: 5人村 勝率 1 位, title_en: "5-player village: Best win rate", team: xxx, note: ""}
+tracks:
+  - id: t5
+    name: 5人村
+    name_en: 5-player village
+    logs_url: https://133.167.32.100/aiwolf/2027/INLG/MainTruck5/log/success/
+    log_dir: ~/work/logs/inlg_2027/t5                       # success ログをローカルに取得したディレクトリ
+    team_summary_csv: ~/calculate_meta/data/output/INLG_MainTruck5/team_summary.csv   # calculate_meta の出力 (任意)
+    judge_csvs:                                              # aiwolf-nlp-llm-judge の出力 (任意)
+      - ~/aiwolf-nlp-llm-judge/data/output/result/main_truck_5/gpt-5.4/team_aggregation.csv
+    judge_models: [GPT-5.4]
+    judge_source: GPT-5.4 の評価（本戦全ゲーム）
+    human_totalling_csv: null                                # 評価フォームの集計シート (任意)
+    human_source: 学生評価者 3 名による抽出ログの順位付け

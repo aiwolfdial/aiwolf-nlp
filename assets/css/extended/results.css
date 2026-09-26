@@ -10,3 +10,125 @@
 .results-howto {
     margin-top: 32px;
 }
+
+/* 結果表 */
+.results-tables table {
+    font-size: 14px;
+}
+.results-tables .results-team {
+    font-weight: 500;
+    white-space: nowrap;
+}
+.results-muted {
+    color: var(--secondary);
+    font-size: 0.9em;
+}
+.results-eval {
+    margin: 12px 0;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+.results-eval summary {
+    cursor: pointer;
+    list-style: none;
+}
+.results-eval summary::-webkit-details-marker {
+    display: none;
+}
+.results-eval summary h3 {
+    display: inline;
+    margin: 0;
+    font-size: 18px;
+}
+.results-eval summary h3::before {
+    content: "▸ ";
+    color: var(--secondary);
+}
+.results-eval[open] summary h3::before {
+    content: "▾ ";
+}
+.results-eval h4 {
+    margin: 16px 0 4px;
+    font-size: 15px;
+}
+
+/* 目次 */
+.results-toc {
+    margin: 8px 0 24px;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--code-bg);
+    font-size: 14px;
+}
+.results-toc-title {
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+.results-toc ol {
+    margin: 0;
+    padding-inline-start: 20px;
+}
+.results-toc ul {
+    margin: 2px 0 4px;
+    padding-inline-start: 18px;
+    list-style: disc;
+}
+.results-toc li {
+    margin: 2px 0;
+}
+.results-tables h2 {
+    margin-top: 40px;
+}
+.results-tables h3 {
+    margin-top: 20px;
+}
+
+/* 結果・ログタブのサマリー */
+.results-awards-all td[rowspan] {
+    vertical-align: top;
+}
+
+/* 横断まとめの表: セルを折り返して横幅に収める */
+.results-methods th, .results-methods td,
+.results-agreement th, .results-agreement td {
+    white-space: normal;
+    font-size: 13px;
+}
+.results-methods td:nth-child(3) {
+    font-size: 12px;
+}
+
+/* 表彰の表・ログ一覧の表: 折り返して横スクロール無しで見えるようにする */
+.results-awards-all,
+.results-logs-all,
+.results-awards {
+    width: 100%;
+    table-layout: fixed;
+}
+/* 「.results-body table td { nowrap }」より詳細度を上げる必要がある */
+.results-body table.results-awards-all th, .results-body table.results-awards-all td,
+.results-body table.results-awards th, .results-body table.results-awards td,
+.results-tables table.results-awards-all th, .results-tables table.results-awards-all td,
+.results-tables table.results-awards th, .results-tables table.results-awards td,
+.results-body table.results-logs-all th, .results-body table.results-logs-all td {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    vertical-align: top;
+    min-width: 0;
+}
+.results-awards-all th:nth-child(1) { width: 26%; }
+.results-awards-all th:nth-child(2) { width: 50%; }
+.results-awards-all th:nth-child(3) { width: 24%; }
+.results-awards th:nth-child(1) { width: 62%; }
+.results-awards th:nth-child(2) { width: 38%; }
+.results-awards-all td.results-team,
+.results-awards td:nth-child(2) {
+    font-weight: 500;
+}
+.results-logs-all th:nth-child(1) { width: 30%; }
+.results-logs-all th:nth-child(2) { width: 42%; }
+.results-logs-all th:nth-child(3) { width: 10%; }
+.results-logs-all th:nth-child(4) { width: 18%; }
+.results-logs-all td[rowspan] { vertical-align: top; }

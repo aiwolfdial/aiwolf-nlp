@@ -1,0 +1,2697 @@
+# 自動生成: 勝率は success ログから集計、評価指標は運営の集計表から転記。表彰(awards.items)は手で記入する。
+contest: 2026 国際大会（INLG 2026）
+contest_en: International Contest 2026 (INLG 2026)
+awards:
+  status: pending
+  note: 表彰は AIWolfDial 2026 ワークショップ（2026年10月17日〜21日、INLG 2026、ユトレヒト）で発表予定です。
+  note_en: Awards will be announced at the AIWolfDial 2026 workshop (October 17–21, 2026, INLG 2026, Utrecht).
+  items: []
+tracks:
+- id: r1_5
+  name: 1次 5人村
+  name_en: Round 1, 5-player village
+  logs: https://133.167.32.100/aiwolf/2026/INLG/MainTruck5/log/success/
+  games: 220
+  village_size: 5
+  win_rates:
+    roles:
+    - VILLAGER
+    - SEER
+    - POSSESSED
+    - WEREWOLF
+    rows:
+    - team: yharada
+      games: 100
+      wins: 61
+      macro: 0.61
+      micro: 0.5875
+      weighted: 0.61
+      by_role:
+        POSSESSED:
+        - 20
+        - 5
+        SEER:
+        - 20
+        - 15
+        VILLAGER:
+        - 40
+        - 28
+        WEREWOLF:
+        - 20
+        - 13
+    - team: Oxymoron
+      games: 100
+      wins: 61
+      macro: 0.61
+      micro: 0.5813
+      weighted: 0.61
+      by_role:
+        POSSESSED:
+        - 20
+        - 8
+        SEER:
+        - 20
+        - 15
+        VILLAGER:
+        - 40
+        - 29
+        WEREWOLF:
+        - 20
+        - 9
+    - team: noisy_watcher
+      games: 100
+      wins: 60
+      macro: 0.6
+      micro: 0.5563
+      weighted: 0.6
+      by_role:
+        POSSESSED:
+        - 20
+        - 8
+        SEER:
+        - 20
+        - 14
+        VILLAGER:
+        - 40
+        - 31
+        WEREWOLF:
+        - 20
+        - 7
+    - team: SunameLLi
+      games: 100
+      wins: 57
+      macro: 0.57
+      micro: 0.5438
+      weighted: 0.57
+      by_role:
+        POSSESSED:
+        - 20
+        - 6
+        SEER:
+        - 20
+        - 13
+        VILLAGER:
+        - 40
+        - 27
+        WEREWOLF:
+        - 20
+        - 11
+    - team: wool_100%
+      games: 100
+      wins: 57
+      macro: 0.57
+      micro: 0.5563
+      weighted: 0.57
+      by_role:
+        POSSESSED:
+        - 20
+        - 12
+        SEER:
+        - 20
+        - 14
+        VILLAGER:
+        - 40
+        - 25
+        WEREWOLF:
+        - 20
+        - 6
+    - team: ryanleeai
+      games: 100
+      wins: 56
+      macro: 0.56
+      micro: 0.5125
+      weighted: 0.56
+      by_role:
+        POSSESSED:
+        - 20
+        - 7
+        SEER:
+        - 20
+        - 12
+        VILLAGER:
+        - 40
+        - 30
+        WEREWOLF:
+        - 20
+        - 7
+    - team: yshimoda
+      games: 100
+      wins: 51
+      macro: 0.51
+      micro: 0.5125
+      weighted: 0.51
+      by_role:
+        POSSESSED:
+        - 20
+        - 6
+        SEER:
+        - 20
+        - 16
+        VILLAGER:
+        - 40
+        - 20
+        WEREWOLF:
+        - 20
+        - 9
+    - team: kataken14f
+      games: 100
+      wins: 49
+      macro: 0.49
+      micro: 0.4562
+      weighted: 0.49
+      by_role:
+        POSSESSED:
+        - 20
+        - 8
+        SEER:
+        - 20
+        - 12
+        VILLAGER:
+        - 40
+        - 25
+        WEREWOLF:
+        - 20
+        - 4
+    - team: CamelliaDragons
+      games: 100
+      wins: 45
+      macro: 0.45
+      micro: 0.4188
+      weighted: 0.45
+      by_role:
+        POSSESSED:
+        - 20
+        - 4
+        SEER:
+        - 20
+        - 13
+        VILLAGER:
+        - 40
+        - 23
+        WEREWOLF:
+        - 20
+        - 5
+    - team: gotsumori-NLP
+      games: 100
+      wins: 43
+      macro: 0.43
+      micro: 0.3813
+      weighted: 0.43
+      by_role:
+        POSSESSED:
+        - 20
+        - 9
+        SEER:
+        - 20
+        - 3
+        VILLAGER:
+        - 40
+        - 25
+        WEREWOLF:
+        - 20
+        - 6
+    - team: CanisLupus
+      games: 100
+      wins: 40
+      macro: 0.4
+      micro: 0.3937
+      weighted: 0.4
+      by_role:
+        POSSESSED:
+        - 20
+        - 7
+        SEER:
+        - 20
+        - 13
+        VILLAGER:
+        - 40
+        - 17
+        WEREWOLF:
+        - 20
+        - 3
+  game_metrics:
+    rows:
+    - team: yharada
+      executed: 0.32
+      divined: 0.86
+      guarded: null
+      divine_acc: 1.43
+      vote_acc: 1.47
+      possessed_avoid: 0.4
+    - team: Oxymoron
+      executed: 0.86
+      divined: 0.89
+      guarded: null
+      divine_acc: 1.23
+      vote_acc: 1.58
+      possessed_avoid: 0.69
+    - team: noisy_watcher
+      executed: 0.79
+      divined: 1.01
+      guarded: null
+      divine_acc: 0.84
+      vote_acc: 1.58
+      possessed_avoid: 0.75
+    - team: SunameLLi
+      executed: 0.93
+      divined: 0.84
+      guarded: null
+      divine_acc: 1.0
+      vote_acc: 1.39
+      possessed_avoid: 0.7
+    - team: wool_100%
+      executed: 1.07
+      divined: 1.22
+      guarded: null
+      divine_acc: 1.22
+      vote_acc: 1.34
+      possessed_avoid: 0.67
+    - team: ryanleeai
+      executed: 0.93
+      divined: 0.87
+      guarded: null
+      divine_acc: 1.04
+      vote_acc: 1.39
+      possessed_avoid: 0.48
+    - team: yshimoda
+      executed: 1.0
+      divined: 0.88
+      guarded: null
+      divine_acc: 1.3
+      vote_acc: 1.48
+      possessed_avoid: 0.67
+    - team: CamelliaDragons
+      executed: 0.94
+      divined: 1.33
+      guarded: null
+      divine_acc: 1.64
+      vote_acc: 1.64
+      possessed_avoid: 0.8
+    - team: gotsumori-NLP
+      executed: 1.51
+      divined: 1.65
+      guarded: null
+      divine_acc: 0.97
+      vote_acc: 0.99
+      possessed_avoid: 0.73
+    - team: CanisLupus
+      executed: 1.46
+      divined: 0.62
+      guarded: null
+      divine_acc: 0.68
+      vote_acc: 1.09
+      possessed_avoid: 0.7
+    - team: kataken
+      executed: 1.26
+      divined: 0.85
+      guarded: null
+      divine_acc: 1.71
+      vote_acc: 1.64
+      possessed_avoid: 0.68
+  human_eval: null
+  llm_judge:
+    criteria:
+    - natural_expression
+    - contextual_dialogue
+    - logical_consistency
+    - action_consistency
+    - character_consistency
+    rows:
+    - team: ryanleeai
+      natural_expression: 1.18
+      contextual_dialogue: 1.45
+      logical_consistency: 2.04
+      action_consistency: 2.2
+      character_consistency: 1.47
+      overall: 1.67
+    - team: Oxymoron
+      natural_expression: 1.55
+      contextual_dialogue: 2.0
+      logical_consistency: 2.18
+      action_consistency: 2.22
+      character_consistency: 1.5
+      overall: 1.89
+    - team: yharada
+      natural_expression: 2.86
+      contextual_dialogue: 2.55
+      logical_consistency: 2.23
+      action_consistency: 1.98
+      character_consistency: 2.28
+      overall: 2.38
+    - team: SunameLLi
+      natural_expression: 2.66
+      contextual_dialogue: 2.87
+      logical_consistency: 2.57
+      action_consistency: 2.72
+      character_consistency: 2.89
+      overall: 2.74
+    - team: noisy_watcher
+      natural_expression: 2.91
+      contextual_dialogue: 2.93
+      logical_consistency: 2.72
+      action_consistency: 2.63
+      character_consistency: 2.94
+      overall: 2.83
+    - team: kataken14f
+      natural_expression: 2.97
+      contextual_dialogue: 3.05
+      logical_consistency: 2.63
+      action_consistency: 2.52
+      character_consistency: 3.11
+      overall: 2.86
+    - team: wool_100%
+      natural_expression: 3.11
+      contextual_dialogue: 3.36
+      logical_consistency: 2.75
+      action_consistency: 2.99
+      character_consistency: 3.18
+      overall: 3.08
+    - team: CamelliaDragons
+      natural_expression: 4.05
+      contextual_dialogue: 2.56
+      logical_consistency: 2.65
+      action_consistency: 2.81
+      character_consistency: 3.61
+      overall: 3.14
+    - team: yshimoda
+      natural_expression: 3.42
+      contextual_dialogue: 3.78
+      logical_consistency: 2.97
+      action_consistency: 3.02
+      character_consistency: 3.59
+      overall: 3.35
+    - team: CanisLupus
+      natural_expression: 3.98
+      contextual_dialogue: 4.32
+      logical_consistency: 3.6
+      action_consistency: 3.51
+      character_consistency: 3.72
+      overall: 3.83
+    - team: gotsumori-NLP
+      natural_expression: 3.81
+      contextual_dialogue: 3.9
+      logical_consistency: 4.24
+      action_consistency: 3.44
+      character_consistency: 4.2
+      overall: 3.92
+    models: &id001
+    - GPT-5.4
+    - Gemini 2.5 Pro
+    - Claude Sonnet 4.5
+    posthoc: false
+    source: GPT-5.4・Gemini 2.5 Pro・Claude Sonnet 4.5 の 3 モデル平均
+- id: r1_9
+  name: 1次 9人村
+  name_en: Round 1, 9-player village
+  logs: https://133.167.32.100/aiwolf/2026/INLG/MainTruck9/log/success/
+  games: 18
+  village_size: 9
+  win_rates:
+    roles:
+    - VILLAGER
+    - SEER
+    - BODYGUARD
+    - MEDIUM
+    - POSSESSED
+    - WEREWOLF
+    rows:
+    - team: CamelliaDragons
+      games: 18
+      wins: 12
+      macro: 0.6667
+      micro: 0.5972
+      weighted: 0.6667
+      by_role:
+        BODYGUARD:
+        - 2
+        - 1
+        MEDIUM:
+        - 2
+        - 1
+        POSSESSED:
+        - 2
+        - 1
+        SEER:
+        - 2
+        - 1
+        VILLAGER:
+        - 6
+        - 5
+        WEREWOLF:
+        - 4
+        - 3
+    - team: CanisLupus
+      games: 18
+      wins: 12
+      macro: 0.6667
+      micro: 0.6389
+      weighted: 0.6667
+      by_role:
+        BODYGUARD:
+        - 2
+        - 1
+        MEDIUM:
+        - 2
+        - 1
+        POSSESSED:
+        - 2
+        - 2
+        SEER:
+        - 2
+        - 1
+        VILLAGER:
+        - 6
+        - 5
+        WEREWOLF:
+        - 4
+        - 2
+    - team: Oxymoron
+      games: 18
+      wins: 12
+      macro: 0.6667
+      micro: 0.7083
+      weighted: 0.6667
+      by_role:
+        BODYGUARD:
+        - 2
+        - 2
+        MEDIUM:
+        - 2
+        - 2
+        POSSESSED:
+        - 2
+        - 1
+        SEER:
+        - 2
+        - 1
+        VILLAGER:
+        - 6
+        - 3
+        WEREWOLF:
+        - 4
+        - 3
+    - team: wool_100%
+      games: 18
+      wins: 10
+      macro: 0.5556
+      micro: 0.5694
+      weighted: 0.5556
+      by_role:
+        BODYGUARD:
+        - 2
+        - 1
+        MEDIUM:
+        - 2
+        - 2
+        POSSESSED:
+        - 2
+        - 2
+        SEER:
+        - 2
+        - 0
+        VILLAGER:
+        - 6
+        - 4
+        WEREWOLF:
+        - 4
+        - 1
+    - team: yshimoda
+      games: 18
+      wins: 10
+      macro: 0.5556
+      micro: 0.5833
+      weighted: 0.5556
+      by_role:
+        BODYGUARD:
+        - 2
+        - 2
+        MEDIUM:
+        - 2
+        - 1
+        POSSESSED:
+        - 2
+        - 1
+        SEER:
+        - 2
+        - 1
+        VILLAGER:
+        - 6
+        - 3
+        WEREWOLF:
+        - 4
+        - 2
+    - team: ryanleeai
+      games: 18
+      wins: 8
+      macro: 0.4444
+      micro: 0.4722
+      weighted: 0.4444
+      by_role:
+        BODYGUARD:
+        - 2
+        - 1
+        MEDIUM:
+        - 2
+        - 1
+        POSSESSED:
+        - 2
+        - 0
+        SEER:
+        - 2
+        - 2
+        VILLAGER:
+        - 6
+        - 2
+        WEREWOLF:
+        - 4
+        - 2
+    - team: noisy_watcher
+      games: 18
+      wins: 8
+      macro: 0.4444
+      micro: 0.4583
+      weighted: 0.4444
+      by_role:
+        BODYGUARD:
+        - 2
+        - 0
+        MEDIUM:
+        - 2
+        - 2
+        POSSESSED:
+        - 2
+        - 1
+        SEER:
+        - 2
+        - 1
+        VILLAGER:
+        - 6
+        - 3
+        WEREWOLF:
+        - 4
+        - 1
+    - team: SunameLLi
+      games: 18
+      wins: 6
+      macro: 0.3333
+      micro: 0.3472
+      weighted: 0.3333
+      by_role:
+        BODYGUARD:
+        - 2
+        - 2
+        MEDIUM:
+        - 2
+        - 0
+        POSSESSED:
+        - 2
+        - 0
+        SEER:
+        - 2
+        - 1
+        VILLAGER:
+        - 6
+        - 2
+        WEREWOLF:
+        - 4
+        - 1
+    - team: yharada
+      games: 18
+      wins: 6
+      macro: 0.3333
+      micro: 0.2917
+      weighted: 0.3333
+      by_role:
+        BODYGUARD:
+        - 2
+        - 0
+        MEDIUM:
+        - 2
+        - 0
+        POSSESSED:
+        - 2
+        - 0
+        SEER:
+        - 2
+        - 2
+        VILLAGER:
+        - 6
+        - 3
+        WEREWOLF:
+        - 4
+        - 1
+  game_metrics:
+    rows:
+    - team: CamelliaDragons
+      executed: 0.33
+      divined: 1.86
+      guarded: 1.34
+      divine_acc: 1.08
+      vote_acc: 1.2
+      possessed_avoid: 0.67
+    - team: CanisLupus
+      executed: 1.93
+      divined: 1.13
+      guarded: 2.59
+      divine_acc: 1.52
+      vote_acc: 1.84
+      possessed_avoid: 0.75
+    - team: Oxymoron
+      executed: 1.04
+      divined: 0.42
+      guarded: 0.34
+      divine_acc: 0.68
+      vote_acc: 1.67
+      possessed_avoid: 0.75
+    - team: wool_100%
+      executed: 1.28
+      divined: 1.03
+      guarded: 1.53
+      divine_acc: 1.27
+      vote_acc: 1.77
+      possessed_avoid: 1.0
+    - team: yshimoda
+      executed: 1.08
+      divined: 0.53
+      guarded: 0.57
+      divine_acc: 0.0
+      vote_acc: 1.7
+      possessed_avoid: 0.25
+    - team: ryanleeai
+      executed: 0.74
+      divined: 0.92
+      guarded: 1.17
+      divine_acc: 2.15
+      vote_acc: 1.15
+      possessed_avoid: 0.5
+    - team: noisy_watcher
+      executed: 1.32
+      divined: 1.59
+      guarded: 1.05
+      divine_acc: 2.27
+      vote_acc: 1.62
+      possessed_avoid: 0.6
+    - team: SunameLLi
+      executed: 1.01
+      divined: 0.93
+      guarded: 1.17
+      divine_acc: 1.51
+      vote_acc: 1.18
+      possessed_avoid: 0.6
+    - team: yharada
+      executed: 0.45
+      divined: 0.83
+      guarded: 0.0
+      divine_acc: 2.55
+      vote_acc: 1.85
+      possessed_avoid: 0.67
+  human_eval: null
+  llm_judge:
+    criteria:
+    - natural_expression
+    - contextual_dialogue
+    - logical_consistency
+    - action_consistency
+    - character_consistency
+    - team_play
+    rows:
+    - team: ryanleeai
+      natural_expression: 1.33
+      contextual_dialogue: 2.54
+      logical_consistency: 2.48
+      action_consistency: 3.48
+      character_consistency: 2.44
+      team_play: 3.56
+      overall: 2.64
+    - team: Oxymoron
+      natural_expression: 2.61
+      contextual_dialogue: 3.7
+      logical_consistency: 3.3
+      action_consistency: 4.3
+      character_consistency: 2.22
+      team_play: 4.61
+      overall: 3.46
+    - team: yharada
+      natural_expression: 5.3
+      contextual_dialogue: 4.28
+      logical_consistency: 2.85
+      action_consistency: 2.63
+      character_consistency: 4.46
+      team_play: 3.98
+      overall: 3.92
+    - team: CamelliaDragons
+      natural_expression: 6.3
+      contextual_dialogue: 2.61
+      logical_consistency: 3.31
+      action_consistency: 3.09
+      character_consistency: 5.24
+      team_play: 3.07
+      overall: 3.94
+    - team: SunameLLi
+      natural_expression: 4.52
+      contextual_dialogue: 4.39
+      logical_consistency: 3.98
+      action_consistency: 4.37
+      character_consistency: 4.52
+      team_play: 4.83
+      overall: 4.43
+    - team: noisy_watcher
+      natural_expression: 4.41
+      contextual_dialogue: 6.06
+      logical_consistency: 6.04
+      action_consistency: 5.39
+      character_consistency: 5.72
+      team_play: 5.43
+      overall: 5.51
+    - team: yshimoda
+      natural_expression: 5.46
+      contextual_dialogue: 6.41
+      logical_consistency: 5.06
+      action_consistency: 5.61
+      character_consistency: 6.06
+      team_play: 5.32
+      overall: 5.65
+    - team: wool_100%
+      natural_expression: 6.93
+      contextual_dialogue: 6.89
+      logical_consistency: 6.26
+      action_consistency: 5.07
+      character_consistency: 7.15
+      team_play: 5.5
+      overall: 6.3
+    - team: CanisLupus
+      natural_expression: 7.04
+      contextual_dialogue: 7.74
+      logical_consistency: 6.61
+      action_consistency: 5.72
+      character_consistency: 5.91
+      team_play: 7.2
+      overall: 6.7
+    models: *id001
+    posthoc: false
+    source: GPT-5.4・Gemini 2.5 Pro・Claude Sonnet 4.5 の 3 モデル平均
+- id: r1_ff5
+  name: 1次 いつでも発話トラック 5人村
+  name_en: Round 1, Speak-Anytime Track, 5-player village
+  logs: https://133.167.32.100/aiwolf/2026/INLG/MainTruck_freeform5/log/success/
+  games: 14
+  village_size: 5
+  win_rates:
+    roles:
+    - VILLAGER
+    - SEER
+    - POSSESSED
+    - WEREWOLF
+    rows:
+    - team: yharada
+      games: 10
+      wins: 6
+      macro: 0.6
+      micro: 0.6875
+      weighted: 0.6
+      by_role:
+        POSSESSED:
+        - 2
+        - 1
+        SEER:
+        - 2
+        - 2
+        VILLAGER:
+        - 4
+        - 1
+        WEREWOLF:
+        - 2
+        - 2
+    - team: CanisLupus
+      games: 10
+      wins: 6
+      macro: 0.6
+      micro: 0.5625
+      weighted: 0.6
+      by_role:
+        POSSESSED:
+        - 2
+        - 2
+        SEER:
+        - 2
+        - 0
+        VILLAGER:
+        - 4
+        - 3
+        WEREWOLF:
+        - 2
+        - 1
+    - team: Oxymoron
+      games: 10
+      wins: 5
+      macro: 0.5
+      micro: 0.5
+      weighted: 0.5
+      by_role:
+        POSSESSED:
+        - 2
+        - 1
+        SEER:
+        - 2
+        - 1
+        VILLAGER:
+        - 4
+        - 2
+        WEREWOLF:
+        - 2
+        - 1
+    - team: CamelliaDragons
+      games: 10
+      wins: 5
+      macro: 0.5
+      micro: 0.5
+      weighted: 0.5
+      by_role:
+        POSSESSED:
+        - 2
+        - 1
+        SEER:
+        - 2
+        - 1
+        VILLAGER:
+        - 4
+        - 2
+        WEREWOLF:
+        - 2
+        - 1
+    - team: wool_100%
+      games: 10
+      wins: 5
+      macro: 0.5
+      micro: 0.5625
+      weighted: 0.5
+      by_role:
+        POSSESSED:
+        - 2
+        - 2
+        SEER:
+        - 2
+        - 2
+        VILLAGER:
+        - 4
+        - 1
+        WEREWOLF:
+        - 2
+        - 0
+    - team: noisy_watcher
+      games: 10
+      wins: 4
+      macro: 0.4
+      micro: 0.375
+      weighted: 0.4
+      by_role:
+        POSSESSED:
+        - 2
+        - 0
+        SEER:
+        - 2
+        - 1
+        VILLAGER:
+        - 4
+        - 2
+        WEREWOLF:
+        - 2
+        - 1
+    - team: SunameLLi
+      games: 10
+      wins: 4
+      macro: 0.4
+      micro: 0.3125
+      weighted: 0.4
+      by_role:
+        POSSESSED:
+        - 2
+        - 0
+        SEER:
+        - 2
+        - 0
+        VILLAGER:
+        - 4
+        - 3
+        WEREWOLF:
+        - 2
+        - 1
+  game_metrics:
+    rows:
+    - team: yharada
+      executed: 0.24
+      divined: 0.83
+      guarded: null
+      divine_acc: 0.0
+      vote_acc: 1.76
+      possessed_avoid: 0.75
+    - team: CanisLupus
+      executed: 2.4
+      divined: 0.0
+      guarded: null
+      divine_acc: 0.0
+      vote_acc: 2.0
+      possessed_avoid: 1.0
+    - team: Oxymoron
+      executed: 0.92
+      divined: 1.09
+      guarded: null
+      divine_acc: 2.0
+      vote_acc: 0.86
+      possessed_avoid: 1.0
+    - team: CamelliaDragons
+      executed: 0.51
+      divined: 1.0
+      guarded: null
+      divine_acc: 1.71
+      vote_acc: 0.67
+      possessed_avoid: 1.0
+    - team: wool_100%
+      executed: 1.37
+      divined: 1.82
+      guarded: null
+      divine_acc: 1.2
+      vote_acc: 1.0
+      possessed_avoid: 1.0
+    - team: noisy_watcher
+      executed: 0.78
+      divined: 1.12
+      guarded: null
+      divine_acc: 1.71
+      vote_acc: 1.8
+      possessed_avoid: 0.0
+    - team: SunameLLi
+      executed: 1.33
+      divined: 0.96
+      guarded: null
+      divine_acc: 0.0
+      vote_acc: 1.0
+      possessed_avoid: 0.0
+  human_eval: null
+  llm_judge:
+    criteria:
+    - natural_expression
+    - contextual_dialogue
+    - logical_consistency
+    - action_consistency
+    - character_consistency
+    rows:
+    - team: Oxymoron
+      natural_expression: 1.4
+      contextual_dialogue: 2.3
+      logical_consistency: 2.03
+      action_consistency: 2.23
+      character_consistency: 1.53
+      overall: 1.9
+    - team: SunameLLi
+      natural_expression: 2.1
+      contextual_dialogue: 2.27
+      logical_consistency: 2.13
+      action_consistency: 2.27
+      character_consistency: 2.83
+      overall: 2.32
+    - team: yharada
+      natural_expression: 2.97
+      contextual_dialogue: 3.07
+      logical_consistency: 2.43
+      action_consistency: 1.87
+      character_consistency: 3.1
+      overall: 2.69
+    - team: noisy_watcher
+      natural_expression: 2.67
+      contextual_dialogue: 2.53
+      logical_consistency: 3.5
+      action_consistency: 3.43
+      character_consistency: 2.67
+      overall: 2.96
+    - team: wool_100%
+      natural_expression: 3.3
+      contextual_dialogue: 3.4
+      logical_consistency: 3.0
+      action_consistency: 3.4
+      character_consistency: 3.13
+      overall: 3.25
+    - team: CanisLupus
+      natural_expression: 3.67
+      contextual_dialogue: 4.2
+      logical_consistency: 3.17
+      action_consistency: 3.37
+      character_consistency: 3.17
+      overall: 3.51
+    - team: CamelliaDragons
+      natural_expression: 4.73
+      contextual_dialogue: 3.2
+      logical_consistency: 3.87
+      action_consistency: 3.07
+      character_consistency: 4.53
+      overall: 3.88
+    models: *id001
+    posthoc: false
+    source: GPT-5.4・Gemini 2.5 Pro・Claude Sonnet 4.5 の 3 モデル平均
+- id: r2_5
+  name: 2次 5人村
+  name_en: Round 2, 5-player village
+  logs: https://133.167.32.100/aiwolf/2026/INLG2/MainTruck5/log/success/
+  games: 270
+  village_size: 5
+  win_rates:
+    roles:
+    - VILLAGER
+    - SEER
+    - POSSESSED
+    - WEREWOLF
+    rows:
+    - team: yatolab
+      games: 75
+      wins: 52
+      macro: 0.6933
+      micro: 0.675
+      weighted: 0.6933
+      by_role:
+        POSSESSED:
+        - 15
+        - 11
+        SEER:
+        - 15
+        - 8
+        VILLAGER:
+        - 30
+        - 23
+        WEREWOLF:
+        - 15
+        - 10
+    - team: AGKAI
+      games: 75
+      wins: 45
+      macro: 0.6
+      micro: 0.5833
+      weighted: 0.6
+      by_role:
+        POSSESSED:
+        - 15
+        - 10
+        SEER:
+        - 15
+        - 7
+        VILLAGER:
+        - 30
+        - 20
+        WEREWOLF:
+        - 15
+        - 8
+    - team: wool_100%
+      games: 75
+      wins: 44
+      macro: 0.5867
+      micro: 0.6
+      weighted: 0.5867
+      by_role:
+        POSSESSED:
+        - 15
+        - 7
+        SEER:
+        - 15
+        - 12
+        VILLAGER:
+        - 30
+        - 16
+        WEREWOLF:
+        - 15
+        - 9
+    - team: CanisLupus
+      games: 75
+      wins: 43
+      macro: 0.5733
+      micro: 0.55
+      weighted: 0.5733
+      by_role:
+        POSSESSED:
+        - 15
+        - 9
+        SEER:
+        - 15
+        - 10
+        VILLAGER:
+        - 30
+        - 20
+        WEREWOLF:
+        - 15
+        - 4
+    - team: yharada
+      games: 75
+      wins: 42
+      macro: 0.56
+      micro: 0.5583
+      weighted: 0.56
+      by_role:
+        POSSESSED:
+        - 15
+        - 6
+        SEER:
+        - 15
+        - 9
+        VILLAGER:
+        - 30
+        - 17
+        WEREWOLF:
+        - 15
+        - 10
+    - team: NTT-HAI
+      games: 75
+      wins: 41
+      macro: 0.5467
+      micro: 0.5667
+      weighted: 0.5467
+      by_role:
+        POSSESSED:
+        - 15
+        - 9
+        SEER:
+        - 15
+        - 9
+        VILLAGER:
+        - 30
+        - 14
+        WEREWOLF:
+        - 15
+        - 9
+    - team: ryanleeai
+      games: 75
+      wins: 41
+      macro: 0.5467
+      micro: 0.5833
+      weighted: 0.5467
+      by_role:
+        POSSESSED:
+        - 15
+        - 6
+        SEER:
+        - 15
+        - 13
+        VILLAGER:
+        - 30
+        - 12
+        WEREWOLF:
+        - 15
+        - 10
+    - team: SunameLLi
+      games: 75
+      wins: 39
+      macro: 0.52
+      micro: 0.4833
+      weighted: 0.52
+      by_role:
+        POSSESSED:
+        - 15
+        - 6
+        SEER:
+        - 15
+        - 8
+        VILLAGER:
+        - 30
+        - 20
+        WEREWOLF:
+        - 15
+        - 5
+    - team: CamelliaDragons
+      games: 75
+      wins: 38
+      macro: 0.5067
+      micro: 0.4833
+      weighted: 0.5067
+      by_role:
+        POSSESSED:
+        - 15
+        - 7
+        SEER:
+        - 15
+        - 6
+        VILLAGER:
+        - 30
+        - 18
+        WEREWOLF:
+        - 15
+        - 7
+    - team: kataken14f
+      games: 75
+      wins: 38
+      macro: 0.5067
+      micro: 0.5
+      weighted: 0.5067
+      by_role:
+        POSSESSED:
+        - 15
+        - 5
+        SEER:
+        - 15
+        - 12
+        VILLAGER:
+        - 30
+        - 16
+        WEREWOLF:
+        - 15
+        - 5
+    - team: UEC-IL
+      games: 75
+      wins: 38
+      macro: 0.5067
+      micro: 0.5
+      weighted: 0.5067
+      by_role:
+        POSSESSED:
+        - 15
+        - 6
+        SEER:
+        - 15
+        - 9
+        VILLAGER:
+        - 30
+        - 16
+        WEREWOLF:
+        - 15
+        - 7
+    - team: Luna
+      games: 75
+      wins: 38
+      macro: 0.5067
+      micro: 0.5
+      weighted: 0.5067
+      by_role:
+        POSSESSED:
+        - 15
+        - 6
+        SEER:
+        - 15
+        - 8
+        VILLAGER:
+        - 30
+        - 16
+        WEREWOLF:
+        - 15
+        - 8
+    - team: carrot
+      games: 75
+      wins: 35
+      macro: 0.4667
+      micro: 0.4583
+      weighted: 0.4667
+      by_role:
+        POSSESSED:
+        - 15
+        - 4
+        SEER:
+        - 15
+        - 8
+        VILLAGER:
+        - 30
+        - 15
+        WEREWOLF:
+        - 15
+        - 8
+    - team: noisy_watcher
+      games: 75
+      wins: 34
+      macro: 0.4533
+      micro: 0.4083
+      weighted: 0.4533
+      by_role:
+        POSSESSED:
+        - 15
+        - 4
+        SEER:
+        - 15
+        - 7
+        VILLAGER:
+        - 30
+        - 19
+        WEREWOLF:
+        - 15
+        - 4
+    - team: Mackerel
+      games: 75
+      wins: 31
+      macro: 0.4133
+      micro: 0.4
+      weighted: 0.4133
+      by_role:
+        POSSESSED:
+        - 15
+        - 6
+        SEER:
+        - 15
+        - 8
+        VILLAGER:
+        - 30
+        - 14
+        WEREWOLF:
+        - 15
+        - 3
+    - team: yshimoda
+      games: 75
+      wins: 31
+      macro: 0.4133
+      micro: 0.3917
+      weighted: 0.4133
+      by_role:
+        POSSESSED:
+        - 15
+        - 6
+        SEER:
+        - 15
+        - 6
+        VILLAGER:
+        - 30
+        - 15
+        WEREWOLF:
+        - 15
+        - 4
+    - team: Oxymoron
+      games: 75
+      wins: 31
+      macro: 0.4133
+      micro: 0.3917
+      weighted: 0.4133
+      by_role:
+        POSSESSED:
+        - 15
+        - 4
+        SEER:
+        - 15
+        - 6
+        VILLAGER:
+        - 30
+        - 15
+        WEREWOLF:
+        - 15
+        - 6
+    - team: gotsumori-NLP
+      games: 75
+      wins: 29
+      macro: 0.3867
+      micro: 0.3667
+      weighted: 0.3867
+      by_role:
+        POSSESSED:
+        - 15
+        - 8
+        SEER:
+        - 15
+        - 4
+        VILLAGER:
+        - 30
+        - 14
+        WEREWOLF:
+        - 15
+        - 3
+  game_metrics:
+    rows:
+    - team: yatolab
+      executed: 0.85
+      divined: 1.0
+      guarded: null
+      divine_acc: 1.57
+      vote_acc: 1.69
+      possessed_avoid: 0.77
+    - team: AGKAI
+      executed: 0.73
+      divined: 1.08
+      guarded: null
+      divine_acc: 0.94
+      vote_acc: 1.34
+      possessed_avoid: 0.82
+    - team: wool_100%
+      executed: 0.66
+      divined: 1.21
+      guarded: null
+      divine_acc: 1.39
+      vote_acc: 1.33
+      possessed_avoid: 0.8
+    - team: CanisLupus
+      executed: 1.34
+      divined: 0.98
+      guarded: null
+      divine_acc: 1.4
+      vote_acc: 1.23
+      possessed_avoid: 0.89
+    - team: yharada
+      executed: 0.55
+      divined: 0.7
+      guarded: null
+      divine_acc: 1.22
+      vote_acc: 0.97
+      possessed_avoid: 0.59
+    - team: NTT-HAI
+      executed: 0.81
+      divined: 0.76
+      guarded: null
+      divine_acc: 0.56
+      vote_acc: 1.14
+      possessed_avoid: 0.64
+    - team: ryanleeai
+      executed: 0.87
+      divined: 0.84
+      guarded: null
+      divine_acc: 1.91
+      vote_acc: 0.96
+      possessed_avoid: 0.71
+    - team: SunameLLi
+      executed: 0.89
+      divined: 1.19
+      guarded: null
+      divine_acc: 0.78
+      vote_acc: 1.87
+      possessed_avoid: 0.58
+    - team: CamelliaDragons
+      executed: 1.11
+      divined: 1.07
+      guarded: null
+      divine_acc: 1.54
+      vote_acc: 1.45
+      possessed_avoid: 0.88
+    - team: UEC-IL
+      executed: 0.87
+      divined: 0.69
+      guarded: null
+      divine_acc: 0.78
+      vote_acc: 1.01
+      possessed_avoid: 0.95
+    - team: Luna
+      executed: 0.83
+      divined: 1.0
+      guarded: null
+      divine_acc: 0.82
+      vote_acc: 0.98
+      possessed_avoid: 0.72
+    - team: carrot
+      executed: 0.93
+      divined: 0.58
+      guarded: null
+      divine_acc: 1.15
+      vote_acc: 1.06
+      possessed_avoid: 0.47
+    - team: noisy_watcher
+      executed: 1.46
+      divined: 0.84
+      guarded: null
+      divine_acc: 0.4
+      vote_acc: 1.28
+      possessed_avoid: 0.38
+    - team: Mackerel
+      executed: 1.21
+      divined: 0.77
+      guarded: null
+      divine_acc: 0.7
+      vote_acc: 1.2
+      possessed_avoid: 0.8
+    - team: yshimoda
+      executed: 1.26
+      divined: 1.16
+      guarded: null
+      divine_acc: 0.98
+      vote_acc: 0.77
+      possessed_avoid: 0.74
+    - team: Oxymoron
+      executed: 0.91
+      divined: 1.15
+      guarded: null
+      divine_acc: 1.04
+      vote_acc: 0.9
+      possessed_avoid: 0.65
+    - team: gotsumori-NLP
+      executed: 2.01
+      divined: 2.04
+      guarded: null
+      divine_acc: 0.9
+      vote_acc: 0.97
+      possessed_avoid: 1.0
+    - team: kataken
+      executed: 0.97
+      divined: 1.0
+      guarded: null
+      divine_acc: 1.33
+      vote_acc: 1.01
+      possessed_avoid: 0.63
+  human_eval: null
+  llm_judge:
+    criteria:
+    - natural_expression
+    - contextual_dialogue
+    - logical_consistency
+    - action_consistency
+    - character_consistency
+    rows:
+    - team: yharada
+      natural_expression: 2.69
+      contextual_dialogue: 1.38
+      logical_consistency: 1.5
+      action_consistency: 1.56
+      character_consistency: 1.25
+      overall: 1.4
+    - team: UEC-IL
+      natural_expression: 1.5
+      contextual_dialogue: 1.75
+      logical_consistency: 2.69
+      action_consistency: 4.19
+      character_consistency: 3.5
+      overall: 2.2
+    - team: ryanleeai
+      natural_expression: 2.38
+      contextual_dialogue: 2.88
+      logical_consistency: 3.44
+      action_consistency: 6.0
+      character_consistency: 2.38
+      overall: 3.0
+    - team: wool_100%
+      natural_expression: 5.19
+      contextual_dialogue: 5.38
+      logical_consistency: 3.81
+      action_consistency: 2.5
+      character_consistency: 6.62
+      overall: 4.0
+    - team: SunameLLi
+      natural_expression: 8.12
+      contextual_dialogue: 6.0
+      logical_consistency: 6.38
+      action_consistency: 6.19
+      character_consistency: 6.69
+      overall: 5.9
+    - team: AGKAI
+      natural_expression: 9.12
+      contextual_dialogue: 8.19
+      logical_consistency: 10.0
+      action_consistency: 6.75
+      character_consistency: 7.75
+      overall: 8.1
+    - team: Oxymoron
+      natural_expression: 7.31
+      contextual_dialogue: 9.12
+      logical_consistency: 9.31
+      action_consistency: 12.12
+      character_consistency: 6.38
+      overall: 8.2
+    - team: yatolab
+      natural_expression: 13.75
+      contextual_dialogue: 8.19
+      logical_consistency: 8.0
+      action_consistency: 5.44
+      character_consistency: 12.94
+      overall: 9.1
+    - team: yshimoda
+      natural_expression: 4.62
+      contextual_dialogue: 9.25
+      logical_consistency: 10.06
+      action_consistency: 15.62
+      character_consistency: 7.25
+      overall: 9.7
+    - team: NTT-HAI
+      natural_expression: 12.12
+      contextual_dialogue: 11.25
+      logical_consistency: 8.5
+      action_consistency: 6.19
+      character_consistency: 12.56
+      overall: 10.1
+    - team: kataken14f
+      natural_expression: 13.12
+      contextual_dialogue: 8.88
+      logical_consistency: 10.06
+      action_consistency: 9.25
+      character_consistency: 11.5
+      overall: 10.6
+    - team: CamelliaDragons
+      natural_expression: 15.5
+      contextual_dialogue: 9.0
+      logical_consistency: 13.19
+      action_consistency: 9.44
+      character_consistency: 10.0
+      overall: 12.0
+    - team: carrot
+      natural_expression: 8.31
+      contextual_dialogue: 14.75
+      logical_consistency: 10.44
+      action_consistency: 14.56
+      character_consistency: 10.38
+      overall: 12.2
+    - team: Luna
+      natural_expression: 9.94
+      contextual_dialogue: 14.0
+      logical_consistency: 12.0
+      action_consistency: 11.75
+      character_consistency: 15.75
+      overall: 12.8
+    - team: Mackerel
+      natural_expression: 11.31
+      contextual_dialogue: 11.88
+      logical_consistency: 12.38
+      action_consistency: 11.94
+      character_consistency: 13.12
+      overall: 13.0
+    - team: CanisLupus
+      natural_expression: 13.12
+      contextual_dialogue: 15.12
+      logical_consistency: 14.56
+      action_consistency: 13.88
+      character_consistency: 7.94
+      overall: 13.7
+    - team: gotsumori-NLP
+      natural_expression: 16.62
+      contextual_dialogue: 16.38
+      logical_consistency: 17.5
+      action_consistency: 16.38
+      character_consistency: 17.25
+      overall: 17.4
+    - team: noisy_watcher
+      natural_expression: 16.25
+      contextual_dialogue: 17.62
+      logical_consistency: 17.19
+      action_consistency: 17.25
+      character_consistency: 17.75
+      overall: 17.6
+    models: &id002
+    - GPT-5.6 Terra
+    - Claude Sonnet 5
+    - Gemini 3.1 Pro
+    - gemma-4-31b
+    - Qwen3.6-27b
+    - Mistral-Small-3.2
+    - EXAONE-4.5-33b
+    - Seed-OSS-36b
+    posthoc: false
+    source: GPT-5.6 Terra・Claude Sonnet 5・Gemini 3.1 Pro・gemma-4-31b・Qwen3.6-27b・Mistral-Small-3.2・EXAONE-4.5-33b・Seed-OSS-36b の 8 モデル平均
+- id: r2_9
+  name: 2次 9人村
+  name_en: Round 2, 9-player village
+  logs: https://133.167.32.100/aiwolf/2026/INLG2/MainTruck9/log/success/
+  games: 28
+  village_size: 9
+  win_rates:
+    roles:
+    - VILLAGER
+    - SEER
+    - BODYGUARD
+    - MEDIUM
+    - POSSESSED
+    - WEREWOLF
+    rows:
+    - team: yharada
+      games: 18
+      wins: 12
+      macro: 0.6667
+      micro: 0.6389
+      weighted: 0.6667
+      by_role:
+        BODYGUARD:
+        - 2
+        - 2
+        MEDIUM:
+        - 2
+        - 1
+        POSSESSED:
+        - 2
+        - 1
+        SEER:
+        - 2
+        - 1
+        VILLAGER:
+        - 6
+        - 5
+        WEREWOLF:
+        - 4
+        - 2
+    - team: ryanleeai
+      games: 18
+      wins: 11
+      macro: 0.6111
+      micro: 0.5833
+      weighted: 0.6111
+      by_role:
+        BODYGUARD:
+        - 2
+        - 1
+        MEDIUM:
+        - 2
+        - 2
+        POSSESSED:
+        - 2
+        - 0
+        SEER:
+        - 2
+        - 1
+        VILLAGER:
+        - 6
+        - 3
+        WEREWOLF:
+        - 4
+        - 4
+    - team: kataken14f
+      games: 18
+      wins: 11
+      macro: 0.6111
+      micro: 0.6667
+      weighted: 0.6111
+      by_role:
+        BODYGUARD:
+        - 2
+        - 1
+        MEDIUM:
+        - 2
+        - 2
+        POSSESSED:
+        - 2
+        - 1
+        SEER:
+        - 2
+        - 2
+        VILLAGER:
+        - 6
+        - 3
+        WEREWOLF:
+        - 4
+        - 2
+    - team: SunameLLi
+      games: 18
+      wins: 11
+      macro: 0.6111
+      micro: 0.7639
+      weighted: 0.6111
+      by_role:
+        BODYGUARD:
+        - 2
+        - 2
+        MEDIUM:
+        - 2
+        - 2
+        POSSESSED:
+        - 2
+        - 2
+        SEER:
+        - 2
+        - 2
+        VILLAGER:
+        - 6
+        - 2
+        WEREWOLF:
+        - 4
+        - 1
+    - team: UEC-IL
+      games: 18
+      wins: 11
+      macro: 0.6111
+      micro: 0.6111
+      weighted: 0.6111
+      by_role:
+        BODYGUARD:
+        - 2
+        - 2
+        MEDIUM:
+        - 2
+        - 1
+        POSSESSED:
+        - 2
+        - 1
+        SEER:
+        - 2
+        - 1
+        VILLAGER:
+        - 6
+        - 4
+        WEREWOLF:
+        - 4
+        - 2
+    - team: noisy_watcher
+      games: 18
+      wins: 10
+      macro: 0.5556
+      micro: 0.4722
+      weighted: 0.5556
+      by_role:
+        BODYGUARD:
+        - 2
+        - 0
+        MEDIUM:
+        - 2
+        - 1
+        POSSESSED:
+        - 2
+        - 1
+        SEER:
+        - 2
+        - 1
+        VILLAGER:
+        - 6
+        - 5
+        WEREWOLF:
+        - 4
+        - 2
+    - team: wool_100%
+      games: 18
+      wins: 10
+      macro: 0.5556
+      micro: 0.5833
+      weighted: 0.5556
+      by_role:
+        BODYGUARD:
+        - 2
+        - 1
+        MEDIUM:
+        - 2
+        - 1
+        POSSESSED:
+        - 2
+        - 2
+        SEER:
+        - 2
+        - 1
+        VILLAGER:
+        - 6
+        - 3
+        WEREWOLF:
+        - 4
+        - 2
+    - team: Oxymoron
+      games: 18
+      wins: 9
+      macro: 0.5
+      micro: 0.4861
+      weighted: 0.5
+      by_role:
+        BODYGUARD:
+        - 2
+        - 0
+        MEDIUM:
+        - 2
+        - 1
+        POSSESSED:
+        - 2
+        - 1
+        SEER:
+        - 2
+        - 2
+        VILLAGER:
+        - 6
+        - 4
+        WEREWOLF:
+        - 4
+        - 1
+    - team: Mackerel
+      games: 18
+      wins: 9
+      macro: 0.5
+      micro: 0.6528
+      weighted: 0.5
+      by_role:
+        BODYGUARD:
+        - 2
+        - 2
+        MEDIUM:
+        - 2
+        - 2
+        POSSESSED:
+        - 2
+        - 1
+        SEER:
+        - 2
+        - 2
+        VILLAGER:
+        - 6
+        - 1
+        WEREWOLF:
+        - 4
+        - 1
+    - team: CanisLupus
+      games: 18
+      wins: 8
+      macro: 0.4444
+      micro: 0.4167
+      weighted: 0.4444
+      by_role:
+        BODYGUARD:
+        - 2
+        - 2
+        MEDIUM:
+        - 2
+        - 1
+        POSSESSED:
+        - 2
+        - 0
+        SEER:
+        - 2
+        - 0
+        VILLAGER:
+        - 6
+        - 3
+        WEREWOLF:
+        - 4
+        - 2
+    - team: yatolab
+      games: 18
+      wins: 8
+      macro: 0.4444
+      micro: 0.3611
+      weighted: 0.4444
+      by_role:
+        BODYGUARD:
+        - 2
+        - 1
+        MEDIUM:
+        - 2
+        - 1
+        POSSESSED:
+        - 2
+        - 0
+        SEER:
+        - 2
+        - 0
+        VILLAGER:
+        - 6
+        - 4
+        WEREWOLF:
+        - 4
+        - 2
+    - team: yshimoda
+      games: 18
+      wins: 8
+      macro: 0.4444
+      micro: 0.3472
+      weighted: 0.4444
+      by_role:
+        BODYGUARD:
+        - 2
+        - 1
+        MEDIUM:
+        - 2
+        - 0
+        POSSESSED:
+        - 2
+        - 1
+        SEER:
+        - 2
+        - 0
+        VILLAGER:
+        - 6
+        - 5
+        WEREWOLF:
+        - 4
+        - 1
+    - team: CamelliaDragons
+      games: 18
+      wins: 8
+      macro: 0.4444
+      micro: 0.3611
+      weighted: 0.4444
+      by_role:
+        BODYGUARD:
+        - 2
+        - 0
+        MEDIUM:
+        - 2
+        - 0
+        POSSESSED:
+        - 2
+        - 0
+        SEER:
+        - 2
+        - 2
+        VILLAGER:
+        - 6
+        - 4
+        WEREWOLF:
+        - 4
+        - 2
+    - team: carrot
+      games: 18
+      wins: 6
+      macro: 0.3333
+      micro: 0.3889
+      weighted: 0.3333
+      by_role:
+        BODYGUARD:
+        - 2
+        - 1
+        MEDIUM:
+        - 2
+        - 1
+        POSSESSED:
+        - 2
+        - 1
+        SEER:
+        - 2
+        - 1
+        VILLAGER:
+        - 6
+        - 2
+        WEREWOLF:
+        - 4
+        - 0
+  game_metrics:
+    rows:
+    - team: yharada
+      executed: 0.32
+      divined: 0.74
+      guarded: 0.15
+      divine_acc: 1.45
+      vote_acc: 1.92
+      possessed_avoid: 0.5
+    - team: ryanleeai
+      executed: 0.62
+      divined: 0.85
+      guarded: 1.77
+      divine_acc: 2.6
+      vote_acc: 1.67
+      possessed_avoid: 0.5
+    - team: SunameLLi
+      executed: 0.55
+      divined: 0.69
+      guarded: 0.57
+      divine_acc: 2.74
+      vote_acc: 1.83
+      possessed_avoid: 0.8
+    - team: UEC-IL
+      executed: 0.7
+      divined: 0.72
+      guarded: 0.71
+      divine_acc: 1.09
+      vote_acc: 2.31
+      possessed_avoid: 0.83
+    - team: noisy_watcher
+      executed: 0.94
+      divined: 0.96
+      guarded: 1.91
+      divine_acc: 1.05
+      vote_acc: 1.34
+      possessed_avoid: 0.75
+    - team: wool_100%
+      executed: 0.76
+      divined: 1.03
+      guarded: 1.47
+      divine_acc: 1.1
+      vote_acc: 1.46
+      possessed_avoid: 1.0
+    - team: Oxymoron
+      executed: 1.72
+      divined: 1.46
+      guarded: 1.79
+      divine_acc: 0.0
+      vote_acc: 1.13
+      possessed_avoid: 0.67
+    - team: Mackerel
+      executed: 1.55
+      divined: 0.9
+      guarded: 0.49
+      divine_acc: 1.08
+      vote_acc: 1.86
+      possessed_avoid: 1.0
+    - team: CanisLupus
+      executed: 1.29
+      divined: 0.45
+      guarded: 0.0
+      divine_acc: 0.0
+      vote_acc: 1.44
+      possessed_avoid: 0.0
+    - team: yatolab
+      executed: 0.61
+      divined: 0.85
+      guarded: 0.59
+      divine_acc: 1.05
+      vote_acc: 1.83
+      possessed_avoid: 0.67
+    - team: yshimoda
+      executed: 2.05
+      divined: 0.62
+      guarded: 1.09
+      divine_acc: 2.66
+      vote_acc: 2.01
+      possessed_avoid: 0.33
+    - team: CamelliaDragons
+      executed: 2.38
+      divined: 2.12
+      guarded: 0.61
+      divine_acc: 0.0
+      vote_acc: 1.76
+      possessed_avoid: 0.6
+    - team: carrot
+      executed: 1.3
+      divined: 1.34
+      guarded: 0.71
+      divine_acc: 0.0
+      vote_acc: 1.15
+      possessed_avoid: 0.5
+    - team: kataken
+      executed: 0.71
+      divined: 1.89
+      guarded: 1.75
+      divine_acc: 1.87
+      vote_acc: 1.62
+      possessed_avoid: 0.67
+  human_eval: null
+  llm_judge:
+    criteria:
+    - natural_expression
+    - contextual_dialogue
+    - logical_consistency
+    - action_consistency
+    - character_consistency
+    - team_play
+    rows:
+    - team: UEC-IL
+      natural_expression: 2.0
+      contextual_dialogue: 1.5
+      logical_consistency: 2.25
+      action_consistency: 3.38
+      character_consistency: 5.12
+      team_play: 2.25
+      overall: 1.75
+    - team: yharada
+      natural_expression: 3.62
+      contextual_dialogue: 2.38
+      logical_consistency: 2.25
+      action_consistency: 2.5
+      character_consistency: 1.62
+      team_play: 2.94
+      overall: 2.08
+    - team: ryanleeai
+      natural_expression: 2.44
+      contextual_dialogue: 4.0
+      logical_consistency: 3.81
+      action_consistency: 3.56
+      character_consistency: 1.75
+      team_play: 5.81
+      overall: 3.33
+    - team: wool_100%
+      natural_expression: 2.56
+      contextual_dialogue: 2.69
+      logical_consistency: 6.38
+      action_consistency: 6.62
+      character_consistency: 5.94
+      team_play: 1.69
+      overall: 4.58
+    - team: SunameLLi
+      natural_expression: 8.25
+      contextual_dialogue: 6.38
+      logical_consistency: 5.44
+      action_consistency: 6.56
+      character_consistency: 5.75
+      team_play: 5.19
+      overall: 5.5
+    - team: kataken14f
+      natural_expression: 9.25
+      contextual_dialogue: 5.38
+      logical_consistency: 5.25
+      action_consistency: 5.62
+      character_consistency: 8.19
+      team_play: 7.12
+      overall: 6.67
+    - team: noisy_watcher
+      natural_expression: 6.12
+      contextual_dialogue: 6.19
+      logical_consistency: 6.38
+      action_consistency: 7.12
+      character_consistency: 8.06
+      team_play: 5.5
+      overall: 6.75
+    - team: yatolab
+      natural_expression: 9.5
+      contextual_dialogue: 7.75
+      logical_consistency: 6.25
+      action_consistency: 4.56
+      character_consistency: 11.81
+      team_play: 7.44
+      overall: 8.17
+    - team: yshimoda
+      natural_expression: 7.31
+      contextual_dialogue: 10.25
+      logical_consistency: 9.44
+      action_consistency: 8.69
+      character_consistency: 8.0
+      team_play: 10.25
+      overall: 8.58
+    - team: CanisLupus
+      natural_expression: 10.5
+      contextual_dialogue: 11.75
+      logical_consistency: 10.56
+      action_consistency: 10.25
+      character_consistency: 5.88
+      team_play: 12.0
+      overall: 10.33
+    - team: Oxymoron
+      natural_expression: 8.88
+      contextual_dialogue: 10.25
+      logical_consistency: 11.31
+      action_consistency: 10.62
+      character_consistency: 6.88
+      team_play: 12.25
+      overall: 10.42
+    - team: Mackerel
+      natural_expression: 11.5
+      contextual_dialogue: 11.0
+      logical_consistency: 11.31
+      action_consistency: 10.06
+      character_consistency: 12.12
+      team_play: 9.44
+      overall: 11.42
+    - team: carrot
+      natural_expression: 9.38
+      contextual_dialogue: 12.12
+      logical_consistency: 10.88
+      action_consistency: 12.69
+      character_consistency: 11.0
+      team_play: 10.88
+      overall: 11.5
+    - team: CamelliaDragons
+      natural_expression: 13.69
+      contextual_dialogue: 13.38
+      logical_consistency: 13.5
+      action_consistency: 12.75
+      character_consistency: 12.88
+      team_play: 12.25
+      overall: 13.92
+    models: *id002
+    posthoc: false
+    source: GPT-5.6 Terra・Claude Sonnet 5・Gemini 3.1 Pro・gemma-4-31b・Qwen3.6-27b・Mistral-Small-3.2・EXAONE-4.5-33b・Seed-OSS-36b の 8 モデル平均
+- id: r2_ff5
+  name: 2次 いつでも発話トラック 5人村
+  name_en: Round 2, Speak-Anytime Track, 5-player village
+  logs: https://133.167.32.100/aiwolf/2026/INLG2/MainTruck_freeform5/log/success/
+  games: 24
+  village_size: 5
+  win_rates:
+    roles:
+    - VILLAGER
+    - SEER
+    - POSSESSED
+    - WEREWOLF
+    rows:
+    - team: yatolab
+      games: 10
+      wins: 7
+      macro: 0.7
+      micro: 0.6875
+      weighted: 0.7
+      by_role:
+        POSSESSED:
+        - 2
+        - 2
+        SEER:
+        - 2
+        - 2
+        VILLAGER:
+        - 4
+        - 3
+        WEREWOLF:
+        - 2
+        - 0
+    - team: ryanleeai
+      games: 10
+      wins: 7
+      macro: 0.7
+      micro: 0.625
+      weighted: 0.7
+      by_role:
+        POSSESSED:
+        - 2
+        - 2
+        SEER:
+        - 2
+        - 0
+        VILLAGER:
+        - 4
+        - 4
+        WEREWOLF:
+        - 2
+        - 1
+    - team: wool_100%
+      games: 10
+      wins: 6
+      macro: 0.6
+      micro: 0.5625
+      weighted: 0.6
+      by_role:
+        POSSESSED:
+        - 2
+        - 1
+        SEER:
+        - 2
+        - 2
+        VILLAGER:
+        - 4
+        - 3
+        WEREWOLF:
+        - 2
+        - 0
+    - team: SunameLLi
+      games: 10
+      wins: 6
+      macro: 0.6
+      micro: 0.5625
+      weighted: 0.6
+      by_role:
+        POSSESSED:
+        - 2
+        - 1
+        SEER:
+        - 2
+        - 1
+        VILLAGER:
+        - 4
+        - 3
+        WEREWOLF:
+        - 2
+        - 1
+    - team: noisy_watcher
+      games: 10
+      wins: 6
+      macro: 0.6
+      micro: 0.5625
+      weighted: 0.6
+      by_role:
+        POSSESSED:
+        - 2
+        - 1
+        SEER:
+        - 2
+        - 1
+        VILLAGER:
+        - 4
+        - 3
+        WEREWOLF:
+        - 2
+        - 1
+    - team: Oxymoron
+      games: 10
+      wins: 5
+      macro: 0.5
+      micro: 0.5
+      weighted: 0.5
+      by_role:
+        POSSESSED:
+        - 2
+        - 0
+        SEER:
+        - 2
+        - 2
+        VILLAGER:
+        - 4
+        - 2
+        WEREWOLF:
+        - 2
+        - 1
+    - team: yharada
+      games: 10
+      wins: 5
+      macro: 0.5
+      micro: 0.5
+      weighted: 0.5
+      by_role:
+        POSSESSED:
+        - 2
+        - 0
+        SEER:
+        - 2
+        - 1
+        VILLAGER:
+        - 4
+        - 2
+        WEREWOLF:
+        - 2
+        - 2
+    - team: kanolab
+      games: 10
+      wins: 5
+      macro: 0.5
+      micro: 0.5
+      weighted: 0.5
+      by_role:
+        POSSESSED:
+        - 2
+        - 1
+        SEER:
+        - 2
+        - 1
+        VILLAGER:
+        - 4
+        - 2
+        WEREWOLF:
+        - 2
+        - 1
+    - team: kataken14f
+      games: 10
+      wins: 4
+      macro: 0.4
+      micro: 0.375
+      weighted: 0.4
+      by_role:
+        POSSESSED:
+        - 2
+        - 0
+        SEER:
+        - 2
+        - 0
+        VILLAGER:
+        - 4
+        - 2
+        WEREWOLF:
+        - 2
+        - 2
+    - team: CanisLupus
+      games: 10
+      wins: 4
+      macro: 0.4
+      micro: 0.4375
+      weighted: 0.4
+      by_role:
+        POSSESSED:
+        - 2
+        - 1
+        SEER:
+        - 2
+        - 2
+        VILLAGER:
+        - 4
+        - 1
+        WEREWOLF:
+        - 2
+        - 0
+    - team: UEC-IL
+      games: 10
+      wins: 4
+      macro: 0.4
+      micro: 0.375
+      weighted: 0.4
+      by_role:
+        POSSESSED:
+        - 2
+        - 1
+        SEER:
+        - 2
+        - 1
+        VILLAGER:
+        - 4
+        - 2
+        WEREWOLF:
+        - 2
+        - 0
+    - team: CamelliaDragons
+      games: 10
+      wins: 3
+      macro: 0.3
+      micro: 0.3125
+      weighted: 0.3
+      by_role:
+        POSSESSED:
+        - 2
+        - 0
+        SEER:
+        - 2
+        - 1
+        VILLAGER:
+        - 4
+        - 1
+        WEREWOLF:
+        - 2
+        - 1
+  game_metrics:
+    rows:
+    - team: yatolab
+      executed: 1.33
+      divined: 1.33
+      guarded: null
+      divine_acc: 1.2
+      vote_acc: 2.0
+      possessed_avoid: 1.0
+    - team: ryanleeai
+      executed: 1.87
+      divined: 1.29
+      guarded: null
+      divine_acc: 0.0
+      vote_acc: 2.0
+      possessed_avoid: 1.0
+    - team: wool_100%
+      executed: 1.2
+      divined: 0.75
+      guarded: null
+      divine_acc: 2.0
+      vote_acc: 2.5
+      possessed_avoid: 0.33
+    - team: SunameLLi
+      executed: 0.84
+      divined: 0.8
+      guarded: null
+      divine_acc: 0.0
+      vote_acc: 1.2
+      possessed_avoid: 1.0
+    - team: noisy_watcher
+      executed: 0.82
+      divined: 1.29
+      guarded: null
+      divine_acc: 0.86
+      vote_acc: 1.67
+      possessed_avoid: 1.0
+    - team: Oxymoron
+      executed: 0.86
+      divined: 1.12
+      guarded: null
+      divine_acc: 4.0
+      vote_acc: 2.67
+      possessed_avoid: 0.5
+    - team: yharada
+      executed: 0.31
+      divined: 0.92
+      guarded: null
+      divine_acc: 2.4
+      vote_acc: 0.86
+      possessed_avoid: 0.5
+    - team: kanolab
+      executed: 1.2
+      divined: 0.75
+      guarded: null
+      divine_acc: 0.0
+      vote_acc: 4.0
+      possessed_avoid: null
+    - team: CanisLupus
+      executed: 1.2
+      divined: 1.45
+      guarded: null
+      divine_acc: 2.0
+      vote_acc: 0.67
+      possessed_avoid: 1.0
+    - team: UEC-IL
+      executed: 1.67
+      divined: 0.5
+      guarded: null
+      divine_acc: 2.4
+      vote_acc: 1.33
+      possessed_avoid: 1.0
+    - team: CamelliaDragons
+      executed: 0.69
+      divined: 0.92
+      guarded: null
+      divine_acc: 1.2
+      vote_acc: 0.8
+      possessed_avoid: 0.0
+    - team: kataken
+      executed: 0.28
+      divined: 0.97
+      guarded: null
+      divine_acc: 0.0
+      vote_acc: 0.35
+      possessed_avoid: 1.0
+  human_eval: null
+  llm_judge:
+    criteria:
+    - natural_expression
+    - contextual_dialogue
+    - logical_consistency
+    - action_consistency
+    - character_consistency
+    rows:
+    - team: yharada
+      natural_expression: 1.25
+      contextual_dialogue: 1.56
+      logical_consistency: 1.19
+      action_consistency: 2.5
+      character_consistency: 1.0
+      overall: 1.0
+    - team: UEC-IL
+      natural_expression: 2.19
+      contextual_dialogue: 2.12
+      logical_consistency: 3.31
+      action_consistency: 4.5
+      character_consistency: 4.94
+      overall: 2.8
+    - team: wool_100%
+      natural_expression: 4.31
+      contextual_dialogue: 2.44
+      logical_consistency: 4.25
+      action_consistency: 3.19
+      character_consistency: 6.12
+      overall: 3.4
+    - team: SunameLLi
+      natural_expression: 5.0
+      contextual_dialogue: 5.0
+      logical_consistency: 5.81
+      action_consistency: 4.56
+      character_consistency: 3.69
+      overall: 4.4
+    - team: ryanleeai
+      natural_expression: 4.38
+      contextual_dialogue: 6.94
+      logical_consistency: 5.44
+      action_consistency: 6.81
+      character_consistency: 8.0
+      overall: 6.2
+    - team: kataken14f
+      natural_expression: 8.69
+      contextual_dialogue: 6.5
+      logical_consistency: 4.56
+      action_consistency: 5.5
+      character_consistency: 7.69
+      overall: 6.4
+    - team: Oxymoron
+      natural_expression: 7.0
+      contextual_dialogue: 7.06
+      logical_consistency: 7.94
+      action_consistency: 8.06
+      character_consistency: 5.31
+      overall: 7.0
+    - team: yatolab
+      natural_expression: 9.31
+      contextual_dialogue: 8.5
+      logical_consistency: 6.94
+      action_consistency: 4.12
+      character_consistency: 9.44
+      overall: 8.0
+    - team: CanisLupus
+      natural_expression: 8.75
+      contextual_dialogue: 10.62
+      logical_consistency: 11.5
+      action_consistency: 11.0
+      character_consistency: 4.44
+      overall: 9.6
+    - team: noisy_watcher
+      natural_expression: 7.75
+      contextual_dialogue: 9.25
+      logical_consistency: 8.31
+      action_consistency: 8.62
+      character_consistency: 11.56
+      overall: 9.6
+    - team: kanolab
+      natural_expression: 8.38
+      contextual_dialogue: 10.12
+      logical_consistency: 9.0
+      action_consistency: 11.44
+      character_consistency: 6.25
+      overall: 9.6
+    - team: CamelliaDragons
+      natural_expression: 11.0
+      contextual_dialogue: 7.88
+      logical_consistency: 9.75
+      action_consistency: 7.69
+      character_consistency: 9.56
+      overall: 10.0
+    models: *id002
+    posthoc: false
+    source: GPT-5.6 Terra・Claude Sonnet 5・Gemini 3.1 Pro・gemma-4-31b・Qwen3.6-27b・Mistral-Small-3.2・EXAONE-4.5-33b・Seed-OSS-36b の 8 モデル平均
+availability:
+  human_eval: none
+  llm_judge: ok
+human_eval_short: null
+human_eval_short_en: null

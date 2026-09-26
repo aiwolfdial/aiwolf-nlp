@@ -25,7 +25,7 @@
                 "layout" "result"
                 "title" ($fm.contest | default $fm.title)
                 "dates" (dict "date" (time.AsTime $fm.date))
-                "params" (dict "contest" $fm.contest "source_menu" $name "menu_slug" $slug)
+                "params" (dict "contest" $fm.contest "source_menu" $name "menu_slug" $slug "results_data" $fm.results_data)
                 "content" (dict "mediaType" "text/markdown" "value" $body)
               ) }}
         {{- end }}

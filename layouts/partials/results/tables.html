@@ -1,0 +1,188 @@
+{{- /* 結果・ログページの本体。data/results/<slug>.yaml を描画する。dict: data, page */}}
+{{- $d := .data }}
+{{- $en := eq site.Language.Lang "en" }}
+{{- $roleName := dict "VILLAGER" (cond $en "Villager" "村人") "SEER" (cond $en "Seer" "占い師") "BODYGUARD" (cond $en "Bodyguard" "騎士") "MEDIUM" (cond $en "Medium" "霊媒師") "POSSESSED" (cond $en "Possessed" "狂人") "WEREWOLF" (cond $en "Werewolf" "人狼") }}
+{{- $critName := dict "natural_expression" (cond $en "Natural expression" "発話表現の自然さ") "contextual_dialogue" (cond $en "Contextual dialogue" "文脈を踏まえた対話") "logical_consistency" (cond $en "Logical consistency" "一貫性・論理") "action_consistency" (cond $en "Action consistency" "行動整合") "character_consistency" (cond $en "Character consistency" "キャラクター性") "team_play" (cond $en "Team play" "チームプレイ") }}
+{{- $pct := "%.1f%%" }}
+{{- $evalTracks := $d.tracks }}{{ with $d.extra_eval_tracks }}{{ $evalTracks = $evalTracks | append . }}{{ end }}
+{{- $avail := $d.availability | default dict }}
+{{- $hasMeta := false }}{{ $hasHuman := false }}{{ $hasJudge := false }}
+{{- range $evalTracks }}{{ if .game_metrics }}{{ $hasMeta = true }}{{ end }}{{ if .human_eval }}{{ $hasHuman = true }}{{ end }}{{ if .llm_judge }}{{ $hasJudge = true }}{{ end }}{{ end }}
+{{- $secAwards := cond $en "Official Results (Awards)" "公式結果（表彰）" }}
+{{- $secWin := cond $en "Win Rates" "勝率" }}
+{{- $secMeta := cond $en "Game Metrics" "ゲーム指標" }}
+{{- $secHuman := cond $en "Human Evaluation (Relative)" "人手評価（相対評価）" }}
+{{- $secJudge := cond $en "LLM-as-a-Judge (Relative Evaluation)" "LLM-as-a-Judge（相対評価）" }}
+{{- $secLogs := cond $en "Game Logs" "対戦ログ" }}
+
+<div class="results-tables">
+
+<nav class="results-toc" aria-label="{{ cond $en "Table of contents" "目次" }}">
+  <div class="results-toc-title">{{ cond $en "Contents" "目次" }}</div>
+  <ol>
+    <li><a href="#awards">{{ $secAwards }}</a></li>
+    <li><a href="#win-rates">{{ $secWin }}</a>
+      <ul>{{ range $d.tracks }}<li><a href="#win-rates-{{ .id }}">{{ cond $en .name_en .name }}</a></li>{{ end }}</ul></li>
+    <li><a href="#game-metrics">{{ $secMeta }}</a>
+      {{- if $hasMeta }}<ul>{{ range $d.tracks }}{{ if .game_metrics }}<li><a href="#game-metrics-{{ .id }}">{{ cond $en .name_en .name }}</a></li>{{ end }}{{ end }}</ul>{{ end }}</li>
+    <li><a href="#human-eval">{{ $secHuman }}</a>
+      {{- if $hasHuman }}<ul>{{ range $evalTracks }}{{ if .human_eval }}<li><a href="#human-eval-{{ .id }}">{{ cond $en .name_en .name }}</a></li>{{ end }}{{ end }}</ul>{{ end }}</li>
+    <li><a href="#llm-judge">{{ $secJudge }}</a>
+      {{- if $hasJudge }}<ul>{{ range $evalTracks }}{{ if .llm_judge }}<li><a href="#llm-judge-{{ .id }}">{{ cond $en .name_en .name }}</a></li>{{ end }}{{ end }}</ul>{{ end }}</li>
+    <li><a href="#logs">{{ $secLogs }}</a></li>
+  </ol>
+</nav>
+
+<h2 id="awards">{{ $secAwards }}</h2>
+{{- with $d.awards }}
+{{- if .items }}
+<table class="results-awards">
+  <thead><tr><th>{{ cond $en "Award" "賞" }}</th><th>{{ cond $en "Team" "チーム" }}</th></tr></thead>
+  <tbody>
+  {{- range .items }}
+  <tr><td>{{ cond $en (.title_en | default .title) .title }}</td><td>{{ .team }}{{ with .note }} <span class="results-muted">({{ . }})</span>{{ end }}</td></tr>
+  {{- end }}
+  </tbody>
+</table>
+{{- else }}
+<p class="results-muted">{{ cond $en "The list of awarded teams is being compiled." "表彰チームの一覧は準備中です。" }}</p>
+{{- end }}
+<p>{{ cond $en (.note_en | default .note) .note }}</p>
+{{- end }}
+
+<h2 id="win-rates">{{ $secWin }}</h2>
+<p class="results-muted">
+{{- if $en -}}
+Computed from the logs of all games that finished normally in the main competition. "Overall" is wins divided by games. Per-role cells show the win rate in that role with (wins / games). "Adjusted" re-weights the per-role win rates by the village's role composition, cancelling out uneven role assignments.
+{{- else -}}
+本戦で正常に終了した全ゲームのログから集計しています。「総合」は勝ち数 ÷ 試合数、役職別の欄はその役職で戦ったときの勝率と（勝ち数 / 試合数）です。「構成加重」は役職別勝率を村の役職構成で平均し直した値で、配役の偏りを打ち消した勝率です。
+{{- end -}}
+</p>
+{{- range $d.tracks }}
+<h3 id="win-rates-{{ .id }}">{{ cond $en .name_en .name }} <span class="results-muted">({{ .games }} {{ cond $en "games" "試合" }})</span></h3>
+<table class="results-winrate">
+  <thead><tr>
+    <th>#</th><th>{{ cond $en "Team" "チーム" }}</th><th>{{ cond $en "Games" "試合" }}</th><th>{{ cond $en "Overall" "総合" }}</th>
+    {{- range .win_rates.roles }}<th>{{ index $roleName . }}</th>{{ end }}
+    <th>{{ cond $en "Adjusted" "構成加重" }}</th>
+  </tr></thead>
+  <tbody>
+  {{- $roles := .win_rates.roles }}
+  {{- range $i, $r := .win_rates.rows }}
+  <tr>
+    <td>{{ add $i 1 }}</td><td class="results-team">{{ $r.team }}</td><td>{{ $r.games }}</td><td><strong>{{ printf $pct (mul $r.macro 100) }}</strong></td>
+    {{- range $roles }}
+      {{- with index $r.by_role . }}<td>{{ printf $pct (mul (div (float (index . 1)) (float (index . 0))) 100) }} <span class="results-muted">({{ index . 1 }}/{{ index . 0 }})</span></td>{{ else }}<td class="results-muted">-</td>{{ end }}
+    {{- end }}
+    <td>{{ printf $pct (mul $r.weighted 100) }}</td>
+  </tr>
+  {{- end }}
+  </tbody>
+</table>
+{{- end }}
+
+<h2 id="game-metrics">{{ $secMeta }}</h2>
+<p class="results-muted">
+{{- if $en -}}
+Behavioural metrics computed mechanically from the game logs, independent of dialogue quality. Each value is a ratio against what random play would produce (1.00 = random). "Executed", "divined" and "guarded" show how often the team was targeted relative to chance; lower is better for being executed or divined. "Divination accuracy" and "vote accuracy" show how often the team found a werewolf relative to chance; higher is better. "Possessed avoidance" is the rate at which, as the possessed, the team voted for someone other than a werewolf.
+{{- else -}}
+ゲームログから機械的に計算した振る舞いの指標で、対話品質とは独立です。各値はランダムに行動した場合との比（1.00 = ランダム）です。「追放されやすさ」「占われやすさ」「守られやすさ」は他のプレイヤーから狙われた頻度の比で、追放・占いは低いほど疑われにくかったことを示します。「占い精度」「投票精度」は人狼を当てた頻度の比で、高いほど良い値です。「狂人の人狼回避」は狂人のときに人狼以外へ投票した割合です。
+{{- end -}}
+</p>
+{{- range $d.tracks }}
+{{- $tr := . }}
+{{- with .game_metrics }}
+<h3 id="game-metrics-{{ $tr.id }}">{{ cond $en $tr.name_en $tr.name }}</h3>
+<table class="results-meta">
+  <thead><tr>
+    <th>{{ cond $en "Team" "チーム" }}</th>
+    <th>{{ cond $en "Executed" "追放されやすさ" }}</th><th>{{ cond $en "Divined" "占われやすさ" }}</th>{{ if ge $tr.village_size 9 }}<th>{{ cond $en "Guarded" "守られやすさ" }}</th>{{ end }}
+    <th>{{ cond $en "Divination accuracy" "占い精度" }}</th><th>{{ cond $en "Vote accuracy" "投票精度" }}</th><th>{{ cond $en "Possessed avoidance" "狂人の人狼回避" }}</th>
+  </tr></thead>
+  <tbody>
+  {{- range .rows }}
+  <tr>
+    <td class="results-team">{{ .team }}</td>
+    <td>{{ with .executed }}{{ printf "%.2f" . }}{{ else }}-{{ end }}</td>
+    <td>{{ with .divined }}{{ printf "%.2f" . }}{{ else }}-{{ end }}</td>
+    {{- if ge $tr.village_size 9 }}<td>{{ with .guarded }}{{ printf "%.2f" . }}{{ else }}-{{ end }}</td>{{ end }}
+    <td>{{ with .divine_acc }}{{ printf "%.2f" . }}{{ else }}-{{ end }}</td>
+    <td>{{ with .vote_acc }}{{ printf "%.2f" . }}{{ else }}-{{ end }}</td>
+    <td>{{ with .possessed_avoid }}{{ printf "%.2f" . }}{{ else }}-{{ end }}</td>
+  </tr>
+  {{- end }}
+  </tbody>
+</table>
+{{- end }}
+{{- end }}
+{{- if not $hasMeta }}<p class="results-muted">{{ cond $en "Not available for this contest." "この大会では集計していません。" }}</p>{{ end }}
+
+<h2 id="human-eval">{{ $secHuman }}</h2>
+<p class="results-muted">
+{{- if $en -}}
+Human judges read selected game logs and evaluate the players of each game on each criterion. From 2024 winter onward the judges rank the players (average rank, lower is better); in the 2024 spring and 2024 international contests they gave 5-point scores (higher is better). In 13-player villages each entry (e.g. team-A, team-B) is evaluated separately.
+{{- else -}}
+評価者が抽出した対戦ログを読み、ゲームごとにプレイヤーを評価項目別に評価した結果をチームごとに平均したものです。2024 冬季以降は順位付け（順位平均、低いほど良い）、2024 春季と 2024 国際大会は 5 点満点の評点（高いほど良い）です。13 人村ではエントリ（チーム-A、チーム-B など）ごとに評価しています。
+{{- end -}}
+</p>
+{{- range $evalTracks }}
+{{- $tr := . }}
+{{- with .human_eval }}
+<h3 id="human-eval-{{ $tr.id }}">{{ cond $en $tr.name_en $tr.name }}</h3>
+<p class="results-muted">
+  {{- with .games }}{{ cond $en (printf "%d selected games. " .) (printf "抽出ログ %d ゲーム。" .) }}{{ end }}
+  {{- with .source }}{{ . }}{{ end }}
+  {{- if eq .scale "rating5" }} {{ cond $en "Scores are on a 5-point scale (higher is better)." "5 点満点の評点（高いほど良い）。" }}{{ else }} {{ cond $en "Average ranks (lower is better)." "順位平均（低いほど良い）。" }}{{ end }}
+</p>
+<table class="results-judge">
+  <thead><tr><th>#</th><th>{{ cond $en "Team" "チーム" }}</th>{{ range .criteria }}<th>{{ index $critName . | default . }}</th>{{ end }}<th>{{ cond $en "Average" "総合" }}</th></tr></thead>
+  <tbody>
+  {{- $crits := .criteria }}
+  {{- range $i, $r := .rows }}
+  <tr><td>{{ add $i 1 }}</td><td class="results-team">{{ $r.team }}</td>{{ range $crits }}<td>{{ with index $r . }}{{ printf "%.2f" . }}{{ else }}-{{ end }}</td>{{ end }}<td><strong>{{ printf "%.2f" $r.overall }}</strong></td></tr>
+  {{- end }}
+  </tbody>
+</table>
+{{- end }}
+{{- end }}
+{{- if not $hasHuman }}<p class="results-muted">{{ if eq $avail.human_eval "none" }}{{ cond $en "Human evaluation was not conducted in this contest." "この大会では人手評価を実施していません。" }}{{ else }}{{ cond $en "Being compiled." "準備中です。" }}{{ end }}</p>{{ end }}
+
+<h2 id="llm-judge">{{ $secJudge }}</h2>
+<p class="results-muted">
+{{- if $en -}}
+LLM judges rank the players of each game on each evaluation criterion; the ranks are averaged per team (lower is better). The judge models differ by contest and are listed under each track. The judge is published as <a href="https://github.com/aiwolfdial/aiwolf-nlp-llm-judge">aiwolf-nlp-llm-judge</a>.
+{{- else -}}
+LLM ジャッジがゲームごとにプレイヤーを評価項目別に順位付けし、チームごとに平均したものです（低いほど良い）。使用したモデルは大会ごとに異なり、各トラックの表の上に記載しています。ジャッジの実装は <a href="https://github.com/aiwolfdial/aiwolf-nlp-llm-judge">aiwolf-nlp-llm-judge</a> として公開しています。
+{{- end -}}
+</p>
+{{- range $evalTracks }}
+{{- $tr := . }}
+{{- with .llm_judge }}
+<h3 id="llm-judge-{{ $tr.id }}">{{ cond $en $tr.name_en $tr.name }}</h3>
+<p class="results-muted">{{ cond $en "Judge models: " "使用モデル: " }}{{ .source }}</p>
+<table class="results-judge">
+  <thead><tr><th>#</th><th>{{ cond $en "Team" "チーム" }}</th>{{ range .criteria }}<th>{{ index $critName . }}</th>{{ end }}<th>{{ cond $en "Average" "総合" }}</th></tr></thead>
+  <tbody>
+  {{- $crits := .criteria }}
+  {{- range $i, $r := .rows }}
+  <tr><td>{{ add $i 1 }}</td><td class="results-team">{{ $r.team }}</td>{{ range $crits }}<td>{{ with index $r . }}{{ printf "%.2f" . }}{{ else }}-{{ end }}</td>{{ end }}<td><strong>{{ printf "%.2f" $r.overall }}</strong></td></tr>
+  {{- end }}
+  </tbody>
+</table>
+{{- end }}
+{{- end }}
+{{- if eq $avail.llm_judge "posthoc" }}<p class="results-muted">{{ cond $en "In this contest the LLM relative evaluation was not part of the official evaluation; it was run afterwards with the same judges as the 2025 international contest." "この大会では LLM 相対評価は大会の評価には含まれておらず、2025 国際大会と同じジャッジで大会後に実施した参考値です。" }}</p>{{ end }}
+{{- if not $hasJudge }}<p class="results-muted">{{ if eq $avail.llm_judge "none" }}{{ cond $en "LLM-as-a-Judge relative evaluation was not conducted in this contest (it started with the 2025 international contest)." "この大会では LLM-as-a-Judge による相対評価を実施していません（2025 国際大会から実施）。" }}{{ else }}{{ cond $en "Being compiled." "準備中です。" }}{{ end }}</p>{{ end }}
+
+<h2 id="logs">{{ $secLogs }}</h2>
+<p>{{ cond $en "Logs of the main competition. Only games that finished normally are listed." "本戦の対戦ログを公開しています。正常に終了したゲームのみを掲載しています。" }}</p>
+<table class="results-logs">
+  <thead><tr><th>{{ cond $en "Track" "トラック" }}</th><th>{{ cond $en "Games" "試合" }}</th><th>{{ cond $en "Logs" "ログ" }}</th></tr></thead>
+  <tbody>
+  {{- range $d.tracks }}
+  <tr><td>{{ cond $en .name_en .name }}</td><td>{{ .games }}</td><td><a href="{{ .logs }}">{{ cond $en "Log list" "ログ一覧" }}</a></td></tr>
+  {{- end }}
+  </tbody>
+</table>
+
+</div>

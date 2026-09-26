@@ -1,0 +1,1102 @@
+# 自動生成: 勝率は success ログから集計、評価指標は運営の集計表から転記。表彰(awards.items)は手で記入する。
+contest: 2025 春季国内大会
+contest_en: Spring 2025 Domestic Contest
+awards:
+  status: published
+  note: 結果発表・表彰は 2025 年度人工知能学会全国大会（2025年5月30日、大阪）の企画セッションで行いました。
+  note_en: Results and awards were presented at the JSAI 2025 annual conference (May 30, 2025, Osaka).
+  items:
+  - title: 5人村 主観評価 1 位
+    title_en: '5-player village: Human evaluation, 1st'
+    team: CamelliaDragons
+  - title: 5人村 主観評価 2 位
+    title_en: '5-player village: Human evaluation, 2nd'
+    team: SunameLLi
+  - title: 5人村 主観評価 3 位
+    title_en: '5-player village: Human evaluation, 3rd'
+    team: CanisLupus
+  - title: 5人村 勝率 1 位
+    title_en: '5-player village: Win rate, 1st'
+    team: CanisLupus
+  - title: 5人村 勝率 2 位
+    title_en: '5-player village: Win rate, 2nd'
+    team: sunamelli
+  - title: 5人村 勝率 3 位
+    title_en: '5-player village: Win rate, 3rd'
+    team: osawalab
+  - title: 13人村 主観評価 1 位
+    title_en: '13-player village: Human evaluation, 1st'
+    team: CamelliaDragons
+  - title: 13人村 主観評価 2 位
+    title_en: '13-player village: Human evaluation, 2nd'
+    team: SunameLLi
+  - title: 13人村 主観評価 3 位
+    title_en: '13-player village: Human evaluation, 3rd'
+    team: GAIT
+  - title: 13人村 勝率上位
+    title_en: '13-player village: Top win rate'
+    team: SunameLLi
+  - title: 13人村 勝率上位
+    title_en: '13-player village: Top win rate'
+    team: CamelliaDragons
+  - title: 13人村 勝率 3 位
+    title_en: '13-player village: Win rate, 3rd'
+    team: kanolab
+tracks:
+- id: t5
+  name: 5人村
+  name_en: 5-player village
+  logs: https://133.167.32.100/aiwolf/2025/JSAI/MainTruck5/Game/success/
+  games: 180
+  village_size: 5
+  win_rates:
+    roles:
+    - VILLAGER
+    - SEER
+    - POSSESSED
+    - WEREWOLF
+    rows:
+    - team: CanisLupus
+      games: 99
+      wins: 64
+      macro: 0.6465
+      micro: 0.6248
+      weighted: 0.642
+      by_role:
+        POSSESSED:
+        - 22
+        - 15
+        SEER:
+        - 22
+        - 14
+        VILLAGER:
+        - 38
+        - 27
+        WEREWOLF:
+        - 17
+        - 8
+    - team: sunamelli
+      games: 100
+      wins: 56
+      macro: 0.56
+      micro: 0.5499
+      weighted: 0.557
+      by_role:
+        POSSESSED:
+        - 20
+        - 8
+        SEER:
+        - 18
+        - 9
+        VILLAGER:
+        - 41
+        - 24
+        WEREWOLF:
+        - 21
+        - 15
+    - team: osawalab
+      games: 99
+      wins: 54
+      macro: 0.5455
+      micro: 0.5028
+      weighted: 0.5373
+      by_role:
+        POSSESSED:
+        - 16
+        - 5
+        SEER:
+        - 22
+        - 11
+        VILLAGER:
+        - 40
+        - 27
+        WEREWOLF:
+        - 21
+        - 11
+    - team: CamelliaDragons
+      games: 99
+      wins: 52
+      macro: 0.5253
+      micro: 0.5006
+      weighted: 0.5214
+      by_role:
+        POSSESSED:
+        - 19
+        - 7
+        SEER:
+        - 18
+        - 10
+        VILLAGER:
+        - 43
+        - 26
+        WEREWOLF:
+        - 19
+        - 9
+    - team: ai168wolf
+      games: 101
+      wins: 53
+      macro: 0.5248
+      micro: 0.4832
+      weighted: 0.5232
+      by_role:
+        POSSESSED:
+        - 20
+        - 8
+        SEER:
+        - 20
+        - 10
+        VILLAGER:
+        - 41
+        - 28
+        WEREWOLF:
+        - 20
+        - 7
+    - team: mille
+      games: 100
+      wins: 51
+      macro: 0.51
+      micro: 0.5205
+      weighted: 0.5112
+      by_role:
+        POSSESSED:
+        - 22
+        - 13
+        SEER:
+        - 19
+        - 13
+        VILLAGER:
+        - 38
+        - 18
+        WEREWOLF:
+        - 21
+        - 7
+    - team: kanolab
+      games: 102
+      wins: 48
+      macro: 0.4706
+      micro: 0.4486
+      weighted: 0.4711
+      by_role:
+        POSSESSED:
+        - 20
+        - 7
+        SEER:
+        - 20
+        - 11
+        VILLAGER:
+        - 41
+        - 23
+        WEREWOLF:
+        - 21
+        - 7
+    - team: GPTaku
+      games: 100
+      wins: 47
+      macro: 0.47
+      micro: 0.4705
+      weighted: 0.4691
+      by_role:
+        POSSESSED:
+        - 19
+        - 7
+        SEER:
+        - 20
+        - 15
+        VILLAGER:
+        - 41
+        - 19
+        WEREWOLF:
+        - 20
+        - 6
+    - team: GAIT
+      games: 100
+      wins: 40
+      macro: 0.4
+      micro: 0.3838
+      weighted: 0.4043
+      by_role:
+        POSSESSED:
+        - 22
+        - 5
+        SEER:
+        - 21
+        - 12
+        VILLAGER:
+        - 37
+        - 18
+        WEREWOLF:
+        - 20
+        - 5
+  game_metrics:
+    rows:
+    - team: CanisLupus
+      executed: 0.99
+      divined: 1.03
+      guarded: null
+      divine_acc: 1.09
+      vote_acc: 1.34
+      possessed_avoid: 0.86
+    - team: sunamelli
+      executed: 0.65
+      divined: 1.15
+      guarded: null
+      divine_acc: 0.7
+      vote_acc: 1.37
+      possessed_avoid: 0.75
+    - team: osawalab
+      executed: 0.82
+      divined: 1.02
+      guarded: null
+      divine_acc: 1.16
+      vote_acc: 1.34
+      possessed_avoid: 0.55
+    - team: CamelliaDragons
+      executed: 0.72
+      divined: 1.07
+      guarded: null
+      divine_acc: 1.73
+      vote_acc: 1.63
+      possessed_avoid: 0.6
+    - team: ai168wolf
+      executed: 1.04
+      divined: 1.1
+      guarded: null
+      divine_acc: 1.02
+      vote_acc: 1.03
+      possessed_avoid: 0.88
+    - team: mille
+      executed: 1.0
+      divined: 0.59
+      guarded: null
+      divine_acc: 1.63
+      vote_acc: 1.37
+      possessed_avoid: 0.55
+    - team: kanolab
+      executed: 1.37
+      divined: 1.02
+      guarded: null
+      divine_acc: 1.43
+      vote_acc: 1.26
+      possessed_avoid: 0.7
+    - team: GPTaku
+      executed: 1.5
+      divined: 1.09
+      guarded: null
+      divine_acc: 0.86
+      vote_acc: 0.78
+      possessed_avoid: 0.75
+    - team: GAIT
+      executed: 0.95
+      divined: 0.92
+      guarded: null
+      divine_acc: 1.76
+      vote_acc: 1.56
+      possessed_avoid: 0.46
+  human_eval:
+    criteria:
+    - natural_expression
+    - contextual_dialogue
+    - logical_consistency
+    - action_consistency
+    - character_consistency
+    rows:
+    - team: CamelliaDragons
+      natural_expression: 2.22
+      contextual_dialogue: 1.94
+      logical_consistency: 2.0
+      action_consistency: 2.48
+      character_consistency: 1.96
+      overall: 2.12
+    - team: Sunamelli
+      natural_expression: 2.17
+      contextual_dialogue: 2.42
+      logical_consistency: 2.23
+      action_consistency: 1.87
+      character_consistency: 2.33
+      overall: 2.2
+    - team: CanisLupus
+      natural_expression: 2.95
+      contextual_dialogue: 2.86
+      logical_consistency: 2.57
+      action_consistency: 2.42
+      character_consistency: 2.36
+      overall: 2.63
+    - team: kanolab
+      natural_expression: 2.37
+      contextual_dialogue: 2.72
+      logical_consistency: 2.97
+      action_consistency: 3.02
+      character_consistency: 3.1
+      overall: 2.84
+    - team: osawalab
+      natural_expression: 2.79
+      contextual_dialogue: 2.75
+      logical_consistency: 3.02
+      action_consistency: 2.96
+      character_consistency: 3.29
+      overall: 2.96
+    - team: GAIT
+      natural_expression: 3.61
+      contextual_dialogue: 3.89
+      logical_consistency: 3.53
+      action_consistency: 3.31
+      character_consistency: 3.33
+      overall: 3.53
+    - team: GPTaku
+      natural_expression: 3.06
+      contextual_dialogue: 3.42
+      logical_consistency: 3.83
+      action_consistency: 4.14
+      character_consistency: 3.61
+      overall: 3.61
+    - team: ai168wolf
+      natural_expression: 4.1
+      contextual_dialogue: 3.71
+      logical_consistency: 3.58
+      action_consistency: 3.9
+      character_consistency: 3.31
+      overall: 3.72
+    - team: mille
+      natural_expression: 4.53
+      contextual_dialogue: 3.94
+      logical_consistency: 4.0
+      action_consistency: 3.47
+      character_consistency: 4.5
+      overall: 4.09
+    games: null
+    scale: rank
+    source: null
+  llm_judge:
+    criteria:
+    - natural_expression
+    - contextual_dialogue
+    - logical_consistency
+    - action_consistency
+    - character_consistency
+    rows:
+    - team: Sunamelli
+      natural_expression: 1.7
+      contextual_dialogue: 1.7
+      logical_consistency: 2.3
+      action_consistency: 1.5
+      character_consistency: 1.6
+      overall: 1.76
+    - team: CamelliaDragons
+      natural_expression: 1.67
+      contextual_dialogue: 1.78
+      logical_consistency: 2.11
+      action_consistency: 2.22
+      character_consistency: 2.11
+      overall: 1.98
+    - team: osawalab
+      natural_expression: 1.38
+      contextual_dialogue: 2.12
+      logical_consistency: 3.62
+      action_consistency: 3.12
+      character_consistency: 2.5
+      overall: 2.55
+    - team: CanisLupus
+      natural_expression: 2.86
+      contextual_dialogue: 2.86
+      logical_consistency: 2.29
+      action_consistency: 2.86
+      character_consistency: 1.86
+      overall: 2.55
+    - team: GAIT
+      natural_expression: 3.5
+      contextual_dialogue: 3.5
+      logical_consistency: 2.33
+      action_consistency: 3.5
+      character_consistency: 3.33
+      overall: 3.23
+    - team: kanolab
+      natural_expression: 3.5
+      contextual_dialogue: 3.0
+      logical_consistency: 3.5
+      action_consistency: 3.0
+      character_consistency: 3.3
+      overall: 3.26
+    - team: GPTaku
+      natural_expression: 3.06
+      contextual_dialogue: 3.42
+      logical_consistency: 3.83
+      action_consistency: 4.14
+      character_consistency: 3.61
+      overall: 3.61
+    - team: mille
+      natural_expression: 4.33
+      contextual_dialogue: 3.94
+      logical_consistency: 2.17
+      action_consistency: 4.0
+      character_consistency: 4.83
+      overall: 3.85
+    - team: ai168wolf
+      natural_expression: 4.62
+      contextual_dialogue: 4.5
+      logical_consistency: 4.25
+      action_consistency: 3.5
+      character_consistency: 4.12
+      overall: 4.2
+    models: &id001
+    - GPT-4o
+    - GPT-5
+    posthoc: true
+    source: GPT-4o・GPT-5 の 2 モデル平均（大会の評価には含まれず、2025 国際大会と同じジャッジで大会後に実施）
+- id: t13
+  name: 13人村
+  name_en: 13-player village
+  logs: https://133.167.32.100/aiwolf/2025/JSAI/MainTruck13/Game/success/
+  games: 13
+  village_size: 13
+  win_rates:
+    roles:
+    - VILLAGER
+    - SEER
+    - BODYGUARD
+    - MEDIUM
+    - POSSESSED
+    - WEREWOLF
+    rows:
+    - team: kanolab-a
+      games: 13
+      wins: 9
+      macro: 0.6923
+      micro: 0.75
+      weighted: 0.6923
+      by_role:
+        BODYGUARD:
+        - 1
+        - 1
+        MEDIUM:
+        - 1
+        - 0
+        POSSESSED:
+        - 1
+        - 1
+        SEER:
+        - 1
+        - 1
+        VILLAGER:
+        - 6
+        - 3
+        WEREWOLF:
+        - 3
+        - 3
+    - team: CamelliaDragons
+      games: 13
+      wins: 9
+      macro: 0.6923
+      micro: 0.4722
+      weighted: 0.6923
+      by_role:
+        BODYGUARD:
+        - 1
+        - 0
+        MEDIUM:
+        - 1
+        - 0
+        POSSESSED:
+        - 1
+        - 1
+        SEER:
+        - 1
+        - 0
+        VILLAGER:
+        - 6
+        - 5
+        WEREWOLF:
+        - 3
+        - 3
+    - team: kanolab-b
+      games: 13
+      wins: 8
+      macro: 0.6154
+      micro: 0.4286
+      weighted: 0.6623
+      by_role:
+        BODYGUARD:
+        - 1
+        - 0
+        MEDIUM:
+        - 2
+        - 0
+        VILLAGER:
+        - 7
+        - 5
+        WEREWOLF:
+        - 3
+        - 3
+    - team: SunameLLi-C
+      games: 13
+      wins: 8
+      macro: 0.6154
+      micro: 0.8056
+      weighted: 0.6538
+      by_role:
+        BODYGUARD:
+        - 1
+        - 1
+        MEDIUM:
+        - 2
+        - 1
+        POSSESSED:
+        - 1
+        - 1
+        SEER:
+        - 1
+        - 1
+        VILLAGER:
+        - 6
+        - 2
+        WEREWOLF:
+        - 2
+        - 2
+    - team: SunameLLi-B
+      games: 13
+      wins: 7
+      macro: 0.5385
+      micro: 0.4167
+      weighted: 0.5385
+      by_role:
+        BODYGUARD:
+        - 1
+        - 0
+        MEDIUM:
+        - 1
+        - 1
+        POSSESSED:
+        - 1
+        - 0
+        SEER:
+        - 1
+        - 0
+        VILLAGER:
+        - 6
+        - 3
+        WEREWOLF:
+        - 3
+        - 3
+    - team: SunameLLi-A
+      games: 13
+      wins: 7
+      macro: 0.5385
+      micro: 0.5278
+      weighted: 0.5385
+      by_role:
+        BODYGUARD:
+        - 1
+        - 0
+        MEDIUM:
+        - 1
+        - 1
+        POSSESSED:
+        - 1
+        - 1
+        SEER:
+        - 1
+        - 0
+        VILLAGER:
+        - 6
+        - 3
+        WEREWOLF:
+        - 3
+        - 2
+    - team: CanisLupus-B
+      games: 13
+      wins: 5
+      macro: 0.3846
+      micro: 0.3333
+      weighted: 0.3846
+      by_role:
+        BODYGUARD:
+        - 1
+        - 1
+        MEDIUM:
+        - 1
+        - 0
+        POSSESSED:
+        - 1
+        - 0
+        SEER:
+        - 1
+        - 0
+        VILLAGER:
+        - 6
+        - 2
+        WEREWOLF:
+        - 3
+        - 2
+    - team: CanisLupus-A
+      games: 13
+      wins: 5
+      macro: 0.3846
+      micro: 0.3333
+      weighted: 0.3846
+      by_role:
+        BODYGUARD:
+        - 1
+        - 1
+        MEDIUM:
+        - 1
+        - 0
+        POSSESSED:
+        - 1
+        - 0
+        SEER:
+        - 1
+        - 0
+        VILLAGER:
+        - 6
+        - 2
+        WEREWOLF:
+        - 3
+        - 2
+    - team: GAIT
+      games: 13
+      wins: 5
+      macro: 0.3846
+      micro: 0.5056
+      weighted: 0.3615
+      by_role:
+        BODYGUARD:
+        - 1
+        - 0
+        MEDIUM:
+        - 1
+        - 1
+        POSSESSED:
+        - 1
+        - 1
+        SEER:
+        - 2
+        - 1
+        VILLAGER:
+        - 5
+        - 1
+        WEREWOLF:
+        - 3
+        - 1
+    - team: mille
+      games: 13
+      wins: 5
+      macro: 0.3846
+      micro: 0.5833
+      weighted: 0.3846
+      by_role:
+        BODYGUARD:
+        - 1
+        - 0
+        MEDIUM:
+        - 1
+        - 1
+        POSSESSED:
+        - 1
+        - 1
+        SEER:
+        - 1
+        - 1
+        VILLAGER:
+        - 6
+        - 1
+        WEREWOLF:
+        - 3
+        - 1
+    - team: kanolab
+      games: 13
+      wins: 4
+      macro: 0.3077
+      micro: 0.4833
+      weighted: 0.3125
+      by_role:
+        BODYGUARD:
+        - 1
+        - 1
+        POSSESSED:
+        - 1
+        - 1
+        SEER:
+        - 1
+        - 0
+        VILLAGER:
+        - 6
+        - 1
+        WEREWOLF:
+        - 4
+        - 1
+    - team: kanolab-c
+      games: 13
+      wins: 3
+      macro: 0.2308
+      micro: 0.2571
+      weighted: 0.2262
+      by_role:
+        BODYGUARD:
+        - 1
+        - 0
+        POSSESSED:
+        - 1
+        - 1
+        SEER:
+        - 1
+        - 0
+        VILLAGER:
+        - 7
+        - 2
+        WEREWOLF:
+        - 3
+        - 0
+    - team: CanisLupus-C
+      games: 13
+      wins: 2
+      macro: 0.1538
+      micro: 0.2222
+      weighted: 0.1538
+      by_role:
+        BODYGUARD:
+        - 1
+        - 0
+        MEDIUM:
+        - 1
+        - 0
+        POSSESSED:
+        - 2
+        - 0
+        SEER:
+        - 1
+        - 1
+        VILLAGER:
+        - 5
+        - 0
+        WEREWOLF:
+        - 3
+        - 1
+  game_metrics:
+    rows:
+    - team: kanolab-a
+      executed: 0.93
+      divined: 1.26
+      guarded: 0.0
+      divine_acc: 1.91
+      vote_acc: 0.93
+      possessed_avoid: 1.0
+    - team: CamelliaDragons
+      executed: 0.51
+      divined: 0.59
+      guarded: 2.08
+      divine_acc: 1.53
+      vote_acc: 1.92
+      possessed_avoid: 1.0
+    - team: kanolab-b
+      executed: 0.48
+      divined: 1.32
+      guarded: 0.4
+      divine_acc: null
+      vote_acc: 1.58
+      possessed_avoid: null
+    - team: SunameLLi-C
+      executed: 0.37
+      divined: 0.61
+      guarded: 0.94
+      divine_acc: 0.75
+      vote_acc: 1.5
+      possessed_avoid: 0.5
+    - team: SunameLLi-B
+      executed: 0.58
+      divined: 0.68
+      guarded: 0.4
+      divine_acc: 0.0
+      vote_acc: 1.11
+      possessed_avoid: 0.5
+    - team: SunameLLi-A
+      executed: 0.4
+      divined: 0.8
+      guarded: 0.93
+      divine_acc: 1.1
+      vote_acc: 1.42
+      possessed_avoid: 1.0
+    - team: CanisLupus-B
+      executed: 1.67
+      divined: 1.97
+      guarded: 0.5
+      divine_acc: 1.91
+      vote_acc: 0.94
+      possessed_avoid: 0.5
+    - team: CanisLupus-A
+      executed: 0.83
+      divined: 1.57
+      guarded: 0.81
+      divine_acc: 2.34
+      vote_acc: 0.92
+      possessed_avoid: 0.25
+    - team: GAIT
+      executed: 0.58
+      divined: 1.13
+      guarded: 1.92
+      divine_acc: 0.94
+      vote_acc: 0.94
+      possessed_avoid: 0.33
+    - team: mille
+      executed: 3.61
+      divined: 1.25
+      guarded: 0.0
+      divine_acc: 4.0
+      vote_acc: 0.69
+      possessed_avoid: 0.5
+    - team: kanolab
+      executed: 1.85
+      divined: 1.07
+      guarded: 1.55
+      divine_acc: 1.91
+      vote_acc: 1.0
+      possessed_avoid: 1.0
+    - team: kanolab-c
+      executed: 1.2
+      divined: 0.36
+      guarded: 0.0
+      divine_acc: 1.17
+      vote_acc: 1.07
+      possessed_avoid: 1.0
+    - team: CanisLupus-C
+      executed: 1.26
+      divined: 0.39
+      guarded: 2.16
+      divine_acc: 1.9
+      vote_acc: 1.33
+      possessed_avoid: 0.75
+  human_eval:
+    criteria:
+    - natural_expression
+    - contextual_dialogue
+    - logical_consistency
+    - action_consistency
+    - character_consistency
+    - team_play
+    rows:
+    - team: CamelliaDragons
+      natural_expression: 4.22
+      contextual_dialogue: 3.97
+      logical_consistency: 4.45
+      action_consistency: 4.23
+      character_consistency: 3.97
+      team_play: 4.48
+      overall: 4.22
+    - team: SunameLLi-A
+      natural_expression: 5.45
+      contextual_dialogue: 6.57
+      logical_consistency: 6.15
+      action_consistency: 5.6
+      character_consistency: 5.12
+      team_play: 6.25
+      overall: 5.86
+    - team: SunameLLi-C
+      natural_expression: 5.4
+      contextual_dialogue: 5.93
+      logical_consistency: 6.35
+      action_consistency: 5.98
+      character_consistency: 6.0
+      team_play: 6.1
+      overall: 5.96
+    - team: GAIT
+      natural_expression: 6.48
+      contextual_dialogue: 6.1
+      logical_consistency: 6.68
+      action_consistency: 6.55
+      character_consistency: 6.85
+      team_play: 6.27
+      overall: 6.49
+    - team: SunameLLi-B
+      natural_expression: 5.65
+      contextual_dialogue: 6.33
+      logical_consistency: 6.5
+      action_consistency: 6.78
+      character_consistency: 6.85
+      team_play: 6.83
+      overall: 6.49
+    - team: kanolab-c
+      natural_expression: 7.35
+      contextual_dialogue: 6.93
+      logical_consistency: 7.18
+      action_consistency: 6.25
+      character_consistency: 7.27
+      team_play: 7.15
+      overall: 7.02
+    - team: CanisLupus-B
+      natural_expression: 7.45
+      contextual_dialogue: 7.42
+      logical_consistency: 6.8
+      action_consistency: 6.43
+      character_consistency: 6.92
+      team_play: 7.57
+      overall: 7.1
+    - team: kanolab-a
+      natural_expression: 7.38
+      contextual_dialogue: 6.78
+      logical_consistency: 6.43
+      action_consistency: 8.13
+      character_consistency: 7.9
+      team_play: 7.0
+      overall: 7.27
+    - team: CanisLupus-C
+      natural_expression: 7.15
+      contextual_dialogue: 7.55
+      logical_consistency: 7.42
+      action_consistency: 7.33
+      character_consistency: 7.95
+      team_play: 7.62
+      overall: 7.5
+    - team: kanolab
+      natural_expression: 7.48
+      contextual_dialogue: 7.55
+      logical_consistency: 8.07
+      action_consistency: 8.08
+      character_consistency: 6.77
+      team_play: 7.45
+      overall: 7.57
+    - team: CanisLupus-A
+      natural_expression: 8.4
+      contextual_dialogue: 7.9
+      logical_consistency: 7.12
+      action_consistency: 7.22
+      character_consistency: 7.45
+      team_play: 7.37
+      overall: 7.58
+    - team: kanolab-b
+      natural_expression: 7.53
+      contextual_dialogue: 7.73
+      logical_consistency: 7.63
+      action_consistency: 8.37
+      character_consistency: 7.12
+      team_play: 7.43
+      overall: 7.63
+    - team: mille
+      natural_expression: 11.07
+      contextual_dialogue: 10.47
+      logical_consistency: 10.18
+      action_consistency: 9.78
+      character_consistency: 10.78
+      team_play: 9.62
+      overall: 10.32
+    games: null
+    scale: rank
+    source: null
+  llm_judge:
+    criteria:
+    - natural_expression
+    - contextual_dialogue
+    - logical_consistency
+    - action_consistency
+    - character_consistency
+    - team_play
+    rows:
+    - team: CamelliaDragons
+      natural_expression: 3.9
+      contextual_dialogue: 3.1
+      logical_consistency: 4.8
+      action_consistency: 5.4
+      character_consistency: 3.1
+      team_play: 3.9
+      overall: 4.03
+    - team: SunameLLi-A
+      natural_expression: 3.0
+      contextual_dialogue: 4.8
+      logical_consistency: 5.7
+      action_consistency: 4.7
+      character_consistency: 5.1
+      team_play: 4.1
+      overall: 4.57
+    - team: SunameLLi-B
+      natural_expression: 2.6
+      contextual_dialogue: 5.5
+      logical_consistency: 5.9
+      action_consistency: 5.4
+      character_consistency: 4.9
+      team_play: 5.2
+      overall: 4.92
+    - team: SunameLLi-C
+      natural_expression: 3.7
+      contextual_dialogue: 4.1
+      logical_consistency: 6.3
+      action_consistency: 6.7
+      character_consistency: 5.3
+      team_play: 4.9
+      overall: 5.17
+    - team: CanisLupus-B
+      natural_expression: 7.7
+      contextual_dialogue: 6.9
+      logical_consistency: 4.9
+      action_consistency: 6.3
+      character_consistency: 4.7
+      team_play: 7.9
+      overall: 6.4
+    - team: GAIT
+      natural_expression: 7.1
+      contextual_dialogue: 6.9
+      logical_consistency: 6.0
+      action_consistency: 5.9
+      character_consistency: 7.5
+      team_play: 6.7
+      overall: 6.68
+    - team: CanisLupus-A
+      natural_expression: 8.1
+      contextual_dialogue: 6.6
+      logical_consistency: 5.5
+      action_consistency: 5.8
+      character_consistency: 7.6
+      team_play: 7.5
+      overall: 6.85
+    - team: CanisLupus-C
+      natural_expression: 8.3
+      contextual_dialogue: 7.0
+      logical_consistency: 5.1
+      action_consistency: 7.5
+      character_consistency: 7.2
+      team_play: 8.1
+      overall: 7.2
+    - team: kanolab-c
+      natural_expression: 8.9
+      contextual_dialogue: 8.2
+      logical_consistency: 8.3
+      action_consistency: 6.9
+      character_consistency: 7.9
+      team_play: 7.7
+      overall: 7.98
+    - team: kanolab-a
+      natural_expression: 8.2
+      contextual_dialogue: 7.8
+      logical_consistency: 8.9
+      action_consistency: 9.0
+      character_consistency: 8.0
+      team_play: 7.5
+      overall: 8.23
+    - team: kanolab-b
+      natural_expression: 8.4
+      contextual_dialogue: 8.7
+      logical_consistency: 8.6
+      action_consistency: 8.2
+      character_consistency: 8.8
+      team_play: 7.4
+      overall: 8.35
+    - team: kanolab
+      natural_expression: 8.6
+      contextual_dialogue: 9.4
+      logical_consistency: 10.6
+      action_consistency: 8.6
+      character_consistency: 8.4
+      team_play: 10.1
+      overall: 9.28
+    - team: mille
+      natural_expression: 12.5
+      contextual_dialogue: 12.0
+      logical_consistency: 10.4
+      action_consistency: 10.6
+      character_consistency: 12.5
+      team_play: 10.0
+      overall: 11.33
+    models: *id001
+    posthoc: true
+    source: GPT-4o・GPT-5 の 2 モデル平均（大会の評価には含まれず、2025 国際大会と同じジャッジで大会後に実施）
+availability:
+  human_eval: ok
+  llm_judge: posthoc
+human_eval_short: 学生評価者 6 名
+human_eval_short_en: 6 student judges

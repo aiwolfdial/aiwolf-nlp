@@ -1,0 +1,512 @@
+# 自動生成: 勝率は success ログから集計、評価指標は運営の集計表から転記。表彰(awards.items)は手で記入する。
+contest: 2024 国際大会（INLG 2024）
+contest_en: International Contest 2024 (INLG 2024)
+awards:
+  status: published
+  note: 結果発表・表彰は AIWolfDial 2024 ワークショップ（2024年9月24日、INLG 2024、東京）で行いました。
+  note_en: Results and awards were presented at the AIWolfDial 2024 workshop (September 24, 2024, INLG 2024, Tokyo).
+  items:
+  - title: 主観評価総合賞（日本語トラック）・スポンサー賞
+    title_en: Best Subjective Evaluation Award (Japanese Track) and Sponsor Award
+    team: kanolab
+  - title: 主観評価総合賞（英語トラック）
+    title_en: Best Subjective Evaluation Award (English Track)
+    team: UEC-IL
+  - title: 勝率・ゲーム行動優秀賞
+    title_en: Best Win Rate and Game Action Award
+    team: sUper_IL
+  - title: 審査員特別賞「初心者プレイっぽい賞」
+    title_en: 'Judge''s Special Award: Beginner-like Play'
+    team: HondaNLP
+    note: 鳥海審査員
+  - title: 審査員特別賞「人狼での説得賞」
+    title_en: 'Judge''s Special Award: Persuasion as a Werewolf'
+    team: sUper_IL
+    note: 原田審査員
+tracks:
+- id: en5
+  name: 英語 5人村
+  name_en: English, 5-player village
+  logs: https://133.167.32.100/aiwolf/2024/INLG/EN/main_eval/success/
+  games: 58
+  village_size: 5
+  win_rates:
+    roles:
+    - VILLAGER
+    - SEER
+    - POSSESSED
+    - WEREWOLF
+    rows:
+    - team: sUper_IL
+      games: 58
+      wins: 32
+      macro: 0.5517
+      micro: 0.5629
+      weighted: 0.5503
+      by_role:
+        POSSESSED:
+        - 14
+        - 7
+        SEER:
+        - 13
+        - 8
+        VILLAGER:
+        - 20
+        - 10
+        WEREWOLF:
+        - 11
+        - 7
+    - team: kanolab
+      games: 58
+      wins: 31
+      macro: 0.5345
+      micro: 0.519
+      weighted: 0.5282
+      by_role:
+        POSSESSED:
+        - 13
+        - 8
+        SEER:
+        - 7
+        - 3
+        VILLAGER:
+        - 23
+        - 13
+        WEREWOLF:
+        - 15
+        - 7
+    - team: satozaki
+      games: 58
+      wins: 30
+      macro: 0.5172
+      micro: 0.5261
+      weighted: 0.5165
+      by_role:
+        POSSESSED:
+        - 11
+        - 5
+        SEER:
+        - 14
+        - 8
+        VILLAGER:
+        - 23
+        - 11
+        WEREWOLF:
+        - 10
+        - 6
+    - team: UEC-IL
+      games: 58
+      wins: 30
+      macro: 0.5172
+      micro: 0.5156
+      weighted: 0.5172
+      by_role:
+        POSSESSED:
+        - 12
+        - 6
+        SEER:
+        - 12
+        - 6
+        VILLAGER:
+        - 21
+        - 11
+        WEREWOLF:
+        - 13
+        - 7
+    - team: yuricat
+      games: 58
+      wins: 22
+      macro: 0.3793
+      micro: 0.3447
+      weighted: 0.3654
+      by_role:
+        POSSESSED:
+        - 8
+        - 3
+        SEER:
+        - 12
+        - 4
+        VILLAGER:
+        - 29
+        - 13
+        WEREWOLF:
+        - 9
+        - 2
+  game_metrics:
+    rows:
+    - team: sUper_IL
+      executed: 0.67
+      divined: 1.14
+      guarded: null
+      divine_acc: 1.44
+      vote_acc: 1.05
+      possessed_avoid: 0.67
+    - team: kanolab
+      executed: 1.17
+      divined: 1.2
+      guarded: null
+      divine_acc: 2.48
+      vote_acc: 1.36
+      possessed_avoid: 0.8
+    - team: satozaki
+      executed: 1.05
+      divined: 0.91
+      guarded: null
+      divine_acc: 0.91
+      vote_acc: 1.12
+      possessed_avoid: 0.69
+    - team: UEC-IL
+      executed: 0.9
+      divined: 0.8
+      guarded: null
+      divine_acc: 0.75
+      vote_acc: 0.96
+      possessed_avoid: 0.88
+    - team: yuricat
+      executed: 1.25
+      divined: 0.95
+      guarded: null
+      divine_acc: 0.8
+      vote_acc: 1.1
+      possessed_avoid: 0.44
+  human_eval:
+    criteria:
+    - natural_expression
+    - contextual_dialogue
+    - logical_consistency
+    - action_consistency
+    - character_consistency
+    rows:
+    - team: UEC-IL
+      natural_expression: 4.333
+      contextual_dialogue: 4.667
+      logical_consistency: 4.0
+      action_consistency: 4.667
+      character_consistency: 4.333
+      overall: 4.4
+    - team: sUper_IL
+      natural_expression: 4.0
+      contextual_dialogue: 4.0
+      logical_consistency: 4.0
+      action_consistency: 4.667
+      character_consistency: 4.0
+      overall: 4.133
+    - team: satozaki
+      natural_expression: 3.333
+      contextual_dialogue: 3.667
+      logical_consistency: 3.667
+      action_consistency: 3.667
+      character_consistency: 3.0
+      overall: 3.467
+    - team: kanolab
+      natural_expression: 2.667
+      contextual_dialogue: 3.333
+      logical_consistency: 3.0
+      action_consistency: 3.333
+      character_consistency: 3.667
+      overall: 3.2
+    - team: Mille
+      natural_expression: 1.667
+      contextual_dialogue: 2.0
+      logical_consistency: 1.0
+      action_consistency: 2.0
+      character_consistency: 1.667
+      overall: 1.667
+    games: null
+    scale: rating5
+    source: 審査員 3 名の 5 段階評価（AIWolfDial 2024 概要論文 Table 2）
+- id: jp5
+  name: 日本語 5人村
+  name_en: Japanese, 5-player village
+  logs: https://133.167.32.100/aiwolf/2024/INLG/JP/main_eval_success/
+  games: 64
+  village_size: 5
+  win_rates:
+    roles:
+    - VILLAGER
+    - SEER
+    - POSSESSED
+    - WEREWOLF
+    rows:
+    - team: sUper_IL
+      games: 40
+      wins: 25
+      macro: 0.625
+      micro: 0.625
+      weighted: 0.625
+      by_role:
+        POSSESSED:
+        - 8
+        - 4
+        SEER:
+        - 8
+        - 4
+        VILLAGER:
+        - 16
+        - 10
+        WEREWOLF:
+        - 8
+        - 7
+    - team: satozaki
+      games: 40
+      wins: 24
+      macro: 0.6
+      micro: 0.6562
+      weighted: 0.6
+      by_role:
+        POSSESSED:
+        - 8
+        - 6
+        SEER:
+        - 8
+        - 6
+        VILLAGER:
+        - 16
+        - 6
+        WEREWOLF:
+        - 8
+        - 6
+    - team: UEC-IL
+      games: 40
+      wins: 21
+      macro: 0.525
+      micro: 0.5312
+      weighted: 0.525
+      by_role:
+        POSSESSED:
+        - 8
+        - 5
+        SEER:
+        - 8
+        - 3
+        VILLAGER:
+        - 16
+        - 8
+        WEREWOLF:
+        - 8
+        - 5
+    - team: HondaNLP
+      games: 40
+      wins: 21
+      macro: 0.525
+      micro: 0.5312
+      weighted: 0.525
+      by_role:
+        POSSESSED:
+        - 8
+        - 6
+        SEER:
+        - 8
+        - 4
+        VILLAGER:
+        - 16
+        - 8
+        WEREWOLF:
+        - 8
+        - 3
+    - team: kanolab
+      games: 40
+      wins: 19
+      macro: 0.475
+      micro: 0.4688
+      weighted: 0.475
+      by_role:
+        POSSESSED:
+        - 8
+        - 4
+        SEER:
+        - 8
+        - 2
+        VILLAGER:
+        - 16
+        - 8
+        WEREWOLF:
+        - 8
+        - 5
+    - team: GPTaku
+      games: 40
+      wins: 18
+      macro: 0.45
+      micro: 0.4531
+      weighted: 0.45
+      by_role:
+        POSSESSED:
+        - 8
+        - 4
+        SEER:
+        - 8
+        - 3
+        VILLAGER:
+        - 16
+        - 7
+        WEREWOLF:
+        - 8
+        - 4
+    - team: IS_Lab
+      games: 40
+      wins: 15
+      macro: 0.375
+      micro: 0.375
+      weighted: 0.375
+      by_role:
+        POSSESSED:
+        - 8
+        - 2
+        SEER:
+        - 8
+        - 3
+        VILLAGER:
+        - 16
+        - 6
+        WEREWOLF:
+        - 8
+        - 4
+    - team: yuricat
+      games: 40
+      wins: 14
+      macro: 0.35
+      micro: 0.3594
+      weighted: 0.35
+      by_role:
+        POSSESSED:
+        - 8
+        - 4
+        SEER:
+        - 8
+        - 4
+        VILLAGER:
+        - 16
+        - 5
+        WEREWOLF:
+        - 8
+        - 1
+  game_metrics:
+    rows:
+    - team: sUper_IL
+      executed: 0.34
+      divined: 1.46
+      guarded: null
+      divine_acc: 0.55
+      vote_acc: 1.1
+      possessed_avoid: 0.69
+    - team: satozaki
+      executed: 1.06
+      divined: 0.7
+      guarded: null
+      divine_acc: 0.67
+      vote_acc: 0.8
+      possessed_avoid: 0.73
+    - team: UEC-IL
+      executed: 0.93
+      divined: 0.87
+      guarded: null
+      divine_acc: 0.9
+      vote_acc: 0.95
+      possessed_avoid: 0.91
+    - team: HondaNLP
+      executed: 0.95
+      divined: 1.17
+      guarded: null
+      divine_acc: 1.5
+      vote_acc: 1.18
+      possessed_avoid: 0.75
+    - team: kanolab
+      executed: 1.02
+      divined: 0.75
+      guarded: null
+      divine_acc: 1.12
+      vote_acc: 1.08
+      possessed_avoid: 0.67
+    - team: GPTaku
+      executed: 1.58
+      divined: 0.75
+      guarded: null
+      divine_acc: 0.86
+      vote_acc: 0.82
+      possessed_avoid: 0.56
+    - team: IS_Lab
+      executed: 0.91
+      divined: 0.79
+      guarded: null
+      divine_acc: 1.0
+      vote_acc: 1.15
+      possessed_avoid: 0.9
+    - team: yuricat
+      executed: 1.32
+      divined: 1.68
+      guarded: null
+      divine_acc: 0.67
+      vote_acc: 0.92
+      possessed_avoid: 0.8
+  human_eval:
+    criteria:
+    - natural_expression
+    - contextual_dialogue
+    - logical_consistency
+    - action_consistency
+    - character_consistency
+    rows:
+    - team: kanolab
+      natural_expression: 4.333
+      contextual_dialogue: 3.666
+      logical_consistency: 4.0
+      action_consistency: 3.666
+      character_consistency: 3.666
+      overall: 3.866
+    - team: UEC-IL
+      natural_expression: 3.666
+      contextual_dialogue: 3.666
+      logical_consistency: 3.666
+      action_consistency: 3.666
+      character_consistency: 3.666
+      overall: 3.666
+    - team: HondaNLP
+      natural_expression: 4.0
+      contextual_dialogue: 3.0
+      logical_consistency: 4.0
+      action_consistency: 3.333
+      character_consistency: 3.666
+      overall: 3.6
+    - team: IS_Lab
+      natural_expression: 4.0
+      contextual_dialogue: 3.666
+      logical_consistency: 2.666
+      action_consistency: 3.0
+      character_consistency: 4.333
+      overall: 3.533
+    - team: sUper_IL
+      natural_expression: 3.666
+      contextual_dialogue: 3.666
+      logical_consistency: 3.666
+      action_consistency: 4.0
+      character_consistency: 2.666
+      overall: 3.533
+    - team: GPTaku
+      natural_expression: 3.333
+      contextual_dialogue: 3.666
+      logical_consistency: 2.666
+      action_consistency: 3.0
+      character_consistency: 2.666
+      overall: 3.066
+    - team: satozaki
+      natural_expression: 3.666
+      contextual_dialogue: 2.666
+      logical_consistency: 2.666
+      action_consistency: 4.0
+      character_consistency: 2.333
+      overall: 3.066
+    - team: Mille
+      natural_expression: 2.333
+      contextual_dialogue: 3.0
+      logical_consistency: 2.0
+      action_consistency: 2.333
+      character_consistency: 2.0
+      overall: 2.333
+    games: null
+    scale: rating5
+    source: 審査員 4 名の 5 段階評価（AIWolfDial 2024 概要論文 Table 1）
+availability:
+  human_eval: ok
+  llm_judge: none
+human_eval_short: 審査員 4 名（日本語）／3 名（英語）
+human_eval_short_en: 4 judges (Japanese) / 3 judges (English)

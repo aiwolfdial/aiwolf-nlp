@@ -1,0 +1,55 @@
+{{- /* 人手評価との一致度: 各大会 YAML からテンプレート内で Spearman を計算 */}}
+{{- $en := eq site.Language.Lang "en" }}
+{{- $pages := where (site.GetPage "/results").RegularPages "Params.results_data" "!=" nil }}
+{{- $pages = $pages.ByDate.Reverse }}
+<p class="results-muted">
+{{- if $en -}}
+Spearman rank correlation between the human evaluation (overall) and the LLM-as-a-Judge relative evaluation (overall), computed on the teams of each track from the tables published on this site. Positive values mean the LLM ranks teams in the same order as the human judges; 1.00 is perfect agreement. The number of teams per track is small, so individual values fluctuate; the consistent positive sign across contests is the point.
+{{- else -}}
+人手評価（総合）と LLM-as-a-Judge 相対評価（総合）の Spearman 順位相関です。本サイトに掲載している表から、トラックごとにチーム単位で計算しています。正の値は LLM が人手と同じ順に並べていることを意味し、1.00 が完全一致です。トラックあたりのチーム数が少ないので個々の値は振れます。大会をまたいで一貫して正であることが要点です。
+{{- end -}}
+</p>
+<table class="results-agreement">
+  <thead><tr><th>{{ cond $en "Contest" "大会" }}</th><th>{{ cond $en "Track" "トラック" }}</th><th>{{ cond $en "Teams" "チーム数" }}</th><th>Spearman ρ</th></tr></thead>
+  <tbody>
+  {{- range $pages }}
+  {{- $pg := . }}
+  {{- with index site.Data.results (.Params.results_data | default "") }}
+  {{- $c := . }}
+  {{- range .tracks }}
+    {{- if and .human_eval .llm_judge }}
+      {{- /* 共通チームの総合値 (評点は符号反転して順位方向に揃える) */}}
+      {{- $hs := dict }}{{ $rating := eq .human_eval.scale "rating5" }}
+      {{- range .human_eval.rows }}{{ $hs = merge $hs (dict .team (cond $rating (mul -1 .overall) .overall)) }}{{ end }}
+      {{- $js := dict }}{{ range .llm_judge.rows }}{{ if isset $hs .team }}{{ $js = merge $js (dict .team .overall) }}{{ end }}{{ end }}
+      {{- $teams := slice }}{{ range $t, $_ := $js }}{{ $teams = $teams | append $t }}{{ end }}
+      {{- $n := len $teams }}
+      {{- if ge $n 4 }}
+        {{- /* 同順位は平均順位: rank = 1 + #(小さい) + (#(同じ) - 1)/2 */}}
+        {{- $ra := dict }}{{ $rb := dict }}
+        {{- range $t := $teams }}
+          {{- $va := index $hs $t }}{{ $vb := index $js $t }}{{ $la := 0.0 }}{{ $ea := 0.0 }}{{ $lb := 0.0 }}{{ $eb := 0.0 }}
+          {{- range $u := $teams }}
+            {{- if lt (index $hs $u) $va }}{{ $la = add $la 1 }}{{ else if eq (index $hs $u) $va }}{{ $ea = add $ea 1 }}{{ end }}
+            {{- if lt (index $js $u) $vb }}{{ $lb = add $lb 1 }}{{ else if eq (index $js $u) $vb }}{{ $eb = add $eb 1 }}{{ end }}
+          {{- end }}
+          {{- $ra = merge $ra (dict $t (add 1 $la (div (sub $ea 1) 2.0))) }}{{ $rb = merge $rb (dict $t (add 1 $lb (div (sub $eb 1) 2.0))) }}
+        {{- end }}
+        {{- $mean := div (add 1 $n) 2.0 }}{{ $cov := 0.0 }}{{ $va2 := 0.0 }}{{ $vb2 := 0.0 }}
+        {{- range $t := $teams }}
+          {{- $da := sub (index $ra $t) $mean }}{{ $db := sub (index $rb $t) $mean }}
+          {{- $cov = add $cov (mul $da $db) }}{{ $va2 = add $va2 (mul $da $da) }}{{ $vb2 = add $vb2 (mul $db $db) }}
+        {{- end }}
+        {{- $rho := div $cov (math.Sqrt (mul $va2 $vb2)) }}
+  <tr>
+    <td class="results-team"><a href="{{ $pg.Permalink }}">{{ cond $en $c.contest_en $c.contest }}</a></td><td>{{ cond $en .name_en .name }}{{ if .llm_judge.posthoc }} <span class="results-muted">{{ cond $en "(post hoc)" "（事後）" }}</span>{{ end }}</td><td>{{ $n }}</td>
+    <td>{{ printf "%.2f" $rho }}</td>
+  </tr>
+      {{- end }}
+    {{- end }}
+  {{- end }}
+  {{- end }}
+  {{- end }}
+  </tbody>
+</table>
+<p class="results-muted">{{ cond $en "Contests without an LLM relative evaluation (2024) are not listed. Values are recomputed from the published tables whenever the site is built." "LLM 相対評価を実施していない 2024 の大会は載せていません。値はサイトのビルド時に掲載表から再計算されます。" }}</p>

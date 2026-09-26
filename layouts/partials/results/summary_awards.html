@@ -1,0 +1,24 @@
+{{- /* 表彰一覧: 大会ページ (新しい順) の YAML から */}}
+{{- $en := eq site.Language.Lang "en" }}
+{{- $pages := where (site.GetPage "/results").RegularPages "Params.results_data" "!=" nil }}
+{{- $pages = $pages.ByDate.Reverse }}
+<p class="results-muted">{{ cond $en "Official awards of each contest, newest first. Click a contest name for the full results." "各大会の公式結果（表彰）を新しい順に並べています。大会名を押すと結果ページに移ります。" }}</p>
+<table class="results-awards-all">
+  <thead><tr><th>{{ cond $en "Contest" "大会" }}</th><th>{{ cond $en "Award" "賞" }}</th><th>{{ cond $en "Team" "チーム" }}</th></tr></thead>
+  <tbody>
+  {{- range $pages }}
+    {{- $pg := . }}
+    {{- with index site.Data.results (.Params.results_data | default "") }}
+      {{- $n := len .awards.items }}
+      {{- if gt $n 0 }}
+        {{- range $i, $a := .awards.items }}
+  <tr>{{ if eq $i 0 }}<td rowspan="{{ $n }}" class="results-team"><a href="{{ $pg.Permalink }}">{{ $pg.Title }}</a></td>{{ end }}<td>{{ cond $en ($a.title_en | default $a.title) $a.title }}</td><td>{{ $a.team }}</td></tr>
+        {{- end }}
+      {{- else }}
+  <tr><td class="results-team"><a href="{{ $pg.Permalink }}">{{ $pg.Title }}</a></td><td colspan="2" class="results-muted">{{ cond $en (.awards.note_en | default .awards.note) .awards.note }}</td></tr>
+      {{- end }}
+    {{- end }}
+  {{- end }}
+  </tbody>
+</table>
+

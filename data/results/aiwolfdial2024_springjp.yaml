@@ -1,0 +1,223 @@
+# 自動生成: 勝率は success ログから集計、評価指標は運営の集計表から転記。表彰(awards.items)は手で記入する。
+contest: 2024 春季国内大会
+contest_en: Spring 2024 Domestic Contest
+awards:
+  status: published
+  note: 結果発表・表彰は 2024 年度人工知能学会全国大会の企画セッション「KS-8 人狼知能コンテスト2024国内大会自然言語部門」で行いました。
+  note_en: Results and awards were presented at the JSAI 2024 annual conference (organized session KS-8).
+  items:
+  - title: 総合最優秀賞
+    title_en: Grand Prize
+    team: kanolab
+    note: 勝率（平均・村人・占い師・狂人）、主観評価（平均・A・D・E）
+  - title: 総合優秀賞 次点
+    title_en: Runner-up
+    team: UEC-IL
+    note: 勝率（人狼）、主観評価（平均）
+  - title: 総合優秀賞 3位
+    title_en: Third Place
+    team: satozaki
+    note: 勝率（占い師）、主観評価（B・C）
+  - title: 審査員特別賞「裏切らない者賞」
+    title_en: 'Judge''s Special Award: The One Who Never Betrays'
+    team: satozaki
+    note: 大槻審査員
+  - title: 審査員特別賞「説得賞」
+    title_en: 'Judge''s Special Award: Persuasion'
+    team: kanolab
+    note: 片上審査員
+  - title: 審査員特別賞「逆転勝利賞」
+    title_en: 'Judge''s Special Award: Comeback Victory'
+    team: ガッツだぜ!!
+    note: 原田審査員
+tracks:
+- id: t5
+  name: 5人村
+  name_en: 5-player village
+  logs: https://133.167.32.100/aiwolf/2024/JSAI/success/
+  games: 62
+  village_size: 5
+  win_rates:
+    roles:
+    - VILLAGER
+    - SEER
+    - POSSESSED
+    - WEREWOLF
+    rows:
+    - team: kanolab
+      games: 62
+      wins: 40
+      macro: 0.6452
+      micro: 0.6295
+      weighted: 0.6452
+      by_role:
+        POSSESSED:
+        - 14
+        - 9
+        SEER:
+        - 12
+        - 8
+        VILLAGER:
+        - 24
+        - 17
+        WEREWOLF:
+        - 12
+        - 6
+    - team: ガッツだぜ!!
+      games: 62
+      wins: 33
+      macro: 0.5323
+      micro: 0.5
+      weighted: 0.5333
+      by_role:
+        POSSESSED:
+        - 12
+        - 4
+        SEER:
+        - 13
+        - 6
+        VILLAGER:
+        - 24
+        - 16
+        WEREWOLF:
+        - 13
+        - 7
+    - team: UEC-IL
+      games: 62
+      wins: 32
+      macro: 0.5161
+      micro: 0.4872
+      weighted: 0.5128
+      by_role:
+        POSSESSED:
+        - 12
+        - 3
+        SEER:
+        - 12
+        - 6
+        VILLAGER:
+        - 26
+        - 16
+        WEREWOLF:
+        - 12
+        - 7
+    - team: GPTaku
+      games: 62
+      wins: 31
+      macro: 0.5
+      micro: 0.4912
+      weighted: 0.5013
+      by_role:
+        POSSESSED:
+        - 12
+        - 6
+        SEER:
+        - 13
+        - 8
+        VILLAGER:
+        - 24
+        - 13
+        WEREWOLF:
+        - 13
+        - 4
+    - team: satozaki
+      games: 62
+      wins: 24
+      macro: 0.3871
+      micro: 0.3878
+      weighted: 0.3872
+      by_role:
+        POSSESSED:
+        - 12
+        - 4
+        SEER:
+        - 12
+        - 8
+        VILLAGER:
+        - 26
+        - 10
+        WEREWOLF:
+        - 12
+        - 2
+  game_metrics:
+    rows:
+    - team: kanolab
+      executed: 0.77
+      divined: 1.02
+      guarded: null
+      divine_acc: 0.8
+      vote_acc: 1.32
+      possessed_avoid: 0.64
+    - team: ガッツだぜ!!
+    - team: UEC-IL
+      executed: 1.22
+      divined: 1.22
+      guarded: null
+      divine_acc: 1.0
+      vote_acc: 0.91
+      possessed_avoid: 0.75
+    - team: GPTaku
+      executed: 1.33
+      divined: 0.78
+      guarded: null
+      divine_acc: 1.53
+      vote_acc: 1.61
+      possessed_avoid: 0.81
+    - team: satozaki
+      executed: 1.01
+      divined: 0.82
+      guarded: null
+      divine_acc: 0.92
+      vote_acc: 1.16
+      possessed_avoid: 0.4
+  human_eval:
+    criteria:
+    - natural_expression
+    - contextual_dialogue
+    - logical_consistency
+    - action_consistency
+    - character_consistency
+    rows:
+    - team: UEC-IL
+      natural_expression: 3.5
+      contextual_dialogue: 3.25
+      logical_consistency: 3.0
+      action_consistency: 3.25
+      character_consistency: 3.75
+      overall: 3.35
+    - team: kanolab
+      natural_expression: 3.75
+      contextual_dialogue: 2.75
+      logical_consistency: 2.75
+      action_consistency: 3.5
+      character_consistency: 4.0
+      overall: 3.35
+    - team: satozaki
+      natural_expression: 3.0
+      contextual_dialogue: 3.75
+      logical_consistency: 3.5
+      action_consistency: 3.25
+      character_consistency: 2.25
+      overall: 3.15
+    - team: ガッツだぜ!!
+      natural_expression: 2.75
+      contextual_dialogue: 2.5
+      logical_consistency: 1.75
+      action_consistency: 2.5
+      character_consistency: 1.75
+      overall: 2.25
+    - team: GPTaku
+      natural_expression: 3.0
+      contextual_dialogue: 2.0
+      logical_consistency: 1.5
+      action_consistency: 2.25
+      character_consistency: 2.25
+      overall: 2.2
+    games: null
+    scale: rating5
+    source: 審査員 4 名の 5 段階評価（評価シートの集計値）
+availability:
+  human_eval: ok
+  llm_judge: none
+human_eval_short: 審査員 4 名
+human_eval_short_en: 4 judges

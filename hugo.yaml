@@ -37,9 +37,12 @@ languages:
         - name: "結果・ログ"
           url: /results/
           weight: 2
+        - name: "論文"
+          url: /papers/
+          weight: 3
         - name: "リンク"
           url: /links/
-          weight: 3
+          weight: 4
       inlg_2026:
         - name: "ホーム"
           url: /page/INLG_2026
@@ -171,9 +174,12 @@ languages:
         - name: "Results & Logs"
           url: /results/
           weight: 2
+        - name: "Papers"
+          url: /papers/
+          weight: 3
         - name: "Links"
           url: /links/
-          weight: 3
+          weight: 4
       inlg_2026:
         - name: "Home"
           url: /page/INLG_2026

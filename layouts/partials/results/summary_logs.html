@@ -1,0 +1,26 @@
+{{- /* 対戦ログ一覧: 全大会・全トラックのログ一覧リンク (新しい順) */}}
+{{- $en := eq site.Language.Lang "en" }}
+{{- $pages := where (site.GetPage "/results").RegularPages "Params.results_data" "!=" nil }}
+{{- $pages = $pages.ByDate.Reverse }}
+<p class="results-muted">{{ cond $en "Logs of the main competition of each contest. Only games that finished normally are listed. Click a contest name for its results page." "各大会の本戦の対戦ログです。正常に終了したゲームのみを掲載しています。大会名を押すと結果ページに移ります。" }}</p>
+<table class="results-logs-all">
+  <thead><tr><th>{{ cond $en "Contest" "大会" }}</th><th>{{ cond $en "Track" "トラック" }}</th><th>{{ cond $en "Games" "試合" }}</th><th>{{ cond $en "Logs" "ログ" }}</th></tr></thead>
+  <tbody>
+  {{- range $pages }}
+    {{- $pg := . }}
+    {{- with index site.Data.results (.Params.results_data | default "") }}
+      {{- $n := len .tracks }}
+      {{- range $i, $tr := .tracks }}
+  <tr>{{ if eq $i 0 }}<td rowspan="{{ $n }}" class="results-team"><a href="{{ $pg.Permalink }}">{{ $pg.Title }}</a></td>{{ end }}<td>{{ cond $en $tr.name_en $tr.name }}</td><td>{{ $tr.games }}</td><td><a href="{{ $tr.logs }}">{{ cond $en "Log list" "ログ一覧" }}</a></td></tr>
+      {{- end }}
+    {{- end }}
+  {{- end }}
+  </tbody>
+</table>
+
+{{- with site.GetPage "snippets/log_howto" }}
+<section class="results-howto">
+  <h2>{{ cond $en "How to view logs" "ログの見方" }}</h2>
+  {{ .Content }}
+</section>
+{{- end }}

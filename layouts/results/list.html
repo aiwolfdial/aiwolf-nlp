@@ -1,5 +1,8 @@
 {{- define "main" }}
-{{- /* 結果・ログタブ: content/results/_content.gotmpl が生成した大会ごとのページを新しい順にカードで並べる */}}
+{{- /* 結果・ログタブ: 「大会横断の比較」(summary_kind を持つページ) と「大会ごとの結果」(content adapter が生成) を仕切りで分けてカード表示 */}}
+{{- $en := eq site.Language.Lang "en" }}
+{{- $summaries := where .RegularPages "Params.summary_kind" "!=" nil }}
+{{- $contests := where .RegularPages "Params.results_data" "!=" nil }}
 <header class="page-header">
   <h1>{{ .Title }}</h1>
   {{- with .Description }}
@@ -10,11 +13,23 @@
 <div class="post-content">{{ . }}</div>
 {{- end }}
 
-{{- range .RegularPages.ByDate.Reverse }}
+<article class="div-content-entry">
+  <header class="entry-header"><h2 class="entry-hint-parent">----- {{ cond $en "Across contests" "大会横断の比較" }} -----</h2></header>
+</article>
+{{- range $summaries.ByWeight }}
 <article class="post-entry">
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">{{ .Title }}</h2>
-  </header>
+  <header class="entry-header"><h2 class="entry-hint-parent">{{ .Title }}</h2></header>
+  <div class="entry-content"><p>{{ .Description }}</p></div>
+  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+</article>
+{{- end }}
+
+<article class="div-content-entry">
+  <header class="entry-header"><h2 class="entry-hint-parent">----- {{ cond $en "Results by contest" "大会ごとの結果" }} -----</h2></header>
+</article>
+{{- range $contests.ByDate.Reverse }}
+<article class="post-entry">
+  <header class="entry-header"><h2 class="entry-hint-parent">{{ .Title }}</h2></header>
   <div class="entry-content"><p>{{ .Date.Format "2006" }}</p></div>
   <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
 </article>

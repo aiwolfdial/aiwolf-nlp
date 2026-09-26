@@ -49,28 +49,62 @@ ShowToc: true
 
 ### content/menu/{{contest_name}}/result.md（結果・ログ）
 
-各大会のメニューにある「結果・ログ」のページです。ここに書いた内容は、サイト全体メニューの「結果・ログ」タブ（`/results/`）にも自動で取り込まれ、`/results/<大会>/` というページとしてサイト全体メニューの下で表示されます（`content/results/_content.gotmpl` が `result.md` を読んでページを生成します）。タブ側にコピーを作る必要はありません。
+各大会のメニューにある「結果・ログ」のページです。中身の表はすべて `data/results/<slug>.yaml` から描画されるので、
+`result.md` 自体は front matter だけです（既存大会のものをコピーして `date` と `contest`、`results_data`、`translationKey` を直す）。
 
-front matter は次の項目を必ず入れます（既存大会の `result.md` をコピーすれば揃います）。
-
-- `layout: result` … 本文の後に「ログの見方」（`content/snippets/log_howto.md`）を自動で付けるレイアウト
+- `layout: result` … 表と「ログの見方」を描画するレイアウト
 - `result_page: true` … 結果・ログタブの収集対象にする印
-- `contest: '2026 国際大会（INLG 2026）'` … タブのカードに表示する大会名
-- `date` … 大会トップページと同じ日付にする（タブの並び順に使う）
+- `results_data: <slug>` … 読み込む YAML 名。`<slug>` は `content/menu/` のディレクトリ名を小文字にして末尾の `_en` を除いたもの
+- `contest: '2026 国際大会（INLG 2026）'` … タブのカードと横断ページに出る大会名
+- `date` … 大会トップページと同じ日付（並び順に使う）
 
-大会が終わったら次の手順でログのリンクを載せます。
+同じ YAML から、結果・ログタブの `/results/<slug>/`（サイト全体メニューの下で開く複製ページ）と、
+「大会横断の比較」の 4 ページ（表彰一覧・評価方法・人手評価との一致度・対戦ログ一覧）が自動で作られます。
+**タブ側や横断ページに手で書き足すものはありません。**
 
-1. aiwolf サーバ（`ssh aiwolf`）で、正常終了したゲームだけを集めた `success` ディレクトリを作る。
-    判定は最終行（result 行）の勝者が `NONE` でないこと。既に `success` があるトラックは再実行しても差分だけコピーされる。
+#### 大会が終わったらやること
+
+1. **success ディレクトリを作る**（aiwolf サーバ）。決着したゲームのログだけを集めます。既にあるトラックは再実行しても差分だけ更新されます。
 
     ```bash
+    ssh aiwolf
     cd /var/www/html/aiwolf
-    # 引数に指定したディレクトリの直下に success/ ができる（複数指定可）
-    python3 ~/bin/make_success_dir.py 2026/INLG2/MainTruck5/log 2026/INLG2/MainTruck9/log
+    python3 ~/bin/make_success_dir.py 2027/INLG/MainTruck5/log 2027/INLG/MainTruck9/log   # <トラック>/log/success ができる
     ```
 
-1. `result.md` の「対戦ログ」の表に、トラックごとの行を追加する。リンク先は `https://133.167.32.100/aiwolf/<年>/<大会>/<トラック>/log/success/` の形。
-1. 英語ページがある大会は `content/menu/{{contest_name}}_en/result.en.md` にも同じ行を追加する。
+1. **success ログを手元に取得**し、`scripts/results/contests/<slug>.yaml` を書く（`example.yaml` をコピー）。トラックごとにログの URL、取得先ディレクトリ、集計元ファイルを指定します。
+
+1. **ゲーム指標と LLM 相対評価の元ファイルを用意する**（任意。無ければその節は「準備中」と表示される）。
+    - ゲーム指標: calculate_meta の `./analyze.py` を実行した `data/output/<データセット>/team_summary.csv`
+    - LLM 相対評価: aiwolf-nlp-llm-judge の出力 `team_aggregation.csv`（モデルごとに 1 つ。複数指定すると平均される）
+    - 人手評価: 評価フォームの集計シート（ログ × チーム × 評価項目の平均順位が入った totalling CSV）
+
+1. **YAML を生成する。**
+
+    ```bash
+    python3 scripts/results/build_contest_yaml.py scripts/results/contests/<slug>.yaml
+    ```
+
+1. **表彰を書く。** 発表後に `data/results/<slug>.yaml` の `awards.items` へ「賞名 / 英語名 / チーム / 注記」を追加し、`awards.status` を `published` にします。設定ファイルの `awards:` に書いて再生成しても同じです。
+
+1. `hugo server -D` で `/menu/<大会>/result/` と `/results/` を確認してからデプロイします。
+
+#### YAML の項目（抜粋）
+
+| 項目 | 内容 |
+|---|---|
+| `awards.items[]` | `title` / `title_en` / `team` / `note`（受賞理由や審査員名など任意） |
+| `availability.human_eval` | `ok` / `none`（未実施）/ `pending`（準備中）。節の文言が切り替わる |
+| `availability.llm_judge` | 同上。`posthoc` は「大会後に事後実施」の注記が付く |
+| `human_eval_short` | 評価方法ページの表に出す短い表記（例: 学生評価者 3 名） |
+| `tracks[].win_rates` | `winrate.py` の出力。`macro`（総合）/ `micro` / `weighted`（構成加重）/ `by_role` |
+| `tracks[].game_metrics` | calculate_meta の team_summary.csv から転記した 6 指標 |
+| `tracks[].human_eval` | `scale` は `rank`（順位平均）か `rating5`（5 点評点）。`source` は表の上に出る注記 |
+| `tracks[].llm_judge` | `models`（評価方法ページの表に出る）/ `source`（表の上に出る注記）/ `posthoc` |
+| `tracks[].logs` | ログ一覧の URL（対戦ログ節と対戦ログ一覧ページに出る） |
+
+LLM-as-a-Judge の定量カウントは現在ページから外しています。データは `data/results_archive/quantitative/`（git 管理外）に退避してあり、
+復帰させる場合はテンプレートの節を戻す必要があります。
 
 ### content/page/ の仕切りページ
 

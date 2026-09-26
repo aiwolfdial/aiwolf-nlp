@@ -1,0 +1,55 @@
+{{- /* 評価方法と大会ごとの評価者・モデル */}}
+{{- $en := eq site.Language.Lang "en" }}
+{{- $pages := where (site.GetPage "/results").RegularPages "Params.results_data" "!=" nil }}
+{{- $pages = $pages.ByDate.Reverse }}
+{{- if $en }}
+<p>Each contest is evaluated from four viewpoints. Win rates and game metrics are computed mechanically from the game logs, while the other two assess the quality of dialogue: human judges, and LLM judges that rank the players of each game (relative evaluation).</p>
+<ul>
+  <li><strong>Win rates</strong>: wins divided by games, overall and per role, plus a role-composition-weighted rate. Same definition for every contest.</li>
+  <li><strong>Game metrics</strong>: how often a team was executed, divined or guarded relative to chance, and how accurately it found werewolves when divining or voting (1.00 = random play).</li>
+  <li><strong>Human evaluation</strong>: judges read selected logs and rate or rank the players on criteria A–E (plus F, team play, in 9- and 13-player villages). Ranking since the 2024 winter contest; 5-point scores before that.</li>
+  <li><strong>LLM-as-a-Judge (relative evaluation)</strong>: LLMs rank the players of each game on the same criteria; ranks are averaged per team. Part of the official evaluation since the 2025 international contest (for the 2025 spring contest it was run afterwards for reference); the models differ by contest (see below). The judge is published as <a href="https://github.com/aiwolfdial/aiwolf-nlp-llm-judge">aiwolf-nlp-llm-judge</a>.</li>
+</ul>
+{{- else }}
+<p>各大会は 4 つの観点で評価しています。勝率とゲーム指標はゲームログから機械的に計算する指標で、残りの 2 つは対話の質の評価です。人手評価と、ゲームごとにプレイヤーを順位付けする LLM ジャッジ（相対評価）があります。</p>
+<ul>
+  <li><strong>勝率</strong>: 勝ち数 ÷ 試合数を総合・役職別に出し、役職構成で加重した値も併記します。全大会で同じ定義です。</li>
+  <li><strong>ゲーム指標</strong>: 追放・占い・護衛の対象になった頻度と、占い・投票で人狼を当てた頻度を、ランダムに行動した場合との比で表します（1.00 = ランダム）。</li>
+  <li><strong>人手評価</strong>: 評価者が抽出ログを読み、A〜E の評価項目（9 人村・13 人村は F チームプレイを追加）でプレイヤーを評価します。2024 冬季以降は順位付け、それ以前は 5 点満点の評点です。</li>
+  <li><strong>LLM-as-a-Judge（相対評価）</strong>: LLM が同じ評価項目でゲームごとにプレイヤーを順位付けし、チームごとに平均します。2025 国際大会から大会の評価として実施しており（2025 春季は大会後に参考値として実施）、モデルは大会ごとに異なります（下表）。ジャッジの実装は <a href="https://github.com/aiwolfdial/aiwolf-nlp-llm-judge">aiwolf-nlp-llm-judge</a> として公開しています。</li>
+</ul>
+{{- end }}
+<h3 id="methods-models">{{ cond $en "Judges by contest" "大会ごとの評価者・モデル" }}</h3>
+<table class="results-methods">
+  <thead><tr><th>{{ cond $en "Contest" "大会" }}</th><th>{{ cond $en "Human" "人手評価" }}</th><th>{{ cond $en "LLM relative" "LLM 相対評価" }}</th></tr></thead>
+  <tbody>
+  {{- range $pages }}
+  {{- $pg := . }}
+  {{- with index site.Data.results (.Params.results_data | default "") }}
+  {{- $av := .availability | default dict }}
+  <tr>
+    <td class="results-team"><a href="{{ $pg.Permalink }}">{{ cond $en .contest_en .contest }}</a></td>
+    <td>{{ if eq $av.human_eval "ok" }}{{ cond $en .human_eval_short_en .human_eval_short }}{{ else if eq $av.human_eval "none" }}{{ cond $en "Not conducted" "未実施" }}{{ else }}{{ cond $en "Being compiled" "準備中" }}{{ end }}</td>
+    <td>
+      {{- /* モデル構成が同じトラックをまとめる (INLG 2026 は 1 次と 2 次で異なる) */}}
+      {{- $groups := dict }}{{ $order := slice }}
+      {{- range .tracks }}{{ $tr := . }}{{ with .llm_judge }}
+        {{- $key := delimit .models "・" }}
+        {{- /* ラウンド名: トラック ID の r1_/r2_ から */}}
+        {{- $label := cond (hasPrefix $tr.id "r1_") (cond $en "Round 1" "1次") (cond (hasPrefix $tr.id "r2_") (cond $en "Round 2" "2次") "") }}
+        {{- if not (isset $groups $key) }}{{ $groups = merge $groups (dict $key $label) }}{{ $order = $order | append $key }}{{ end }}
+      {{- end }}{{ end }}
+      {{- if not $order }}{{ cond $en "Not conducted" "未実施" }}{{ end }}
+      {{- $multi := gt (len $order) 1 }}
+      {{- range $key := $order }}
+        {{- if $multi }}<span class="results-muted">{{ index $groups $key }}: </span>{{ end }}{{ replace $key "・" "<br>" | safeHTML }}<br>
+      {{- end }}
+      {{- $ph := false }}{{ range .tracks }}{{ with .llm_judge }}{{ if .posthoc }}{{ $ph = true }}{{ end }}{{ end }}{{ end }}
+      {{- if $ph }}<span class="results-muted">{{ cond $en "(run after the contest)" "（大会後に実施）" }}</span>{{ end }}
+    </td>
+  </tr>
+  {{- end }}
+  {{- end }}
+  </tbody>
+</table>
+
