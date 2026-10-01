@@ -54,9 +54,12 @@ languages:
         - name: "エージェント"
           url: /benchmark/agents/
           weight: 2
+        - name: "ゲーム指標"
+          url: /benchmark/game/
+          weight: 3
         - name: "ジャッジ"
           url: /benchmark/judges/
-          weight: 3
+          weight: 4
       inlg_2026:
         - name: "ホーム"
           url: /page/INLG_2026
@@ -204,9 +207,12 @@ languages:
         - name: "Agents"
           url: /benchmark/agents/
           weight: 2
+        - name: "Game metrics"
+          url: /benchmark/game/
+          weight: 3
         - name: "Judges"
           url: /benchmark/judges/
-          weight: 3
+          weight: 4
       inlg_2026:
         - name: "Home"
           url: /page/INLG_2026

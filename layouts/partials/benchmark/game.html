@@ -1,0 +1,96 @@
+{{- /* ゲーム指標: data/benchmark/game.yaml（calculate_meta の陣営別集計と、投票の相互関係） */}}
+{{- $en := eq site.Language.Lang "en" }}
+{{- $d := site.Data.benchmark.game }}
+{{- $tierName := dict "上位" (cond $en "Top" "上位") "中位" (cond $en "Middle" "中位") "下位" (cond $en "Bottom" "下位") }}
+<p class="results-muted">
+{{- if $en -}}
+The LLM-as-a-Judge ranking on the Agents page depends on the judge model, which may favour its own family. The metrics here are taken from the game records alone, so they do not depend on any judge. In effect they are how the other models treated each model at the table. All games of the same season as the Agents page ({{ $d.season }}).
+{{- else -}}
+[エージェント](../agents/)の順位は LLM-as-a-Judge によるもので、ジャッジモデルが自分のファミリーを贔屓する恐れがあります。ここに載せる指標はゲームの記録だけから計算したもので、ジャッジに依りません。言い換えると、卓にいる他のモデルがそのモデルをどう扱ったかです。対象は[エージェント](../agents/)と同じシーズン（{{ $d.season }}）の全試合です。
+{{- end -}}
+</p>
+
+<h2 id="per-model">{{ cond $en "Per model" "モデルごとの指標" }}</h2>
+<p class="results-muted">
+{{- if $en -}}
+"Vote accuracy" is, when the model is on the village side, the rate at which its votes hit the werewolf, divided by the rate expected from the roles at the table (1.0 = chance; higher is better). "Suspected" is, when the model is on the village side, the votes it received divided by the votes expected if voters chose uniformly (1.0 = indifferent; lower means less wrongly suspected). "Survival as werewolf" is the fraction of games it survived when it was the werewolf. Win rate is for reference only.
+{{- else -}}
+「投票精度」は、村人陣営のときに自分の票が人狼に当たった率を、役職の割り当てから期待される率で割ったものです（1.0 が当てずっぽう。高いほど良い）。「疑われやすさ」は、村人陣営のときに受けた票を、投票者が候補者から一様に選んだときの期待票数で割ったものです（1.0 が無差別。低いほど疑われていない）。「人狼のときの生存率」は人狼を引いた試合で生き残った割合です。勝率は参考値です。
+{{- end -}}
+</p>
+<div class="results-tables">
+<table class="results-agreement">
+  <thead><tr><th>{{ cond $en "Judge rank" "ジャッジ順位" }}</th><th>{{ cond $en "Model" "モデル" }}</th><th>{{ cond $en "Vote accuracy" "投票精度" }}</th><th>{{ cond $en "Suspected" "疑われやすさ" }}</th><th>{{ cond $en "Survival as werewolf" "人狼のときの生存率" }}</th><th>{{ cond $en "Win rate" "勝率" }}</th></tr></thead>
+  <tbody>
+  {{- range $d.models }}
+  <tr><td>{{ .rank }}</td><td class="results-team">{{ .model }}</td>
+    <td>{{ with .vote_accuracy }}{{ printf "%.2f" . }}{{ else }}-{{ end }}</td><td>{{ with .suspected }}{{ printf "%.2f" . }}{{ else }}-{{ end }}</td>
+    <td>{{ with .wolf_survival }}{{ printf "%.0f%%" (mul 100 .) }}{{ else }}-{{ end }}</td><td>{{ printf "%.0f%%" (mul 100 .win_rate) }}</td></tr>
+  {{- end }}
+  </tbody>
+</table>
+</div>
+<p class="results-muted">
+{{- if $en -}}
+Across the {{ len $d.models }} models, vote accuracy agrees moderately with the judge ranking (Spearman about −0.5 against the mean rank; better-ranked models hit the werewolf more often), and survival as werewolf agrees weakly (about −0.35). "Suspected" by itself does not: better-ranked models are, if anything, slightly more often suspected when they are villagers. The next section shows why.
+{{- else -}}
+{{ len $d.models }} モデルで見ると、投票精度はジャッジの順位とほどよく一致します（平均順位との Spearman がおよそ −0.5。順位の良いモデルほど人狼に当てる）。人狼のときの生存率は弱く一致します（およそ −0.35）。疑われやすさは単体では一致せず、むしろ順位の良いモデルの方が村人のときに少し多く疑われています。その理由を次の節で分けて見ます。
+{{- end -}}
+</p>
+
+<h2 id="interaction">{{ cond $en "Who votes for whom" "誰が誰に投票するか" }}</h2>
+<p class="results-muted">
+{{- if $en -}}
+Models are split into three tiers (top / middle / bottom) by the judge ranking. The tables count the wrong votes of village-side voters (votes cast at a player who is not the werewolf) and show how often each tier of target was chosen, relative to choosing uniformly among the candidates alive at that vote (1.0 = indifferent).
+{{- else -}}
+モデルをジャッジの順位で上位・中位・下位の 3 層に分けます。表は村人陣営の投票者の誤投票（人狼でない相手に入れた票）について、相手の層がどれだけ選ばれたかを、その時点の生存者から一様に選んだ場合との比で示します（1.0 が無差別）。
+{{- end -}}
+</p>
+<h3>{{ cond $en "Wrong votes by tier of voter and target" "誤投票の選ばれやすさ（行 = 投票者の層、列 = 相手の層）" }}</h3>
+<div class="results-tables">
+<table class="results-agreement">
+  <thead><tr><th>{{ cond $en "Voter \\ Target" "投票者＼相手" }}</th>{{ range $d.tiers }}<th>{{ index $tierName . }}</th>{{ end }}</tr></thead>
+  <tbody>{{ range $d.wrong_vote_by_tier }}{{ $r := . }}<tr><td class="results-team">{{ index $tierName .voter }}</td>{{ range $d.tiers }}<td>{{ printf "%.2f" (index $r .) }}</td>{{ end }}</tr>{{ end }}</tbody>
+</table>
+</div>
+<p class="results-muted">{{ cond $en "Top-tier villagers are suspected slightly more by every tier, and bottom-tier villagers slightly less; pair by pair the differences are small." "上位の村人はどの層からも少し多めに疑われ、下位の村人は疑われにくい。対ごとの差は小さいです。" }}</p>
+
+<h3>{{ cond $en "Top-tier villagers by composition of the table" "卓の構成で分けた、上位層の村人の疑われやすさ" }}</h3>
+<div class="results-tables">
+<table class="results-agreement">
+  <thead><tr><th>{{ cond $en "Bottom-tier players at the table" "卓の下位層の人数" }}</th><th>{{ cond $en "Votes" "票数" }}</th><th>{{ cond $en "Top-tier villager chosen" "上位層の村人が選ばれる比" }}</th><th>{{ cond $en "Bottom-tier villager chosen" "下位層の村人が選ばれる比" }}</th></tr></thead>
+  <tbody>{{ range $d.by_table }}<tr><td>{{ .n_bottom }}</td><td>{{ .votes }}</td><td>{{ printf "%.2f" .top_ratio }}</td><td>{{ printf "%.2f" .bottom_ratio }}</td></tr>{{ end }}</tbody>
+</table>
+</div>
+<p class="results-muted">
+{{- if $en -}}
+At tables made of top- and middle-tier models only, top-tier villagers are suspected less than chance; the more bottom-tier models sit at the table, the more the top-tier villagers are suspected. The "suspicion" of good models is thus largely something that weaker models do, plausibly by voting at the most conspicuous speaker. The last rows have few votes.
+{{- else -}}
+上位・中位だけの卓では上位の村人は無差別より疑われにくく、下位のモデルが増えるほど上位の村人が疑われます。良いモデルが疑われるのは主に弱いモデルが混ざった卓で起きることで、目立つ発話に短絡的に票を入れている可能性があります。下の行ほど票数が少ないので値は振れます。
+{{- end -}}
+</p>
+
+<h3>{{ cond $en "Vote accuracy by tier of voter and werewolf" "投票精度（行 = 投票者の層、列 = 人狼の層）" }}</h3>
+<div class="results-tables">
+<table class="results-agreement">
+  <thead><tr><th>{{ cond $en "Voter \\ Werewolf" "投票者＼人狼" }}</th>{{ range $d.tiers }}<th>{{ index $tierName . }}</th>{{ end }}</tr></thead>
+  <tbody>{{ range $d.vote_accuracy_by_tier }}{{ $r := . }}<tr><td class="results-team">{{ index $tierName .voter }}</td>{{ range $d.tiers }}<td>{{ printf "%.2f" (index $r .) }}</td>{{ end }}</tr>{{ end }}</tbody>
+</table>
+</div>
+<p class="results-muted">{{ if $en }}Rate at which village-side votes hit the werewolf; chance is about {{ printf "%.2f" $d.chance_accuracy }}. By tier the differences are small, and a top-tier werewolf is not harder to catch than a bottom-tier one.{{ else }}村人陣営の票が人狼に当たった率で、当てずっぽうはおよそ {{ printf "%.2f" $d.chance_accuracy }} です。層で分けると差は小さく、上位の人狼が特に見破られにくいということもありません。{{ end }}</p>
+
+<h3>{{ cond $en "Same-family favouritism" "同じファミリーへの贔屓" }}</h3>
+<div class="results-tables">
+<table class="results-agreement">
+  <thead><tr><th>{{ cond $en "Family" "ファミリー" }}</th><th>{{ cond $en "Models" "モデル数" }}</th><th>{{ cond $en "Wrong votes at same family" "誤投票で同ファミリーを選ぶ比" }}</th><th>{{ cond $en "Expected votes" "期待票数" }}</th><th>{{ cond $en "Attacks at same family" "襲撃で同ファミリーを選ぶ比" }}</th><th>{{ cond $en "Expected attacks" "期待襲撃数" }}</th></tr></thead>
+  <tbody>{{ range $d.family_bias }}<tr><td class="results-team">{{ .family }}</td><td>{{ .models }}</td><td>{{ printf "%.2f" .vote_ratio }}</td><td>{{ .vote_expected }}</td><td>{{ printf "%.2f" .attack_ratio }}</td><td>{{ .attack_expected }}</td></tr>{{ end }}</tbody>
+</table>
+</div>
+<p class="results-muted">
+{{- if $en -}}
+Ratio of choosing a target of the same family (the model itself excluded) to choosing uniformly; 1.0 = indifferent. Families with fewer than 10 expected votes are omitted. Neither in wrong votes nor in werewolf attacks do models spare or target their own family, so the self-preference seen in some judge models does not appear in how the models play against each other.
+{{- else -}}
+同じファミリーの相手（自分自身は除く）を選んだ比で、1.0 が無差別です。期待票数が 10 未満のファミリーは省いています。誤投票でも襲撃でも、同じファミリーを避ける・狙う傾向は見えません。ジャッジモデルに見られる自己贔屓は、対戦相手としての振る舞いには出ていません。
+{{- end -}}
+</p>
+<p class="results-muted">{{ cond $en "Caveat: the tiers themselves come from the judge ranking, so a judge bias can leak into the split. The per-model columns above are independent of the judge." "注意: 層分けはジャッジの順位に依っているので、ジャッジの偏りが層に入り込みえます。上のモデルごとの列はジャッジに依りません。" }}</p>

@@ -70,8 +70,52 @@ def judges():
             "relative": rel, "count": cnt}
 
 
+def game():
+    """ゲーム指標: calculate_meta の陣営別集計（期待値比）と、scripts/interaction.py の投票の相互関係。"""
+    meta = BM / "runs/season1/report/meta"; inter = BM / "runs/season1/report/interaction"
+    camp = rows(meta / "team_by_camp.csv"); summ = {r["team"]: r for r in rows(meta / "team_summary.csv")}
+    ens = {r["model"]: r for r in rows(JB / "results/season1/scores_ensemble.csv")}
+    by = {}
+    for r in camp:
+        t = r["team"]; d = by.setdefault(t, {})
+        f = lambda a, b: round(float(r[a]) / float(r[b]), 2) if float(r[b] or 0) > 0 else None
+        if r["camp"] == "VILLAGER":
+            d["suspected"] = f("voted_recv", "voted_exp"); d["vote_accuracy"] = f("vote_to_wolf", "vote_to_wolf_exp")
+        elif r["camp"] == "WEREWOLF":
+            d["wolf_survival"] = round(float(r["survived"]) / float(r["games"]), 2) if float(r["games"]) > 0 else None
+    models = []
+    for m, e in ens.items():
+        d = by.get(m, {})
+        models.append({"model": m, "rank": int(e["順位"]), "mean_rank": round(float(e["ens"]), 2),
+                       "vote_accuracy": d.get("vote_accuracy"), "suspected": d.get("suspected"), "wolf_survival": d.get("wolf_survival"),
+                       "win_rate": round(float(summ.get(m, {}).get("勝率_macro", 0) or 0), 2)})
+    models.sort(key=lambda x: x["rank"])
+    def table(name):
+        out = []
+        with open(inter / name, encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                out.append({k: (round(float(v), 2) if v not in ("", None) and k not in ("ファミリー",) and _isnum(v) else v) for k, v in r.items()})
+        return out
+    tiers = ["上位", "中位", "下位"]
+    wrong = {r[""]: {t: r[t] for t in tiers} for r in table("wrong_vote_tier.csv")}
+    acc = {r["voter_tier"]: {t: r[t] for t in tiers} for r in table("vote_accuracy_tier.csv")}
+    fam = [r for r in table("family_bias.csv") if r["期待票数"] and float(r["期待票数"]) >= 10]
+    comp = table("top_suspected_by_table.csv")
+    return {"season": "season1", "tiers": tiers, "models": models,
+            "wrong_vote_by_tier": [{"voter": v, **{t: wrong[v][t] for t in tiers}} for v in tiers],
+            "vote_accuracy_by_tier": [{"voter": v, **{t: acc[v][t] for t in tiers}} for v in tiers],
+            "chance_accuracy": 0.31,
+            "family_bias": [{"family": r["ファミリー"], "models": r["モデル数"], "vote_ratio": r["誤投票で同ファミリーを選ぶ比"], "vote_expected": r["期待票数"], "attack_ratio": r["襲撃で同ファミリーを選ぶ比"], "attack_expected": r["期待襲撃数"]} for r in fam],
+            "by_table": [{"n_bottom": r["卓の下位層の人数"], "votes": r["票数"], "top_ratio": r["上位層が選ばれる比"], "bottom_ratio": r["下位層が選ばれる比"]} for r in comp]}
+
+
+def _isnum(v):
+    try: float(v); return True
+    except (TypeError, ValueError): return False
+
+
 if __name__ == "__main__":
-    for name, data in (("agents", agents()), ("judges", judges())):
+    for name, data in (("agents", agents()), ("judges", judges()), ("game", game())):
         p = SITE / "data/benchmark" / f"{name}.yaml"
         p.write_text("# 自動生成: scripts/benchmark/build_benchmark_yaml.py\n" + yaml.safe_dump(data, allow_unicode=True, sort_keys=False), encoding="utf-8")
         print(p, "ok")

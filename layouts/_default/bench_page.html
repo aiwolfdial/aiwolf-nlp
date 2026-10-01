@@ -1,5 +1,5 @@
 {{- define "main" }}
-{{- /* ベンチマークのページ本体: bench_kind に応じた partial を描画する（layout: benchmark） */}}
+{{- /* ベンチマークのページ本体: bench_kind に応じた partial を描画する（layout: bench_page。セクション名と同じ benchmark にすると _index にも適用されてしまう） */}}
 <article class="post-single">
   <header class="post-header">
     {{ partial "breadcrumbs.html" . }}
