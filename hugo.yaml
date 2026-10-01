@@ -43,6 +43,20 @@ languages:
         - name: "リンク"
           url: /links/
           weight: 4
+        - name: "ベンチマーク"
+          url: /benchmark/
+          weight: 5
+      # ベンチマークタブの下段メニュー（content/benchmark/*.md は menu_id: benchmark）
+      benchmark:
+        - name: "概要"
+          url: /benchmark/
+          weight: 1
+        - name: "エージェント"
+          url: /benchmark/agents/
+          weight: 2
+        - name: "ジャッジ"
+          url: /benchmark/judges/
+          weight: 3
       inlg_2026:
         - name: "ホーム"
           url: /page/INLG_2026
@@ -180,6 +194,19 @@ languages:
         - name: "Links"
           url: /links/
           weight: 4
+        - name: "Benchmark"
+          url: /benchmark/
+          weight: 5
+      benchmark:
+        - name: "Overview"
+          url: /benchmark/
+          weight: 1
+        - name: "Agents"
+          url: /benchmark/agents/
+          weight: 2
+        - name: "Judges"
+          url: /benchmark/judges/
+          weight: 3
       inlg_2026:
         - name: "Home"
           url: /page/INLG_2026
