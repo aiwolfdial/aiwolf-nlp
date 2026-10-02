@@ -7,13 +7,13 @@ tiers:
 n_models: 28
 correlations:
 - metric: vote_accuracy
-  rho: -0.49
+  rho: 0.49
 - metric: suspected
   rho: -0.25
 - metric: wolf_survival
-  rho: -0.35
+  rho: 0.35
 - metric: win_rate
-  rho: -0.22
+  rho: 0.22
 wrong_vote_by_tier:
 - voter: 上位
   上位: 1.03

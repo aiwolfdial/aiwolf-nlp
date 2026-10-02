@@ -134,7 +134,9 @@ def game():
     acc = {r["voter_tier"]: {t: r[t] for t in tiers} for r in table("vote_accuracy_tier.csv")}
     fam = [r for r in table("family_bias.csv") if r["期待票数"] and float(r["期待票数"]) >= 10]
     comp = table("top_suspected_by_table.csv")
-    corr = [{"metric": k, "rho": _spearman([m["mean_rank"] for m in models], [m[k] for m in models])} for k in ("vote_accuracy", "suspected", "wolf_survival", "win_rate")]
+    # 符号は「相対順位が良い ↔ 結果が良い」を正にそろえる（順位は小さいほど良いので反転、疑われやすさは小さいほど良いので反転）
+    corr = [{"metric": k, "rho": _spearman([-m["mean_rank"] for m in models], [(-m[k] if k == "suspected" else m[k]) if m[k] is not None else None for m in models])}
+            for k in ("vote_accuracy", "suspected", "wolf_survival", "win_rate")]
     scores = {"season": "season1", "models": models}
     nz = lambda v: v if _isnum(v) else None
     review = {"season": "season1", "tiers": tiers, "n_models": len(models), "correlations": corr,

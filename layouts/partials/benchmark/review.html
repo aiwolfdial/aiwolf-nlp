@@ -13,7 +13,7 @@ This page compares the two kinds of results in this benchmark. One is the <b>rel
 </p>
 
 <h2 id="correlation">{{ cond $en "Does the LLM judge's ranking agree with the game scores?" "LLM ジャッジの相対順位は、ゲームスコアと一致するか" }}</h2>
-<p class="results-muted">{{ if $en }}Spearman rank correlation, over the {{ $d.n_models }} models, between the mean rank of the LLM judge's relative evaluation (1 = best) and each game score. A negative value means that models ranked higher by the LLM judge have a higher score.{{ else }}{{ $d.n_models }} モデルについて、LLM ジャッジの相対評価の平均順位（1 が最良）と各ゲームスコアの Spearman 順位相関を取りました。負の値は、LLM ジャッジが上位に置いたモデルほどスコアが高い、という意味です。{{ end }}</p>
+<p class="results-muted">{{ if $en }}Spearman rank correlation, over the {{ $d.n_models }} models, between the LLM judge's relative ranking and each game score, with signs arranged so that <b>positive means "a better rank goes with a better score"</b> (for "suspected", a better score is a lower one). +1 would be perfect agreement, 0 no relation.{{ else }}{{ $d.n_models }} モデルについて、LLM ジャッジの相対順位と各ゲームスコアの Spearman 順位相関です。符号は<b>「順位が良いほど結果も良い」を正</b>にそろえています（疑われやすさは、低いほど良い結果として扱います）。+1 が完全一致、0 が無関係です。{{ end }}</p>
 <div class="results-tables">
 <table class="results-agreement">
   <thead><tr><th>{{ cond $en "Game score" "ゲームスコア" }}</th><th>Spearman ρ</th><th>{{ cond $en "Reading" "読み" }}</th></tr></thead>
@@ -21,7 +21,7 @@ This page compares the two kinds of results in this benchmark. One is the <b>rel
   {{- range $d.correlations }}
   {{- $read := "" }}
   {{- if eq .metric "vote_accuracy" }}{{ $read = cond $en "Models ranked higher by the LLM judge hit the werewolf more often when voting. Moderate agreement." "LLM ジャッジが上位に置いたモデルほど、投票で人狼に当てている。ほどよく一致" }}
-  {{- else if eq .metric "suspected" }}{{ $read = cond $en "Weak, and in the opposite direction: models ranked higher are suspected slightly more when they are villagers. Examined below." "弱く、向きも逆。上位のモデルの方が村人のときに少し多く疑われている。下で詳しく見る" }}
+  {{- else if eq .metric "suspected" }}{{ $read = cond $en "Negative: models ranked higher are, if anything, suspected slightly more when they are villagers. Examined below." "負。上位のモデルの方が村人のときにむしろ少し多く疑われている。下で詳しく見る" }}
   {{- else if eq .metric "wolf_survival" }}{{ $read = cond $en "Models ranked higher survive more often as the werewolf. Weak agreement." "上位のモデルほど人狼のときに生き残る。弱く一致" }}
   {{- else }}{{ $read = cond $en "Weak. Win rate depends heavily on which role was drawn." "弱い。勝率は引いた役職に大きく左右される" }}{{ end }}
   <tr><td class="results-team">{{ index $metricName .metric }}</td><td>{{ with .rho }}{{ printf "%+.2f" . }}{{ else }}-{{ end }}</td><td class="results-muted">{{ $read }}</td></tr>
@@ -33,10 +33,10 @@ This page compares the two kinds of results in this benchmark. One is the <b>rel
 <h2 id="suspicion">{{ cond $en "Who wrongly suspects whom" "誰が誰を間違って疑うのか" }}</h2>
 <p class="results-muted">
 {{- if $en -}}
-The scores above say that models ranked higher by the LLM judge are, if anything, suspected slightly <i>more</i> when they are villagers. To see who does the suspecting, we split the models into three tiers by the LLM judge's ranking: <b>top</b>, <b>middle</b> and <b>bottom</b> (about nine models each); the tables below focus on the top and bottom tiers. Then we look only at <b>wrong votes</b>: votes cast by a village-side player at someone who is not the werewolf. For each wrong vote we ask which tier the chosen target belonged to.<br>
+The table above says that models ranked higher by the LLM judge are, if anything, suspected slightly <i>more</i> when they are villagers (the negative value). To see who does the suspecting, we split the models into three tiers by the LLM judge's ranking: <b>top</b>, <b>middle</b> and <b>bottom</b> (about nine models each); the tables below focus on the top and bottom tiers. Then we look only at <b>wrong votes</b>: votes cast by a village-side player at someone who is not the werewolf. For each wrong vote we ask which tier the chosen target belonged to.<br>
 If voters picked their target at random from the players alive at that moment, each tier would receive votes in proportion to how many of its members were available. We divide the votes a tier actually received by that random expectation and call the result its <b>suspicion ratio</b>: 1.0 means "no more or less than random", 1.2 means "20% more often than random", 0.8 means "20% less often".
 {{- else -}}
-上の表では、LLM ジャッジが上位に置いたモデルの方が、村人のときにむしろ少し多く疑われていました。誰がそう疑っているのかを見るために、モデルを LLM ジャッジの順位で<b>上位・中位・下位</b>の 3 層（各 9 モデル前後）に分けます。以下の表では上位と下位に注目します。そして<b>間違った票</b>、つまり村人陣営のプレイヤーが人狼でない相手に入れた票だけを集め、1 票ずつ「選ばれた相手はどの層か」を見ます。<br>
+上の表では、LLM ジャッジが上位に置いたモデルの方が、村人のときにむしろ少し多く疑われていました（負の値）。誰がそう疑っているのかを見るために、モデルを LLM ジャッジの順位で<b>上位・中位・下位</b>の 3 層（各 9 モデル前後）に分けます。以下の表では上位と下位に注目します。そして<b>間違った票</b>、つまり村人陣営のプレイヤーが人狼でない相手に入れた票だけを集め、1 票ずつ「選ばれた相手はどの層か」を見ます。<br>
 投票者がその時点の生存者から無作為に相手を選ぶなら、各層は生存者の中での人数に比例して票を受けるはずです。実際に受けた票数をその無作為の場合の票数で割ったものを<b>疑われ比</b>と呼びます。1.0 なら無作為と同じ、1.2 なら無作為より 20% 多く疑われた、0.8 なら 20% 少ない、という意味です。
 {{- end -}}
 </p>
