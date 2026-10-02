@@ -1,3 +1,4 @@
+# 自動生成: scripts/benchmark/build_benchmark_yaml.py
 season: season1
 tiers:
 - 上位

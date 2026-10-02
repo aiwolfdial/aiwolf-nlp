@@ -1,6 +1,95 @@
 # 自動生成: scripts/benchmark/build_benchmark_yaml.py
 season: season1
-bench: []
+bench:
+- model: gemma-4-31b
+  ded: 0.37
+  add: 0.48
+  net: 0.5
+  human: 0.63
+  diff: -0.13
+  ci_low: -0.21
+  ci_high: -0.06
+  verdict: worse
+- model: qwen3_8-27b
+  ded: 0.3
+  add: 0.4
+  net: 0.49
+  human: 0.63
+  diff: -0.14
+  ci_low: -0.24
+  ci_high: -0.11
+  verdict: worse
+by_track:
+- model: gemma-4-31b
+  track: 24冬 p3
+  ded: 0.03
+  add: 0.38
+  net: 0.23
+- model: gemma-4-31b
+  track: INLG25 t5(英)
+  ded: 0.62
+  add: 0.43
+  net: 0.6
+- model: gemma-4-31b
+  track: 26春 t5
+  ded: 0.56
+  add: 0.51
+  net: 0.61
+- model: gemma-4-31b
+  track: 26春 ff5
+  ded: 0.41
+  add: 0.48
+  net: 0.48
+- model: gemma-4-31b
+  track: 26春 t9
+  ded: 0.33
+  add: 0.5
+  net: 0.56
+- model: gemma-4-31b
+  track: 25春 t13
+  ded: 0.24
+  add: 0.44
+  net: 0.43
+- model: gemma-4-31b
+  track: INLG25 t13(英)
+  ded: 0.43
+  add: 0.65
+  net: 0.63
+- model: qwen3_8-27b
+  track: 24冬 p3
+  ded: 0.0
+  add: 0.34
+  net: 0.4
+- model: qwen3_8-27b
+  track: INLG25 t5(英)
+  ded: 0.55
+  add: 0.26
+  net: 0.52
+- model: qwen3_8-27b
+  track: 26春 t5
+  ded: 0.44
+  add: 0.33
+  net: 0.52
+- model: qwen3_8-27b
+  track: 26春 ff5
+  ded: 0.34
+  add: 0.5
+  net: 0.48
+- model: qwen3_8-27b
+  track: 26春 t9
+  ded: 0.38
+  add: 0.4
+  net: 0.51
+- model: qwen3_8-27b
+  track: 25春 t13
+  ded: 0.11
+  add: 0.43
+  net: 0.52
+- model: qwen3_8-27b
+  track: INLG25 t13(英)
+  ded: 0.26
+  add: 0.52
+  net: 0.5
 seasons:
 - judge: gemma-4-31b
   models:

@@ -72,6 +72,11 @@ def count():
     if p.exists():
         for r in rows(p):
             bench.append({k: (round(float(v), 2) if k not in ("model", "verdict") and _isnum(v) else v) for k, v in r.items()})
+    by_track = []
+    p = JB / "results/count_final/by_track.csv"
+    if p.exists():
+        for r in rows(p):
+            by_track.append({"model": r["model"], "track": r["track"], "ded": round(float(r["ded"]), 2), "add": round(float(r["add"]), 2), "net": round(float(r["net"]), 2)})
     ens = {r["model"]: float(r["ens"]) for r in rows(JB / "results/season1/scores_ensemble.csv")}
     seasons = []
     for p in sorted((BM / "runs/season1/report").glob("count_judge_*.csv")):
@@ -83,7 +88,7 @@ def count():
         ms.sort(key=lambda x: x["rank"])
         rho = _spearman([-m["net"] for m in ms], [ens.get(m["model"]) for m in ms])
         seasons.append({"judge": judge, "models": ms, "rho_vs_relative": rho})
-    return {"season": "season1", "bench": bench, "seasons": seasons}
+    return {"season": "season1", "bench": bench, "by_track": by_track, "seasons": seasons}
 
 
 def _spearman(a, b):

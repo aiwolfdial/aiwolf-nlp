@@ -23,6 +23,31 @@ A different kind of LLM judge from the relative judge: instead of ranking the pl
   </tbody>
 </table>
 </div>
+<p class="results-muted">
+{{- if $en -}}
+Both judge models fall significantly below one human rater on this benchmark ("worse"), whereas the relative judge does not (see the Relative judge page). The count judge is therefore a <b>supplementary</b> measure, not a replacement for the relative evaluation. Where it falls short is visible by track below: on 5-player villages the net agreement is close to the human level (about 0.6), but deductions weaken as the village grows (0.56 → 0.33 → 0.24 for gemma from 5 to 9 to 13 players), and the 2024 winter contest, which had no character profiles, is close to uncorrelated.
+{{- else -}}
+このベンチマークでは、どちらのジャッジモデルも人手の評価者 1 人を有意に下回ります（worse）。相対ジャッジは下回らないので（[相対ジャッジ](../relative_judge/)）、件数ジャッジは相対評価の置き換えではなく<b>補助の指標</b>という位置づけです。弱いところはトラック別に見えます。5 人村では合計の一致が 0.6 前後で人手の水準に近い一方、村が大きくなるほど減点が弱くなり（gemma で 5 人村 0.56 → 9 人村 0.33 → 13 人村 0.24）、人物設定のなかった 2024 冬季大会はほぼ無相関です。
+{{- end -}}
+</p>
+{{- with $d.by_track }}
+<h3>{{ cond $en "By track" "トラック別" }}</h3>
+<div class="results-tables">
+<table class="results-agreement">
+  <thead><tr><th>{{ cond $en "Track" "トラック" }}</th>{{ range $d.bench }}<th colspan="3">{{ .model }}</th>{{ end }}</tr>
+  <tr><th></th>{{ range $d.bench }}<th>{{ cond $en "Ded." "減点" }}</th><th>{{ cond $en "Add." "加点" }}</th><th>{{ cond $en "Net" "合計" }}</th>{{ end }}</tr></thead>
+  <tbody>
+  {{- $bt := . }}
+  {{- $tracks := slice }}{{ range $bt }}{{ if not (in $tracks .track) }}{{ $tracks = $tracks | append .track }}{{ end }}{{ end }}
+  {{- range $t := $tracks }}
+  <tr><td class="results-team">{{ $t }}</td>
+  {{- range $m := $d.bench }}{{ range $bt }}{{ if and (eq .track $t) (eq .model $m.model) }}<td>{{ printf "%.2f" .ded }}</td><td>{{ printf "%.2f" .add }}</td><td>{{ printf "%.2f" .net }}</td>{{ end }}{{ end }}{{ end }}
+  </tr>
+  {{- end }}
+  </tbody>
+</table>
+</div>
+{{- end }}
 {{- else }}
 <p class="results-muted">{{ cond $en "The benchmark run on the full set of human-rated logs is in progress; the table will appear here. On the two 5-player tracks used during development (Spring 2026 and INLG 2025), gemma-4-31B-it reached a team-level Spearman of 0.62 for deductions, 0.48 for additions and 0.61 for the net, against 0.68 for one human rater." "人手評価のある全ログでのベンチマークは実行中で、結果はここに載せます。開発中に使った 5 人村の 2 トラック（2026 春季・INLG 2025）では、gemma-4-31B-it のチーム単位の Spearman は減点 0.62、加点 0.48、合計 0.61 でした（人手の評価者 1 人は 0.68）。" }}</p>
 {{- end }}
