@@ -6,5 +6,5 @@ description: 'Agreement with the human evaluation of past contests when each pub
 layout: bench_page
 bench_kind: judges
 menu_id: benchmark
-weight: 3
+weight: 4
 ---

@@ -3,9 +3,9 @@
 {{- $d := site.Data.benchmark.agents }}
 <p class="results-muted">
 {{- if $en -}}
-Season {{ $d.season | strings.TrimPrefix "season" }}. {{ $d.rules_en }}. {{ $d.n_models }} public LLMs, each loaded into the official sample agent ([aiwolf-nlp-agent-llm](https://github.com/aiwolfdial/aiwolf-nlp-agent-llm)) with the same prompts and settings; {{ $d.games }} games per model with randomized seating. Each game was ranked by the LLM-as-a-Judge relative evaluation ({{ delimit $d.judges ", " }}) with team names hidden from the judge, and the table shows the mean rank over games (1 = best of the 5 players, lower is better; "±" is the standard error). Win rate is shown for reference: it depends on the role assignment and is not an evaluation of dialogue quality.
+Season {{ $d.season | strings.TrimPrefix "season" }}. {{ $d.rules_en }}. {{ $d.n_models }} public LLMs, each loaded into the official sample agent ([aiwolf-nlp-agent-llm](https://github.com/aiwolfdial/aiwolf-nlp-agent-llm)) with the same prompts and settings; {{ $d.games }} games per model with randomized seating. Each game was ranked by the LLM-as-a-Judge relative evaluation ({{ delimit $d.judges ", " }}) with team names hidden from the judge, and the table shows the mean rank over games (1 = best of the 5 players, lower is better; "±" is the standard error). Win rates and other judge-independent scores are on the Game scores page.
 {{- else -}}
-第 {{ $d.season | strings.TrimPrefix "season" }} シーズン。{{ $d.rules }}。公開 LLM {{ $d.n_models }} 種類を、公式サンプルエージェント（[aiwolf-nlp-agent-llm](https://github.com/aiwolfdial/aiwolf-nlp-agent-llm)）に同じプロンプト・同じ設定で載せ替え、席順を乱数で決めてモデルごとに {{ $d.games }} 試合ずつ対戦させました。各試合を LLM-as-a-Judge の相対評価（{{ delimit $d.judges "・" }}）でチーム名を伏せて順位付けし、試合をまたいだ平均順位を示します（5 人中の順位。1 が最良で、小さいほど良い。「±」は標準誤差）。勝率は参考値で、役職の割り当てに左右されるため対話の質の評価ではありません。
+第 {{ $d.season | strings.TrimPrefix "season" }} シーズン。{{ $d.rules }}。公開 LLM {{ $d.n_models }} 種類を、公式サンプルエージェント（[aiwolf-nlp-agent-llm](https://github.com/aiwolfdial/aiwolf-nlp-agent-llm)）に同じプロンプト・同じ設定で載せ替え、席順を乱数で決めてモデルごとに {{ $d.games }} 試合ずつ対戦させました。各試合を LLM-as-a-Judge の相対評価（{{ delimit $d.judges "・" }}）でチーム名を伏せて順位付けし、試合をまたいだ平均順位を示します（5 人中の順位。1 が最良で、小さいほど良い。「±」は標準誤差）。勝率などジャッジに依らないスコアは[ゲームスコア](../scores/)にあります。
 {{- end -}}
 </p>
 <div class="results-tables">
@@ -14,7 +14,7 @@ Season {{ $d.season | strings.TrimPrefix "season" }}. {{ $d.rules_en }}. {{ $d.n
     <th>{{ cond $en "Rank" "順位" }}</th><th>{{ cond $en "Model" "モデル" }}</th>
     <th>{{ cond $en "Mean rank" "平均順位" }}</th>
     {{- range $d.judges }}<th class="results-muted">{{ . }}</th>{{ end }}
-    <th>{{ cond $en "Games" "試合数" }}</th><th>{{ cond $en "Win rate" "勝率" }}</th>
+    <th>{{ cond $en "Games" "試合数" }}</th>
   </tr></thead>
   <tbody>
   {{- range $d.models }}
@@ -22,7 +22,7 @@ Season {{ $d.season | strings.TrimPrefix "season" }}. {{ $d.rules_en }}. {{ $d.n
     <td>{{ .rank }}</td><td class="results-team">{{ .model }}</td>
     <td>{{ printf "%.2f" .mean_rank }} <span class="results-muted">±{{ printf "%.2f" .se }}</span></td>
     {{- $bj := .by_judge }}{{ range $d.judges }}<td class="results-muted">{{ printf "%.2f" (index $bj .) }}</td>{{ end }}
-    <td>{{ .games }}</td><td>{{ printf "%.0f%%" (mul 100 .win_rate) }}</td>
+    <td>{{ .games }}</td>
   </tr>
   {{- end }}
   </tbody>

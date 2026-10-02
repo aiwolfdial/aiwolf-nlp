@@ -6,5 +6,5 @@ description: '公開 LLM をジャッジにしたときの、過去大会の人�
 layout: bench_page
 bench_kind: judges
 menu_id: benchmark
-weight: 3
+weight: 4
 ---

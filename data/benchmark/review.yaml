@@ -1,0 +1,70 @@
+# 自動生成: scripts/benchmark/build_benchmark_yaml.py
+season: season1
+tiers:
+- 上位
+- 中位
+- 下位
+n_models: 28
+correlations:
+- metric: vote_accuracy
+  rho: -0.49
+- metric: suspected
+  rho: -0.25
+- metric: wolf_survival
+  rho: -0.35
+- metric: win_rate
+  rho: -0.22
+vote_accuracy_by_tier:
+- voter: 上位
+  上位: 0.39
+  中位: 0.42
+  下位: 0.41
+- voter: 中位
+  上位: 0.44
+  中位: 0.43
+  下位: 0.38
+- voter: 下位
+  上位: 0.42
+  中位: 0.35
+  下位: 0.41
+chance_accuracy: 0.31
+family_bias:
+- family: gemma
+  models: 7.0
+  vote_ratio: 0.91
+  vote_expected: 57.0
+  attack_ratio: 1.2
+  attack_expected: 21.0
+- family: mistral
+  models: 3.0
+  vote_ratio: 1.76
+  vote_expected: 13.0
+  attack_ratio: 0.0
+  attack_expected: 1.0
+- family: qwen
+  models: 8.0
+  vote_ratio: 1.06
+  vote_expected: 80.0
+  attack_ratio: 0.87
+  attack_expected: 24.0
+by_table:
+- n_bottom: 0
+  votes: 356
+  top_ratio: 0.83
+  bottom_ratio: 2.27
+- n_bottom: 1
+  votes: 775
+  top_ratio: 0.91
+  bottom_ratio: 1.23
+- n_bottom: 2
+  votes: 674
+  top_ratio: 1.26
+  bottom_ratio: 0.68
+- n_bottom: 3
+  votes: 236
+  top_ratio: 1.42
+  bottom_ratio: 0.63
+- n_bottom: 4
+  votes: 23
+  top_ratio: 2.1
+  bottom_ratio: 0.56

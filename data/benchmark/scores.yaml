@@ -1,9 +1,5 @@
 # 自動生成: scripts/benchmark/build_benchmark_yaml.py
 season: season1
-tiers:
-- 上位
-- 中位
-- 下位
 models:
 - model: gemma-4-26b-a4b
   rank: 1
@@ -201,70 +197,3 @@ models:
   suspected: 0.8
   wolf_survival: 0.33
   win_rate: 0.52
-wrong_vote_by_tier:
-- voter: 上位
-  上位: 1.03
-  中位: 1.0
-  下位: 0.98
-- voter: 中位
-  上位: 1.08
-  中位: 1.01
-  下位: 0.92
-- voter: 下位
-  上位: 1.04
-  中位: 1.04
-  下位: 0.93
-vote_accuracy_by_tier:
-- voter: 上位
-  上位: 0.39
-  中位: 0.42
-  下位: 0.41
-- voter: 中位
-  上位: 0.44
-  中位: 0.43
-  下位: 0.38
-- voter: 下位
-  上位: 0.42
-  中位: 0.35
-  下位: 0.41
-chance_accuracy: 0.31
-family_bias:
-- family: gemma
-  models: 7.0
-  vote_ratio: 0.91
-  vote_expected: 57.0
-  attack_ratio: 1.2
-  attack_expected: 21.0
-- family: mistral
-  models: 3.0
-  vote_ratio: 1.76
-  vote_expected: 13.0
-  attack_ratio: 0.0
-  attack_expected: 1.0
-- family: qwen
-  models: 8.0
-  vote_ratio: 1.06
-  vote_expected: 80.0
-  attack_ratio: 0.87
-  attack_expected: 24.0
-by_table:
-- n_bottom: 0.0
-  votes: 356.0
-  top_ratio: 0.83
-  bottom_ratio: 2.27
-- n_bottom: 1.0
-  votes: 775.0
-  top_ratio: 0.91
-  bottom_ratio: 1.23
-- n_bottom: 2.0
-  votes: 674.0
-  top_ratio: 1.26
-  bottom_ratio: 0.68
-- n_bottom: 3.0
-  votes: 236.0
-  top_ratio: 1.42
-  bottom_ratio: 0.63
-- n_bottom: 4.0
-  votes: 23.0
-  top_ratio: 2.1
-  bottom_ratio: 0.56

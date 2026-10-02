@@ -70,8 +70,25 @@ def judges():
             "relative": rel, "count": cnt}
 
 
+def _spearman(a, b):
+    """同順位は平均順位。n < 3 なら None。"""
+    def ranks(x):
+        order = sorted(range(len(x)), key=lambda i: x[i]); r = [0.0] * len(x); i = 0
+        while i < len(order):
+            j = i
+            while j + 1 < len(order) and x[order[j + 1]] == x[order[i]]: j += 1
+            for k in range(i, j + 1): r[order[k]] = (i + j) / 2 + 1
+            i = j + 1
+        return r
+    pairs = [(x, y) for x, y in zip(a, b) if x is not None and y is not None]
+    if len(pairs) < 3: return None
+    ra, rb = ranks([x for x, _ in pairs]), ranks([y for _, y in pairs]); n = len(pairs); ma = mb = (n + 1) / 2
+    cov = sum((x - ma) * (y - mb) for x, y in zip(ra, rb)); va = sum((x - ma) ** 2 for x in ra); vb = sum((y - mb) ** 2 for y in rb)
+    return round(cov / (va * vb) ** 0.5, 2) if va and vb else None
+
+
 def game():
-    """ゲーム指標: calculate_meta の陣営別集計（期待値比）と、scripts/interaction.py の投票の相互関係。"""
+    """ゲームスコア（scores.yaml）とレビュー（review.yaml）: calculate_meta の陣営別集計（期待値比）と scripts/interaction.py の相互関係。"""
     meta = BM / "runs/season1/report/meta"; inter = BM / "runs/season1/report/interaction"
     camp = rows(meta / "team_by_camp.csv"); summ = {r["team"]: r for r in rows(meta / "team_summary.csv")}
     ens = {r["model"]: r for r in rows(JB / "results/season1/scores_ensemble.csv")}
@@ -101,12 +118,14 @@ def game():
     acc = {r["voter_tier"]: {t: r[t] for t in tiers} for r in table("vote_accuracy_tier.csv")}
     fam = [r for r in table("family_bias.csv") if r["期待票数"] and float(r["期待票数"]) >= 10]
     comp = table("top_suspected_by_table.csv")
-    return {"season": "season1", "tiers": tiers, "models": models,
-            "wrong_vote_by_tier": [{"voter": v, **{t: wrong[v][t] for t in tiers}} for v in tiers],
+    corr = [{"metric": k, "rho": _spearman([m["mean_rank"] for m in models], [m[k] for m in models])} for k in ("vote_accuracy", "suspected", "wolf_survival", "win_rate")]
+    scores = {"season": "season1", "models": models}
+    review = {"season": "season1", "tiers": tiers, "n_models": len(models), "correlations": corr,
             "vote_accuracy_by_tier": [{"voter": v, **{t: acc[v][t] for t in tiers}} for v in tiers],
             "chance_accuracy": 0.31,
             "family_bias": [{"family": r["ファミリー"], "models": r["モデル数"], "vote_ratio": r["誤投票で同ファミリーを選ぶ比"], "vote_expected": r["期待票数"], "attack_ratio": r["襲撃で同ファミリーを選ぶ比"], "attack_expected": r["期待襲撃数"]} for r in fam],
-            "by_table": [{"n_bottom": r["卓の下位層の人数"], "votes": r["票数"], "top_ratio": r["上位層が選ばれる比"], "bottom_ratio": r["下位層が選ばれる比"]} for r in comp]}
+            "by_table": [{"n_bottom": int(r["卓の下位層の人数"]), "votes": int(r["票数"]), "top_ratio": r["上位層が選ばれる比"], "bottom_ratio": r["下位層が選ばれる比"]} for r in comp]}
+    return scores, review
 
 
 def _isnum(v):
@@ -115,7 +134,8 @@ def _isnum(v):
 
 
 if __name__ == "__main__":
-    for name, data in (("agents", agents()), ("judges", judges()), ("game", game())):
+    scores, review = game()
+    for name, data in (("agents", agents()), ("judges", judges()), ("scores", scores), ("review", review)):
         p = SITE / "data/benchmark" / f"{name}.yaml"
         p.write_text("# 自動生成: scripts/benchmark/build_benchmark_yaml.py\n" + yaml.safe_dump(data, allow_unicode=True, sort_keys=False), encoding="utf-8")
         print(p, "ok")

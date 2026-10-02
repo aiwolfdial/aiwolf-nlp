@@ -1,0 +1,97 @@
+{{- /* レビュー: data/benchmark/review.yaml（相対順位とゲームスコアの相関、卓の構成、ファミリー贔屓） */}}
+{{- $en := eq site.Language.Lang "en" }}
+{{- $d := site.Data.benchmark.review }}
+{{- $tierName := dict "上位" (cond $en "Top" "上位") "中位" (cond $en "Middle" "中位") "下位" (cond $en "Bottom" "下位") }}
+{{- $metricName := dict "vote_accuracy" (cond $en "Vote accuracy" "投票精度") "suspected" (cond $en "Suspected" "疑われやすさ") "wolf_survival" (cond $en "Survival as werewolf" "人狼のときの生存率") "win_rate" (cond $en "Win rate" "勝率") }}
+<p class="results-muted">
+{{- if $en -}}
+The relative ranking on the Agents page depends on the judge model, which may favour its own family. The game scores do not depend on any judge. This page puts the two side by side: if a judge-independent score moves together with the judge ranking, the ranking is supported by something other than the judge's taste.
+{{- else -}}
+[エージェント](../agents/)の相対順位は LLM-as-a-Judge によるもので、ジャッジモデルが自分のファミリーを贔屓する恐れがあります。[ゲームスコア](../scores/)はジャッジに依りません。このページは両者を突き合わせたもので、ジャッジに依らないスコアが相対順位と同じ向きに動いていれば、順位はジャッジの好みだけで決まっていない、と言えます。
+{{- end -}}
+</p>
+
+<h2 id="correlation">{{ cond $en "Relative ranking vs. game scores" "相対順位とゲームスコアの関係" }}</h2>
+<p class="results-muted">{{ if $en }}Spearman rank correlation between the mean rank of the relative evaluation (lower is better) and each game score over the {{ $d.n_models }} models. A negative value means that better-ranked models have a higher score.{{ else }}相対評価の平均順位（小さいほど良い）と各スコアの、{{ $d.n_models }} モデルでの Spearman 順位相関です。負の値は、順位の良いモデルほどスコアが高いことを意味します。{{ end }}</p>
+<div class="results-tables">
+<table class="results-agreement">
+  <thead><tr><th>{{ cond $en "Game score" "ゲームスコア" }}</th><th>Spearman ρ</th><th>{{ cond $en "Reading" "読み" }}</th></tr></thead>
+  <tbody>
+  {{- range $d.correlations }}
+  {{- $read := "" }}
+  {{- if eq .metric "vote_accuracy" }}{{ $read = cond $en "Better-ranked models hit the werewolf more often. Moderate agreement." "順位の良いモデルほど人狼に当てる。ほどよく一致" }}
+  {{- else if eq .metric "suspected" }}{{ $read = cond $en "Weak, and in the opposite direction: better-ranked villagers are suspected slightly more. See below." "弱く、向きも逆。順位の良い村人の方が少し疑われる。下で分けて見る" }}
+  {{- else if eq .metric "wolf_survival" }}{{ $read = cond $en "Better-ranked werewolves survive more. Weak agreement." "順位の良い人狼ほど生き残る。弱く一致" }}
+  {{- else }}{{ $read = cond $en "Weak. Win rate depends on the role draw." "弱い。勝率は役職の引きに左右される" }}{{ end }}
+  <tr><td class="results-team">{{ index $metricName .metric }}</td><td>{{ with .rho }}{{ printf "%+.2f" . }}{{ else }}-{{ end }}</td><td class="results-muted">{{ $read }}</td></tr>
+  {{- end }}
+  </tbody>
+</table>
+</div>
+
+<h2 id="table">{{ cond $en "Who suspects the good models" "良いモデルは誰に疑われるのか" }}</h2>
+<p class="results-muted">
+{{- if $en -}}
+Models are split into three tiers (top / middle / bottom) by the relative ranking. For each wrong vote of a village-side voter (a vote at a player who is not the werewolf), we ask which tier the chosen target belonged to, relative to choosing uniformly among the candidates alive at that vote (1.0 = indifferent). The chart splits the votes by how many bottom-tier models sat at the table.
+{{- else -}}
+モデルを相対順位で上位・中位・下位の 3 層に分けます。村人陣営の投票者の誤投票（人狼でない相手に入れた票）について、選ばれた相手の層を、その時点の生存者から一様に選んだ場合との比で見ます（1.0 が無差別）。グラフは、卓にいた下位層のモデルの人数で票を分けたものです。
+{{- end -}}
+</p>
+{{- $rows := $d.by_table }}
+{{- $w := 560 }}{{ $h := 260 }}{{ $left := 44 }}{{ $bottom := 40 }}{{ $top := 16 }}
+{{- $max := 2.5 }}
+{{- $plotH := sub (sub $h $bottom) $top }}{{ $plotW := sub $w $left }}
+{{- $n := len $rows }}{{ $group := div (float $plotW) (float $n) }}{{ $bw := mul $group 0.32 }}
+<figure class="bench-chart">
+<svg viewBox="0 0 {{ $w }} {{ $h }}" width="100%" role="img" aria-label="{{ cond $en "Suspicion of top- and bottom-tier villagers by number of bottom-tier models at the table" "卓の下位層の人数ごとの、上位層・下位層の村人の疑われやすさ" }}">
+  {{- range $g := slice 0.5 1.0 1.5 2.0 2.5 }}
+  {{- $y := sub (add $top $plotH) (mul (div $g $max) $plotH) }}
+  <line x1="{{ $left }}" y1="{{ $y }}" x2="{{ $w }}" y2="{{ $y }}" stroke="currentColor" stroke-opacity="{{ cond (eq $g 1.0) 0.6 0.15 }}" stroke-dasharray="{{ cond (eq $g 1.0) "none" "3 3" }}"/>
+  <text x="{{ sub $left 6 }}" y="{{ add $y 4 }}" font-size="11" text-anchor="end" fill="currentColor">{{ printf "%.1f" $g }}</text>
+  {{- end }}
+  {{- range $i, $r := $rows }}
+  {{- $x0 := add $left (mul $group (add (float $i) 0.5)) }}
+  {{- $ht := mul (div (float $r.top_ratio) $max) $plotH }}{{ $hb := mul (div (float $r.bottom_ratio) $max) $plotH }}
+  <rect x="{{ sub $x0 $bw }}" y="{{ sub (add $top $plotH) $ht }}" width="{{ sub $bw 2 }}" height="{{ $ht }}" fill="#2b6cb0"/>
+  <rect x="{{ add $x0 2 }}" y="{{ sub (add $top $plotH) $hb }}" width="{{ sub $bw 2 }}" height="{{ $hb }}" fill="#c05621"/>
+  <text x="{{ sub $x0 (div $bw 2) }}" y="{{ sub (sub (add $top $plotH) $ht) 4 }}" font-size="11" text-anchor="middle" fill="currentColor">{{ printf "%.2f" $r.top_ratio }}</text>
+  <text x="{{ add $x0 (div $bw 2) }}" y="{{ sub (sub (add $top $plotH) $hb) 4 }}" font-size="11" text-anchor="middle" fill="currentColor">{{ printf "%.2f" $r.bottom_ratio }}</text>
+  <text x="{{ $x0 }}" y="{{ add (add $top $plotH) 16 }}" font-size="12" text-anchor="middle" fill="currentColor">{{ $r.n_bottom }}</text>
+  <text x="{{ $x0 }}" y="{{ add (add $top $plotH) 30 }}" font-size="10" text-anchor="middle" fill="currentColor" opacity="0.7">{{ $r.votes }} {{ cond $en "votes" "票" }}</text>
+  {{- end }}
+  <text x="{{ add $left (div $plotW 2) }}" y="{{ sub $h 2 }}" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.8">{{ cond $en "Bottom-tier models at the table (of the 4 other players)" "卓にいる下位層のモデルの人数（他の 4 人のうち）" }}</text>
+</svg>
+<figcaption class="results-muted"><span style="color:#2b6cb0">■</span> {{ cond $en "top-tier villager chosen" "上位層の村人が選ばれる比" }}　<span style="color:#c05621">■</span> {{ cond $en "bottom-tier villager chosen" "下位層の村人が選ばれる比" }}　— 1.0 = {{ cond $en "indifferent" "無差別" }}</figcaption>
+</figure>
+<p class="results-muted">
+{{- if $en -}}
+At tables made of top- and middle-tier models only, top-tier villagers are suspected less than chance; the more bottom-tier models sit at the table, the more the top-tier villagers are suspected, and the less the bottom-tier ones are. The "suspicion" of good models is thus mostly something weaker models do, plausibly by voting at the most conspicuous speaker. The rightmost group has few votes.
+{{- else -}}
+上位・中位だけの卓では上位の村人は無差別より疑われにくく、下位のモデルが増えるほど上位の村人が疑われ、下位の村人は疑われなくなります。良いモデルが疑われるのは主に弱いモデルが混ざった卓で起きることで、目立つ発話に短絡的に票を入れている可能性があります。右端は票数が少ないので値は振れます。
+{{- end -}}
+</p>
+
+<h3>{{ cond $en "Vote accuracy by tier of voter and werewolf" "投票精度（行 = 投票者の層、列 = 人狼の層）" }}</h3>
+<div class="results-tables">
+<table class="results-agreement">
+  <thead><tr><th>{{ cond $en "Voter \\ Werewolf" "投票者＼人狼" }}</th>{{ range $d.tiers }}<th>{{ index $tierName . }}</th>{{ end }}</tr></thead>
+  <tbody>{{ range $d.vote_accuracy_by_tier }}{{ $r := . }}<tr><td class="results-team">{{ index $tierName .voter }}</td>{{ range $d.tiers }}<td>{{ printf "%.2f" (index $r .) }}</td>{{ end }}</tr>{{ end }}</tbody>
+</table>
+</div>
+<p class="results-muted">{{ if $en }}Rate at which village-side votes hit the werewolf; chance is about {{ printf "%.2f" $d.chance_accuracy }}. By tier the differences are small, and a top-tier werewolf is not harder to catch than a bottom-tier one.{{ else }}村人陣営の票が人狼に当たった率で、当てずっぽうはおよそ {{ printf "%.2f" $d.chance_accuracy }} です。層で分けると差は小さく、上位の人狼が特に見破られにくいということもありません。{{ end }}</p>
+
+<h2 id="family">{{ cond $en "Same-family favouritism" "同じファミリーへの贔屓" }}</h2>
+<div class="results-tables">
+<table class="results-agreement">
+  <thead><tr><th>{{ cond $en "Family" "ファミリー" }}</th><th>{{ cond $en "Models" "モデル数" }}</th><th>{{ cond $en "Wrong votes at same family" "誤投票で同ファミリーを選ぶ比" }}</th><th>{{ cond $en "Expected votes" "期待票数" }}</th><th>{{ cond $en "Attacks at same family" "襲撃で同ファミリーを選ぶ比" }}</th><th>{{ cond $en "Expected attacks" "期待襲撃数" }}</th></tr></thead>
+  <tbody>{{ range $d.family_bias }}<tr><td class="results-team">{{ .family }}</td><td>{{ .models }}</td><td>{{ printf "%.2f" .vote_ratio }}</td><td>{{ .vote_expected }}</td><td>{{ printf "%.2f" .attack_ratio }}</td><td>{{ .attack_expected }}</td></tr>{{ end }}</tbody>
+</table>
+</div>
+<p class="results-muted">
+{{- if $en -}}
+Ratio of choosing a target of the same family (the model itself excluded) to choosing uniformly; 1.0 = indifferent. Families with fewer than 10 expected votes are omitted. Neither in wrong votes nor in werewolf attacks do models spare or target their own family, so the self-preference seen in some judge models does not appear in how the models play against each other.
+{{- else -}}
+同じファミリーの相手（自分自身は除く）を選んだ比で、1.0 が無差別です。期待票数が 10 未満のファミリーは省いています。誤投票でも襲撃でも、同じファミリーを避ける・狙う傾向は見えません。ジャッジモデルに見られる自己贔屓は、対戦相手としての振る舞いには出ていません。
+{{- end -}}
+</p>
+<p class="results-muted">{{ cond $en "Caveat: the tiers come from the judge ranking, so a judge bias can leak into the split. The correlations in the first table and the scores themselves are independent of the judge." "注意: 層分けはジャッジの順位に依っているので、ジャッジの偏りが層に入り込みえます。最初の表の相関とスコアそのものはジャッジに依りません。" }}</p>
