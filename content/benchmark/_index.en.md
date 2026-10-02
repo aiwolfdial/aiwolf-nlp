@@ -12,4 +12,4 @@ Separately from the contest results, the organizers run two benchmarks under ide
 - **Relative judge**: how closely each public LLM, used as the ranking judge of the contests, agrees with the human evaluation (per-rater rankings) of past contests. This is the basis for choosing the judge model used in the contests.
 - **Count judge**: a different kind of LLM judge that counts deduction and addition events per utterance, with its agreement with the same human evaluation.
 - **Game scores**: judge-independent scores computed from the game records alone.
-- **Review**: a cross-analysis of the relative evaluation and the game scores.
+- **Review**: from the game records, the wrong-vote rate by the composition of the table and whether models favour their own family.

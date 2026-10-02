@@ -1,44 +1,8 @@
-# 自動生成: scripts/benchmark/build_benchmark_yaml.py
 season: season1
 tiers:
 - 上位
 - 中位
 - 下位
-n_models: 28
-correlations:
-- metric: vote_accuracy
-  rho: 0.49
-- metric: suspected
-  rho: -0.25
-- metric: win_rate
-  rho: 0.22
-wrong_vote_by_tier:
-- voter: 上位
-  上位: 1.03
-  中位: 1.0
-  下位: 0.98
-- voter: 中位
-  上位: 1.08
-  中位: 1.01
-  下位: 0.92
-- voter: 下位
-  上位: 1.04
-  中位: 1.04
-  下位: 0.93
-vote_accuracy_by_tier:
-- voter: 上位
-  上位: 0.39
-  中位: 0.42
-  下位: 0.41
-- voter: 中位
-  上位: 0.44
-  中位: 0.43
-  下位: 0.38
-- voter: 下位
-  上位: 0.42
-  中位: 0.35
-  下位: 0.41
-chance_accuracy: 0.31
 family_bias:
 - family: gemma
   models: 7.0
@@ -63,41 +27,23 @@ by_table:
   games: 61
   votes: 226
   wrong_rate: 0.55
-  top_ratio: 1.04
-  mid_ratio: 0.97
-  bottom_ratio: null
 - n_bottom: 1
   games: 158
   votes: 594
   wrong_rate: 0.6
-  top_ratio: 1.05
-  mid_ratio: 0.94
-  bottom_ratio: 1.03
 - n_bottom: 2
   games: 209
   votes: 778
   wrong_rate: 0.6
-  top_ratio: 1.1
-  mid_ratio: 1.04
-  bottom_ratio: 0.9
 - n_bottom: 3
   games: 101
   votes: 362
   wrong_rate: 0.57
-  top_ratio: 0.81
-  mid_ratio: 1.31
-  bottom_ratio: 0.95
 - n_bottom: 4
   games: 25
   votes: 95
   wrong_rate: 0.66
-  top_ratio: 1.11
-  mid_ratio: 0.78
-  bottom_ratio: 1.0
 - n_bottom: 5
   games: 3
   votes: 9
   wrong_rate: 0.78
-  top_ratio: null
-  mid_ratio: null
-  bottom_ratio: 1.0

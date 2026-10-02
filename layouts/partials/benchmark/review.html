@@ -1,85 +1,54 @@
-{{- /* レビュー: data/benchmark/review.yaml（LLM ジャッジの相対順位とゲームスコアの相関、誰が誰を疑うか、ファミリー贔屓） */}}
+{{- /* レビュー: data/benchmark/review.yaml（卓の構成ごとの誤投票率、ファミリー内の贔屓） */}}
 {{- $en := eq site.Language.Lang "en" }}
 {{- $d := site.Data.benchmark.review }}
-{{- $tierName := dict "上位" (cond $en "Top" "上位") "中位" (cond $en "Middle" "中位") "下位" (cond $en "Bottom" "下位") }}
-{{- $tierColor := dict "上位" "#2b6cb0" "中位" "#718096" "下位" "#c05621" }}
-{{- $metricName := dict "vote_accuracy" (cond $en "Vote accuracy" "投票精度") "suspected" (cond $en "Suspected" "疑われやすさ") "win_rate" (cond $en "Win rate" "勝率") }}
 <p class="results-muted">
 {{- if $en -}}
-This page compares the two kinds of results in this benchmark. One is the <b>relative ranking by the LLM judge</b> (the Agents page): a judge model reads each game and ranks the five players, so the result depends on the judge model, which may favour its own family. The other is the <b>game scores</b>: numbers computed from the game records alone (who voted for whom, who survived), which do not depend on any judge. If the two agree, the LLM judge's ranking is supported by something other than the judge's taste.
+Two questions answered from the game records of the agent benchmark (<a href="../agents/">Agents</a>, {{ $d.season }}), independent of any judge model: does the composition of the table change how often villagers vote at the wrong player, and do models go easy on their own model family?
 {{- else -}}
-このページは、ベンチマークの 2 種類の結果を突き合わせたものです。1 つは <b>LLM ジャッジによる相対評価の順位</b>（<a href="../agents/">エージェント</a>のページ）で、ジャッジモデルが各試合を読んで 5 人を順位付けしたものです。結果はジャッジモデルに依存し、ジャッジが自分のファミリーを贔屓する恐れがあります。もう 1 つは<b>ゲームスコア</b>（<a href="../scores/">ゲームスコア</a>のページ）で、対戦記録（誰が誰に投票したか、誰が生き残ったか）だけから計算した数値です。こちらはジャッジに依りません。両者が一致していれば、LLM ジャッジの順位はジャッジの好みだけで決まっていない、と言えます。
+エージェントのベンチマーク（<a href="../agents/">エージェント</a>、{{ $d.season }}）の対戦記録から、ジャッジモデルに依らずに答えられる 2 つの問いを見ます。卓の顔ぶれで村人の誤投票率は変わるか、そしてモデルは自分と同じファミリーを疑いにくいか、です。
 {{- end -}}
 </p>
 
-<h2 id="correlation">{{ cond $en "Does the LLM judge's ranking agree with the game scores?" "LLM ジャッジの相対順位は、ゲームスコアと一致するか" }}</h2>
-<p class="results-muted">{{ if $en }}Spearman rank correlation, over the {{ $d.n_models }} models, between the LLM judge's relative ranking and each game score, with signs arranged so that <b>positive means "a better rank goes with a better score"</b> (for "suspected", a better score is a lower one). +1 would be perfect agreement, 0 no relation.{{ else }}{{ $d.n_models }} モデルについて、LLM ジャッジの相対順位と各ゲームスコアの Spearman 順位相関です。符号は<b>「順位が良いほど結果も良い」を正</b>にそろえています（疑われやすさは、低いほど良い結果として扱います）。+1 が完全一致、0 が無関係です。{{ end }}</p>
-<div class="results-tables">
-<table class="results-agreement">
-  <thead><tr><th>{{ cond $en "Game score" "ゲームスコア" }}</th><th>Spearman ρ</th><th>{{ cond $en "Reading" "読み" }}</th></tr></thead>
-  <tbody>
-  {{- range $d.correlations }}
-  {{- $read := "" }}
-  {{- if eq .metric "vote_accuracy" }}{{ $read = cond $en "Models ranked higher by the LLM judge hit the werewolf more often when voting. Moderate agreement." "LLM ジャッジが上位に置いたモデルほど、投票で人狼に当てている。ほどよく一致" }}
-  {{- else if eq .metric "suspected" }}{{ $read = cond $en "Negative: models ranked higher are, if anything, suspected slightly more when they are villagers. Examined below." "負。上位のモデルの方が村人のときにむしろ少し多く疑われている。下で詳しく見る" }}
-  {{- else }}{{ $read = cond $en "Weak. Win rate depends heavily on which role was drawn." "弱い。勝率は引いた役職に大きく左右される" }}{{ end }}
-  <tr><td class="results-team">{{ index $metricName .metric }}</td><td>{{ with .rho }}{{ printf "%+.2f" . }}{{ else }}-{{ end }}</td><td class="results-muted">{{ $read }}</td></tr>
-  {{- end }}
-  </tbody>
-</table>
-</div>
-
-<h2 id="suspicion">{{ cond $en "Who wrongly suspects whom" "誰が誰を間違って疑うのか" }}</h2>
+<h2 id="table">{{ cond $en "Wrong-vote rate by the composition of the table" "卓の構成ごとの誤投票率" }}</h2>
 <p class="results-muted">
 {{- if $en -}}
-The table above says that models ranked higher by the LLM judge are, if anything, suspected slightly <i>more</i> when they are villagers (the negative value). To see who does the suspecting, we split the models into three tiers by the LLM judge's ranking: <b>top</b>, <b>middle</b> and <b>bottom</b> (about nine models each); the tables below focus on the top and bottom tiers. Then we look only at <b>wrong votes</b>: votes cast by a village-side player at someone who is not the werewolf. For each wrong vote we ask which tier the chosen target belonged to.<br>
-If voters picked their target at random from the players alive at that moment, each tier would receive votes in proportion to how many of its members were available. We divide the votes a tier actually received by that random expectation and call the result its <b>suspicion ratio</b>: 1.0 means "no more or less than random", 1.2 means "20% more often than random", 0.8 means "20% less often".
+Models are split into <b>top, middle and bottom</b> tiers (about 9 each) by their rank on the Agents page, and the games are grouped by how many of the five players at the table were bottom-tier models. A <b>wrong vote</b> is a vote by a village-side player at someone who is not the werewolf; the rate is the share of village-side votes that were wrong. The last rows have few games, so their values fluctuate.
 {{- else -}}
-上の表では、LLM ジャッジが上位に置いたモデルの方が、村人のときにむしろ少し多く疑われていました（負の値）。誰がそう疑っているのかを見るために、モデルを LLM ジャッジの順位で<b>上位・中位・下位</b>の 3 層（各 9 モデル前後）に分けます。以下の表では上位と下位に注目します。そして<b>間違った票</b>、つまり村人陣営のプレイヤーが人狼でない相手に入れた票だけを集め、1 票ずつ「選ばれた相手はどの層か」を見ます。<br>
-投票者がその時点の生存者から無作為に相手を選ぶなら、各層は生存者の中での人数に比例して票を受けるはずです。実際に受けた票数をその無作為の場合の票数で割ったものを<b>疑われ比</b>と呼びます。1.0 なら無作為と同じ、1.2 なら無作為より 20% 多く疑われた、0.8 なら 20% 少ない、という意味です。
+モデルを<a href="../agents/">エージェント</a>の順位で<b>上位・中位・下位</b>の 3 層（各 9 モデル前後）に分け、試合を「卓の 5 人のうち下位層のモデルが何人いたか」で分けます。<b>誤投票</b>は村人陣営のプレイヤーが人狼でない相手に入れた票で、誤投票率は村人陣営の票のうち誤投票だった割合です。下の行ほど試合数が少ないので値は振れます。
 {{- end -}}
 </p>
-
-<h3>{{ cond $en "Suspicion by the composition of the table" "卓の顔ぶれごとの疑われ比" }}</h3>
-<p class="results-muted">{{ if $en }}The games are split by how many of the five players at the table were bottom-tier models. For each group: the number of games, the fraction of village-side votes that were wrong (cast at someone who is not the werewolf), and the suspicion ratio of top-tier and of bottom-tier villagers among those wrong votes (a dash when that tier was not at the table). The last rows have few games, so their values fluctuate.{{ else }}試合を、卓の 5 人のうち下位層のモデルが何人いたかで分けます。各行に、試合数、村人陣営の票のうち間違った票（人狼でない相手に入れた票）の割合、そして間違った票の中での上位層の村人と下位層の村人の疑われ比を示します（その層が卓にいない場合は「-」）。下の行ほど試合数が少ないので値は振れます。{{ end }}</p>
 <div class="results-tables">
 <table class="results-agreement">
-  <thead><tr><th>{{ cond $en "Bottom-tier models at the table (of 5)" "卓の下位層の人数（5 人中）" }}</th><th>{{ cond $en "Games" "試合数" }}</th><th>{{ cond $en "Wrong-vote rate" "誤投票率" }}</th><th>{{ cond $en "Top-tier villager suspected" "上位層の村人の疑われ比" }}</th><th>{{ cond $en "Bottom-tier villager suspected" "下位層の村人の疑われ比" }}</th></tr></thead>
-  <tbody>{{ range $d.by_table }}<tr><td>{{ .n_bottom }}</td><td>{{ .games }}</td><td>{{ with .wrong_rate }}{{ printf "%.0f%%" (mul 100 .) }}{{ else }}-{{ end }}</td><td>{{ with .top_ratio }}{{ printf "%.2f" . }}{{ else }}-{{ end }}</td><td>{{ with .bottom_ratio }}{{ printf "%.2f" . }}{{ else }}-{{ end }}</td></tr>{{ end }}</tbody>
+  <thead><tr><th>{{ cond $en "Bottom-tier models at the table (of 5)" "卓の下位層の人数（5 人中）" }}</th><th>{{ cond $en "Games" "試合数" }}</th><th>{{ cond $en "Village-side votes" "村人陣営の票数" }}</th><th>{{ cond $en "Wrong-vote rate" "誤投票率" }}</th></tr></thead>
+  <tbody>{{ range $d.by_table }}<tr><td>{{ .n_bottom }}</td><td>{{ .games }}</td><td>{{ .votes }}</td><td>{{ with .wrong_rate }}{{ printf "%.0f%%" (mul 100 .) }}{{ else }}-{{ end }}</td></tr>{{ end }}</tbody>
 </table>
 </div>
 <p class="results-muted">
 {{- if $en -}}
-Whatever the composition of the table, top-tier villagers are suspected at about the random level (0.8–1.1), and so are bottom-tier villagers. So "good models get suspected more" is not something that happens strongly at tables full of weak models. Looking at the voters instead, bottom- and middle-tier voters wrongly suspect top-tier villagers slightly more often than random (about 1.05–1.08) and bottom-tier villagers slightly less often (about 0.92), while top-tier voters are close to random for every target. The direction fits the idea that weaker models tend to vote at the most conspicuous speaker, but the effect is small.
+With no bottom-tier model at the table, 55% of village-side votes still miss the werewolf; the rate rises only slowly as bottom-tier models are added and stays around 60% up to three of them. Wrong votes are mostly a property of the game (little information, four talks per day) rather than of weak players at the table. Caveat: the tiers come from the LLM judge's ranking, so a bias of the judge can leak into the split.
 {{- else -}}
-卓の顔ぶれを変えても、上位の村人の疑われ比はほぼ無作為の水準（0.8〜1.1）で、下位の村人も同様です。「良いモデルほど疑われる」は、弱いモデルばかりの卓で強く起きる現象ではありません。投票者の側から見ると、下位・中位の投票者は上位の村人を無作為より少し多く疑い（1.05〜1.08）、下位の村人を少し少なく疑います（0.92 前後）。上位の投票者はどの相手に対してもほぼ無作為です。「弱いモデルが目立つ発話に票を入れる」という見方と向きは合いますが、効果は小さいです。
+下位層のモデルが卓に 1 人もいなくても、村人陣営の票の 55% は人狼を外しています。下位層が増えても誤投票率はゆるやかにしか上がらず、3 人までは 60% 前後です。誤投票の大半は弱いプレイヤーのせいではなく、情報の少ないゲーム（1 日 4 発言）そのものの性質と見るのが妥当です。注意: 層分けは LLM ジャッジの順位に依っているので、ジャッジの偏りが層に入り込みえます。
 {{- end -}}
 </p>
 
-<h3>{{ cond $en "Vote accuracy by tier" "投票精度を層ごとに見る" }}</h3>
-<p class="results-muted">{{ if $en }}Rate at which village-side votes hit the werewolf (chance is about {{ printf "%.2f" $d.chance_accuracy }}). Rows are the tier of the voter, columns the tier of the werewolf.{{ else }}村人陣営の票が人狼に当たった率です（当てずっぽうはおよそ {{ printf "%.2f" $d.chance_accuracy }}）。行が投票者の層、列が人狼の層です。{{ end }}</p>
+<h2 id="family">{{ cond $en "Do models go easy on their own family?" "自分のファミリーは疑いにくいか" }}</h2>
+<p class="results-muted">
+{{- if $en -}}
+For each voter (or attacking werewolf), we ask whether it chose a target of its own model family (gemma, qwen and so on) more or less often than random. If voters picked their target at random from the players alive at that moment, each family would receive votes in proportion to how many of its members were available; the table shows the votes actually received divided by that expectation (the model itself is never a candidate). 1.0 = random; below 1.0 means the family was spared. Wrong votes only for voting, all attacks for the werewolf. Families with fewer than 10 expected votes are omitted.
+{{- else -}}
+投票者（または襲撃する人狼）が、自分と同じモデルファミリー（gemma、qwen など）の相手を無作為より多く選んだか少なく選んだかを見ます。投票者がその時点の生存者から無作為に相手を選ぶなら、各ファミリーは生存者の中での人数に比例して票を受けるはずです。実際に受けた票数をその期待値で割った比を示します（自分自身は候補に入りません）。1.0 が無作為で、1.0 を下回れば同じファミリーを避けたことになります。投票は誤投票のみ、襲撃は全件が対象です。期待票数が 10 未満のファミリーは省いています。
+{{- end -}}
+</p>
 <div class="results-tables">
 <table class="results-agreement">
-  {{- $tb := slice "上位" "下位" }}
-  <thead><tr><th>{{ cond $en "Voter \\ Werewolf" "投票者＼人狼" }}</th>{{ range $tb }}<th>{{ index $tierName . }}</th>{{ end }}</tr></thead>
-  <tbody>{{ range $d.vote_accuracy_by_tier }}{{ $r := . }}{{ if in $tb .voter }}<tr><td class="results-team">{{ index $tierName .voter }}</td>{{ range $tb }}<td>{{ printf "%.2f" (index $r .) }}</td>{{ end }}</tr>{{ end }}{{ end }}</tbody>
-</table>
-</div>
-<p class="results-muted">{{ cond $en "Split into tiers, the differences are small, and a top-tier werewolf is not harder to catch than a bottom-tier one." "層で分けると差は小さく、上位の人狼が特に見破られにくいということもありません。" }}</p>
-
-<h2 id="family">{{ cond $en "Do models favour their own family?" "同じファミリーを贔屓するか" }}</h2>
-<p class="results-muted">{{ if $en }}The same ratio, but asking whether a voter (or an attacking werewolf) chose a target of its own model family — gemma, qwen and so on — more or less often than random (the model itself is never a candidate). 1.0 = random. Families with fewer than 10 expected votes are omitted.{{ else }}同じ疑われ比の考え方で、投票者（または襲撃する人狼）が自分と同じモデルファミリー（gemma、qwen など）の相手を、無作為より多く選んだか少なく選んだかを見ます（自分自身は候補に入りません）。1.0 が無作為です。期待票数が 10 未満のファミリーは省いています。{{ end }}</p>
-<div class="results-tables">
-<table class="results-agreement">
-  <thead><tr><th>{{ cond $en "Family" "ファミリー" }}</th><th>{{ cond $en "Models" "モデル数" }}</th><th>{{ cond $en "Wrong votes at own family" "間違った票で同ファミリーを選ぶ比" }}</th><th>{{ cond $en "Expected votes" "期待票数" }}</th><th>{{ cond $en "Attacks at own family" "襲撃で同ファミリーを選ぶ比" }}</th><th>{{ cond $en "Expected attacks" "期待襲撃数" }}</th></tr></thead>
+  <thead><tr><th>{{ cond $en "Family" "ファミリー" }}</th><th>{{ cond $en "Models" "モデル数" }}</th><th>{{ cond $en "Wrong votes at own family" "誤投票で同ファミリーを選ぶ比" }}</th><th>{{ cond $en "Expected votes" "期待票数" }}</th><th>{{ cond $en "Attacks at own family" "襲撃で同ファミリーを選ぶ比" }}</th><th>{{ cond $en "Expected attacks" "期待襲撃数" }}</th></tr></thead>
   <tbody>{{ range $d.family_bias }}<tr><td class="results-team">{{ .family }}</td><td>{{ .models }}</td><td>{{ printf "%.2f" .vote_ratio }}</td><td>{{ .vote_expected }}</td><td>{{ printf "%.2f" .attack_ratio }}</td><td>{{ .attack_expected }}</td></tr>{{ end }}</tbody>
 </table>
 </div>
 <p class="results-muted">
 {{- if $en -}}
-Neither in wrong votes nor in werewolf attacks do models spare or target their own family. The self-preference that some judge models show when ranking does not appear in how the models play against each other.
+Neither in wrong votes nor in werewolf attacks do models spare or target their own family: the two large families sit close to 1.0 in both columns, and the mistral row rests on too few expected votes to read. The self-preference that some judge models show when ranking does not appear in how the models play against each other.
 {{- else -}}
-間違った票でも襲撃でも、同じファミリーを避ける・狙う傾向は見えません。ジャッジモデルが順位付けのときに見せる自己贔屓は、対戦相手としての振る舞いには出ていません。
+誤投票でも襲撃でも、同じファミリーを避ける・狙う傾向は見えません。モデル数の多い 2 ファミリーはどちらの列も 1.0 の近くにあり、mistral の行は期待票数が少なすぎて読めません。ジャッジモデルが順位付けのときに見せる自己贔屓は、対戦相手としての振る舞いには現れていません。
 {{- end -}}
 </p>
-<p class="results-muted">{{ cond $en "Caveat: the tiers come from the LLM judge's ranking, so a bias of the judge can leak into the split. The correlations in the first table and the game scores themselves are independent of the judge." "注意: 層分けは LLM ジャッジの順位に依っているので、ジャッジの偏りが層に入り込みえます。最初の表の相関とゲームスコアそのものはジャッジに依りません。" }}</p>

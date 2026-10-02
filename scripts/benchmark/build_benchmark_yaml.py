@@ -128,22 +128,13 @@ def game():
                 out.append({k: (round(float(v), 2) if v not in ("", None) and k not in ("ファミリー",) and _isnum(v) else v) for k, v in r.items()})
         return out
     tiers = ["上位", "中位", "下位"]
-    wrong = {r[""]: {t: r[t] for t in tiers} for r in table("wrong_vote_tier.csv")}
-    acc = {r["voter_tier"]: {t: r[t] for t in tiers} for r in table("vote_accuracy_tier.csv")}
     fam = [r for r in table("family_bias.csv") if r["期待票数"] and float(r["期待票数"]) >= 10]
     comp = table("top_suspected_by_table.csv")
-    # 符号は「相対順位が良い ↔ 結果が良い」を正にそろえる（順位は小さいほど良いので反転、疑われやすさは小さいほど良いので反転）
-    corr = [{"metric": k, "rho": _spearman([-m["mean_rank"] for m in models], [(-m[k] if k == "suspected" else m[k]) if m[k] is not None else None for m in models])}
-            for k in ("vote_accuracy", "suspected", "win_rate")]
     scores = {"season": "season1", "models": models}
     nz = lambda v: v if _isnum(v) else None
-    review = {"season": "season1", "tiers": tiers, "n_models": len(models), "correlations": corr,
-            "wrong_vote_by_tier": [{"voter": v, **{t: nz(wrong[v][t]) for t in tiers}} for v in tiers],
-            "vote_accuracy_by_tier": [{"voter": v, **{t: acc[v][t] for t in tiers}} for v in tiers],
-            "chance_accuracy": 0.31,
+    review = {"season": "season1", "tiers": tiers,
             "family_bias": [{"family": r["ファミリー"], "models": r["モデル数"], "vote_ratio": r["誤投票で同ファミリーを選ぶ比"], "vote_expected": r["期待票数"], "attack_ratio": r["襲撃で同ファミリーを選ぶ比"], "attack_expected": r["期待襲撃数"]} for r in fam],
-            "by_table": [{"n_bottom": int(r["卓の下位層の人数"]), "games": int(r["試合数"]), "votes": int(r["村人陣営の票数"]), "wrong_rate": nz(r["誤投票率"]),
-                          "top_ratio": nz(r["上位層が選ばれる比"]), "mid_ratio": nz(r["中位層が選ばれる比"]), "bottom_ratio": nz(r["下位層が選ばれる比"])} for r in comp]}
+            "by_table": [{"n_bottom": int(r["卓の下位層の人数"]), "games": int(r["試合数"]), "votes": int(r["村人陣営の票数"]), "wrong_rate": nz(r["誤投票率"])} for r in comp]}
     return scores, review
 
 
