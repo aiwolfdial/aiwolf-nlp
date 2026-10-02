@@ -1,4 +1,4 @@
-{{- /* カウントジャッジ: data/benchmark/count.yaml（人手評価との一致。season1 への適用は agents.html 側） */}}
+{{- /* カウントジャッジ: data/benchmark/count.yaml（人手評価との一致。エージェントのベンチマークへの適用は agents.html 側） */}}
 {{- $en := eq site.Language.Lang "en" }}
 {{- $d := site.Data.benchmark.count }}
 {{- $rel := site.Data.benchmark.judges }}
@@ -26,11 +26,3 @@ A different kind of LLM judge from the relative judge: instead of ranking the pl
 {{- else }}
 <p class="results-muted">{{ cond $en "The benchmark run on the full set of human-rated logs is in progress; the table will appear here. On the two 5-player tracks used during development (Spring 2026 and INLG 2025), gemma-4-31B-it reached a team-level Spearman of 0.62 for deductions, 0.48 for additions and 0.61 for the net, against 0.68 for one human rater." "人手評価のある全ログでのベンチマークは実行中で、結果はここに載せます。開発中に使った 5 人村の 2 トラック（2026 春季・INLG 2025）では、gemma-4-31B-it のチーム単位の Spearman は減点 0.62、加点 0.48、合計 0.61 でした（人手の評価者 1 人は 0.68）。" }}</p>
 {{- end }}
-
-<p class="results-muted">
-{{- if $en -}}
-The result of judging the whole agent benchmark with this judge is on the <a href="../agents/#count">Agents page</a>.
-{{- else -}}
-このジャッジでエージェントのベンチマークの全試合を判定した結果は、<a href="../agents/#count">エージェント</a>のページに載せています。
-{{- end -}}
-</p>
