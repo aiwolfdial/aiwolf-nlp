@@ -9,7 +9,7 @@ How closely each public LLM, used as the judge, agrees with the human evaluation
 {{- end -}}
 </p>
 <h2 id="relative">{{ cond $en "Relative evaluation (ranking judge)" "相対評価（順位付けジャッジ）" }}</h2>
-<p class="results-muted">{{ cond $en "The judge used in the contests: [aiwolf-nlp-llm-judge](https://github.com/aiwolfdial/aiwolf-nlp-llm-judge). One request per game and criterion; the judge ranks the players." "大会で使っている順位付けのジャッジ（[aiwolf-nlp-llm-judge](https://github.com/aiwolfdial/aiwolf-nlp-llm-judge)）です。試合×基準ごとに 1 リクエストで、参加者を順位付けします。" | markdownify }}</p>
+<p class="results-muted">{{ cond $en "The judge used in the contests: <a href="https://github.com/aiwolfdial/aiwolf-nlp-llm-judge">aiwolf-nlp-llm-judge</a>. One request per game and criterion; the judge ranks the players." "大会で使っている順位付けのジャッジ（<a href="https://github.com/aiwolfdial/aiwolf-nlp-llm-judge">aiwolf-nlp-llm-judge</a>）です。試合×基準ごとに 1 リクエストで、参加者を順位付けします。" | markdownify }}</p>
 <div class="results-tables">
 <table class="results-agreement">
   <thead><tr>
