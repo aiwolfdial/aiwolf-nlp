@@ -114,13 +114,11 @@ def game():
         f = lambda a, b: round(float(r[a]) / float(r[b]), 2) if float(r[b] or 0) > 0 else None
         if r["camp"] == "VILLAGER":
             d["suspected"] = f("voted_recv", "voted_exp"); d["vote_accuracy"] = f("vote_to_wolf", "vote_to_wolf_exp")
-        elif r["camp"] == "WEREWOLF":
-            d["wolf_survival"] = round(float(r["survived"]) / float(r["games"]), 2) if float(r["games"]) > 0 else None
     models = []
     for m, e in ens.items():
         d = by.get(m, {})
         models.append({"model": m, "rank": int(e["順位"]), "mean_rank": round(float(e["ens"]), 2),
-                       "vote_accuracy": d.get("vote_accuracy"), "suspected": d.get("suspected"), "wolf_survival": d.get("wolf_survival"),
+                       "vote_accuracy": d.get("vote_accuracy"), "suspected": d.get("suspected"),
                        "win_rate": round(float(summ.get(m, {}).get("勝率_macro", 0) or 0), 2)})
     models.sort(key=lambda x: x["rank"])
     def table(name):
@@ -136,7 +134,7 @@ def game():
     comp = table("top_suspected_by_table.csv")
     # 符号は「相対順位が良い ↔ 結果が良い」を正にそろえる（順位は小さいほど良いので反転、疑われやすさは小さいほど良いので反転）
     corr = [{"metric": k, "rho": _spearman([-m["mean_rank"] for m in models], [(-m[k] if k == "suspected" else m[k]) if m[k] is not None else None for m in models])}
-            for k in ("vote_accuracy", "suspected", "wolf_survival", "win_rate")]
+            for k in ("vote_accuracy", "suspected", "win_rate")]
     scores = {"season": "season1", "models": models}
     nz = lambda v: v if _isnum(v) else None
     review = {"season": "season1", "tiers": tiers, "n_models": len(models), "correlations": corr,

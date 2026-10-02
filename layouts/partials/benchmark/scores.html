@@ -4,20 +4,20 @@
 <p class="results-muted">
 {{- if $en -}}
 Scores computed from the game records alone, independent of any judge model. In effect they are how the other models at the table treated each model. Same season and games as the Agents page ({{ $d.season }}).
-"Vote accuracy" is, when the model is on the village side, the rate at which its votes hit the werewolf, divided by the rate expected from the roles at the table (1.0 = chance; higher is better). "Suspected" is, when the model is on the village side, the votes it received divided by the votes expected if voters chose uniformly among the candidates (1.0 = indifferent; lower means less wrongly suspected). "Survival as werewolf" is the fraction of games it survived when it was the werewolf. Win rate counts all roles.
+"Vote accuracy" is, when the model is on the village side, the rate at which its votes hit the werewolf, divided by the rate expected from the roles at the table (1.0 = chance; higher is better). "Suspected" is, when the model is on the village side, the votes it received divided by the votes expected if voters chose uniformly among the candidates (1.0 = indifferent; lower means less wrongly suspected). Win rate counts all roles.
 {{- else -}}
 対戦記録だけから計算した、ジャッジモデルに依らないスコアです。言い換えると、卓にいる他のモデルがそのモデルをどう扱ったかです。対象は<a href="../agents/">エージェント</a>と同じシーズン（{{ $d.season }}）の同じ試合です。
-「投票精度」は、村人陣営のときに自分の票が人狼に当たった率を、役職の割り当てから期待される率で割ったものです（1.0 が当てずっぽう。高いほど良い）。「疑われやすさ」は、村人陣営のときに受けた票を、投票者が候補者から一様に選んだときの期待票数で割ったものです（1.0 が無差別。低いほど疑われていない）。「人狼のときの生存率」は人狼を引いた試合で生き残った割合です。勝率は全役職を通した値です。
+「投票精度」は、村人陣営のときに自分の票が人狼に当たった率を、役職の割り当てから期待される率で割ったものです（1.0 が当てずっぽう。高いほど良い）。「疑われやすさ」は、村人陣営のときに受けた票を、投票者が候補者から一様に選んだときの期待票数で割ったものです（1.0 が無差別。低いほど疑われていない）。勝率は全役職を通した値です。
 {{- end -}}
 </p>
 <div class="results-tables">
 <table class="results-agreement">
-  <thead><tr><th>{{ cond $en "Judge rank" "相対順位" }}</th><th>{{ cond $en "Model" "モデル" }}</th><th>{{ cond $en "Vote accuracy" "投票精度" }}</th><th>{{ cond $en "Suspected" "疑われやすさ" }}</th><th>{{ cond $en "Survival as werewolf" "人狼のときの生存率" }}</th><th>{{ cond $en "Win rate" "勝率" }}</th></tr></thead>
+  <thead><tr><th>{{ cond $en "Judge rank" "相対順位" }}</th><th>{{ cond $en "Model" "モデル" }}</th><th>{{ cond $en "Vote accuracy" "投票精度" }}</th><th>{{ cond $en "Suspected" "疑われやすさ" }}</th><th>{{ cond $en "Win rate" "勝率" }}</th></tr></thead>
   <tbody>
   {{- range $d.models }}
   <tr><td>{{ .rank }}</td><td class="results-team">{{ .model }}</td>
     <td>{{ with .vote_accuracy }}{{ printf "%.2f" . }}{{ else }}-{{ end }}</td><td>{{ with .suspected }}{{ printf "%.2f" . }}{{ else }}-{{ end }}</td>
-    <td>{{ with .wolf_survival }}{{ printf "%.0f%%" (mul 100 .) }}{{ else }}-{{ end }}</td><td>{{ printf "%.0f%%" (mul 100 .win_rate) }}</td></tr>
+    <td>{{ printf "%.0f%%" (mul 100 .win_rate) }}</td></tr>
   {{- end }}
   </tbody>
 </table>

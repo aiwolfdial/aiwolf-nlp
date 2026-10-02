@@ -3,7 +3,7 @@
 {{- $d := site.Data.benchmark.review }}
 {{- $tierName := dict "上位" (cond $en "Top" "上位") "中位" (cond $en "Middle" "中位") "下位" (cond $en "Bottom" "下位") }}
 {{- $tierColor := dict "上位" "#2b6cb0" "中位" "#718096" "下位" "#c05621" }}
-{{- $metricName := dict "vote_accuracy" (cond $en "Vote accuracy" "投票精度") "suspected" (cond $en "Suspected" "疑われやすさ") "wolf_survival" (cond $en "Survival as werewolf" "人狼のときの生存率") "win_rate" (cond $en "Win rate" "勝率") }}
+{{- $metricName := dict "vote_accuracy" (cond $en "Vote accuracy" "投票精度") "suspected" (cond $en "Suspected" "疑われやすさ") "win_rate" (cond $en "Win rate" "勝率") }}
 <p class="results-muted">
 {{- if $en -}}
 This page compares the two kinds of results in this benchmark. One is the <b>relative ranking by the LLM judge</b> (the Agents page): a judge model reads each game and ranks the five players, so the result depends on the judge model, which may favour its own family. The other is the <b>game scores</b>: numbers computed from the game records alone (who voted for whom, who survived), which do not depend on any judge. If the two agree, the LLM judge's ranking is supported by something other than the judge's taste.
@@ -22,7 +22,6 @@ This page compares the two kinds of results in this benchmark. One is the <b>rel
   {{- $read := "" }}
   {{- if eq .metric "vote_accuracy" }}{{ $read = cond $en "Models ranked higher by the LLM judge hit the werewolf more often when voting. Moderate agreement." "LLM ジャッジが上位に置いたモデルほど、投票で人狼に当てている。ほどよく一致" }}
   {{- else if eq .metric "suspected" }}{{ $read = cond $en "Negative: models ranked higher are, if anything, suspected slightly more when they are villagers. Examined below." "負。上位のモデルの方が村人のときにむしろ少し多く疑われている。下で詳しく見る" }}
-  {{- else if eq .metric "wolf_survival" }}{{ $read = cond $en "Models ranked higher survive more often as the werewolf. Weak agreement." "上位のモデルほど人狼のときに生き残る。弱く一致" }}
   {{- else }}{{ $read = cond $en "Weak. Win rate depends heavily on which role was drawn." "弱い。勝率は引いた役職に大きく左右される" }}{{ end }}
   <tr><td class="results-team">{{ index $metricName .metric }}</td><td>{{ with .rho }}{{ printf "%+.2f" . }}{{ else }}-{{ end }}</td><td class="results-muted">{{ $read }}</td></tr>
   {{- end }}
