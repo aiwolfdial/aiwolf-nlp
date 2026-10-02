@@ -14,6 +14,19 @@ correlations:
   rho: -0.35
 - metric: win_rate
   rho: -0.22
+wrong_vote_by_tier:
+- voter: 上位
+  上位: 1.03
+  中位: 1.0
+  下位: 0.98
+- voter: 中位
+  上位: 1.08
+  中位: 1.01
+  下位: 0.92
+- voter: 下位
+  上位: 1.04
+  中位: 1.04
+  下位: 0.93
 vote_accuracy_by_tier:
 - voter: 上位
   上位: 0.39
@@ -49,22 +62,27 @@ family_bias:
   attack_expected: 24.0
 by_table:
 - n_bottom: 0
-  votes: 356
-  top_ratio: 0.83
-  bottom_ratio: 2.27
+  votes: 226
+  top_ratio: 1.04
+  mid_ratio: 0.97
+  bottom_ratio: null
 - n_bottom: 1
-  votes: 775
-  top_ratio: 0.91
-  bottom_ratio: 1.23
+  votes: 594
+  top_ratio: 1.05
+  mid_ratio: 0.94
+  bottom_ratio: 1.03
 - n_bottom: 2
-  votes: 674
-  top_ratio: 1.26
-  bottom_ratio: 0.68
+  votes: 778
+  top_ratio: 1.1
+  mid_ratio: 1.04
+  bottom_ratio: 0.9
 - n_bottom: 3
-  votes: 236
-  top_ratio: 1.42
-  bottom_ratio: 0.63
+  votes: 362
+  top_ratio: 0.81
+  mid_ratio: 1.31
+  bottom_ratio: 0.95
 - n_bottom: 4
-  votes: 23
-  top_ratio: 2.1
-  bottom_ratio: 0.56
+  votes: 95
+  top_ratio: 1.11
+  mid_ratio: 0.78
+  bottom_ratio: 1.0

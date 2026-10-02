@@ -120,11 +120,13 @@ def game():
     comp = table("top_suspected_by_table.csv")
     corr = [{"metric": k, "rho": _spearman([m["mean_rank"] for m in models], [m[k] for m in models])} for k in ("vote_accuracy", "suspected", "wolf_survival", "win_rate")]
     scores = {"season": "season1", "models": models}
+    nz = lambda v: v if _isnum(v) else None
     review = {"season": "season1", "tiers": tiers, "n_models": len(models), "correlations": corr,
+            "wrong_vote_by_tier": [{"voter": v, **{t: nz(wrong[v][t]) for t in tiers}} for v in tiers],
             "vote_accuracy_by_tier": [{"voter": v, **{t: acc[v][t] for t in tiers}} for v in tiers],
             "chance_accuracy": 0.31,
             "family_bias": [{"family": r["ファミリー"], "models": r["モデル数"], "vote_ratio": r["誤投票で同ファミリーを選ぶ比"], "vote_expected": r["期待票数"], "attack_ratio": r["襲撃で同ファミリーを選ぶ比"], "attack_expected": r["期待襲撃数"]} for r in fam],
-            "by_table": [{"n_bottom": int(r["卓の下位層の人数"]), "votes": int(r["票数"]), "top_ratio": r["上位層が選ばれる比"], "bottom_ratio": r["下位層が選ばれる比"]} for r in comp]}
+            "by_table": [{"n_bottom": int(r["卓の下位層の人数"]), "votes": int(r["票数"]), "top_ratio": nz(r["上位層が選ばれる比"]), "mid_ratio": nz(r["中位層が選ばれる比"]), "bottom_ratio": nz(r["下位層が選ばれる比"])} for r in comp if int(r["票数"]) >= 50]}
     return scores, review
 
 
