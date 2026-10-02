@@ -42,11 +42,11 @@ If voters picked their target at random from the players alive at that moment, e
 </p>
 
 <h3>{{ cond $en "Suspicion by the composition of the table" "卓の顔ぶれごとの疑われ比" }}</h3>
-<p class="results-muted">{{ if $en }}The wrong votes are split by how many of the five players at the table were bottom-tier models. For each group, the table gives the suspicion ratio of top-tier villagers and of bottom-tier villagers (a dash when that tier was not at the table). Groups with few votes are omitted.{{ else }}間違った票を、卓の 5 人のうち下位層のモデルが何人いたかで分けます。各行に、上位層の村人と下位層の村人の疑われ比を示します（その層が卓にいない場合は「-」）。票の少ない組は省いています。{{ end }}</p>
+<p class="results-muted">{{ if $en }}The games are split by how many of the five players at the table were bottom-tier models. For each group: the number of games, the fraction of village-side votes that were wrong (cast at someone who is not the werewolf), and the suspicion ratio of top-tier and of bottom-tier villagers among those wrong votes (a dash when that tier was not at the table). The last rows have few games, so their values fluctuate.{{ else }}試合を、卓の 5 人のうち下位層のモデルが何人いたかで分けます。各行に、試合数、村人陣営の票のうち間違った票（人狼でない相手に入れた票）の割合、そして間違った票の中での上位層の村人と下位層の村人の疑われ比を示します（その層が卓にいない場合は「-」）。下の行ほど試合数が少ないので値は振れます。{{ end }}</p>
 <div class="results-tables">
 <table class="results-agreement">
-  <thead><tr><th>{{ cond $en "Bottom-tier models at the table (of 5)" "卓の下位層の人数（5 人中）" }}</th><th>{{ cond $en "Wrong votes" "間違った票の数" }}</th><th>{{ cond $en "Top-tier villager suspected" "上位層の村人の疑われ比" }}</th><th>{{ cond $en "Bottom-tier villager suspected" "下位層の村人の疑われ比" }}</th></tr></thead>
-  <tbody>{{ range $d.by_table }}<tr><td>{{ .n_bottom }}</td><td>{{ .votes }}</td><td>{{ with .top_ratio }}{{ printf "%.2f" . }}{{ else }}-{{ end }}</td><td>{{ with .bottom_ratio }}{{ printf "%.2f" . }}{{ else }}-{{ end }}</td></tr>{{ end }}</tbody>
+  <thead><tr><th>{{ cond $en "Bottom-tier models at the table (of 5)" "卓の下位層の人数（5 人中）" }}</th><th>{{ cond $en "Games" "試合数" }}</th><th>{{ cond $en "Wrong-vote rate" "誤投票率" }}</th><th>{{ cond $en "Top-tier villager suspected" "上位層の村人の疑われ比" }}</th><th>{{ cond $en "Bottom-tier villager suspected" "下位層の村人の疑われ比" }}</th></tr></thead>
+  <tbody>{{ range $d.by_table }}<tr><td>{{ .n_bottom }}</td><td>{{ .games }}</td><td>{{ with .wrong_rate }}{{ printf "%.0f%%" (mul 100 .) }}{{ else }}-{{ end }}</td><td>{{ with .top_ratio }}{{ printf "%.2f" . }}{{ else }}-{{ end }}</td><td>{{ with .bottom_ratio }}{{ printf "%.2f" . }}{{ else }}-{{ end }}</td></tr>{{ end }}</tbody>
 </table>
 </div>
 <p class="results-muted">

@@ -62,27 +62,44 @@ family_bias:
   attack_expected: 24.0
 by_table:
 - n_bottom: 0
+  games: 61
   votes: 226
+  wrong_rate: 0.55
   top_ratio: 1.04
   mid_ratio: 0.97
   bottom_ratio: null
 - n_bottom: 1
+  games: 158
   votes: 594
+  wrong_rate: 0.6
   top_ratio: 1.05
   mid_ratio: 0.94
   bottom_ratio: 1.03
 - n_bottom: 2
+  games: 209
   votes: 778
+  wrong_rate: 0.6
   top_ratio: 1.1
   mid_ratio: 1.04
   bottom_ratio: 0.9
 - n_bottom: 3
+  games: 101
   votes: 362
+  wrong_rate: 0.57
   top_ratio: 0.81
   mid_ratio: 1.31
   bottom_ratio: 0.95
 - n_bottom: 4
+  games: 25
   votes: 95
+  wrong_rate: 0.66
   top_ratio: 1.11
   mid_ratio: 0.78
+  bottom_ratio: 1.0
+- n_bottom: 5
+  games: 3
+  votes: 9
+  wrong_rate: 0.78
+  top_ratio: null
+  mid_ratio: null
   bottom_ratio: 1.0

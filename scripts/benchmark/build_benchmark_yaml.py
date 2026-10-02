@@ -144,7 +144,8 @@ def game():
             "vote_accuracy_by_tier": [{"voter": v, **{t: acc[v][t] for t in tiers}} for v in tiers],
             "chance_accuracy": 0.31,
             "family_bias": [{"family": r["ファミリー"], "models": r["モデル数"], "vote_ratio": r["誤投票で同ファミリーを選ぶ比"], "vote_expected": r["期待票数"], "attack_ratio": r["襲撃で同ファミリーを選ぶ比"], "attack_expected": r["期待襲撃数"]} for r in fam],
-            "by_table": [{"n_bottom": int(r["卓の下位層の人数"]), "votes": int(r["票数"]), "top_ratio": nz(r["上位層が選ばれる比"]), "mid_ratio": nz(r["中位層が選ばれる比"]), "bottom_ratio": nz(r["下位層が選ばれる比"])} for r in comp if int(r["票数"]) >= 50]}
+            "by_table": [{"n_bottom": int(r["卓の下位層の人数"]), "games": int(r["試合数"]), "votes": int(r["村人陣営の票数"]), "wrong_rate": nz(r["誤投票率"]),
+                          "top_ratio": nz(r["上位層が選ばれる比"]), "mid_ratio": nz(r["中位層が選ばれる比"]), "bottom_ratio": nz(r["下位層が選ばれる比"])} for r in comp]}
     return scores, review
 
 
