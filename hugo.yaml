@@ -54,15 +54,18 @@ languages:
         - name: "エージェント"
           url: /benchmark/agents/
           weight: 2
+        - name: "相対ジャッジ"
+          url: /benchmark/relative_judge/
+          weight: 3
+        - name: "カウントジャッジ"
+          url: /benchmark/count_judge/
+          weight: 4
         - name: "ゲームスコア"
           url: /benchmark/scores/
-          weight: 3
+          weight: 5
         - name: "レビュー"
           url: /benchmark/review/
-          weight: 4
-        - name: "ジャッジ"
-          url: /benchmark/judges/
-          weight: 5
+          weight: 6
       inlg_2026:
         - name: "ホーム"
           url: /page/INLG_2026
@@ -210,15 +213,18 @@ languages:
         - name: "Agents"
           url: /benchmark/agents/
           weight: 2
+        - name: "Relative judge"
+          url: /benchmark/relative_judge/
+          weight: 3
+        - name: "Count judge"
+          url: /benchmark/count_judge/
+          weight: 4
         - name: "Game scores"
           url: /benchmark/scores/
-          weight: 3
+          weight: 5
         - name: "Review"
           url: /benchmark/review/
-          weight: 4
-        - name: "Judges"
-          url: /benchmark/judges/
-          weight: 5
+          weight: 6
       inlg_2026:
         - name: "Home"
           url: /page/INLG_2026

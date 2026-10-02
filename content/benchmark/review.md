@@ -6,5 +6,5 @@ description: '相対順位とゲームスコアの関係、卓の構成による
 layout: bench_page
 bench_kind: review
 menu_id: benchmark
-weight: 3
+weight: 5
 ---

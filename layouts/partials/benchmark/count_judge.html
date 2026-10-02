@@ -1,0 +1,58 @@
+{{- /* カウントジャッジ: data/benchmark/count.yaml（人手評価との一致、season1 への適用） */}}
+{{- $en := eq site.Language.Lang "en" }}
+{{- $d := site.Data.benchmark.count }}
+{{- $rel := site.Data.benchmark.judges }}
+{{- $axisName := dict "A" (cond $en "A Naturalness" "A 発話の自然さ") "B" (cond $en "B Dialogue" "B 文脈をふまえた対話") "C" (cond $en "C Consistency" "C 一貫性・論理") "D" (cond $en "D Talk vs. action" "D 発言と行動の一致") "E" (cond $en "E Character" "E 人物設定との整合") }}
+<p class="results-muted">
+{{- if $en -}}
+A different kind of LLM judge from the relative judge: instead of ranking the players, it reads the game and <b>counts events</b> — deductions (such as verbatim repetition, ignoring a direct question, contradicting oneself, voting against one's own declaration) and additions (such as a well-grounded inference or a reply that engages with what was just said) — on a rubric of 25 items in six axes. Every event is counted once per utterance, with the quoted utterance and a reason, so the result can be checked afterwards. The judge holds one conversation per game, per kind (deduction or addition) and per character: the public log is handed over one talk round at a time, and the judge counts only that character's events. Source: <a href="https://github.com/aiwolfdial/aiwolf-nlp-llm-judge-count">aiwolf-nlp-llm-judge-count</a>.
+{{- else -}}
+相対ジャッジとは別方式の LLM ジャッジです。参加者を順位付けする代わりに、対局を読んで<b>事象を数えます</b>。減点（逐語の反復、名指しの質問の無視、自己矛盾、宣言と違う投票など）と加点（根拠のある推論、直前の発言を受けた応答など）を、6 軸 25 項目のルーブリックで数えます。事象は発話 1 つにつき 1 件で、引用と理由が付くので、結果をあとから検証できます。会話は 1 試合・1 種別（減点 or 加点）・1 キャラクターごとに分け、公開ログを 1 巡ずつ渡しながら、そのキャラクターの事象だけを数えます。ソース: <a href="https://github.com/aiwolfdial/aiwolf-nlp-llm-judge-count">aiwolf-nlp-llm-judge-count</a>。
+{{- end -}}
+</p>
+
+<h2 id="human">{{ cond $en "Agreement with human evaluation" "人手評価との一致度" }}</h2>
+{{- with $d.bench }}
+<p class="results-muted">{{ if $en }}Same benchmark as the Relative judge page ({{ $rel.bench.logs }} logs, {{ $rel.bench.tracks }} tracks, leave-one-rater-out). Team-level Spearman with the human ranking for deductions only, additions only and their difference (additions minus deductions), next to the level at which one human rater agrees with the others.{{ else }}[相対ジャッジ](../relative_judge/)と同じベンチマーク（{{ $rel.bench.logs }} 本、{{ $rel.bench.tracks }} トラック、評価者 1 人抜き）です。減点のみ・加点のみ・合計（加点 − 減点）それぞれについて、人手の順位とのチーム単位の Spearman を、人手の評価者 1 人の水準と並べます。{{ end }}</p>
+<div class="results-tables">
+<table class="results-agreement">
+  <thead><tr><th>{{ cond $en "Judge model" "ジャッジモデル" }}</th><th>{{ cond $en "Deductions" "減点のみ" }}</th><th>{{ cond $en "Additions" "加点のみ" }}</th><th>{{ cond $en "Net" "合計" }}</th><th>{{ cond $en "Human rater" "人手の評価者 1 人" }}</th><th>{{ cond $en "Verdict" "判定" }}</th></tr></thead>
+  <tbody>
+  {{- range . }}
+  <tr><td class="results-team">{{ .model }}</td><td>{{ printf "%.2f" .ded }}</td><td>{{ printf "%.2f" .add }}</td><td>{{ printf "%.2f" .net }}</td><td class="results-muted">{{ printf "%.2f" .human }}</td><td>{{ .verdict }}</td></tr>
+  {{- end }}
+  </tbody>
+</table>
+</div>
+{{- else }}
+<p class="results-muted">{{ cond $en "The benchmark run on the full set of human-rated logs is in progress; the table will appear here. On the two 5-player tracks used during development (Spring 2026 and INLG 2025), gemma-4-31B-it reached a team-level Spearman of 0.62 for deductions, 0.48 for additions and 0.61 for the net, against 0.68 for one human rater." "人手評価のある全ログでのベンチマークは実行中で、結果はここに載せます。開発中に使った 5 人村の 2 トラック（2026 春季・INLG 2025）では、gemma-4-31B-it のチーム単位の Spearman は減点 0.62、加点 0.48、合計 0.61 でした（人手の評価者 1 人は 0.68）。" }}</p>
+{{- end }}
+
+<h2 id="season">{{ cond $en "Results on the agent benchmark" "エージェントのベンチマークへの適用" }}</h2>
+{{- range $d.seasons }}
+<p class="results-muted">
+{{- if $en -}}
+All games of {{ $d.season }} judged by <b>{{ .judge }}</b>. Per model: mean deductions, additions and net (additions minus deductions) per game, summed over all axes and all five characters' conversations, and the net per axis. Team names were hidden from the judge. The ranking by net agrees with the relative evaluation on the Agents page at Spearman {{ printf "%+.2f" .rho_vs_relative }}.
+{{- else -}}
+{{ $d.season }} の全試合を <b>{{ .judge }}</b> で判定した結果です。モデルごとに、減点・加点・合計（加点 − 減点）の試合あたり平均（全軸の合計）と、軸別の合計を示します。チーム名はジャッジに伏せています。合計による順位は、[エージェント](../agents/)の相対評価の順位と Spearman {{ printf "%+.2f" .rho_vs_relative }} で一致します。
+{{- end -}}
+</p>
+<div class="results-tables">
+<table class="results-agreement">
+  <thead><tr><th>{{ cond $en "Rank" "順位" }}</th><th>{{ cond $en "Model" "モデル" }}</th><th>{{ cond $en "Deductions" "減点" }}</th><th>{{ cond $en "Additions" "加点" }}</th><th>{{ cond $en "Net" "合計" }}</th>{{ range $a := slice "A" "B" "C" "D" "E" }}<th class="results-muted">{{ index $axisName $a }}</th>{{ end }}</tr></thead>
+  <tbody>
+  {{- range .models }}
+  {{- $m := . }}
+  <tr><td>{{ .rank }}</td><td class="results-team">{{ .model }}</td><td>{{ printf "%.2f" .deduction }}</td><td>{{ printf "%.2f" .addition }}</td><td>{{ printf "%.2f" .net }}</td>{{ range $a := slice "A" "B" "C" "D" "E" }}<td class="results-muted">{{ printf "%+.2f" (index $m (printf "net_%s" $a)) }}</td>{{ end }}</tr>
+  {{- end }}
+  </tbody>
+</table>
+</div>
+{{- end }}
+<p class="results-muted">
+{{- if $en -}}
+Caveat: the judge model is itself one of the benchmarked agents, and it is ranked first with clearly more additions than the others (notably on axis E, character consistency). The relative judge showed a milder preference for its own family. Results with a second judge model will be added once it passes the human-agreement benchmark.
+{{- else -}}
+注意: ジャッジモデル自身がベンチマークの対象でもあり、そのモデルが 1 位で、加点が他より明確に多くなっています（特に E 軸、人物設定との整合）。相対ジャッジでも同じファミリーへの弱い贔屓が見られました。人手評価との一致のベンチマークを通った 2 つ目のジャッジモデルの結果が出しだい追加します。
+{{- end -}}
+</p>

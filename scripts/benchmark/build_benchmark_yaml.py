@@ -61,13 +61,29 @@ def judges():
             "verdict": n.get("verdict", ""),
         })
     rel.sort(key=lambda x: -x["judge_rho"])
-    cnt = []
+    return {"bench": {"tracks": 7, "logs": 88, "contests": ["2026 春季国内大会（5 人村・9 人村・いつでも発話）", "INLG 2025（5 人村・13 人村）", "2025 春季国内大会（13 人村）", "2024 冬季国内大会"]},
+            "relative": rel}
+
+
+def count():
+    """カウントジャッジ: 人手評価との一致（judge-bench の results/count_final/summary.csv。無ければ空）と、season1 への適用結果。"""
+    bench = []
     p = JB / "results/count_final/summary.csv"
     if p.exists():
         for r in rows(p):
-            cnt.append({k: (round(float(v), 2) if k not in ("model", "verdict") and v not in ("", None) else v) for k, v in r.items()})
-    return {"bench": {"tracks": 7, "logs": 88, "contests": ["2026 春季国内大会（5 人村・9 人村・いつでも発話）", "INLG 2025（5 人村・13 人村）", "2025 春季国内大会（13 人村）", "2024 冬季国内大会"]},
-            "relative": rel, "count": cnt}
+            bench.append({k: (round(float(v), 2) if k not in ("model", "verdict") and _isnum(v) else v) for k, v in r.items()})
+    ens = {r["model"]: float(r["ens"]) for r in rows(JB / "results/season1/scores_ensemble.csv")}
+    seasons = []
+    for p in sorted((BM / "runs/season1/report").glob("count_judge_*.csv")):
+        judge = p.stem[len("count_judge_"):]
+        ms = []
+        for r in rows(p):
+            ms.append({"model": r["model"], "rank": int(r["rank"]), "games": int(r["games"]), "deduction": round(float(r["deduction"]), 2), "addition": round(float(r["addition"]), 2), "net": round(float(r["net"]), 2),
+                       **{f"net_{a}": round(float(r.get(f"net_{a}", 0) or 0), 2) for a in "ABCDE"}})
+        ms.sort(key=lambda x: x["rank"])
+        rho = _spearman([-m["net"] for m in ms], [ens.get(m["model"]) for m in ms])
+        seasons.append({"judge": judge, "models": ms, "rho_vs_relative": rho})
+    return {"season": "season1", "bench": bench, "seasons": seasons}
 
 
 def _spearman(a, b):
@@ -137,7 +153,7 @@ def _isnum(v):
 
 if __name__ == "__main__":
     scores, review = game()
-    for name, data in (("agents", agents()), ("judges", judges()), ("scores", scores), ("review", review)):
+    for name, data in (("agents", agents()), ("judges", judges()), ("count", count()), ("scores", scores), ("review", review)):
         p = SITE / "data/benchmark" / f"{name}.yaml"
         p.write_text("# 自動生成: scripts/benchmark/build_benchmark_yaml.py\n" + yaml.safe_dump(data, allow_unicode=True, sort_keys=False), encoding="utf-8")
         print(p, "ok")

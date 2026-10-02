@@ -9,4 +9,7 @@ menu_id: benchmark
 Separately from the contest results, the organizers run two benchmarks under identical conditions.
 
 - **Agents**: the official sample agent with its LLM swapped for each public model, playing under the contest rules, ranked by the LLM-as-a-Judge relative evaluation. Useful for comparing the LLMs that contest agents are built on.
-- **Judges**: how closely each public LLM, used as a judge, agrees with the human evaluation (per-rater rankings) of past contests. This is the basis for choosing the judge model used in the contests.
+- **Relative judge**: how closely each public LLM, used as the ranking judge of the contests, agrees with the human evaluation (per-rater rankings) of past contests. This is the basis for choosing the judge model used in the contests.
+- **Count judge**: a different kind of LLM judge that counts deduction and addition events per utterance, with its agreement with the same human evaluation and its results on the agent benchmark.
+- **Game scores**: judge-independent scores computed from the game records alone.
+- **Review**: a cross-analysis of the relative evaluation and the game scores.

@@ -1,0 +1,315 @@
+# 自動生成: scripts/benchmark/build_benchmark_yaml.py
+season: season1
+bench: []
+seasons:
+- judge: gemma-4-31b
+  models:
+  - model: gemma-4-31b
+    rank: 1
+    games: 100
+    deduction: 0.39
+    addition: 12.13
+    net: 11.74
+    net_A: -0.01
+    net_B: 6.83
+    net_C: 0.63
+    net_D: 0.62
+    net_E: 3.67
+  - model: gemma-4-26b-a4b
+    rank: 2
+    games: 100
+    deduction: 0.36
+    addition: 9.74
+    net: 9.38
+    net_A: -0.01
+    net_B: 7.48
+    net_C: 0.16
+    net_D: 0.37
+    net_E: 1.38
+  - model: gemma-3-27b
+    rank: 3
+    games: 100
+    deduction: 1.04
+    addition: 10.24
+    net: 9.2
+    net_A: -0.03
+    net_B: 6.86
+    net_C: -0.2
+    net_D: 0.42
+    net_E: 2.15
+  - model: gemma-4-e4b
+    rank: 4
+    games: 100
+    deduction: 0.61
+    addition: 9.67
+    net: 9.06
+    net_A: -0.01
+    net_B: 5.42
+    net_C: -0.09
+    net_D: 0.12
+    net_E: 3.62
+  - model: gemma-4-12b
+    rank: 5
+    games: 100
+    deduction: 0.48
+    addition: 9.43
+    net: 8.95
+    net_A: -0.04
+    net_B: 6.75
+    net_C: 0.12
+    net_D: 0.3
+    net_E: 1.82
+  - model: qwen3_5-27b
+    rank: 6
+    games: 100
+    deduction: 1.67
+    addition: 9.98
+    net: 8.31
+    net_A: -0.12
+    net_B: 6.02
+    net_C: -0.13
+    net_D: 0.72
+    net_E: 1.82
+  - model: ministral-3-14b
+    rank: 7
+    games: 100
+    deduction: 1.34
+    addition: 9.64
+    net: 8.3
+    net_A: -0.05
+    net_B: 5.95
+    net_C: -0.77
+    net_D: 0.23
+    net_E: 2.94
+  - model: gemma-3-12b
+    rank: 8
+    games: 100
+    deduction: 0.92
+    addition: 9.21
+    net: 8.29
+    net_A: -0.05
+    net_B: 7.32
+    net_C: -0.43
+    net_D: 0.37
+    net_E: 1.08
+  - model: qwen3_8-27b
+    rank: 9
+    games: 100
+    deduction: 1.13
+    addition: 9.38
+    net: 8.25
+    net_A: -0.17
+    net_B: 5.83
+    net_C: -0.12
+    net_D: 0.3
+    net_E: 2.41
+  - model: qwen3_5-35b-a3b
+    rank: 10
+    games: 100
+    deduction: 2.12
+    addition: 9.83
+    net: 7.71
+    net_A: -0.25
+    net_B: 6.02
+    net_C: -0.43
+    net_D: 0.61
+    net_E: 1.76
+  - model: qwen3_5-4b
+    rank: 11
+    games: 100
+    deduction: 2.08
+    addition: 9.66
+    net: 7.58
+    net_A: -0.21
+    net_B: 6.46
+    net_C: -0.83
+    net_D: -0.02
+    net_E: 2.18
+  - model: ministral-3-8b
+    rank: 12
+    games: 100
+    deduction: 1.93
+    addition: 9.44
+    net: 7.51
+    net_A: -0.14
+    net_B: 4.87
+    net_C: -0.84
+    net_D: 0.08
+    net_E: 3.54
+  - model: mistral-small-3_2-24b
+    rank: 13
+    games: 100
+    deduction: 1.4
+    addition: 8.75
+    net: 7.35
+    net_A: -0.17
+    net_B: 5.75
+    net_C: -0.52
+    net_D: 0.2
+    net_E: 2.09
+  - model: qwen3_5-9b
+    rank: 14
+    games: 100
+    deduction: 1.88
+    addition: 7.91
+    net: 6.03
+    net_A: -0.28
+    net_B: 4.4
+    net_C: -0.66
+    net_D: 0.37
+    net_E: 2.2
+  - model: qwen3-32b
+    rank: 15
+    games: 100
+    deduction: 1.98
+    addition: 7.82
+    net: 5.84
+    net_A: -0.77
+    net_B: 4.71
+    net_C: -0.38
+    net_D: 0.39
+    net_E: 1.89
+  - model: exaone-4_5-33b
+    rank: 16
+    games: 100
+    deduction: 3.1
+    addition: 8.19
+    net: 5.09
+    net_A: -2.36
+    net_B: 4.92
+    net_C: -0.25
+    net_D: 0.09
+    net_E: 2.69
+  - model: granite-4_2-8b
+    rank: 17
+    games: 100
+    deduction: 3.64
+    addition: 8.66
+    net: 5.02
+    net_A: -1.88
+    net_B: 4.52
+    net_C: -0.13
+    net_D: 0.0
+    net_E: 2.51
+  - model: llama-3_1-8b
+    rank: 18
+    games: 100
+    deduction: 1.89
+    addition: 6.46
+    net: 4.57
+    net_A: -0.17
+    net_B: 4.89
+    net_C: -0.8
+    net_D: 0.07
+    net_E: 0.58
+  - model: phi-4-14b
+    rank: 19
+    games: 100
+    deduction: 3.16
+    addition: 7.39
+    net: 4.23
+    net_A: -1.53
+    net_B: 5.78
+    net_C: -0.54
+    net_D: 0.09
+    net_E: 0.43
+  - model: nemotron-3_5-lightning-30b
+    rank: 20
+    games: 100
+    deduction: 3.2
+    addition: 7.31
+    net: 4.11
+    net_A: -1.05
+    net_B: 4.98
+    net_C: -0.79
+    net_D: 0.44
+    net_E: 0.53
+  - model: qwen3-30b-a3b
+    rank: 21
+    games: 100
+    deduction: 2.3
+    addition: 6.37
+    net: 4.07
+    net_A: -0.43
+    net_B: 3.0
+    net_C: -0.57
+    net_D: 0.3
+    net_E: 1.77
+  - model: gemma-3-4b
+    rank: 22
+    games: 100
+    deduction: 1.69
+    addition: 5.23
+    net: 3.54
+    net_A: -0.17
+    net_B: 2.66
+    net_C: -0.57
+    net_D: 0.07
+    net_E: 1.55
+  - model: granite-4_1-30b
+    rank: 23
+    games: 100
+    deduction: 1.24
+    addition: 4.55
+    net: 3.31
+    net_A: -0.43
+    net_B: 2.64
+    net_C: -0.14
+    net_D: 0.22
+    net_E: 1.02
+  - model: olmo-3-7b
+    rank: 24
+    games: 100
+    deduction: 2.38
+    addition: 4.49
+    net: 2.11
+    net_A: -0.34
+    net_B: 1.94
+    net_C: -0.44
+    net_D: -0.02
+    net_E: 0.97
+  - model: nemotron-nano-9b
+    rank: 25
+    games: 100
+    deduction: 4.41
+    addition: 5.89
+    net: 1.48
+    net_A: -2.33
+    net_B: 4.03
+    net_C: -0.99
+    net_D: 0.02
+    net_E: 0.75
+  - model: olmo-3_1-32b
+    rank: 26
+    games: 100
+    deduction: 3.29
+    addition: 4.39
+    net: 1.1
+    net_A: -2.34
+    net_B: 2.68
+    net_C: -0.28
+    net_D: -0.15
+    net_E: 1.19
+  - model: qwen3-8b
+    rank: 27
+    games: 100
+    deduction: 4.47
+    addition: 4.78
+    net: 0.31
+    net_A: -2.59
+    net_B: 2.53
+    net_C: -0.73
+    net_D: 0.25
+    net_E: 0.85
+  - model: gpt-oss-20b
+    rank: 28
+    games: 100
+    deduction: 4.92
+    addition: 4.33
+    net: -0.59
+    net_A: -1.8
+    net_B: 0.34
+    net_C: -0.59
+    net_D: 0.2
+    net_E: 1.26
+  rho_vs_relative: 0.9

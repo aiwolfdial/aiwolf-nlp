@@ -184,4 +184,3 @@ relative:
   ci_low: -0.4
   ci_high: -0.2
   verdict: worse
-count: []

@@ -6,5 +6,5 @@ description: 'Judge-independent per-model scores computed from the game records 
 layout: bench_page
 bench_kind: scores
 menu_id: benchmark
-weight: 2
+weight: 4
 ---

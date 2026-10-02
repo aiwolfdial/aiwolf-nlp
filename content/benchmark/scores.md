@@ -6,5 +6,5 @@ description: '対戦記録だけから計算した、ジャッジに依らない
 layout: bench_page
 bench_kind: scores
 menu_id: benchmark
-weight: 2
+weight: 4
 ---

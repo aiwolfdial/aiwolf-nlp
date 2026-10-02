@@ -1,4 +1,4 @@
-{{- /* ジャッジのベンチマーク: data/benchmark/judges.yaml */}}
+{{- /* 相対ジャッジのベンチマーク: data/benchmark/judges.yaml */}}
 {{- $en := eq site.Language.Lang "en" }}
 {{- $d := site.Data.benchmark.judges }}
 <p class="results-muted">
@@ -36,17 +36,3 @@ How closely each public LLM, used as the judge, agrees with the human evaluation
 「gemma-4-31b-nows」は gemma-4-31B-it を構造化出力の空白対策つきで配信したもので、大会で使っている設定です。人手の評価者 1 人の値が行ごとに少し違うのは、ジャッジが評価できたログの集合がモデルごとに少し違い、その集合で計算し直しているためです。すべてローカルで温度 0・1 周で回し、大会の運用に合わせています。
 {{- end -}}
 </p>
-{{- with $d.count }}
-<h2 id="count">{{ cond $en "Count evaluation (deduction / addition judge)" "件数評価（減点・加点ジャッジ）" }}</h2>
-<p class="results-muted">{{ cond $en "The judge that counts deduction and addition events per utterance ([aiwolf-nlp-llm-judge-count](https://github.com/aiwolfdial/aiwolf-nlp-llm-judge-count)). Team-level Spearman with the human evaluation on the same benchmark, for deductions only, additions only, and their difference." "発話ごとに減点・加点の事象を数えるジャッジ（[aiwolf-nlp-llm-judge-count](https://github.com/aiwolfdial/aiwolf-nlp-llm-judge-count)）です。同じベンチマークで、減点のみ・加点のみ・その差について、人手評価とのチーム単位の Spearman 順位相関を示します。" | markdownify }}</p>
-<div class="results-tables">
-<table class="results-agreement">
-  <thead><tr><th>{{ cond $en "Judge model" "ジャッジモデル" }}</th><th>{{ cond $en "Deductions" "減点のみ" }}</th><th>{{ cond $en "Additions" "加点のみ" }}</th><th>{{ cond $en "Net" "合計（加点 − 減点）" }}</th><th>{{ cond $en "Human rater" "人手の評価者 1 人" }}</th></tr></thead>
-  <tbody>
-  {{- range . }}
-  <tr><td class="results-team">{{ .model }}</td><td>{{ printf "%.2f" .ded }}</td><td>{{ printf "%.2f" .add }}</td><td>{{ printf "%.2f" .net }}</td><td class="results-muted">{{ printf "%.2f" .human }}</td></tr>
-  {{- end }}
-  </tbody>
-</table>
-</div>
-{{- end }}

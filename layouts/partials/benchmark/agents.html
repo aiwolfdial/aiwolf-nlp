@@ -30,8 +30,8 @@ Season {{ $d.season | strings.TrimPrefix "season" }}. {{ $d.rules_en }}. {{ $d.n
 </div>
 <p class="results-muted">
 {{- if $en -}}
-The per-judge columns are the mean rank given by each judge model; the "Mean rank" column averages the two. The judge models were chosen from the Judges benchmark. Models in the "thinking" mode were run with thinking turned off, in bf16, up to about 35B parameters.
+The per-judge columns are the mean rank given by each judge model; the "Mean rank" column averages the two. The judge models were chosen from the Relative judge page. Models in the "thinking" mode were run with thinking turned off, in bf16, up to about 35B parameters.
 {{- else -}}
-ジャッジ別の列は各ジャッジモデルがつけた平均順位で、「平均順位」はその 2 つの平均です。ジャッジモデルは[ジャッジ](../judges/)のベンチマークから選びました。思考モードを持つモデルは思考を切って動かし、精度は bf16、規模はおよそ 35B までです。
+ジャッジ別の列は各ジャッジモデルがつけた平均順位で、「平均順位」はその 2 つの平均です。ジャッジモデルは[相対ジャッジ](../relative_judge/)のベンチマークから選びました。思考モードを持つモデルは思考を切って動かし、精度は bf16、規模はおよそ 35B までです。
 {{- end -}}
 </p>
