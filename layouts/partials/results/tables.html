@@ -36,6 +36,7 @@
 <h2 id="awards">{{ $secAwards }}</h2>
 {{- with $d.awards }}
 {{- if .items }}
+<p class="results-muted">{{ cond $en "Win-rate awards are based on the role-composition-weighted win rate (\"Adjusted\" in the tables below)." "勝率の表彰は、役職構成で加重した勝率（下の表の「構成加重」）によります。" }}</p>
 <table class="results-awards">
   <thead><tr><th>{{ cond $en "Award" "賞" }}</th><th>{{ cond $en "Team" "チーム" }}</th></tr></thead>
   <tbody>

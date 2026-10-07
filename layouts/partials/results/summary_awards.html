@@ -3,6 +3,7 @@
 {{- $pages := where (site.GetPage "/results").RegularPages "Params.results_data" "!=" nil }}
 {{- $pages = $pages.ByDate.Reverse }}
 <p class="results-muted">{{ cond $en "Official awards of each contest, newest first. Click a contest name for the full results." "各大会の公式結果（表彰）を新しい順に並べています。大会名を押すと結果ページに移ります。" }}</p>
+<p class="results-muted">{{ cond $en "Win-rate awards are based on the role-composition-weighted win rate (per-role win rates averaged with the weights of the village's role composition)." "勝率の表彰は、役職別の勝率を村の役職構成の重みで平均した「構成加重」の勝率によります。" }}</p>
 <table class="results-awards-all">
   <thead><tr><th>{{ cond $en "Contest" "大会" }}</th><th>{{ cond $en "Award" "賞" }}</th><th>{{ cond $en "Team" "チーム" }}</th></tr></thead>
   <tbody>
