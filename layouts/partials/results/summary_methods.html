@@ -5,7 +5,7 @@
 {{- if $en }}
 <p>Each contest is evaluated from four viewpoints. Win rates and game metrics are computed mechanically from the game logs, while the other two assess the quality of dialogue: human judges, and LLM judges that rank the players of each game (relative evaluation).</p>
 <ul>
-  <li><strong>Win rates</strong>: wins divided by games, overall and per role, plus a role-composition-weighted rate. Same definition for every contest.</li>
+  <li><strong>Win rates</strong>: the official rate is the per-role win rates averaged with the weights of the village's role composition; plain wins ÷ games (overall and per role) is shown alongside. Same definition for every contest.</li>
   <li><strong>Game metrics</strong>: how often a team was executed, divined or guarded relative to chance, and how accurately it found werewolves when divining or voting (1.00 = random play).</li>
   <li><strong>Human evaluation</strong>: judges read selected logs and rate or rank the players on criteria A–E (plus F, team play, in 9- and 13-player villages). Ranking since the 2024 winter contest; 5-point scores before that.</li>
   <li><strong>LLM-as-a-Judge (relative evaluation)</strong>: LLMs rank the players of each game on the same criteria; ranks are averaged per team. Part of the official evaluation since the 2025 international contest (for the 2025 spring contest it was run afterwards for reference); the models differ by contest (see below). The judge is published as <a href="https://github.com/aiwolfdial/aiwolf-nlp-llm-judge">aiwolf-nlp-llm-judge</a>.</li>
@@ -13,7 +13,7 @@
 {{- else }}
 <p>各大会は 4 つの観点で評価しています。勝率とゲーム指標はゲームログから機械的に計算する指標で、残りの 2 つは対話の質の評価です。人手評価と、ゲームごとにプレイヤーを順位付けする LLM ジャッジ（相対評価）があります。</p>
 <ul>
-  <li><strong>勝率</strong>: 勝ち数 ÷ 試合数を総合・役職別に出し、役職構成で加重した値も併記します。全大会で同じ定義です。</li>
+  <li><strong>勝率</strong>: 役職別の勝率を村の役職構成で加重平均した値を公式の勝率とし、単純な勝ち数 ÷ 試合数（総合・役職別）も併記します。全大会で同じ定義です。</li>
   <li><strong>ゲーム指標</strong>: 追放・占い・護衛の対象になった頻度と、占い・投票で人狼を当てた頻度を、ランダムに行動した場合との比で表します（1.00 = ランダム）。</li>
   <li><strong>人手評価</strong>: 評価者が抽出ログを読み、A〜E の評価項目（9 人村・13 人村は F チームプレイを追加）でプレイヤーを評価します。2024 冬季以降は順位付け、それ以前は 5 点満点の評点です。</li>
   <li><strong>LLM-as-a-Judge（相対評価）</strong>: LLM が同じ評価項目でゲームごとにプレイヤーを順位付けし、チームごとに平均します。2025 国際大会から大会の評価として実施しており（2025 春季は大会後に参考値として実施）、モデルは大会ごとに異なります（下表）。ジャッジの実装は <a href="https://github.com/aiwolfdial/aiwolf-nlp-llm-judge">aiwolf-nlp-llm-judge</a> として公開しています。</li>

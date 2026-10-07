@@ -56,28 +56,26 @@
 <h2 id="win-rates">{{ $secWin }}</h2>
 <p class="results-muted">
 {{- if $en -}}
-Computed from the logs of all games that finished normally in the main competition. "Overall" is wins divided by games. Per-role cells show the win rate in that role with (wins / games). "Adjusted" re-weights the per-role win rates by the village's role composition, cancelling out uneven role assignments.
+Computed from the logs of all games that finished normally in the main competition. The official win rate is "Adjusted": the per-role win rates averaged with the weights of the village's role composition, so that uneven role assignments cancel out; teams are ranked by it. "Overall" is simply wins divided by games, and per-role cells show the win rate in that role with (wins / games).
 {{- else -}}
-本戦で正常に終了した全ゲームのログから集計しています。「総合」は勝ち数 ÷ 試合数、役職別の欄はその役職で戦ったときの勝率と（勝ち数 / 試合数）です。「構成加重」は役職別勝率を村の役職構成で平均し直した値で、配役の偏りを打ち消した勝率です。
+本戦で正常に終了した全ゲームのログから集計しています。公式の勝率は「構成加重」で、役職別の勝率を村の役職構成の重みで平均した値です（配役の偏りを打ち消すため）。順位もこの値によります。「総合」は単純な勝ち数 ÷ 試合数、役職別の欄はその役職で戦ったときの勝率と（勝ち数 / 試合数）です。
 {{- end -}}
 </p>
 {{- range $d.tracks }}
 <h3 id="win-rates-{{ .id }}">{{ cond $en .name_en .name }} <span class="results-muted">({{ .games }} {{ cond $en "games" "試合" }})</span></h3>
 <table class="results-winrate">
   <thead><tr>
-    <th>#</th><th>{{ cond $en "Team" "チーム" }}</th><th>{{ cond $en "Games" "試合" }}</th><th>{{ cond $en "Overall" "総合" }}</th>
+    <th>#</th><th>{{ cond $en "Team" "チーム" }}</th><th>{{ cond $en "Games" "試合" }}</th><th>{{ cond $en "Adjusted" "構成加重" }}</th><th>{{ cond $en "Overall" "総合" }}</th>
     {{- range .win_rates.roles }}<th>{{ index $roleName . }}</th>{{ end }}
-    <th>{{ cond $en "Adjusted" "構成加重" }}</th>
   </tr></thead>
   <tbody>
   {{- $roles := .win_rates.roles }}
-  {{- range $i, $r := .win_rates.rows }}
+  {{- range $i, $r := sort .win_rates.rows "weighted" "desc" }}
   <tr>
-    <td>{{ add $i 1 }}</td><td class="results-team">{{ $r.team }}</td><td>{{ $r.games }}</td><td><strong>{{ printf $pct (mul $r.macro 100) }}</strong></td>
+    <td>{{ add $i 1 }}</td><td class="results-team">{{ $r.team }}</td><td>{{ $r.games }}</td><td><strong>{{ printf $pct (mul $r.weighted 100) }}</strong></td><td>{{ printf $pct (mul $r.macro 100) }}</td>
     {{- range $roles }}
       {{- with index $r.by_role . }}<td>{{ printf $pct (mul (div (float (index . 1)) (float (index . 0))) 100) }} <span class="results-muted">({{ index . 1 }}/{{ index . 0 }})</span></td>{{ else }}<td class="results-muted">-</td>{{ end }}
     {{- end }}
-    <td>{{ printf $pct (mul $r.weighted 100) }}</td>
   </tr>
   {{- end }}
   </tbody>

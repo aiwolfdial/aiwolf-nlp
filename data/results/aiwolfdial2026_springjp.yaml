@@ -6,11 +6,11 @@ awards:
   note: 結果発表・表彰は 2026 年度人工知能学会全国大会（2026年6月8日〜12日）の企画セッションで行いました。
   note_en: Results and awards were presented at the JSAI 2026 annual conference (June 8–12, 2026).
   remark: >-
-    9 人村の勝率は、表彰時の集計で 13 人村の役職構成を使って加重平均していたため、bmd が 1 位になっていました。
-    決着済み全試合の勝率（勝ち数 ÷ 試合数）では yshimoda 76.5% が 1 位、bmd 73.7% が 2 位です。表彰は発表どおり bmd とし、下の表は正しい値を載せています。
+    9 人村の勝率は、表彰時の集計で 9 人村ではなく 13 人村の役職構成の重みを使っていたため、bmd が 1 位になっていました。
+    正しい重みでは yshimoda 75.9% が 1 位、bmd 72.2% が 2 位です。表彰は発表どおり bmd とし、下の表は正しい値を載せています。
   remark_en: >-
-    The 9-player win-rate tally used at the ceremony weighted the per-role rates with the 13-player role composition, which put bmd first.
-    By win rate over all finished games (wins ÷ games), yshimoda is first at 76.5% and bmd second at 73.7%. The award stands as announced; the tables below show the correct values.
+    The 9-player win-rate tally used at the ceremony weighted the per-role rates with the 13-player role composition instead of the 9-player one, which put bmd first.
+    With the correct weights yshimoda is first at 75.9% and bmd second at 72.2%. The award stands as announced; the tables below show the correct values.
   items:
   - title: 5人村 勝率 1 位
     title_en: '5-player village: Best win rate'
