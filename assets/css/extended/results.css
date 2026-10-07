@@ -133,18 +133,6 @@
 .results-logs-all th:nth-child(4) { width: 18%; }
 .results-logs-all td[rowspan] { vertical-align: top; }
 
-/* ベンチマークのグラフ (layouts/partials/benchmark/review.html) */
-.bench-chart {
-    margin: 12px 0 4px;
-}
-.bench-chart svg {
-    max-width: 640px;
-    display: block;
-}
-.bench-chart figcaption {
-    margin-top: 4px;
-}
-
 /* 表彰の補足説明（集計の訂正など）: 本文幅で折り返し、左に細い罫線 */
 .results-body .results-remark {
   max-width: 48em;

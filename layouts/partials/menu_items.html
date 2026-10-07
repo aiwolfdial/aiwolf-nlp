@@ -1,4 +1,4 @@
-{{- /* ヘッダーのメニュー項目を描画する。dict: items, page, id ("menu" | "menu-sub"), topActive ("home" | "results" | "benchmark" | "") */}}
+{{- /* ヘッダーのメニュー項目を描画する。dict: items, page, id ("menu" | "menu-sub"), topActive ("home" | "results" | "") */}}
 {{- $currentPage := .page }}
 {{- $topActive := .topActive }}
 {{- $basePath := "/aiwolf-nlp/" }}
@@ -15,7 +15,6 @@
     {{- $active := eq $menu_item_url $page_url }}
     {{- if and (not $active) (eq $topActive "home") (eq $menu_item_url $home) }}{{ $active = true }}{{ end }}
     {{- if and (not $active) (eq $topActive "results") (eq $menu_item_url (printf "%sresults/" $home)) }}{{ $active = true }}{{ end }}
-    {{- if and (not $active) (eq $topActive "benchmark") (eq $menu_item_url (printf "%sbenchmark/" $home)) }}{{ $active = true }}{{ end }}
     {{- $is_search := eq (site.GetPage .KeyName).Layout `search` }}
     <li>
         <a href="{{ $menu_item_url }}" title="{{ .Title | default .Name }} {{- cond $is_search (" (Alt + /)" | safeHTMLAttr) ("" | safeHTMLAttr ) }}"

@@ -58,11 +58,10 @@
 {{- if and (ne $menuName "none") (ne $menuName "main") }}
 {{- $subItems = index site.Menus $menuName | default slice }}
 {{- end }}
-{{- /* 上段でアクティブにする項目: 大会関連ページなら「大会情報」、results 配下なら「結果・ログ」、benchmark 配下なら「ベンチマーク」 */}}
+{{- /* 上段でアクティブにする項目: 大会関連ページなら「大会情報」、results 配下なら「結果・ログ」 */}}
 {{- $topActive := "" }}
 {{- if or $currentPage.IsHome (in (slice "page" "menu") $currentPage.Section) }}{{ $topActive = "home" }}
-{{- else if eq $currentPage.Section "results" }}{{ $topActive = "results" }}
-{{- else if eq $currentPage.Section "benchmark" }}{{ $topActive = "benchmark" }}{{ end }}
+{{- else if eq $currentPage.Section "results" }}{{ $topActive = "results" }}{{ end }}
 
 <header class="header">
     <nav class="nav">
