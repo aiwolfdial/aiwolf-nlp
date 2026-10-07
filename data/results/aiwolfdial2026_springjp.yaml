@@ -6,20 +6,11 @@ awards:
   note: 結果発表・表彰は 2026 年度人工知能学会全国大会（2026年6月8日〜12日）の企画セッションで行いました。
   note_en: Results and awards were presented at the JSAI 2026 annual conference (June 8–12, 2026).
   remark: >-
-    **9 人村の勝率 1 位について。** 表彰は発表どおり bmd ですが、表彰時の集計に誤りがありました。
-    役職別の勝率を村の役職構成で加重平均する際に、9 人村の構成（村人 3・占い師 1・騎士 1・霊媒師 1・狂人 1・人狼 2）ではなく
-    13 人村の構成（村人 6・占い師 1・騎士 1・霊媒師 1・狂人 1・人狼 3）を使っていたため、bmd が 1 位になっていました。
-    決着済みの全 30 試合から計算し直した勝率（勝ち数 ÷ 試合数）では yshimoda が 76.5%（13 勝 / 17 試合）で 1 位、
-    bmd が 73.7%（14 勝 / 19 試合）で 2 位です。9 人村の構成で加重し直しても yshimoda が上回ります。
-    下の勝率の表は計算し直した値です。
+    9 人村の勝率は、表彰時の集計で 13 人村の役職構成を使って加重平均していたため、bmd が 1 位になっていました。
+    決着済み全試合の勝率（勝ち数 ÷ 試合数）では yshimoda 76.5% が 1 位、bmd 73.7% が 2 位です。表彰は発表どおり bmd とし、下の表は正しい値を載せています。
   remark_en: >-
-    **On the 9-player village win-rate award.** The award went to bmd as announced, but the tally used at the ceremony was wrong:
-    when averaging the per-role win rates by the village's role composition, it used the 13-player composition
-    (6 villagers, 1 seer, 1 bodyguard, 1 medium, 1 possessed, 3 werewolves) instead of the 9-player one
-    (3 villagers, 1 seer, 1 bodyguard, 1 medium, 1 possessed, 2 werewolves), which put bmd first.
-    Recomputed from all 30 finished games, the win rate (wins ÷ games) is 76.5% for yshimoda (13 / 17), first,
-    and 73.7% for bmd (14 / 19), second; yshimoda also leads when the rates are re-weighted with the 9-player composition.
-    The win-rate tables below show the recomputed values.
+    The 9-player win-rate tally used at the ceremony weighted the per-role rates with the 13-player role composition, which put bmd first.
+    By win rate over all finished games (wins ÷ games), yshimoda is first at 76.5% and bmd second at 73.7%. The award stands as announced; the tables below show the correct values.
   items:
   - title: 5人村 勝率 1 位
     title_en: '5-player village: Best win rate'
@@ -33,8 +24,8 @@ awards:
   - title: 9人村 勝率 1 位
     title_en: '9-player village: Best win rate'
     team: bmd
-    note: 表彰時の集計による。計算し直した勝率では yshimoda が 1 位
-    note_en: As tallied at the ceremony; the recomputed win rate puts yshimoda first
+    note: 集計誤りあり。勝率では yshimoda が 1 位
+    note_en: Tally error; by win rate yshimoda is first
   - title: 9人村 主観評価 1 位
     title_en: '9-player village: Best human evaluation'
     team: yharada
