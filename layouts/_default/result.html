@@ -61,15 +61,6 @@
   {{- end }}
   {{- end }}
 
-  {{- /* data/results/<key>.yaml から表彰・勝率・評価・ログの表を描画 */}}
-  {{- with .Params.results_data }}
-  {{- with index site.Data.results . }}
-  <div class="post-content results-body">
-    {{ partial "results/tables.html" (dict "data" . "page" $) }}
-  </div>
-  {{- end }}
-  {{- end }}
-
   {{- /* 結果・ログページ共通: ログの見方 */}}
   {{- with site.GetPage "snippets/log_howto" }}
   <section class="post-content results-howto">

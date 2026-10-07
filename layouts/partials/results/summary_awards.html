@@ -12,7 +12,7 @@
       {{- $n := len .awards.items }}
       {{- if gt $n 0 }}
         {{- range $i, $a := .awards.items }}
-  <tr>{{ if eq $i 0 }}<td rowspan="{{ $n }}" class="results-team"><a href="{{ $pg.Permalink }}">{{ $pg.Title }}</a></td>{{ end }}<td>{{ cond $en ($a.title_en | default $a.title) $a.title }}</td><td>{{ $a.team }}</td></tr>
+  <tr>{{ if eq $i 0 }}<td rowspan="{{ $n }}" class="results-team"><a href="{{ $pg.Permalink }}">{{ $pg.Title }}</a></td>{{ end }}<td>{{ cond $en ($a.title_en | default $a.title) $a.title }}</td><td>{{ $a.team }}{{ with (cond $en ($a.note_en | default $a.note) $a.note) }} <span class="results-muted">({{ . }})</span>{{ end }}</td></tr>
         {{- end }}
       {{- else }}
   <tr><td class="results-team"><a href="{{ $pg.Permalink }}">{{ $pg.Title }}</a></td><td colspan="2" class="results-muted">{{ cond $en (.awards.note_en | default .awards.note) .awards.note }}</td></tr>

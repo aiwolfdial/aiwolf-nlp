@@ -144,3 +144,11 @@
 .bench-chart figcaption {
     margin-top: 4px;
 }
+
+/* 表彰の補足説明（集計の訂正など）: 本文幅で折り返し、左に細い罫線 */
+.results-body .results-remark {
+  max-width: 48em;
+  padding-left: 0.9em;
+  border-left: 3px solid var(--border);
+  font-size: 0.95em;
+}

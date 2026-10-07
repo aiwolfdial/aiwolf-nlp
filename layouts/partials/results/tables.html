@@ -40,7 +40,7 @@
   <thead><tr><th>{{ cond $en "Award" "賞" }}</th><th>{{ cond $en "Team" "チーム" }}</th></tr></thead>
   <tbody>
   {{- range .items }}
-  <tr><td>{{ cond $en (.title_en | default .title) .title }}</td><td>{{ .team }}{{ with .note }} <span class="results-muted">({{ . }})</span>{{ end }}</td></tr>
+  <tr><td>{{ cond $en (.title_en | default .title) .title }}</td><td>{{ .team }}{{ with (cond $en (.note_en | default .note) .note) }} <span class="results-muted">({{ . }})</span>{{ end }}</td></tr>
   {{- end }}
   </tbody>
 </table>
@@ -48,6 +48,9 @@
 <p class="results-muted">{{ cond $en "The list of awarded teams is being compiled." "表彰チームの一覧は準備中です。" }}</p>
 {{- end }}
 <p>{{ cond $en (.note_en | default .note) .note }}</p>
+{{- with (cond $en (.remark_en | default .remark) .remark) }}
+<p class="results-remark">{{ . | markdownify }}</p>
+{{- end }}
 {{- end }}
 
 <h2 id="win-rates">{{ $secWin }}</h2>

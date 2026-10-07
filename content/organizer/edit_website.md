@@ -93,7 +93,8 @@ ShowToc: true
 
 | 項目 | 内容 |
 |---|---|
-| `awards.items[]` | `title` / `title_en` / `team` / `note`（受賞理由や審査員名など任意） |
+| `awards.items[]` | `title` / `title_en` / `team` / `note` / `note_en`（受賞理由や審査員名など任意。チーム名の後ろに括弧書きで出る） |
+| `awards.remark` / `remark_en` | 表彰についての補足説明（任意、Markdown 可）。表彰の表の下に段落として出ます。集計の訂正など、受賞そのものは変えずに事情を書くときに使います |
 | `availability.human_eval` | `ok` / `none`（未実施）/ `pending`（準備中）。節の文言が切り替わる |
 | `availability.llm_judge` | 同上。`posthoc` は「大会後に事後実施」の注記が付く |
 | `human_eval_short` | 評価方法ページの表に出す短い表記（例: 学生評価者 3 名） |
