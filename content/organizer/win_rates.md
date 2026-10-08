@@ -1,110 +1,83 @@
 ---
-date: '2025-10-04T14:00:00+09:00'
+date: '2026-10-08T10:00:00+09:00'
 draft: false
-title: 'win_ratesまとめ手順'
+title: 'ゲームスコアの配信と集計'
 category: organizer_guide
+ShowToc: true
 ---
 
-## サーバーからゲームの結果を取得
+勝率やゲーム指標（投票精度、疑われやすさなど）の計算は、公式ツール
+[aiwolf-nlp-calculate-score](https://github.com/aiwolfdial/aiwolf-nlp-calculate-score) で行います。
+使い方はリポジトリの README と `doc/ja/` に書いてあるので、**手順そのものは README に従ってください。**
+このページには、README には書いていない運営側の決めごと（どこで・いつ動かすか、配り方、サイトへの反映）だけをまとめます。
 
-```bash
-./aiwolf-nlp-server-linux-amd64 -c ./default5.yml -a
-./aiwolf-nlp-server-linux-amd64 -c ./default13.yml -a
-```
+ツールの使い方は 2 つあります。
 
-## 役職ごと、トータルの勝率を計算
+| 場面 | 動かす場所 | README の節 |
+|---|---|---|
+| 本戦中の配信（ゲームが決着するたびに全チームの表を更新） | 大会サーバ（`ssh aiwolf`） | 「大会中にゲームスコアを配信する」 |
+| 本戦後の集計とチーム別ファイルの生成 | 手元の PC | 「終了したログからゲームスコアを計算する」「チームごとのゲームスコアをまとめる」 |
 
-役職ごとの勝率とすべてのゲームでの勝率を計算。csv形式でまとめる。
+## 本戦開始前（大会サーバ）
 
-```csv
-Team,BODYGUARD,MEDIUM,POSSESSED,SEER,VILLAGER,WEREWOLF,BODYGUARD (%),MEDIUM (%),POSSESSED (%),SEER (%),VILLAGER (%),WEREWOLF (%),TOTAL
-```
+1. `ssh aiwolf` で入り、ホームディレクトリにリポジトリを置きます（初回だけ。2 回目以降は `git pull` で更新）。
+   `uv` はサーバに入っています。見つからないときは `export PATH="$HOME/.local/bin:$PATH"` を先に実行してください。
 
-の形式でまとめる
+    ```bash
+    cd ~ && git clone https://github.com/aiwolfdial/aiwolf-nlp-calculate-score.git && cd aiwolf-nlp-calculate-score && uv sync
+    ```
 
-## Macro, Micro, Weighted Microを計算
+1. 大会ごとの作業ディレクトリ（サーバの設定 yml がある場所。例: `~/inlg2026-2`）で、各トラックの yml に `live_metrics:` を足します。
+   `output_dir` は**そのトラックの公開ディレクトリ**にします。参加者はここに置かれる `metrics.ja.txt` / `metrics.en.txt` をブラウザで読みます。
 
-以下のコードを参考。
+    ```yaml
+    live_metrics:
+      output_dir: /var/www/html/aiwolf/<年>/<大会>/<トラック>   # 例: /var/www/html/aiwolf/2026/INLG2/MainTruck5
+    ```
 
-```python
-import pandas as pd
-from pathlib import Path
-import argparse
+1. 同じディレクトリで `start_live.sh` を実行します（README のとおり）。**ゲームサーバを起動する前に立てておいて構いません。**
+   トラックごとに tmux セッション `aiwolf` のウィンドウが立ち、全試合が終わると自分で止まります。
 
-計算ルール:
-# Macro = 総勝率
-# Micro = 役職勝率の単純平均（担当0の役職は除外）
-# Weighted Micro = 13人配分(1,1,1,1,6,3)で加重（未観測役職の重みは除外し再正規化）
+    ```bash
+    cd ~/inlg2026-2
+    ~/aiwolf-nlp-calculate-score/scripts/start_live.sh default_en_5.yml default_en_9.yml freeform_en_5.yml
+    tmux attach -t aiwolf     # 様子を見る。抜けるのは Ctrl-b d
+    ```
 
-ROLES = ["BODYGUARD", "MEDIUM", "POSSESSED", "SEER", "VILLAGER", "WEREWOLF"]
-WEIGHTS = {"BODYGUARD": 1, "MEDIUM": 1, "POSSESSED": 1, "SEER": 1, "VILLAGER": 6, "WEREWOLF": 3}
+配信が動いていれば、決着したゲームの log は `<トラック>/log/success/` に自動でコピーされます。
+これは結果・ログページで公開する「決着済みログ」と同じ場所なので、別途 success ディレクトリを作る作業は要りません。
 
-def compute_metrics_row(row):
-    counts = [row[r] for r in ROLES]
-    ps = [row[f"{r} (%)"] / 100.0 for r in ROLES]  # 0〜1 に変換
-    observed = [c > 0 for c in counts]
+## 本戦終了後（手元の PC）
 
-    # Macro: 総勝率 = sum(cnt * p) / sum(cnt)
-    total_counts = sum(counts)
-    macro = (sum(c * p for c, p in zip(counts, ps)) / total_counts) if total_counts > 0 else 0.0
+1. 手元にもリポジトリを置き、`uv sync` します。
+1. `scripts/fetch_logs.sh` でサーバから決着済みログと json を取得します。`ssh aiwolf` で繋がることが前提です
+   （[運営を始める前に](./preparing.md) の `~/.ssh/config` の設定）。年度は自動判別され、`data/input/<大会>_<トラック>/` に並びます。
+1. README のとおり `run` と `teams` を実行します。
 
-    # Micro: 観測あり役職の平均
-    ps_obs = [p for p, o in zip(ps, observed) if o]
-    micro = (sum(ps_obs) / len(ps_obs)) if ps_obs else 0.0
+    ```bash
+    uv run src/main.py run data/input      # 全チームの集計 → data/output/<大会>_<トラック>/
+    uv run src/main.py teams data/input    # チーム別ファイル → data/output/teams/
+    ```
 
-    # Weighted Micro: 観測あり役職だけで重み再正規化
-    denom_w = sum(WEIGHTS[r] for r, o in zip(ROLES, observed) if o)
-    numer_w = sum(WEIGHTS[r] * p for r, p, o in zip(ROLES, ps, observed) if o)
-    wmicro = (numer_w / denom_w) if denom_w > 0 else 0.0
+配信中に出していた全チーム表と、ここで出る値は同じ関数で計算されるので一致します。食い違う場合はログの取りこぼしを疑ってください（`uv run src/main.py check data/input`）。
 
-    return pd.Series({
-        "Macro (%)": round(macro * 100, 2),
-        "Micro (%)": round(micro * 100, 2),
-        "Weighted Micro (%)": round(wmicro * 100, 2),
-    })
+## 参加者への配布
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--in", dest="in_path", default="input.csv", help="入力CSVパス")
-    ap.add_argument("--out", dest="out_path", default="metrics_out.csv", help="出力CSVパス")
-    args = ap.parse_args()
+- 全チームの表（`data/output/teams/<大会>_<トラック>/all_team/`）は配信中と同じ内容なので、Slack のチャンネルにそのまま貼れます。
+- チーム別のファイルは `data/output/teams/by_team/<チーム>/` に出場した全トラック分がまとまっています。これを 1 チーム 1 つの zip にして、各チームの Slack DM に送ります。
 
-    script_dir = Path(__file__).resolve().parent
+    ```bash
+    cd data/output/teams/by_team
+    for t in */; do t="${t%/}"; zip -qr "../../${t}_scores.zip" "$t"; done
+    ls ../../*_scores.zip
+    ```
 
-    in_path = Path(args.in_path)
-    if not in_path.is_absolute():
-        in_path = script_dir / in_path
-    if not in_path.exists():
-        print(f"ERROR: 入力CSVが見つかりません: {in_path}")
-        print("対処: 1) CSVを result.py と同じフォルダに置き 'input.csv' にリネーム")
-        print("      2) パスを明示指定: python result.py --in \"C:\\full\\path\\to\\your.csv\"")
-        raise SystemExit(1)
+Slack の文面は [Slack メッセージ一覧](./slack_message.md) を参照してください。
 
-    df = pd.read_csv(in_path)
+## サイトへの反映
 
-    # 必要列の存在チェック（あると安心）
-    required_cols = (ROLES + [f"{r} (%)" for r in ROLES] + ["TOTAL"])
-    missing = [c for c in required_cols if c not in df.columns]
-    if missing:
-        print("ERROR: 必要な列が入力CSVにありません:", missing)
-        raise SystemExit(1)
-
-    metrics = df.apply(compute_metrics_row, axis=1)
-    out = pd.concat([df, metrics], axis=1)
-
-    out_path = Path(args.out_path)
-    if not out_path.is_absolute():
-        out_path = script_dir / out_path
-    out.to_csv(out_path, index=False, encoding="utf-8-sig")
-    print(f"Wrote: {out_path}")
-
-if __name__ == "__main__":
-    main()
-```
-
-## csvデータのアップロード
-
-[aiwolf-nlp-viewer/static/assets/](https://github.com/aiwolfdial/aiwolf-nlp-viewer/tree/main/static/assets)直下に今大会分の勝率csvファイルを追加する。
+結果・ログページのゲーム指標は、`run` が出す `data/output/<大会>_<トラック>/team_summary.csv` から転記します。
+手順は [人狼知能大会ウェブサイト更新](./edit_website.md) の「大会が終わったらやること」を見てください。
 
 [outlineへ戻る](./outline.md)
 [前: 人狼知能人手評価手順](./subjective_evaluation.md)

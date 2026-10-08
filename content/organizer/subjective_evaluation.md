@@ -87,4 +87,4 @@ GoogleFormのリンクを評価者へ配布する
 
 [outlineへ戻る](./outline.md)
 [前: 予選・本戦実行のコマンド一覧](./server_command.md)
-[次: win_ratesまとめ手順](./win_rates.md)
+[次: ゲームスコアの配信と集計](./win_rates.md)

@@ -64,7 +64,7 @@ ShowToc: true
 
 #### 大会が終わったらやること
 
-1. **success ディレクトリを作る**（aiwolf サーバ）。決着したゲームのログだけを集めます。既にあるトラックは再実行しても差分だけ更新されます。
+1. **success ディレクトリを確認する**（aiwolf サーバ）。本戦中にゲームスコアの配信（[ゲームスコアの配信と集計](./win_rates.md)）を動かしていれば、決着したゲームのログは `<トラック>/log/success/` に揃っています。動かしていなかった場合だけ、次で作ります。既にあるトラックは再実行しても差分だけ更新されます。
 
     ```bash
     ssh aiwolf
@@ -75,7 +75,7 @@ ShowToc: true
 1. **success ログを手元に取得**し、`scripts/results/contests/<slug>.yaml` を書く（`example.yaml` をコピー）。トラックごとにログの URL、取得先ディレクトリ、集計元ファイルを指定します。
 
 1. **ゲーム指標と LLM 相対評価の元ファイルを用意する**（任意。無ければその節は「準備中」と表示される）。
-    - ゲーム指標: calculate_meta の `./analyze.py` を実行した `data/output/<データセット>/team_summary.csv`
+    - ゲーム指標: [aiwolf-nlp-calculate-score](https://github.com/aiwolfdial/aiwolf-nlp-calculate-score) の `run` が出す `data/output/<大会>_<トラック>/team_summary.csv`（[ゲームスコアの配信と集計](./win_rates.md)）
     - LLM 相対評価: aiwolf-nlp-llm-judge の出力 `team_aggregation.csv`（モデルごとに 1 つ。複数指定すると平均される）
     - 人手評価: 評価フォームの集計シート（ログ × チーム × 評価項目の平均順位が入った totalling CSV）
 
@@ -99,7 +99,7 @@ ShowToc: true
 | `availability.llm_judge` | 同上。`posthoc` は「大会後に事後実施」の注記が付く |
 | `human_eval_short` | 評価方法ページの表に出す短い表記（例: 学生評価者 3 名） |
 | `tracks[].win_rates` | `winrate.py` の出力。`macro`（総合）/ `micro` / `weighted`（構成加重）/ `by_role` |
-| `tracks[].game_metrics` | calculate_meta の team_summary.csv から転記した 6 指標 |
+| `tracks[].game_metrics` | aiwolf-nlp-calculate-score の team_summary.csv から転記した 6 指標 |
 | `tracks[].human_eval` | `scale` は `rank`（順位平均）か `rating5`（5 点評点）。`source` は表の上に出る注記 |
 | `tracks[].llm_judge` | `models`（評価方法ページの表に出る）/ `source`（表の上に出る注記）/ `posthoc` |
 | `tracks[].logs` | ログ一覧の URL（対戦ログ節と対戦ログ一覧ページに出る） |

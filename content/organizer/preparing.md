@@ -42,6 +42,7 @@ $ mkdir aiwolfdial
 | aiwolf-nlp-log-translator | ログファイルを任意の言語へ翻訳する。 |
 | aiwolf-nlp-viewer | ログファイルを閲覧するためのビュアー。大会実行後選んだログファイルをアップロードし、ここから閲覧できるようにする。 |
 | aiwolf-nlp-llm-judge | 主観評価と同じ項目の順位をLLMによってつけさせる。 |
+| aiwolf-nlp-calculate-score | ログから勝率とゲームスコア（投票精度・疑われやすさなど）を計算する。本戦中の配信にも使う。 |
 
 上記の中から必要に応じてaiwolfdialフォルダにクローンし管理していくとやりやすい。
 

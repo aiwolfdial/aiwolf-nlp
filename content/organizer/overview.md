@@ -8,7 +8,7 @@ category: organizer_guide
 <details>
 <summary>表変換</summary>
 
-[主観評価の結果](./subjective_evaluation.md)、[勝率の結果](./win_rates.md)をLaTeX形式の表にまとめなおす。
+[主観評価の結果](./subjective_evaluation.md)、[勝率・ゲームスコアの結果](./win_rates.md)をLaTeX形式の表にまとめなおす。
 スペースの都合上、別々で作成していた表もひとつにまとめる。
 参考：[INLG2025_summary](https://ja.overleaf.com/project/68baa8b56e8d5f192df6e2a9)
 主観評価をまとめた表は、各評価タイプ（Human, 4o-same, ...）ごと、かつ軸（A, B, ...）毎に、最も良いスコアのセルを太字に、
@@ -34,4 +34,4 @@ overviewをよりスムーズに先生が作成できるように各種リンク
 その他、適宜任されたタスクをこなしていく。
 
 [outlineへ戻る](./outline.md)
-[前: win_ratesまとめ手順](./win_rates.md)
+[前: ゲームスコアの配信と集計](./win_rates.md)

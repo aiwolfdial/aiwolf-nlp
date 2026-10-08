@@ -14,7 +14,7 @@ category: organizer_guide
 5. [Slackメッセージ一覧](./slack_message.md)
 6. [予選・本戦実行のコマンド一覧](./server_command.md)
 7. [人狼知能人手評価手順](./subjective_evaluation.md)
-8. [win_ratesまとめ手順](./win_rates.md)
+8. [ゲームスコアの配信と集計](./win_rates.md)
 9. [overview作成手伝い](./overview.md)
 10. [賞状の作成](./certificate.md)
 11. [デモの準備](./demo.md)
