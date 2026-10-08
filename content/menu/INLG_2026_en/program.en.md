@@ -12,7 +12,7 @@ https://2026.inlgmeeting.org/
 
 All times are in Central European Summer Time (CEST), UTC+2.
 
-Presenters are marked with an asterisk (*). Long talks are 15 minutes and short talks 10 minutes, including Q&A. The program is preliminary and subject to change.
+All talks in Sessions 1–3 are peer reviewed papers accepted to the workshop. **Long** papers are given 15 minutes and **Short** papers 10 minutes, including Q&A. Presenters are marked with an asterisk (*). The program is preliminary and subject to change.
 
 09:00–09:15 Opening and contest results
 

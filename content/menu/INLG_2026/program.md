@@ -12,7 +12,7 @@ https://2026.inlgmeeting.org/
 
 時刻はすべて中央ヨーロッパ夏時間（CEST、UTC+2）です。日本時間は +7 時間（16:00–19:30）です。
 
-発表者には * を付けています。Long は 15 分、Short は 10 分（いずれも質疑込み）です。仮プログラムのため変更の可能性があります。[英語版](https://aiwolfdial.github.io/aiwolf-nlp/en/menu/inlg_2026_en/program/)もあります。
+Session 1〜3 の発表はすべてワークショップに採択された査読付き論文（peer reviewed papers）です。**Long** は 15 分、**Short** は 10 分の発表（質疑込み）です。発表者には * を付けています。仮プログラムのため変更の可能性があります。[英語版](https://aiwolfdial.github.io/aiwolf-nlp/en/menu/inlg_2026_en/program/)もあります。
 
 09:00–09:15 オープニング・コンテスト結果報告
 
