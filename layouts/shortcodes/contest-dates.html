@@ -1,0 +1,20 @@
+{{- /* 日程の箇条書き。回が 2 つ以上なら回ごとに見出しを付ける。
+       引数: format=ja|en|slash（既定: 英語ページは en、それ以外は ja） bold=true|false  heading=h4|h3|none  sep（区切り。既定 ja は「：」他は「: 」） */ -}}
+{{- $c := partial "contest/load.html" .Page -}}
+{{- $en := $c.en -}}
+{{- $fmt := .Get "format" | default (cond $en "en" "ja") -}}
+{{- $bold := eq (.Get "bold" | default "false") "true" -}}
+{{- $sep := .Get "sep" | default (cond (eq $fmt "ja") "：" ": ") -}}
+{{- $heading := .Get "heading" | default "h4" -}}
+{{- $rounds := $c.contest.rounds -}}
+{{- if not $rounds -}}{{ partial "contest/tba.html" (dict "en" $en "inline" false) }}{{- else -}}
+{{- $multi := gt (len $rounds) 1 -}}
+{{- range $i, $r := $rounds -}}
+{{- if and $multi (ne $heading "none") }}
+{{ cond (eq $heading "h3") "###" "####" }} {{ cond $en ($r.name_en | default $r.name) $r.name }}
+{{ end }}
+{{- range $r.milestones }}
+- {{ if $bold }}**{{ end }}{{ partial "contest/date.html" (dict "start" .date "end" .end "open" .open "format" $fmt) }}{{ if $bold }}**{{ end }}{{ $sep }}{{ cond $en (.name_en | default .name) .name }}
+{{- end }}
+{{ end -}}
+{{- end -}}

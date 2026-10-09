@@ -1,0 +1,23 @@
+{{- /* 役職構成。引数: size=5|9|13  format=table|x|plus
+       table: レギュレーションの表   x: 村人×2, 占い師, 人狼, 狂人（英語は Villager ×2, …）   plus: 村人2 + 占い師1 + 人狼1 + 狂人1（英語は Villager ×2, Seer ×1, …） */ -}}
+{{- $c := partial "contest/load.html" .Page -}}{{- $en := $c.en -}}
+{{- $size := .Get "size" | default "5" -}}
+{{- $fmt := .Get "format" | default "table" -}}
+{{- $roles := index site.Data.roles (printf "%v" $size) -}}
+{{- if not $roles -}}{{ partial "contest/tba.html" (dict "en" $en "inline" false) }}{{- else if eq $fmt "table" -}}
+| {{ cond $en "Role" "役職" }} | {{ cond $en "Team" "陣営" }} | {{ cond $en "Count" "人数" }} | {{ cond $en "Special Ability" "特殊能力" }} |
+| --- | --- | --- | --- |
+{{ range $roles }}| {{ cond $en .name_en .name }} | {{ cond $en .side_en .side }} | {{ .count }} | {{ cond $en .ability_en .ability }} |
+{{ end -}}
+{{- else -}}
+{{- $items := slice -}}
+{{- range $roles -}}
+  {{- $n := cond $en .name_en .name -}}
+  {{- if eq $fmt "plus" -}}
+    {{- $items = $items | append (cond $en (printf "%s ×%d" $n .count) (printf "%s%d" $n .count)) -}}
+  {{- else -}}
+    {{- $items = $items | append (cond (gt .count 1) (cond $en (printf "%s ×%d" $n .count) (printf "%s×%d" $n .count)) $n) -}}
+  {{- end -}}
+{{- end -}}
+{{- delimit $items (cond (and (eq $fmt "plus") (not $en)) " + " ", ") -}}
+{{- end -}}

@@ -14,7 +14,7 @@ Spearman rank correlation between the human evaluation (overall) and the LLM-as-
   <tbody>
   {{- range $pages }}
   {{- $pg := . }}
-  {{- with index site.Data.results (.Params.results_data | default "") }}
+  {{- with partial "contest_results.html" (.Params.results_data | default "") }}
   {{- $c := . }}
   {{- range .tracks }}
     {{- if and .human_eval .llm_judge }}

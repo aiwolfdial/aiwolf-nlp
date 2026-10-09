@@ -1,0 +1,3 @@
+{{- /* 未記入のときの決まり文句。dict: en inline
+       inline（文中）: 【未定】 / [TBA]      block（段落）: 決定次第掲載します。 / To be announced. */ -}}
+{{- if .inline }}{{ cond .en "[TBA]" "【未定】" }}{{ else }}{{ cond .en "To be announced." "決定次第掲載します。" }}{{ end -}}

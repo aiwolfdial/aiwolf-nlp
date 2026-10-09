@@ -1,0 +1,24 @@
+{{- /* 日付 1 件を整形。dict: start end open format(ja|en|en_to|slash) sep pad
+       ja:    2026年7月4日 / 2026年7月6日〜 / 2026年10月17日〜10月21日   （sep で「〜」を「～」などに変えられる）
+       en:    July 4, 2026 / From July 6, 2026 / October 17–21, 2026
+       en_to: October 17 to 21, 2026（文中の "from … to …" 用）
+       slash: 2026/05/01 / 2026/05/11〜 / 2026/06/08~12   （pad=false で 2026/6/8-12 のように 0 埋めなし） */ -}}
+{{- $s := time.AsTime .start -}}
+{{- $e := "" }}{{ with .end }}{{ $e = time.AsTime . }}{{ end -}}
+{{- $f := .format | default "ja" -}}
+{{- $pad := ne (printf "%v" (.pad | default "true")) "false" -}}
+{{- if or (eq $f "en") (eq $f "en_to") -}}
+  {{- $sep := .sep | default (cond (eq $f "en_to") " to " "–") -}}
+  {{- if .open }}From {{ end -}}
+  {{- if $e -}}
+    {{- if eq $s.Month $e.Month }}{{ $s.Format "January 2" }}{{ $sep }}{{ $e.Format "2" }}, {{ $s.Format "2006" }}{{ else }}{{ $s.Format "January 2" }} {{ $sep | strings.TrimSpace }} {{ $e.Format "January 2" }}, {{ $s.Format "2006" }}{{ end -}}
+  {{- else }}{{ $s.Format "January 2, 2006" }}{{ end -}}
+{{- else if eq $f "slash" -}}
+  {{- $sep := .sep | default "~" -}}
+  {{- $s.Format (cond $pad "2006/01/02" "2006/1/2") -}}
+  {{- if $e }}{{ $sep }}{{ if eq $s.Month $e.Month }}{{ $e.Format (cond $pad "02" "2") }}{{ else }}{{ $e.Format (cond $pad "01/02" "1/2") }}{{ end }}{{ else if .open }}〜{{ end -}}
+{{- else -}}
+  {{- $sep := .sep | default "〜" -}}
+  {{- $s.Format "2006年1月2日" -}}
+  {{- if $e }}{{ $sep }}{{ $e.Format "1月2日" }}{{ else if .open }}〜{{ end -}}
+{{- end -}}

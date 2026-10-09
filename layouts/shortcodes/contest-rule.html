@@ -1,0 +1,5 @@
+{{- /* rules の値を 1 つ出す。引数: key=talk_chars|mention_chars|response_timeout_sec|anytime_talks_per_day|anytime_phase_min   as=min で秒を分に */ -}}
+{{- $c := partial "contest/load.html" .Page -}}
+{{- $k := .Get "key" -}}
+{{- $v := index $c.contest.rules $k -}}
+{{- if eq $v nil }}{{ partial "contest/tba.html" (dict "en" $c.en "inline" true) }}{{ else if eq (.Get "as") "min" }}{{ div (int $v) 60 }}{{ else }}{{ $v }}{{ end -}}

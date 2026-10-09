@@ -3,6 +3,20 @@ theme: ["PaperMod"]
 enableRobotsTXT: true
 enableGitInfo: true
 
+# 大会データ (aiwolf-nlp-contests) を submodule external/ から data/ にマウントする。
+# module.mounts を書くと既定のマウントが無効になるので、標準ディレクトリも列挙している。
+module:
+  mounts:
+    - {source: content,   target: content}
+    - {source: layouts,   target: layouts}
+    - {source: static,    target: static}
+    - {source: assets,    target: assets}
+    - {source: data,      target: data}
+    - {source: i18n,      target: i18n}
+    - {source: archetypes, target: archetypes}
+    - {source: external/aiwolf-nlp-contests/contests, target: data/contests}
+    - {source: external/aiwolf-nlp-contests/roles,    target: data/roles}
+
 params:
   env: production
   description: "人狼知能大会 自然言語部門（AIWolfDial）の公式サイト。マルチエージェント対話によるAI人狼ゲームの研究・大会情報を掲載しています。"
@@ -45,28 +59,28 @@ languages:
           weight: 4
       inlg_2026:
         - name: "ホーム"
-          url: /page/INLG_2026
+          url: /page/inlg_2026
           weight: 1
         - name: "論文提出"
-          url: /menu/INLG_2026/paper_submission
+          url: /menu/inlg_2026/paper_submission
           weight: 2
         - name: "ワークショップ"
-          url: /menu/INLG_2026/program
+          url: /menu/inlg_2026/program
           weight: 3
         - name: "参加方法"
-          url: /menu/INLG_2026/participation
+          url: /menu/inlg_2026/participation
           weight: 4
         - name: "レギュレーション"
-          url: /menu/INLG_2026/regulation
+          url: /menu/inlg_2026/regulation
           weight: 5
         - name: "開発"
-          url: /menu/INLG_2026/agent
+          url: /menu/inlg_2026/agent
           weight: 6
         - name: "リンク・実行委員会"
-          url: /menu/INLG_2026/organizer
+          url: /menu/inlg_2026/organizer
           weight: 7
         - name: "結果・ログ"
-          url: /menu/INLG_2026/result
+          url: /menu/inlg_2026/result
           weight: 8
       inlg_2025:
         - name: "ホーム"
@@ -95,25 +109,25 @@ languages:
           weight: 8
       aiwolfdial2026_springjp:
         - name: "ホーム"
-          url: /page/AIWolfDial_2026SpringJP
+          url: /page/aiwolfdial2026_springjp
           weight: 1
         - name: "ワークショップ"
-          url: /menu/AIWolfDial2026_SpringJP/program
+          url: /menu/aiwolfdial2026_springjp/program
           weight: 2
         - name: "スケジュールと参加"
-          url: /menu/AIWolfDial2026_SpringJP/schedule_participation
+          url: /menu/aiwolfdial2026_springjp/schedule_participation
           weight: 3
         - name: "レギュレーション"
-          url: /menu/AIWolfDial2026_SpringJP/regulation
+          url: /menu/aiwolfdial2026_springjp/regulation
           weight: 4
         - name: "開発"
-          url: /menu/AIWolfDial2026_SpringJP/agent
+          url: /menu/aiwolfdial2026_springjp/agent
           weight: 5
         - name: "リンク・実行委員会"
-          url: /menu/AIWolfDial2026_SpringJP/organizer
+          url: /menu/aiwolfdial2026_springjp/organizer
           weight: 6
         - name: "結果・ログ"
-          url: /menu/AIWolfDial2026_SpringJP/result
+          url: /menu/aiwolfdial2026_springjp/result
           weight: 7
       aiwolfdial2025_springjp:
         - name: "ホーム"
@@ -182,28 +196,28 @@ languages:
           weight: 4
       inlg_2026:
         - name: "Home"
-          url: /page/INLG_2026
+          url: /page/inlg_2026
           weight: 1
         - name: "Paper Submission"
-          url: /menu/INLG_2026_en/paper_submission
+          url: /menu/inlg_2026_en/paper_submission
           weight: 2
         - name: "Workshop"
-          url: /menu/INLG_2026_en/program
+          url: /menu/inlg_2026_en/program
           weight: 3
         - name: "How to Participate"
-          url: /menu/INLG_2026_en/participation
+          url: /menu/inlg_2026_en/participation
           weight: 4
         - name: "Regulations"
-          url: /menu/INLG_2026_en/regulation
+          url: /menu/inlg_2026_en/regulation
           weight: 5
         - name: "Development"
-          url: /menu/INLG_2026_en/agent
+          url: /menu/inlg_2026_en/agent
           weight: 6
         - name: "Links & Organizing Committee"
-          url: /menu/INLG_2026_en/organizer
+          url: /menu/inlg_2026_en/organizer
           weight: 7
         - name: "Results & Logs"
-          url: /menu/INLG_2026_en/result
+          url: /menu/inlg_2026_en/result
           weight: 8
       inlg_2025:
         - name: "Home"

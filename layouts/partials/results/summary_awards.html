@@ -9,7 +9,7 @@
   <tbody>
   {{- range $pages }}
     {{- $pg := . }}
-    {{- with index site.Data.results (.Params.results_data | default "") }}
+    {{- with partial "contest_results.html" (.Params.results_data | default "") }}
       {{- $n := len .awards.items }}
       {{- if gt $n 0 }}
         {{- range $i, $a := .awards.items }}

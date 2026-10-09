@@ -9,6 +9,11 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+  # 毎日 06:00 JST (21:00 UTC) に再ビルドする。大会一覧の「次回大会 / 過去大会」の仕切りは
+  # ビルド時の日付で決まるので、会期が過ぎた翌朝に自動で移る
+  schedule:
+    - cron: "0 21 * * *"
+
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
@@ -56,7 +61,7 @@ jobs:
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
-          TZ: America/Los_Angeles
+          TZ: Asia/Tokyo
         run: |
           hugo \
             --gc \

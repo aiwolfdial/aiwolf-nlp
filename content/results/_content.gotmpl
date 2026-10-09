@@ -19,13 +19,16 @@
           {{- $fm := transform.Unmarshal (index (index $m 0) 1) }}
           {{- $body := index (index $m 0) 2 }}
           {{- $slug := lower (strings.TrimSuffix "_en" $name) }}
+          {{- /* contest: が大会 id（contests にデータがある）なら表示名はそこから。旧ページは contest: に表示名が直書きされている */}}
+          {{- $title := $fm.contest | default $fm.title }}
+          {{- with index site.Data.contests ($fm.contest | default "") }}{{ with .contest }}{{ $title = cond $isEn (.name_en | default .name) .name }}{{ end }}{{ end }}
           {{- $.AddPage (dict
                 "path" $slug
                 "kind" "page"
                 "layout" "result"
-                "title" ($fm.contest | default $fm.title)
+                "title" $title
                 "dates" (dict "date" (time.AsTime $fm.date))
-                "params" (dict "contest" $fm.contest "source_menu" $name "menu_slug" $slug "results_data" $fm.results_data)
+                "params" (dict "contest" $title "source_menu" $name "menu_slug" $slug "results_data" $fm.results_data)
                 "content" (dict "mediaType" "text/markdown" "value" $body)
               ) }}
         {{- end }}

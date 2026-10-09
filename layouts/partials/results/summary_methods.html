@@ -25,7 +25,7 @@
   <tbody>
   {{- range $pages }}
   {{- $pg := . }}
-  {{- with index site.Data.results (.Params.results_data | default "") }}
+  {{- with partial "contest_results.html" (.Params.results_data | default "") }}
   {{- $av := .availability | default dict }}
   <tr>
     <td class="results-team"><a href="{{ $pg.Permalink }}">{{ cond $en .contest_en .contest }}</a></td>

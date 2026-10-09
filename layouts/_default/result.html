@@ -52,9 +52,9 @@
   </div>
   {{- end }}
 
-  {{- /* data/results/<key>.yaml から表彰・勝率・評価・ログの表を描画 */}}
+  {{- /* contests の results.yaml から表彰・勝率・評価・ログの表を描画 */}}
   {{- with .Params.results_data }}
-  {{- with index site.Data.results . }}
+  {{- with partial "contest_results.html" . }}
   <div class="post-content results-body">
     {{ partial "results/tables.html" (dict "data" . "page" $) }}
   </div>

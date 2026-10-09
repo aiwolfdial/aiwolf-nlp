@@ -1,0 +1,10 @@
+{{- /* トラックごとのチーム当たり試合数の表（contest.yaml の tracks の順）。games_per_team が無いトラックは出さない */ -}}
+{{- $c := partial "contest/load.html" .Page -}}{{- $en := $c.en -}}
+{{- $rows := slice -}}
+{{- range $t := $c.contest.tracks }}{{ with $t.games_per_team }}{{ $rows = $rows | append (dict "name" (cond $en ($t.name_en | default $t.name) $t.name) "g" .) }}{{ end }}{{ end -}}
+{{- if not $rows -}}{{ partial "contest/tba.html" (dict "en" $en "inline" false) }}{{- else -}}
+| {{ cond $en "Division" "区分" }} | {{ cond $en "Matches per Team" "チーム当たり試合数" }} |
+| --- | --- |
+{{ range $rows }}| {{ .name }} | {{ index .g 0 }}{{ cond $en "–" "〜" }}{{ index .g 1 }}{{ cond $en " matches" "試合" }} |
+{{ end -}}
+{{- end -}}

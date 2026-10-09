@@ -1,0 +1,4 @@
+{{- /* 参加登録フォームへのリンク。引数: text（リンク文字列。既定: Google フォーム / Google Form） */ -}}
+{{- $c := partial "contest/load.html" .Page -}}
+{{- $text := .Get "text" | default (cond $c.en "Google Form" "Google フォーム") -}}
+{{- with $c.contest.form_url }}[{{ $text }}]({{ . }}){{ else }}{{ partial "contest/tba.html" (dict "en" $c.en "inline" true) }}{{ end -}}

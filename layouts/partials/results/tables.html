@@ -1,4 +1,4 @@
-{{- /* 結果・ログページの本体。data/results/<slug>.yaml を描画する。dict: data, page */}}
+{{- /* 結果・ログページの本体。contests/<slug>/results.yaml を描画する。dict: data, page */}}
 {{- $d := .data }}
 {{- $en := eq site.Language.Lang "en" }}
 {{- $roleName := dict "VILLAGER" (cond $en "Villager" "村人") "SEER" (cond $en "Seer" "占い師") "BODYGUARD" (cond $en "Bodyguard" "騎士") "MEDIUM" (cond $en "Medium" "霊媒師") "POSSESSED" (cond $en "Possessed" "狂人") "WEREWOLF" (cond $en "Werewolf" "人狼") }}

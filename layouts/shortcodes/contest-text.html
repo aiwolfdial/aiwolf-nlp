@@ -1,0 +1,6 @@
+{{- /* contest.yaml の texts.<key>（自由文。Markdown 可）を出す。無ければ「決定次第掲載します。」
+       使い方: contest-text key="character_prompt" */ -}}
+{{- $c := partial "contest/load.html" .Page -}}
+{{- $v := "" }}{{ with $c.contest.texts }}{{ with index . ($.Get "key") }}{{ $v = . }}{{ end }}{{ end -}}
+{{- if $c.en }}{{ with $c.contest.texts }}{{ with index . (printf "%s_en" ($.Get "key")) }}{{ $v = . }}{{ end }}{{ end }}{{ end -}}
+{{- if $v }}{{ $v }}{{ else }}{{ partial "contest/tba.html" (dict "en" $c.en "inline" false) }}{{ end -}}

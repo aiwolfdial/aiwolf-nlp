@@ -1,0 +1,15 @@
+{{- /* 日付を 1 つだけ文中に出す。引数: key=venue（会期）| 日程の key（registration, main_start, results, …）  round=回の id（省略時は最初に見つかったもの）
+       format=ja|en|en_to|slash  sep=範囲の区切り  pad=false で 0 埋めなし  bold=true */ -}}
+{{- $c := partial "contest/load.html" .Page -}}{{- $en := $c.en -}}
+{{- $key := .Get "key" | default "venue" -}}
+{{- $fmt := .Get "format" | default (cond $en "en" "ja") -}}
+{{- $d := dict -}}
+{{- if eq $key "venue" -}}
+  {{- with $c.contest.venue }}{{ $d = dict "start" .start "end" .end }}{{ end -}}
+{{- else -}}
+  {{- range $c.contest.rounds }}{{ if or (not ($.Get "round")) (eq .id ($.Get "round")) }}{{ range .milestones }}{{ if and (eq .key $key) (not $d.start) }}{{ $d = dict "start" .date "end" .end "open" .open }}{{ end }}{{ end }}{{ end }}{{ end -}}
+{{- end -}}
+{{- if not $d.start }}{{ partial "contest/tba.html" (dict "en" $en "inline" true) }}{{ else -}}
+{{- $txt := partial "contest/date.html" (dict "start" $d.start "end" $d.end "open" $d.open "format" $fmt "sep" (.Get "sep") "pad" (.Get "pad")) -}}
+{{- if eq (.Get "bold") "true" }}**{{ $txt }}**{{ else }}{{ $txt }}{{ end -}}
+{{- end -}}

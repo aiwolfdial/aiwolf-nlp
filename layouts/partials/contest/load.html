@@ -1,0 +1,20 @@
+{{- /* ページから大会データを引く。front matter の contest: <id> を優先し、無ければ
+       content/menu/<Dir>/ のディレクトリ名（小文字化し末尾の _en を除く）か、page の menu_id から決める。
+       返り値: dict "id" "contest" "results" "en"  （見つからなければ contest は空 dict） */ -}}
+{{- $page := . -}}
+{{- $id := $page.Params.contest | default "" -}}
+{{- if not $id -}}
+  {{- with $page.Params.menu_id }}{{ $id = . }}{{ end -}}
+{{- end -}}
+{{- if and (not $id) $page.File -}}
+  {{- $parts := split (strings.TrimSuffix "/" $page.File.Dir) "/" -}}
+  {{- if and (ge (len $parts) 2) (eq (index $parts 0) "menu") -}}
+    {{- $id = strings.TrimSuffix "_en" (lower (index $parts 1)) -}}
+  {{- end -}}
+{{- end -}}
+{{- $c := dict -}}{{- $r := dict -}}
+{{- with index site.Data.contests $id -}}
+  {{- with .contest }}{{ $c = . }}{{ end -}}
+  {{- with .results }}{{ $r = . }}{{ end -}}
+{{- end -}}
+{{- return (dict "id" $id "contest" $c "results" $r "en" (eq site.Language.Lang "en")) -}}

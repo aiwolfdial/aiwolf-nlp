@@ -1,0 +1,8 @@
+{{- /* トラック名の箇条書き（contest.yaml の tracks の順）。引数: indent=行頭の空白（入れ子の箇条書き用、例 "  "） */ -}}
+{{- $c := partial "contest/load.html" .Page -}}{{- $en := $c.en -}}
+{{- $indent := .Get "indent" | default "" -}}
+{{- with $c.contest.tracks -}}
+{{- range . }}
+{{ $indent }}- {{ cond $en (.name_en | default .name) .name }}
+{{- end }}
+{{ else -}}{{ partial "contest/tba.html" (dict "en" $en "inline" false) }}{{- end -}}

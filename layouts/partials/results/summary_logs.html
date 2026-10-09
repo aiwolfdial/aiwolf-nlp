@@ -8,7 +8,7 @@
   <tbody>
   {{- range $pages }}
     {{- $pg := . }}
-    {{- with index site.Data.results (.Params.results_data | default "") }}
+    {{- with partial "contest_results.html" (.Params.results_data | default "") }}
       {{- $n := len .tracks }}
       {{- range $i, $tr := .tracks }}
   <tr>{{ if eq $i 0 }}<td rowspan="{{ $n }}" class="results-team"><a href="{{ $pg.Permalink }}">{{ $pg.Title }}</a></td>{{ end }}<td>{{ cond $en $tr.name_en $tr.name }}</td><td>{{ $tr.games }}</td><td><a href="{{ $tr.logs }}">{{ cond $en "Log list" "ログ一覧" }}</a></td></tr>

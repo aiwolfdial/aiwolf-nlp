@@ -43,7 +43,13 @@
 {{- if .IsHome }}
   {{- $pages = where site.RegularPages "Type" "in" site.Params.mainSections }}
   {{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true"  }}
+  {{- $pages = where $pages "Params.divContent" "!=" true }}{{/* 仕切りは下で自動挿入する */}}
 {{- end }}
+{{- /* 大会一覧の仕切り: contests の会期（venue.end、無ければ日程の最終日）が今日以降なら「次回大会」、過ぎていれば「過去大会」。
+       contests にデータの無い古い大会は過去扱い。判定はビルド時の日付なので、定期ビルド（.github/workflows）で追従させる */}}
+{{- $today := now.Format "2006-01-02" }}
+{{- $isEn := eq site.Language.Lang "en" }}
+{{- $labelNext := cond $isEn "Next Contest" "次回大会" }}{{ $labelPast := cond $isEn "Past Contest" "過去大会" }}{{ $labelSoon := cond $isEn "Coming soon" "近日追加予定" }}
 
 {{- $paginator := .Paginate $pages }}
 
@@ -52,7 +58,30 @@
 {{- end }}
 
 {{- $term := .Data.Term }}
+{{- $divNextDone := false }}{{ $divPastDone := false }}
 {{- range $index, $page := $paginator.Pages }}
+
+{{- if and (or $.IsHome (eq $.Section "page")) (eq $paginator.PageNumber 1) }}
+  {{- $cid := .Params.contest | default .Params.menu_id | default "" }}
+  {{- $end := "" }}
+  {{- with index site.Data.contests $cid }}{{ with .contest }}
+    {{- with .venue }}{{ with .end }}{{ $end = printf "%v" . | truncate 10 "" }}{{ end }}{{ end }}
+    {{- if not $end }}{{ range .rounds }}{{ range .milestones }}{{ $d := printf "%v" (.end | default .date) | truncate 10 "" }}{{ if gt $d $end }}{{ $end = $d }}{{ end }}{{ end }}{{ end }}{{ end }}
+  {{- end }}{{ end }}
+  {{- $upcoming := and $end (ge $end $today) }}
+  {{- if and (not $divNextDone) $upcoming }}
+<article class="div-content-entry"><header class="entry-header"><h2 class="entry-hint-parent">----- {{ $labelNext }} -----</h2></header></article>
+    {{- $divNextDone = true }}
+  {{- else if and (not $divPastDone) (not $upcoming) }}
+    {{- if not $divNextDone }}
+<article class="div-content-entry"><header class="entry-header"><h2 class="entry-hint-parent">----- {{ $labelNext }} -----</h2></header></article>
+<article class="div-content-entry"><header class="entry-header"><h2 class="entry-hint-parent">{{ $labelSoon }}</h2></header></article>
+      {{- $divNextDone = true }}
+    {{- end }}
+<article class="div-content-entry"><header class="entry-header"><h2 class="entry-hint-parent">----- {{ $labelPast }} -----</h2></header></article>
+    {{- $divPastDone = true }}
+  {{- end }}
+{{- end }}
 
 {{- $class := "post-entry" }}
 
