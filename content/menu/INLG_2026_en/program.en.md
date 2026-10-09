@@ -21,7 +21,7 @@ All talks in Sessions 1–3 are peer reviewed papers accepted to the workshop. *
 
 09:15–09:35 Contest team presentations (6): non-archival AIWolf agent descriptions, 3 minutes each
 
-- Team kataken14f (Atsuro Hamanaka*, Ariana Sheikhi, Daiki Asakura, and Ryosuke Sueyoshi)
+- Team kataken14f (Atsuro Hamanaka, Ariana Sheikhi, Daiki Asakura, and Ryosuke Sueyoshi*)
 - Team CamelliaDragons (Momoka Kato*, Kaito Okuno, Syuji Otsuki, Keita Kasuya, and Toma Inagaki)
 - Team CanisLupus (Yu Sugawara*)
 - Team gotsumori-NLP (Tatsuya Mikami*)
@@ -46,7 +46,7 @@ All talks in Sessions 1–3 are peer reviewed papers accepted to the workshop. *
 11:20–12:20 Session 3 — Timing, persona, evaluation, and robustness: peer reviewed papers
 
 - 11:20 [Long] Beyond What to Say: Proactive Utterance Timing with Inner Thoughts for Werewolf Agents (Yoshiki Tanaka*, Shuya Uchiyama, Daichi Hamaguchi, and Michimasa Inaba) (Team UEC-IL)
-- 11:35 [Long] Preserving Character in Four Letters: Personality Information Compression in AIWolf Agents Using MBTI-like Labels (Ryosuke Sueyoshi*, Kentaro Hoshi, Miyu Ueki, and Chaeyoung Sung) (Team noisy_watcher)
+- 11:35 [Long] Preserving Character in Four Letters: Personality Information Compression in AIWolf Agents Using MBTI-like Labels (Ryosuke Sueyoshi, Kentaro Hoshi*, Miyu Ueki, and Chaeyoung Sung) (Team noisy_watcher)
 - 11:50 [Long] Fine-Grained Absolute Evaluation of Utterance Naturalness in Japanese AIWolf Dialogue: An Agreement Analysis between Human Annotators and LLM Judges (Chaeyoung Sung*, Ryosuke Sueyoshi, Kentaro Hoshi, Miyu Ueki, and Masato Taki) (Team noisy_watcher)
 - 12:05 [Long] What Breaks Prompt-Specified Settings in Multi-Turn Dialogue Attacks: Attack Type, Burst-Injection Granularity, and Role Boundaries (Yuki Shimoda* and Yoshinobu Kano) (Team yshimoda)
 
