@@ -21,30 +21,26 @@ roles/<人数>.yaml                  村の人数ごとの役職表
 大会 id は `inlg_2026`、`aiwolfdial2026_springjp` のように小文字で付け、サイト側のディレクトリ名・ファイル名もこれに合わせます。
 
 - clone 直後は `git submodule update --init --recursive` で取得します（PaperMod と同じ）。
-- contests 側を更新したら、サイト側で `git -C external/aiwolf-nlp-contest-data pull` して submodule の参照を進めたコミットを push すると反映されます。
+- contests 側が更新されたら、サイト側で `bash scripts/contest/sync.sh` を実行すると submodule の参照を進めてコミットします（push はしません）。localhost で確認してから自分で push すると反映されます。
 - 連絡先など公開できない情報は contests には書きません（登録フォームの回答シートが台帳です）。
 
 ## 新規ページ作成
 
-1. **contests に大会を登録する。** 大会定義シート（Google スプレッドシート 1 枚。行が項目、列が大会）に新しい大会の列を足し、その列を埋めて取り込みます。
-   前回の大会の値が入った状態で列ができ、日付と参加フォーム URL だけ空になります。隣の列が過去の大会なので見比べながら埋められます。
-   項目名の頭の「＊」が必須で、必須なのに空のセルは赤く表示されます。YAML を直接書く必要はなく、未定の値は空欄のままで構いません（ページには「決定次第」と出て、検査で拾えます）。
+1. **contests に大会を登録する。** 大会定義シート（Google スプレッドシート 1 枚。行が項目、列が大会）の「大会」タブで、空いている列の 1 行目に大会 id を書き、値を埋めます。
+   ドロップダウンやチェックボックスは最初から付いていて、項目名の頭の「＊」が必須、会期前の大会で必須なのに空のセルは赤く表示されます。
+   英語ページも作る大会は「サイトの言語」を「両方」（英語だけなら「英語」）にし、「大会_en」タブの同じ列を埋めます。
    トラックの一覧と文字数などのルールは大会横断の「トラック」「ルール」タブにあり、大会の列では使うトラックにチェックを入れ、ルールセット名を選ぶだけです。
-
-    ```bash
-    python -m ops contest new <大会 id> --from <前回の大会 id>   # シートに列が増える（前回の値入り。日付は空）
-    python -m ops contest import <大会 id>                       # シートの列 → contests/<大会 id>/contest.yaml
-    ```
-
-   直したいときはシートを直して `import` し直します（`contest.yaml` を手で編集しない）。項目の意味は contests の `schema/fields.yaml` が正本です。
+   埋めたらメニュー「大会データ → 大会データを更新」を押します。contests の `contests/<大会 id>/contest.yaml` が書かれ、push まで自動で行われます（ボタンの準備は運営ツールの README）。
+   YAML を直接書く必要はなく、未定の値は空欄のままで構いません（ページには「決定次第」と出て、検査で拾えます）。参加フォームは運営ツールの `ops form create <大会 id>` で作り、URL はシートに自動で入ります（もう一度「更新」を押す）。
 1. **サイトでページ一式を生成する。**
 
     ```bash
-    git -C external/aiwolf-nlp-contest-data pull
-    python3 scripts/contest/new.py <大会 id> --from <前回の大会 id>
+    bash scripts/contest/sync.sh                                   # contests の最新を取り込む
+    python3 scripts/contest/new.py <大会 id> --from <前回の大会 id>   # 英語の雛形が前回に無ければ --from-en inlg_2026 も
     ```
 
-    前回大会の `content/menu/<前回>/`（英語版があれば `_en` も）とトップページを複製し、front matter（`date`、`translationKey`、`contest: <大会 id>`）、内部リンク、`hugo.yaml` の大会メニュー、`result.md` を整えます。本文は書き換えません。
+    前回大会の `content/menu/<前回>/` とトップページを複製し、front matter（`date`、`translationKey`、`contest: <大会 id>`）、内部リンク、`hugo.yaml` の大会メニュー、`result.md` を整えます。本文は書き換えません。
+    日本語・英語のどちらを作るかは「サイトの言語」で決まります。
 1. **本文を今回の内容に書き直す。** 日程・フォーム・役職・試合数・会場などの事実は下のショートコードで書き、文章だけを直します。
    国内大会は前回の国内大会ではなく**直近の国際大会**を元にし、国内固有の部分（言語、学会セッション、スポンサー）だけ戻すと、改善点を引き継げます。
 1. **検査する。**
@@ -54,7 +50,8 @@ roles/<人数>.yaml                  村の人数ごとの役職表
     ```
 
     前回大会の名残、contest.yaml と違うフォーム URL や日付、「決まり次第」「（仮）」などの未記入、日英の対応、メニューの URL 切れを一覧にします。0 件になるまで直します。
-1. `hugo server -D` で `/page/<大会 id>` と `/menu/<大会 id>/` を確認してからデプロイします。
+1. `hugo server -D` で `/page/<大会 id>` と `/menu/<大会 id>/` を確認してから push します。
+1. 以後、シートを直したときは「大会データを更新」→ `bash scripts/contest/sync.sh` → localhost で確認 → push です。日付やフォーム URL はショートコードで出しているので、ページを作り直す必要はありません。
 
 ### ショートコード（事実は contests から出す）
 
