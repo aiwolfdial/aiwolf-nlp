@@ -58,6 +58,12 @@ def carry_over(text, prev_c, c, old_dirs, new_id, is_page, en):
     pv, v = str((prev_c.get("venue") or {}).get("name", "")), str((c.get("venue") or {}).get("name", ""))
     for w in sorted(re.findall(r"[^\s\d()（）_\-A-Za-z]{4,}", re.sub(r"20\d\d", " ", pv)), key=len, reverse=True):
         if w not in v: body = body.replace(w, '{{% contest-venue part="name" %}}')
+    pl, nl = prev_c.get("language"), c.get("language")
+    if pl and nl and pl != nl and not en:
+        def swap(mm):
+            path = SITE / "static" / "images" / nl / mm.group(2)
+            return f"{mm.group(1)}/images/{nl}/{mm.group(2)}" if path.exists() else mm.group(0)
+        body = re.sub(r"(aiwolf-nlp|)/images/" + re.escape(pl) + r"/([\w.\-]+)", swap, body)
     ps = next((x for x in SEASONS if x in str(prev_c.get("name", ""))), None)
     ns = next((x for x in SEASONS if x in str(c.get("name", ""))), None)
     if ps and ns and ps != ns:
@@ -108,7 +114,8 @@ def main():
     if not cy.exists():
         sys.exit(f"contest.yaml がありません: {cy}\n先に aiwolf-nlp-contest-data に contests/{cid}/contest.yaml を書いてください。")
     contest = yaml.safe_load(cy.read_text(encoding="utf-8"))
-    today = (a.date or datetime.date.today().isoformat()) + "T10:00:00+09:00"
+    # 日付は作った時刻（未来の時刻にすると Hugo がページをビルドしないので、決め打ちの 10:00 は使わない）
+    today = (a.date + "T00:00:00+09:00") if a.date else datetime.datetime.now().astimezone().replace(microsecond=0).isoformat()
     # どの言語のページを作るか: contest.yaml の site_language（ja / en / both）。無ければ前回大会に英語ページがあるかで決める
     lang = contest.get("site_language") or ("both" if menu_dir(prev, en=True) else "ja")
     want = {"ja": lang in ("ja", "both"), "en": lang in ("en", "both")}
@@ -122,7 +129,7 @@ def main():
     old_pages = [page_file(src_id["ja"]) if want["ja"] else None, page_file(src_id["en"], en=True) if want["en"] else None]
     old_page_stems = [p.name.replace(".en.md", "").replace(".md", "") if p else None for p in old_pages]
     new_page_stems = [cid, cid]
-    made = []
+    made, skipped = [], []
     # menu ディレクトリ
     for od, nd, L in zip(old_dirs, new_dirs, ("ja", "en")):
         if not od: continue
@@ -131,6 +138,8 @@ def main():
             sys.exit(f"既にあります: {dst}")
         dst.mkdir(parents=True)
         for f in sorted(od.glob("*.md")):
+            if f.name.startswith("paper_submission.") and not contest.get("paper_submission"):
+                skipped.append(f.name); continue                     # 論文投稿の無い大会には作らない
             text = f.read_text(encoding="utf-8")
             if f.name.startswith("program."):
                 fm_text = re.match(r"^---\n.*?\n---\n", text, re.S).group(0)
@@ -169,7 +178,19 @@ def main():
                 j += 1
             block = lines[i:j]
             new_block = [f"      {cid}:"]
-            for b in block[1:]:
+            if not contest.get("paper_submission"):          # 論文提出のメニュー項目（- name: から次の - name: の前まで）を落とす
+                kept, k = [block[0]], 1
+                while k < len(block):
+                    if block[k].lstrip().startswith("- name:"):
+                        e = k + 1
+                        while e < len(block) and not block[e].lstrip().startswith("- name:"): e += 1
+                        if not any("/paper_submission" in x for x in block[k:e]): kept += block[k:e]
+                        k = e
+                    else: kept.append(block[k]); k += 1
+                block_src = kept
+            else:
+                block_src = block
+            for b in block_src[1:]:
                 b2 = b
                 for od, nd in zip(old_dirs, new_dirs):
                     if od and nd: b2 = re.sub(rf"/menu/{re.escape(od.name)}(?=[/\s]|$)", f"/menu/{nd}", b2, flags=re.I)
@@ -180,6 +201,9 @@ def main():
         out.append(line); i += 1
     hy.write_text("\n".join(out), encoding="utf-8")
     print(f"作成: {len(made)} ファイル、hugo.yaml のメニュー {inserted} ブロック")
+    if skipped: print(f"作らなかった: {', '.join(skipped)}（論文投稿の無い大会）")
+    if contest.get("paper_submission") and not any(m.name.startswith("paper_submission.") for m in made):
+        print("注意: 論文投稿のある大会ですが、雛形に論文提出のページがありません（--page で論文提出のある大会から取ってください）")
     for m in made: print("  ", m.relative_to(SITE))
     print("\n次にやること:")
     print(f"  1. 本文を今回の内容に書き直す（日程・フォーム・役職・試合数・会場はショートコードに置き換える）")

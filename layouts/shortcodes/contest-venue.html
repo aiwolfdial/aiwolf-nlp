@@ -1,8 +1,8 @@
-{{- /* 併催の学会・会議。「名前 [host](url)」の形。引数: part=name|link|session|place で一部だけ出せる */ -}}
+{{- /* 併催の学会・会議。「名前 [host](url)」の形。引数: part=name|link|namelink|session|place で一部だけ出せる（namelink は名前に URL のリンク） */ -}}
 {{- $c := partial "contest/load.html" .Page -}}{{- $en := $c.en -}}
 {{- with $c.contest.venue -}}
 {{- $name := cond $en (.name_en | default .name) .name -}}
 {{- $host := .url | replaceRE "^https?://(www\\.)?" "" | strings.TrimSuffix "/" -}}
 {{- $part := $.Get "part" | default "" -}}
-{{- if eq $part "name" }}{{ $name }}{{ else if eq $part "place" }}{{ cond $en (.place_en | default .place) .place }}{{ else if eq $part "link" }}[{{ $host }}]({{ .url }}){{ else if eq $part "session" }}{{ cond $en (.session_en | default .session) .session }}{{ else }}{{ $name }} [{{ $host }}]({{ .url }}){{ end -}}
+{{- if eq $part "name" }}{{ $name }}{{ else if eq $part "place" }}{{ cond $en (.place_en | default .place) .place }}{{ else if eq $part "link" }}[{{ $host }}]({{ .url }}){{ else if eq $part "namelink" }}[{{ $name }}]({{ .url }}){{ else if eq $part "session" }}{{ cond $en (.session_en | default .session) .session }}{{ else }}{{ $name }} [{{ $host }}]({{ .url }}){{ end -}}
 {{- else -}}{{ partial "contest/tba.html" (dict "en" $en "inline" true) }}{{- end -}}

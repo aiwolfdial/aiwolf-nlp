@@ -94,7 +94,14 @@ def main():
             pv, v = str((pc.get("venue") or {}).get("name", "")), str((c.get("venue") or {}).get("name", ""))
             for w in re.findall(r"[^\s\d()（）_\-]{2,}", re.sub(r"20\d\d", " ", pv)):
                 if w not in v: prev_tokens.append(w)
-    prev_tokens = sorted({t for t in prev_tokens if t}, key=len, reverse=True)
+        if py.exists():
+            cur_sp = {s.get("name") for s in c.get("sponsors") or []}
+            for s_ in pc.get("sponsors") or []:
+                n_ = str(s_.get("name", ""))
+                if n_ and n_ not in cur_sp: prev_tokens += [n_, re.sub(r"株式会社|社$", "", n_).strip()]
+    prev_tokens = sorted({t for t in prev_tokens if t and len(t) >= 2}, key=len, reverse=True)
+    one_round = len(c.get("rounds") or []) <= 1
+    lang_words = ["英語で", "(英語)", "（英語）", "English", "/images/en/"] if c.get("language") == "ja" else ["日本語で", "(日本語)", "（日本語）"]
     known = contest_dates(c)
     form = c.get("form_url")
 
@@ -109,6 +116,9 @@ def main():
             where = f"{rel}:{'title' if n == 0 else n}"
             hit = next((t for t in prev_tokens if t.lower() in line.lower()), None)
             if hit: issue("A", where, f"前回の名残 '{hit}': {line.strip()[:80]}")
+            if one_round and re.search(r"[12]次", line): issue("A", where, f"回は 1 つなのに 1次・2次 の記述: {line.strip()[:80]}")
+            w_ = next((w for w in lang_words if w in line), None)
+            if w_: issue("A", where, f"対戦言語（{c.get('language')}）と違う言語の記述 '{w_}': {line.strip()[:80]}")
             m_news = re.match(r"^\s*[-*]\s*\*\*(20\d\d)/(\d\d)/(\d\d)\*\*", line)
             if m_news and created and f"{m_news.group(1)}-{m_news.group(2)}-{m_news.group(3)}" < created:
                 issue("A", where, f"ページを作る前の日付の更新情報（前回大会のもの？）: {line.strip()[:60]}")
