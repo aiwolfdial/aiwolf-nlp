@@ -41,7 +41,8 @@ roles/<人数>.yaml                  村の人数ごとの役職表
 
     前回大会の `content/menu/<前回>/` とトップページを複製し、front matter（`date`、`translationKey`、`contest: <大会 id>`）、内部リンク、`hugo.yaml` の大会メニュー、`result.md` を整えます。本文は書き換えません。
     日本語・英語のどちらを作るかは「サイトの言語」で決まります。論文投稿の無い大会では、論文提出のページとメニューは作りません。
-    前回の学会名・季節・大会名・説明画像の言語・トップのタイトルと更新情報は自動で今回のものに置き換わります。2 回制の記述や対戦言語の違いは検査が指摘するので、本文を直します。
+    前回の学会名・季節・大会名・説明画像の言語・トップのタイトルと更新情報は自動で今回のものに置き換わります。
+    回数・国内/国際・対戦言語・論文の有無で変わる文は、雛形（INLG 2026）に `contest-if` と `contest-lang` で書いてあるので、複製しただけで今回の大会に合った文になります。雛形に新しい文を足すときも、大会によって変わる部分はこの 2 つで書きます。
 1. **本文を今回の内容に書き直す。** 日程・フォーム・役職・試合数・会場などの事実は下のショートコードで書き、文章だけを直します。
    国内大会は前回の国内大会ではなく**直近の国際大会**を元にし、国内固有の部分（言語、学会セッション、スポンサー）だけ戻すと、改善点を引き継げます。
 1. **検査する。**
@@ -69,6 +70,8 @@ roles/<人数>.yaml                  村の人数ごとの役職表
 | `{{%/* contest-venue */%}}` | 併催の学会・会議「名前 [host](url)」。`part="name"` で名前だけ、`part="namelink"` でリンク付きの名前、`part="session"` でセッション名、`part="place"` で開催地だけ |
 | `{{%/* contest-rule key="talk_chars" */%}}` | ルールの値 1 つ（`talk_chars` / `mention_chars` / `response_timeout_sec` / `anytime_talks_per_day` / `anytime_phase_min`）。`as="min"` で秒を分に |
 | `{{%/* contest-sponsors */%}}` | スポンサーの箇条書き |
+| `{{%/* contest-lang */%}}` | 対戦言語（「日本語」「英語」）。`as="code"` で `ja` / `en`（画像のパスなど） |
+| `{{%/* contest-if rounds="2+" */%}}…{{%/* /contest-if */%}}` | 大会の設定に合うときだけ中身を出す。条件は `rounds="1"`/`"2+"`、`kind="domestic"`/`"international"`、`language`、`paper`、`sponsors`、`results`（`"true"`/`"false"`）、`has="venue.place"`（項目が埋まっているとき）。行ごと出し分けるときは前の行の末尾に開始タグを置き、中身を `- ` で始める |
 | `{{%/* contest-results-note */%}}` | 結果・ログの案内。結果（results.yaml）が入る前は「掲載予定です」、入ったら「掲載しています」に自動で切り替わる |
 | `{{%/* contest-name */%}}` | 大会名（英語ページは `name_en`）。「〇〇のサンプルエージェント」のように大会名を書く所に使う |
 | `{{%/* contest-text key="character_prompt" */%}}` | `contest.yaml` の `texts.<key>` の自由文（Markdown 可）。英語ページは `<key>_en` |

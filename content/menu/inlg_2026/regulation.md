@@ -34,7 +34,7 @@ contest: inlg_2026
 
 ### 発話（talk）のルール（両トラック共通）
 
-- 会話フェーズ（talk）では自然言語(英語)での対話を行います。プロトコルなど自然言語以外の使用は禁止です。
+- 会話フェーズ（talk）では自然言語({{% contest-lang %}})での対話を行います。プロトコルなど自然言語以外の使用は禁止です。
 - 会話フェーズ（talk）には1発話あたりの発話文字数の上限が存在します。詳細については[１発話あたりの発話文字数上限について](#１発話あたりの発話文字数上限について)をご確認ください。
 - talkでプレイヤーの名前を呼ぶ際はゲームサーバから送信されるキャラクターの名前を指定してください。(例：「@Daisuke was the werewolf」)
 - 「@Daisuke」というようなアンカーをtalkの発言冒頭につけることで、特定のエージェントに向けた発話ができます。発話を向けられたエージェントは、なにか応答することが期待されます。
@@ -98,7 +98,7 @@ contest: inlg_2026
 
 ### 具体例
 
-ゲームサーバから渡されるキャラクター情報の一例は下記の通りです。なお、本大会は英語で実施されるため、実際にエージェントへ渡されるキャラクター情報は英語です。以下は日本語サイト向けの参考例です。
+ゲームサーバから渡されるキャラクター情報の一例は下記の通りです。{{% contest-if language="en" %}}なお、本大会は英語で実施されるため、実際にエージェントへ渡されるキャラクター情報は英語です。以下は日本語サイト向けの参考例です。{{% /contest-if %}}
 
 ```text
 ミナト:
@@ -124,19 +124,19 @@ contest: inlg_2026
 
 ゲームサーバから送信される`base_length`はメンションが無い通常の発話の部分の文字数を制限する物です。\
 下記画像のように超過した分は切り捨てられます。
-![base_length](https://aiwolfdial.github.io/aiwolf-nlp/images/en/base_length.png#center)
+![base_length](https://aiwolfdial.github.io/aiwolf-nlp/images/{{% contest-lang as="code" %}}/base_length.png#center)
 
 ### メンションの発話
 
 ゲームサーバから送信される`mention_length`はメンションしている発話の部分の文字数を制限する物です。\
 メンションの部分は文字数としてカウントされることはなく、通常の発話と同様に超過した分は切り捨てられます。
-![mention_length](https://aiwolfdial.github.io/aiwolf-nlp/images/en/mention_length.png#center)
+![mention_length](https://aiwolfdial.github.io/aiwolf-nlp/images/{{% contest-lang as="code" %}}/mention_length.png#center)
 
 ### 通常の会話とメンションが混合した発話
 
 下記画像のように、`base_length`はメンションの手前までの発話に適応され超過した分は破棄されます。\
 同様に`mention_length`はメンションしている発話部分のみの適応となり超過した分は破棄されます。
-![base_mention_length](https://aiwolfdial.github.io/aiwolf-nlp/images/en/base_mention_length.png#center)
+![base_mention_length](https://aiwolfdial.github.io/aiwolf-nlp/images/{{% contest-lang as="code" %}}/base_mention_length.png#center)
 
 ## 評価基準
 

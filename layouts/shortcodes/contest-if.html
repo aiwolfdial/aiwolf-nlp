@@ -1,0 +1,19 @@
+{{- /* 大会の設定に合うときだけ中身を出す。条件は全部満たしたときに出る（AND）。
+       rounds="1" | "2+"   kind="domestic" | "international"   language="ja" | "en"
+       paper="true" | "false"   sponsors="true" | "false"   results="true" | "false"
+       has="venue.place"（その項目が埋まっているとき）
+       文の一部:  接続確認は{{% contest-if rounds="2+" %}}各回の{{% /contest-if %}}…
+       行ごと:    前の行の末尾に開始タグを置き、中身を「- 」や「#」で始める（空行を残さないため）
+                 - 前の行{{% contest-if rounds="2+" %}}
+                 - 2 回制のときだけの行{{% /contest-if %}}
+       段落ごと:  空行で囲んで置く */ -}}
+{{- $c := partial "contest/load.html" .Page -}}{{- $x := $c.contest -}}{{- $ok := true -}}
+{{- with .Get "rounds" }}{{ $n := len ($x.rounds | default slice) }}{{ if and (eq . "1") (ne $n 1) }}{{ $ok = false }}{{ end }}{{ if and (eq . "2+") (lt $n 2) }}{{ $ok = false }}{{ end }}{{ end -}}
+{{- with .Get "kind" }}{{ if ne . ($x.kind | default "") }}{{ $ok = false }}{{ end }}{{ end -}}
+{{- with .Get "language" }}{{ if ne . ($x.language | default "") }}{{ $ok = false }}{{ end }}{{ end -}}
+{{- with .Get "paper" }}{{ if ne (eq . "true") (eq $x.paper_submission true) }}{{ $ok = false }}{{ end }}{{ end -}}
+{{- with .Get "sponsors" }}{{ if ne (eq . "true") (gt (len ($x.sponsors | default slice)) 0) }}{{ $ok = false }}{{ end }}{{ end -}}
+{{- with .Get "results" }}{{ if ne (eq . "true") (gt (len $c.results) 0) }}{{ $ok = false }}{{ end }}{{ end -}}
+{{- with .Get "has" }}{{ $v := $x }}{{ range split . "." }}{{ $v = index ($v | default dict) . }}{{ end }}{{ if not $v }}{{ $ok = false }}{{ end }}{{ end -}}
+{{- $in := .Inner | strings.TrimRight " \n" | strings.TrimLeft "\n" -}}
+{{- if $ok }}{{ if findRE `^\s*([-*] |#)` $in }}{{ "\n" }}{{ $in }}{{ else }}{{ strings.TrimSpace $in }}{{ end }}{{ end -}}

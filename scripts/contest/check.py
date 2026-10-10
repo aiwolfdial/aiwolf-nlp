@@ -26,6 +26,30 @@ def fm_and_body(text):
     if not m: return {}, text
     return (yaml.safe_load(m.group(1)) or {}), m.group(2)
 
+def contest_if_ok(attrs: str, c: dict, has_results: bool) -> bool:
+    """contest-if の条件をサイトと同じ規則で評価する"""
+    a = dict(re.findall(r'(\w+)="([^"]*)"', attrs)); n = len(c.get("rounds") or [])
+    if a.get("rounds") == "1" and n != 1: return False
+    if a.get("rounds") == "2+" and n < 2: return False
+    if "kind" in a and a["kind"] != c.get("kind"): return False
+    if "language" in a and a["language"] != c.get("language"): return False
+    if "paper" in a and (a["paper"] == "true") != bool(c.get("paper_submission")): return False
+    if "sponsors" in a and (a["sponsors"] == "true") != bool(c.get("sponsors")): return False
+    if "results" in a and (a["results"] == "true") != has_results: return False
+    if "has" in a:
+        v = c
+        for k in a["has"].split("."): v = v.get(k) if isinstance(v, dict) else None
+        if not v: return False
+    return True
+
+def resolve_ifs(body: str, c: dict, has_results: bool) -> str:
+    """この大会で表示されない contest-if の中身を消す（行番号を保つため改行は残す）"""
+    def rep(m):
+        keep = contest_if_ok(m.group(1), c, has_results)
+        inner = m.group(2) if keep else "\n" * m.group(2).count("\n")
+        return inner
+    return re.sub(r"\{\{%\s*contest-if\s+([^%]*?)%\}\}(.*?)\{\{%\s*/contest-if\s*%\}\}", rep, body, flags=re.S)
+
 def strip_comments(body):
     """HTML コメントを消す。行番号がずれないよう、コメント内の改行は残す"""
     return re.sub(r"<!--.*?-->", lambda m: "\n" * m.group(0).count("\n"), body, flags=re.S)
@@ -119,7 +143,7 @@ def main():
 
     for f in files:
         rel = f.relative_to(SITE); text = f.read_text(encoding="utf-8")
-        fm, body = fm_and_body(text); body = strip_comments(body)
+        fm, body = fm_and_body(text); body = resolve_ifs(strip_comments(body), c, (CONTESTS / cid / "results.yaml").exists())
         if fm.get("contest") != cid and fm.get("menu_id") != cid:
             issue("G", rel, f"front matter に contest: {cid} がない")
         created = str(fm.get("date", ""))[:10]
