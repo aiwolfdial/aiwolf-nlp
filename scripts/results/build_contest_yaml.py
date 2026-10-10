@@ -91,7 +91,7 @@ def main(cfg_path):
         d["tracks"].append(track)
     d["availability"] = cfg.get("availability", {})
     d["human_eval_short"], d["human_eval_short_en"] = cfg.get("human_eval_short"), cfg.get("human_eval_short_en")
-    out = SITE / "data/contests" / cfg["slug"] / "results.yaml"; out.parent.mkdir(parents=True, exist_ok=True)
+    out = SITE / "external/aiwolf-nlp-contest-data/contests" / cfg["slug"] / "results.yaml"   # submodule（大会データ）に書く; out.parent.mkdir(parents=True, exist_ok=True)
     with open(out, "w", encoding="utf-8") as f:
         f.write(f"# 生成: scripts/results/build_contest_yaml.py {Path(cfg_path).name}\n")
         yaml.safe_dump(d, f, allow_unicode=True, sort_keys=False, width=200)
