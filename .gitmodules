@@ -1,6 +1,6 @@
 [submodule "themes/PaperMod"]
 	path = themes/PaperMod
 	url = https://github.com/adityatelange/hugo-PaperMod.git
-[submodule "external/aiwolf-nlp-contests"]
-	path = external/aiwolf-nlp-contests
-	url = https://github.com/aiwolfdial/aiwolf-nlp-contests.git
+[submodule "external/aiwolf-nlp-contest-data"]
+	path = external/aiwolf-nlp-contest-data
+	url = https://github.com/aiwolfdial/aiwolf-nlp-contest-data.git

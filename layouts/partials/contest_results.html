@@ -1,5 +1,5 @@
 {{- /* 大会 id (slug) から results データを返す。無ければ空 dict（with で偽になる）。
-       データは submodule data/contests/<id>/results.yaml (aiwolf-nlp-contests) */ -}}
+       データは submodule data/contests/<id>/results.yaml (aiwolf-nlp-contest-data) */ -}}
 {{- $out := dict -}}
 {{- with index site.Data.contests . -}}{{- with .results -}}{{- $out = . -}}{{- end -}}{{- end -}}
 {{- return $out -}}

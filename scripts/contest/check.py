@@ -18,7 +18,7 @@ from pathlib import Path
 import yaml
 
 SITE = Path(__file__).resolve().parents[2]
-CONTESTS = SITE / "external/aiwolf-nlp-contests/contests"
+CONTESTS = SITE / "external/aiwolf-nlp-contest-data/contests"
 PLACEHOLDERS = ["決まり次第", "決定次第", "未定", "TBA", "TBD", "TODO", "XX", "xx/xx", "（仮）"]
 
 def fm_and_body(text):

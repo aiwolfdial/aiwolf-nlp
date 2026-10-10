@@ -6,11 +6,11 @@ category: organizer_guide
 ShowToc: true
 ---
 
-## 大会データ（aiwolf-nlp-contests）
+## 大会データ（aiwolf-nlp-contest-data）
 
 大会の事実（日程、参加フォームの URL、トラックと役職構成、試合数、併催の学会、文字数などのルール値、スポンサー）と結果は、
-別リポジトリ [aiwolf-nlp-contests](https://github.com/aiwolfdial/aiwolf-nlp-contests) に置きます。
-本サイトはそれを `external/aiwolf-nlp-contests` に submodule として取り込み、`hugo.yaml` のマウント設定で `data/contests/` と `data/roles/` に見せています。
+別リポジトリ [aiwolf-nlp-contest-data](https://github.com/aiwolfdial/aiwolf-nlp-contest-data) に置きます。
+本サイトはそれを `external/aiwolf-nlp-contest-data` に submodule として取り込み、`hugo.yaml` のマウント設定で `data/contests/` と `data/roles/` に見せています。
 
 ```text
 contests/<大会 id>/contest.yaml   大会の定義（人が書く）
@@ -21,7 +21,7 @@ roles/<人数>.yaml                  村の人数ごとの役職表
 大会 id は `inlg_2026`、`aiwolfdial2026_springjp` のように小文字で付け、サイト側のディレクトリ名・ファイル名もこれに合わせます。
 
 - clone 直後は `git submodule update --init --recursive` で取得します（PaperMod と同じ）。
-- contests 側を更新したら、サイト側で `git -C external/aiwolf-nlp-contests pull` して submodule の参照を進めたコミットを push すると反映されます。
+- contests 側を更新したら、サイト側で `git -C external/aiwolf-nlp-contest-data pull` して submodule の参照を進めたコミットを push すると反映されます。
 - 連絡先など公開できない情報は contests には書きません（登録フォームの回答シートが台帳です）。
 
 ## 新規ページ作成
@@ -31,7 +31,7 @@ roles/<人数>.yaml                  村の人数ごとの役職表
 1. **サイトでページ一式を生成する。**
 
     ```bash
-    git -C external/aiwolf-nlp-contests pull
+    git -C external/aiwolf-nlp-contest-data pull
     python3 scripts/contest/new.py <大会 id> --from <前回の大会 id>
     ```
 
@@ -99,8 +99,8 @@ roles/<人数>.yaml                  村の人数ごとの役職表
 1. **results.yaml を生成して contests に push する。**
 
     ```bash
-    python3 scripts/results/build_contest_yaml.py scripts/results/contests/<大会 id>.yaml   # external/aiwolf-nlp-contests/contests/<大会 id>/results.yaml に書く
-    git -C external/aiwolf-nlp-contests add -A && git -C external/aiwolf-nlp-contests commit -m "結果: <大会 id>" && git -C external/aiwolf-nlp-contests push
+    python3 scripts/results/build_contest_yaml.py scripts/results/contests/<大会 id>.yaml   # external/aiwolf-nlp-contest-data/contests/<大会 id>/results.yaml に書く
+    git -C external/aiwolf-nlp-contest-data add -A && git -C external/aiwolf-nlp-contest-data commit -m "結果: <大会 id>" && git -C external/aiwolf-nlp-contest-data push
     ```
 
 1. **表彰を書く。** 発表後に `results.yaml` の `awards.items` へ追加し、`awards.status` を `published` にします（設定ファイルの `awards:` に書いて再生成しても同じ）。

@@ -3,7 +3,7 @@
 
     python3 scripts/contest/new.py <id> --from <前回の id>
 
-    <id> は aiwolf-nlp-contests の contests/<id>/contest.yaml が存在すること。
+    <id> は aiwolf-nlp-contest-data の contests/<id>/contest.yaml が存在すること。
     やること:
       - content/menu/<id>/（と <id>_en/）を前回のディレクトリから複製し、front matter の date を今日に、
         translationKey と内部リンクを新 id に、contest: <id> を追加
@@ -17,7 +17,7 @@ from pathlib import Path
 import yaml
 
 SITE = Path(__file__).resolve().parents[2]
-CONTESTS = SITE / "external/aiwolf-nlp-contests/contests"
+CONTESTS = SITE / "external/aiwolf-nlp-contest-data/contests"
 
 def menu_dir(cid, en=False):
     """content/menu の中から id に対応するディレクトリ名を返す（大文字小文字の揺れを吸収）"""
@@ -67,7 +67,7 @@ def main():
     cid, prev = a.id, a.prev
     cy = CONTESTS / cid / "contest.yaml"
     if not cy.exists():
-        sys.exit(f"contest.yaml がありません: {cy}\n先に aiwolf-nlp-contests に contests/{cid}/contest.yaml を書いてください。")
+        sys.exit(f"contest.yaml がありません: {cy}\n先に aiwolf-nlp-contest-data に contests/{cid}/contest.yaml を書いてください。")
     contest = yaml.safe_load(cy.read_text(encoding="utf-8"))
     today = (a.date or datetime.date.today().isoformat()) + "T10:00:00+09:00"
     old_dirs = [menu_dir(prev), menu_dir(prev, en=True)]

@@ -1,6 +1,6 @@
 # scripts/results — 結果ページ用データの生成
 
-`external/aiwolf-nlp-contests/contests/<slug>/results.yaml`（大会データリポジトリ）を作るためのスクリプト群。運用手順は
+`external/aiwolf-nlp-contest-data/contests/<slug>/results.yaml`（大会データリポジトリ）を作るためのスクリプト群。運用手順は
 [運営マニュアル（ウェブサイト更新）](../../content/organizer/edit_website.md) の「結果・ログページ」を参照。
 
 | ファイル | 役割 |
