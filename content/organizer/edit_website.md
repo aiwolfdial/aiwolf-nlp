@@ -26,8 +26,15 @@ roles/<人数>.yaml                  村の人数ごとの役職表
 
 ## 新規ページ作成
 
-1. **contests に大会を登録する。** 前回大会の `contests/<前回 id>/contest.yaml` をコピーして日程・トラック・会場・フォーム URL を直し、push します。
-   未定の値は `null` のままで構いません（ページには「決定次第」と出て、検査で拾えます）。
+1. **contests に大会を登録する。** 運営ツールで大会定義シート（Google スプレッドシート。A 列が値、B 列がキー、C 列が説明）を作り、A 列を埋めて取り込みます。
+   YAML を直接書く必要はありません。未定の値は空欄のままで構いません（ページには「決定次第」と出て、検査で拾えます）。
+
+    ```bash
+    python -m ops contest new <大会 id> --from <前回の大会 id>   # シートができる（前回の値入り。日付は空）
+    python -m ops contest import <大会 id>                       # シート → contests/<大会 id>/contest.yaml
+    ```
+
+   直したいときはシートを直して `import` し直します（`contest.yaml` を手で編集しない）。項目の意味は contests の `schema/fields.yaml` が正本です。
 1. **サイトでページ一式を生成する。**
 
     ```bash
