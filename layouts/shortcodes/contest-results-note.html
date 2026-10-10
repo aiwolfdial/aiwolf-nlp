@@ -1,0 +1,10 @@
+{{- /* 結果・ログの案内。contest-data に results.yaml が入ると「掲載予定」から「掲載しています」に自動で切り替わる。
+       使い方: contest-results-note */ -}}
+{{- $c := partial "contest/load.html" .Page -}}
+{{- $dir := cond $c.en (printf "%s_en" $c.id) $c.id -}}
+{{- $link := printf "/menu/%s/result" $dir -}}
+{{- if $c.en -}}
+{{- if $c.results }}Logs of the main competition are available on [Results & Logs]({{ $link }}).{{ else }}Logs of the main competition will be posted on [Results & Logs]({{ $link }}).{{ end }} Results and logs of past contests are available [here](/results).
+{{- else -}}
+{{- if $c.results }}本戦の対戦ログは[結果・ログ]({{ $link }})に掲載しています。{{ else }}本戦の対戦ログは[結果・ログ]({{ $link }})に掲載予定です。{{ end }}前大会までの結果・ログは[こちら](/results)にあります。
+{{- end -}}

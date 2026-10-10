@@ -69,6 +69,9 @@ def carry_over(text, prev_c, c, old_dirs, new_id, is_page, en):
     if ps and ns and ps != ns:
         for a, b in ((ps, ns), ("年" + ps[0], "年" + ns[0]), (ps[0] + "に", ns[0] + "に")):
             body = body.replace(a, b); fm = fm.replace(a, b)
+    # 結果・ログの案内（結果が出たら自動で「掲載しています」に変わるショートコード）
+    body = re.sub(r"本戦の対戦ログは\[結果・ログ\]\([^)]*\)に掲載(?:しています|予定です)。(?:前大会までの結果・ログは\[こちら\]\([^)]*\)にあります。)?", "{{% contest-results-note %}}", body)
+    body = re.sub(r"Logs of the main competition (?:are available on|will be posted on) \[Results & Logs\]\([^)]*\)\.", "{{% contest-results-note %}}", body)
     if is_page:
         title = (c.get("name_en") or c.get("name")) if en else f"{c.get('name', new_id)} 自然言語部門"
         fm = re.sub(r"^title: .*$", "title: '" + str(title).replace("'", "''") + "'", fm, count=1, flags=re.M)

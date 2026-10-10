@@ -58,7 +58,7 @@ def main():
         for p in paths: print(f"  {cid}: {(base or 'http://localhost:1313/aiwolf-nlp/') + p}")
     if not base:
         print("\nプレビューのサーバが動いていません。起動してから上の URL を開いてください:\n"
-              "  hugo server -D --port 1313 --baseURL http://localhost:1313/aiwolf-nlp/ --appendPort=false")
+              "  hugo server -D --port 1313 --baseURL http://localhost:1313/aiwolf-nlp/ --appendPort=false --poll 700ms")
 
 if __name__ == "__main__":
     main()

@@ -51,7 +51,7 @@ roles/<人数>.yaml                  村の人数ごとの役職表
     ```
 
     前回大会の名残、contest.yaml と違うフォーム URL や日付、「決まり次第」「（仮）」などの未記入、日英の対応、メニューの URL 切れを一覧にします。0 件になるまで直します。
-1. `hugo server -D` で `/page/<大会 id>` と `/menu/<大会 id>/` を確認してから push します。
+1. `hugo server -D --poll 700ms` で `/page/<大会 id>` と `/menu/<大会 id>/` を確認してから push します（`--poll` はネットワークディスク上で変更を確実に拾うため）。
 1. 以後、シートを直したときは「大会データを更新」→ `bash scripts/contest/sync.sh` → localhost で確認 → push です。日付やフォーム URL はショートコードで出しているので、ページを作り直す必要はありません。
 
 ### ショートコード（事実は contests から出す）
@@ -69,6 +69,7 @@ roles/<人数>.yaml                  村の人数ごとの役職表
 | `{{%/* contest-venue */%}}` | 併催の学会・会議「名前 [host](url)」。`part="name"` で名前だけ、`part="namelink"` でリンク付きの名前、`part="session"` でセッション名、`part="place"` で開催地だけ |
 | `{{%/* contest-rule key="talk_chars" */%}}` | ルールの値 1 つ（`talk_chars` / `mention_chars` / `response_timeout_sec` / `anytime_talks_per_day` / `anytime_phase_min`）。`as="min"` で秒を分に |
 | `{{%/* contest-sponsors */%}}` | スポンサーの箇条書き |
+| `{{%/* contest-results-note */%}}` | 結果・ログの案内。結果（results.yaml）が入る前は「掲載予定です」、入ったら「掲載しています」に自動で切り替わる |
 | `{{%/* contest-name */%}}` | 大会名（英語ページは `name_en`）。「〇〇のサンプルエージェント」のように大会名を書く所に使う |
 | `{{%/* contest-text key="character_prompt" */%}}` | `contest.yaml` の `texts.<key>` の自由文（Markdown 可）。英語ページは `<key>_en` |
 
