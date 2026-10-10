@@ -51,7 +51,24 @@
 {{- $isEn := eq site.Language.Lang "en" }}
 {{- $labelNext := cond $isEn "Next Contest" "次回大会" }}{{ $labelPast := cond $isEn "Past Contest" "過去大会" }}{{ $labelSoon := cond $isEn "Coming soon" "近日追加予定" }}
 
-{{- $paginator := .Paginate $pages }}
+{{- /* 仕切りも一覧の 1 件として数える（以前の仕切りページと同じ並び・ページ送りにするため）。
+       1 ページの件数から、1 ページ目に入る仕切りの数を引く */}}
+{{- $nDiv := 0 }}
+{{- if or .IsHome (eq .Section "page") }}
+  {{- $hasUp := false }}{{ $hasPast := false }}
+  {{- range $pages }}
+    {{- $cid := .Params.contest | default .Params.menu_id | default "" }}{{ $end := "" }}
+    {{- with index site.Data.contests $cid }}{{ with .contest }}
+      {{- with .venue }}{{ with .end }}{{ $end = printf "%v" . | truncate 10 "" }}{{ end }}{{ end }}
+      {{- if not $end }}{{ range .rounds }}{{ range .milestones }}{{ $d := printf "%v" (.end | default .date) | truncate 10 "" }}{{ if gt $d $end }}{{ $end = $d }}{{ end }}{{ end }}{{ end }}{{ end }}
+    {{- end }}{{ end }}
+    {{- if and $end (ge $end $today) }}{{ $hasUp = true }}{{ else }}{{ $hasPast = true }}{{ end }}
+  {{- end }}
+  {{- if $hasUp }}{{ $nDiv = add $nDiv 1 }}{{ end }}
+  {{- if $hasPast }}{{ $nDiv = add $nDiv (cond $hasUp 1 3) }}{{ end }}
+{{- end }}
+{{- $size := sub 10 $nDiv }}{{/* 10 は Hugo の既定の 1 ページの件数 */}}
+{{- $paginator := .Paginate $pages $size }}
 
 {{- if and .IsHome site.Params.homeInfoParams (eq $paginator.PageNumber 1) }}
   {{- partial "home_info.html" . }}
