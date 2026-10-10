@@ -112,3 +112,4 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/macos,windows,linux,visualstudiocode,hugo
 # 結果ページから外した集計データの退避先 (復帰させるときは build_results_yaml.py の INCLUDE_QUANT を True に)
 data/results_archive/
+__pycache__/
