@@ -44,6 +44,34 @@ def front_matter(text):
 
 SEASONS = ("春季", "夏季", "秋季", "冬季")
 
+def prev_venue_names(prev_c) -> list[str]:
+    """前回の学会名の書き方の候補: 正式名、括弧内の略称（JSAI2026）、略称の英字と年の間に空白（JSAI 2026）"""
+    pv = str((prev_c.get("venue") or {}).get("name", "")).strip()
+    out = [pv] if pv else []
+    for short in re.findall(r"[（(]\s*([^()（）]+?)\s*[)）]", pv):
+        out += [short, re.sub(r"([A-Za-z])(\d)", r"\1 \2", short)]
+    m = re.match(r"^([A-Za-z]+)\s*(20\d\d)$", pv)
+    if m: out += [m.group(1) + m.group(2), f"{m.group(1)} {m.group(2)}"]
+    return sorted({x for x in out if len(x) >= 4}, key=len, reverse=True)
+
+def replace_prev_names(body, prev_c, c):
+    """前回の大会名・学会名をショートコードにする。
+      [学会名](URL) → リンク付きの学会名 / 学会名への・で・にて → 学会名 / それ以外（〇〇のサンプルエージェント など）→ 大会名
+      日本語の学会名の一部（人工知能学会全国大会 など）も学会名にする"""
+    VENUE, VLINK, NAME = '{{% contest-venue part="name" %}}', '{{% contest-venue part="namelink" %}}', '{{% contest-name %}}'
+    pn = str(prev_c.get("name", "")).strip()
+    if pn and pn != str(c.get("name", "")): body = body.replace(pn, NAME)
+    v = str((c.get("venue") or {}).get("name", ""))
+    for w in prev_venue_names(prev_c):
+        if not w or w in v: continue
+        body = re.sub(r"\[" + re.escape(w) + r"\]\([^)]*\)", VLINK, body)
+        body = re.sub(re.escape(w) + r"(?=\s*(?:への|で開催|にて|で行|に参加|の会場))", VENUE, body)
+        body = re.sub(re.escape(w) + r"\s*(?=の)", NAME, body)
+    pv = str((prev_c.get("venue") or {}).get("name", ""))
+    for w in sorted(re.findall(r"[^\s\d()（）_\-A-Za-z]{4,}", re.sub(r"20\d\d", " ", pv)), key=len, reverse=True):
+        if w not in v: body = body.replace(w, VENUE)
+    return body
+
 def carry_over(text, prev_c, c, old_dirs, new_id, is_page, en):
     """前回大会の固有の語を今回のものに置き換える。
       - 前回のディレクトリ名（リンクの文字など）→ 今回の id
@@ -55,9 +83,7 @@ def carry_over(text, prev_c, c, old_dirs, new_id, is_page, en):
     fm, body = (m.group(1), m.group(2)) if m else ("", text)
     for od in old_dirs:
         if od: body = re.sub(re.escape(od.name), new_id, body, flags=re.I)
-    pv, v = str((prev_c.get("venue") or {}).get("name", "")), str((c.get("venue") or {}).get("name", ""))
-    for w in sorted(re.findall(r"[^\s\d()（）_\-A-Za-z]{4,}", re.sub(r"20\d\d", " ", pv)), key=len, reverse=True):
-        if w not in v: body = body.replace(w, '{{% contest-venue part="name" %}}')
+    body = replace_prev_names(body, prev_c, c)
     pl, nl = prev_c.get("language"), c.get("language")
     if pl and nl and pl != nl and not en:
         def swap(mm):
