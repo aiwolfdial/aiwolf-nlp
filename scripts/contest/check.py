@@ -27,7 +27,8 @@ def fm_and_body(text):
     return (yaml.safe_load(m.group(1)) or {}), m.group(2)
 
 def strip_comments(body):
-    return re.sub(r"<!--.*?-->", "", body, flags=re.S)
+    """HTML コメントを消す。行番号がずれないよう、コメント内の改行は残す"""
+    return re.sub(r"<!--.*?-->", lambda m: "\n" * m.group(0).count("\n"), body, flags=re.S)
 
 def find_menu_dir(cid, en):
     want = cid + ("_en" if en else "")
@@ -122,11 +123,13 @@ def main():
         if fm.get("contest") != cid and fm.get("menu_id") != cid:
             issue("G", rel, f"front matter に contest: {cid} がない")
         created = str(fm.get("date", ""))[:10]
+        m_fm = re.match(r"^---\n.*?\n---\n", text, re.S); off = m_fm.group(0).count("\n") if m_fm else 0     # front matter の行数
+        title_line = next((i + 1 for i, l in enumerate(text.split("\n")) if l.startswith("title:")), 1)
         lines = [f"title: {fm.get('title', '')}"] + body.split("\n")
         for n, line in enumerate(lines):
-            where = f"{rel}:{'title' if n == 0 else n}"
+            where = f"{rel}:{title_line if n == 0 else n + off}"
             hit = next((t for t in prev_tokens if t.lower() in line.lower()), None)
-            if hit: issue("A", where, f"前回の名残 '{hit}': {line.strip()[:80]}")
+            if hit: issue("A", where, f"前回大会の語「{hit}」が残っている: {line.strip()[:80]}")
             if one_round and re.search(r"[12]次", line): issue("A", where, f"回は 1 つなのに 1次・2次 の記述: {line.strip()[:80]}")
             w_ = next((w for w in lang_words if w in line), None)
             if w_: issue("A", where, f"対戦言語（{c.get('language')}）と違う言語の記述 '{w_}': {line.strip()[:80]}")
@@ -177,8 +180,19 @@ def main():
 
     if not issues:
         print(f"{cid}: 問題なし（{len(files)} ファイル）"); print_preview(cid); return 0
-    print(f"{cid}: {len(issues)} 件")
-    for kind, where, msg in issues: print(f"  [{kind}] {where}: {msg}")
+    KIND = {"A": "前回大会の名残・食い違い", "B": "フォーム URL", "C": "日付", "D": "未記入", "E": "日英の対応", "F": "メニュー", "G": "front matter"}
+    print(f"{cid}: 直すところ {len(issues)} 件（ファイル名:行番号 をクリックするとその行が開きます）")
+    by_file = {}
+    for kind, where, msg in issues:
+        f, _, ln = str(where).partition(":")
+        by_file.setdefault(f, []).append((int(ln) if ln.isdigit() else 0, ln, kind, msg))
+    for f, items in by_file.items():
+        print(f"\n{f}")
+        for _, ln, kind, msg in sorted(items):
+            head, _, quote = msg.partition(": ")
+            print(f"  {f}:{ln}" if ln else f"  {f}")
+            print(f"      {head}" if kind == "A" else f"      {KIND.get(kind, kind)} — {head}")
+            if quote: print(f"      > {quote}")
     print_preview(cid)
     return 1
 

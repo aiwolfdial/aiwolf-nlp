@@ -76,7 +76,9 @@ def carry_over(text, prev_c, c, old_dirs, new_id, is_page, en):
         title = (c.get("name_en") or c.get("name")) if en else f"{c.get('name', new_id)} 自然言語部門"
         fm = re.sub(r"^title: .*$", "title: '" + str(title).replace("'", "''") + "'", fm, count=1, flags=re.M)
         head = r"## (?:Updates|News)" if en else r"## 更新情報"
-        body = re.sub(rf"({head}\n)(.*?)(?=\n## |\Z)", lambda mm: mm.group(1) + "\n" + ("<!-- - **YYYY/MM/DD**: what changed -->" if en else "<!-- - **YYYY/MM/DD**: 更新内容 -->") + "\n", body, count=1, flags=re.S)
+        stub = ("<!-- Remove this comment line and the closing one to show Updates.\n## Updates\n\n- **YYYY/MM/DD**: what changed\n-->\n" if en else
+                "<!-- 更新情報を載せるときは、この行と最後の行を消す（見出しごと表示される）\n## 更新情報\n\n- **YYYY/MM/DD**: 更新内容\n-->\n")
+        body = re.sub(rf"{head}\n.*?(?=\n## |\Z)", lambda mm: stub, body, count=1, flags=re.S)
     return fm + body
 
 def rewrite(text, old_id, new_id, old_dirs, new_dirs, old_pages, new_pages, today, is_page):
