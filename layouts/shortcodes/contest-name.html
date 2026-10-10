@@ -1,0 +1,3 @@
+{{- /* contest.yaml の大会名（英語ページでは name_en）。使い方: contest-name */ -}}
+{{- $c := partial "contest/load.html" .Page -}}
+{{- if $c.en }}{{ $c.contest.name_en | default $c.contest.name }}{{ else }}{{ $c.contest.name }}{{ end -}}

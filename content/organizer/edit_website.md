@@ -68,6 +68,7 @@ roles/<人数>.yaml                  村の人数ごとの役職表
 | `{{%/* contest-venue */%}}` | 併催の学会・会議「名前 [host](url)」。`part="session"` でセッション名、`part="place"` で開催地だけ |
 | `{{%/* contest-rule key="talk_chars" */%}}` | ルールの値 1 つ（`talk_chars` / `mention_chars` / `response_timeout_sec` / `anytime_talks_per_day` / `anytime_phase_min`）。`as="min"` で秒を分に |
 | `{{%/* contest-sponsors */%}}` | スポンサーの箇条書き |
+| `{{%/* contest-name */%}}` | 大会名（英語ページは `name_en`）。「〇〇のサンプルエージェント」のように大会名を書く所に使う |
 | `{{%/* contest-text key="character_prompt" */%}}` | `contest.yaml` の `texts.<key>` の自由文（Markdown 可）。英語ページは `<key>_en` |
 
 値が無いときはどのショートコードも決まり文句を出します（文中は「【未定】」、段落は「決定次第掲載します。」、英語は `[TBA]` / `To be announced.`）。検査がこの文言を未記入として拾います。
