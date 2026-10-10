@@ -3,4 +3,4 @@
 	url = https://github.com/adityatelange/hugo-PaperMod.git
 [submodule "external/aiwolf-nlp-contest-data"]
 	path = external/aiwolf-nlp-contest-data
-	url = https://github.com/iggy157/aiwolf-nlp-contest-data.git
+	url = https://github.com/aiwolfdial/aiwolf-nlp-contest-data.git
