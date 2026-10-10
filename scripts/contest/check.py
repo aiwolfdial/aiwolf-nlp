@@ -59,6 +59,17 @@ def parse_dates(line):
         out.append(f"{m.group(1)}-{int(m.group(2)):02d}-{int(m.group(3)):02d}")
     return out
 
+def print_preview(cid):
+    """プレビューの URL を出す（動いている hugo server の番号で）"""
+    import importlib.util
+    sp = importlib.util.spec_from_file_location("preview_links", Path(__file__).with_name("preview_links.py"))
+    m = importlib.util.module_from_spec(sp); sp.loader.exec_module(m)
+    base = m.running_base() or "http://localhost:1313/aiwolf-nlp/"
+    print("\nプレビュー:")
+    for p in m.page_paths(cid): print(f"  {base}{p}")
+    if not m.running_base():
+        print("  （プレビューのサーバが動いていません: hugo server -D --port 1313 --baseURL http://localhost:1313/aiwolf-nlp/ --appendPort=false --poll 700ms）")
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("id"); ap.add_argument("--from", dest="prev")
@@ -165,9 +176,10 @@ def main():
             if not ok: issue("F", f"hugo.yaml[{lang}]", f"メニュー '{item.get('name')}' の URL 先が無い: /{url}")
 
     if not issues:
-        print(f"{cid}: 問題なし（{len(files)} ファイル）"); return 0
+        print(f"{cid}: 問題なし（{len(files)} ファイル）"); print_preview(cid); return 0
     print(f"{cid}: {len(issues)} 件")
     for kind, where, msg in issues: print(f"  [{kind}] {where}: {msg}")
+    print_preview(cid)
     return 1
 
 if __name__ == "__main__":

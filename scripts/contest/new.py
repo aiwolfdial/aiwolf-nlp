@@ -106,6 +106,17 @@ def load_c(cid):
     p = CONTESTS / cid / "contest.yaml"
     return yaml.safe_load(p.read_text(encoding="utf-8")) if p.exists() else {}
 
+def print_preview(cid):
+    """プレビューの URL を出す（動いている hugo server の番号で）"""
+    import importlib.util
+    sp = importlib.util.spec_from_file_location("preview_links", Path(__file__).with_name("preview_links.py"))
+    m = importlib.util.module_from_spec(sp); sp.loader.exec_module(m)
+    base = m.running_base() or "http://localhost:1313/aiwolf-nlp/"
+    print("\nプレビュー:")
+    for p in m.page_paths(cid): print(f"  {base}{p}")
+    if not m.running_base():
+        print("  （プレビューのサーバが動いていません: hugo server -D --port 1313 --baseURL http://localhost:1313/aiwolf-nlp/ --appendPort=false --poll 700ms）")
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("id"); ap.add_argument("--from", dest="prev", required=True)
@@ -211,7 +222,8 @@ def main():
     print("\n次にやること:")
     print(f"  1. 本文を今回の内容に書き直す（日程・フォーム・役職・試合数・会場はショートコードに置き換える）")
     print(f"  2. python3 scripts/contest/check.py {cid} --from {prev} で直し忘れを確認する")
-    print(f"  3. hugo server -D で /page/{cid} と /menu/{cid}/ を確認する")
+    print(f"  3. 下の URL で確認する")
+    print_preview(cid)
 
 if __name__ == "__main__":
     main()
