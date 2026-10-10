@@ -100,7 +100,11 @@ def main():
         dst.mkdir(parents=True)
         for f in sorted(od.glob("*.md")):
             text = f.read_text(encoding="utf-8")
-            if f.name.startswith("result."):
+            if f.name.startswith("program."):
+                fm_text = re.match(r"^---\n.*?\n---\n", text, re.S).group(0)
+                text = rewrite(fm_text, src_id[L], cid, old_dirs, new_dirs, old_page_stems, new_page_stems, today, is_page=False)
+                text += ("\nThe program will be posted once it is decided.\n" if f.name.endswith(".en.md") else "\nプログラムは決定次第掲載します。\n")
+            elif f.name.startswith("result."):
                 fm = front_matter(text)
                 en = f.name.endswith(".en.md")
                 text = ("---\n" f"date: '{today}'\ndraft: false\ntitle: '{fm.get('title', 'Results & Logs' if en else '結果・ログ')}'\n"

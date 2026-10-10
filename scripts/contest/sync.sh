@@ -8,4 +8,4 @@ git -C external/aiwolf-nlp-contest-data checkout -q --detach origin/HEAD 2>/dev/
 if git diff --quiet -- external/aiwolf-nlp-contest-data; then echo "contests: 変更なし（$(git -C external/aiwolf-nlp-contest-data log --oneline -1)）"; exit 0; fi
 git add external/aiwolf-nlp-contest-data
 git commit -q -m "data: 大会データを更新（$(git -C external/aiwolf-nlp-contest-data log -1 --format=%h)）"
-echo "コミットしました: $(git log --oneline -1)"; echo "push すると公開サイトに反映されます: git push origin main"
+echo "コミットしました: $(git log --oneline -1)"; echo "localhost で確認してから push してください: git push origin $(git rev-parse --abbrev-ref HEAD)"

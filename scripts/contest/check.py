@@ -66,11 +66,8 @@ def main():
     cy = CONTESTS / cid / "contest.yaml"
     if not cy.exists(): sys.exit(f"contest.yaml がありません: {cy}")
     c = yaml.safe_load(cy.read_text(encoding="utf-8"))
-    year = None
-    for r in c.get("rounds", []):
-        for m in r.get("milestones", []):
-            if m.get("date"): year = str(m["date"])[:4]; break
-        if year: break
+    years = {d[:4] for d in contest_dates(c) if re.match(r"^20\d\d", d)}
+    year = "・".join(sorted(years)) if years else None
     issues = []
     def issue(kind, where, msg): issues.append((kind, where, msg))
 
@@ -88,6 +85,16 @@ def main():
             d = find_menu_dir(a.prev, en)
             if d: prev_tokens.append(d.name)
         for p in find_pages(a.prev): prev_tokens.append(p.name.replace(".en.md", "").replace(".md", ""))
+        py = CONTESTS / a.prev / "contest.yaml"
+        if py.exists():
+            pc = yaml.safe_load(py.read_text(encoding="utf-8"))
+            pname, name = str(pc.get("name", "")), str(c.get("name", ""))
+            for w in ("春季", "夏季", "秋季", "冬季"):
+                if w in pname and w not in name: prev_tokens += [w, w[0] + "に", "年" + w[0], w[0] + "の"]
+            pv, v = str((pc.get("venue") or {}).get("name", "")), str((c.get("venue") or {}).get("name", ""))
+            for w in re.findall(r"[^\s\d()（）_\-]{2,}", re.sub(r"20\d\d", " ", pv)):
+                if w not in v: prev_tokens.append(w)
+    prev_tokens = sorted({t for t in prev_tokens if t}, key=len, reverse=True)
     known = contest_dates(c)
     form = c.get("form_url")
 
@@ -96,13 +103,18 @@ def main():
         fm, body = fm_and_body(text); body = strip_comments(body)
         if fm.get("contest") != cid and fm.get("menu_id") != cid:
             issue("G", rel, f"front matter に contest: {cid} がない")
-        for n, line in enumerate(body.split("\n"), 1):
-            where = f"{rel}:{n}"
-            for t in prev_tokens:
-                if t and t.lower() in line.lower(): issue("A", where, f"前回の名残 '{t}': {line.strip()[:80]}")
+        created = str(fm.get("date", ""))[:10]
+        lines = [f"title: {fm.get('title', '')}"] + body.split("\n")
+        for n, line in enumerate(lines):
+            where = f"{rel}:{'title' if n == 0 else n}"
+            hit = next((t for t in prev_tokens if t.lower() in line.lower()), None)
+            if hit: issue("A", where, f"前回の名残 '{hit}': {line.strip()[:80]}")
+            m_news = re.match(r"^\s*[-*]\s*\*\*(20\d\d)/(\d\d)/(\d\d)\*\*", line)
+            if m_news and created and f"{m_news.group(1)}-{m_news.group(2)}-{m_news.group(3)}" < created:
+                issue("A", where, f"ページを作る前の日付の更新情報（前回大会のもの？）: {line.strip()[:60]}")
             if year:
                 for y in set(re.findall(r"20\d\d", line)):
-                    if y != year and not re.search(r"20\d\d/\d\d/\d\d|^\s*[-*]\s*\*\*20\d\d", line):
+                    if y not in years and not re.search(r"20\d\d/\d\d/\d\d|^\s*[-*]\s*\*\*20\d\d", line):
                         issue("A", where, f"大会の年 {year} 以外の西暦 {y}: {line.strip()[:80]}")
             for u in re.findall(r"https?://(?:forms\.gle|docs\.google\.com/forms)[^\s)]*", line):
                 if form and u.rstrip("/") != form.rstrip("/"): issue("B", where, f"フォーム URL が contest.yaml と違う: {u}")
