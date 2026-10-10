@@ -1,114 +1,86 @@
 ---
 date: '2025-10-04T14:00:00+09:00'
 draft: false
-title: '運営を始める前に'
+title: '準備（リポジトリと初回設定）'
 category: organizer_guide
+weight: 2
 ShowToc: true
 ---
 
-wsl上にaiwoldialのフォルダを作成
+運営に参加したら、最初に 1 回だけ行う準備です。
+
+## 運営で使うリポジトリ
+
+運営の作業に使うのは次の 3 つです。同じフォルダに並べて置きます（道具が隣のフォルダを探すため）。
+
+| リポジトリ | 公開 | 役割 |
+| --- | --- | --- |
+| [aiwolf-nlp](https://github.com/aiwolfdial/aiwolf-nlp) | 公開 | このウェブサイト。大会ページの作成と更新 |
+| [aiwolf-nlp-contest-data](https://github.com/aiwolfdial/aiwolf-nlp-contest-data) | 公開 | 大会データ（大会の定義、参加チーム一覧、結果）。シートのボタンで自動更新されるので、手で編集しない |
+| [aiwolf-nlp-organize-tool](https://github.com/aiwolfdial/aiwolf-nlp-organize-tool) | 非公開 | 運営の道具（`ops` コマンド）。フォームの作成、登録の通知、大会サーバの設定、結果の集計 |
 
 ```bash
-$ mkdir aiwolfdial
+mkdir aiwolfdial && cd aiwolfdial
+git clone --recursive https://github.com/aiwolfdial/aiwolf-nlp.git
+git clone https://github.com/aiwolfdial/aiwolf-nlp-contest-data.git
+git clone git@github.com:aiwolfdial/aiwolf-nlp-organize-tool.git
 ```
 
-## 主要なリポジトリ説明
+`aiwolf-nlp` は `--recursive` で、テーマと大会データ（submodule）も一緒に取得します。
+付け忘れたら `git submodule update --init --recursive` を実行してください。テーマが無いと全ページが 404 になります。
 
-### ウェブサイト運営
+### そのほかのリポジトリ
 
-| リポジトリリンク | 概要 |
+| リポジトリ | 概要 |
 | --- | --- |
-| aiwolf-nlp | 人狼知能プロジェクトの大会やイベント情報を一般向けに公開するウェブサイト。 |
+| aiwolf-nlp-server | 大会のゲームサーバ |
+| aiwolf-nlp-agent-llm | LLM で発話するサンプルエージェント。参加者向けの基準 |
+| aiwolf-nlp-agent | テンプレートから発話するサンプルエージェント。サーバの動作確認に使える |
+| aiwolf-nlp-common | サーバが送る JSON をオブジェクトに変換するパッケージ |
+| aiwolf-nlp-viewer | 対戦ログのビューア |
+| aiwolf-nlp-calculate-score | 勝率とゲームスコアの計算。本戦中の配信にも使う |
+| aiwolf-nlp-llm-judge | 主観評価と同じ項目を LLM で順位付けする |
+| aiwolf-nlp-log-picker / aiwolf-nlp-log-translator | 評価用ログの抽出、ログの翻訳 |
 
-### サンプルエージェント関連
+必要になったときに同じフォルダへ clone してください。
 
-| リポジトリリンク | 概要 |
-| --- | --- |
-| aiwolf-nlp-agent | 人狼知能コンテストのサンプルエージェント。LLMは使わず、テンプレからランダムで選択し発話。サーバ起動後、実行テストなどで使える。 |
-| aiwolf-nlp-agent-llm | 人狼知能コンテストのサンプルエージェント。LLMによって発話を生成。 |
-| aiwolf-nlp-common | ゲームサーバから送信されるJSON形式のデータをオブジェクトに変換するためのパッケージ。エージェントの開発においてサーバから送信されるデータやその構造を簡単に確認・利用したいときに便利。 |
+## 運営の道具（aiwolf-nlp-organize-tool）の初回設定
 
-### 大会の実行
+```bash
+cd aiwolf-nlp-organize-tool
+uv sync          # 依存の導入（uv が無ければ https://docs.astral.sh/uv/ で入れる）
+uv run python -m ops --help
+```
 
-| リポジトリリンク | 概要 |
-| --- | --- |
-| aiwolf-nlp-server | 人狼知能コンテストのゲームサーバ。 |
+Google（フォームの作成、シートの読み書き）と Slack（通知）を使うために、次を用意します。手順の詳細はリポジトリ内の `docs/setup_google.md` にあります。
 
-### 結果の集計・分析
+- **Google へのログイン**: `clasp login` で運営の共有アカウントにログインします。フォームの作成で使います。
+  ログインの有効期限は 7 日です。切れたらコマンドが案内を出すので、もう一度ログインします。
+- **秘密情報**: サービスアカウントの鍵と Slack Bot のトークンを管理者から受け取り、`~/.ops/` に置きます（`secrets.env.example` を参照）。
+  **チャットやリポジトリには貼らないでください。**
 
-| リポジトリリンク | 概要 |
-| --- | --- |
-| aiwolf-nlp-log-picker | ゲームログのファイルの中から評価用のログを出場回数・担当役職バランスなどがよくなるようにピックする。 |
-| aiwolf-nlp-log-translator | ログファイルを任意の言語へ翻訳する。 |
-| aiwolf-nlp-viewer | ログファイルを閲覧するためのビュアー。大会実行後選んだログファイルをアップロードし、ここから閲覧できるようにする。 |
-| aiwolf-nlp-llm-judge | 主観評価と同じ項目の順位をLLMによってつけさせる。 |
-| aiwolf-nlp-calculate-score | ログから勝率とゲームスコア（投票精度・疑われやすさなど）を計算する。本戦中の配信にも使う。 |
+## 大会定義シートを使う準備
 
-上記の中から必要に応じてaiwolfdialフォルダにクローンし管理していくとやりやすい。
+- 管理者にシートの**編集権限**をもらいます。
+- シートのメニュー「大会データ → 大会データを更新」を使う人は、GitHub のトークンを 1 回設定します（[大会定義シートの使い方](./sheet.md#更新ボタンの準備初回だけ)）。
 
-## 必要な初期設定
+## GitHub Organization への参加
 
-これから人狼の運営に参加するにあたって必要な設定について書いていきます。
+aiwolfdial の Organization に参加し、上の 3 つのリポジトリに書き込めるようにしてもらいます。
 
-### 人狼サーバに公開鍵を登録
+## 大会サーバへの接続（後半の作業で使う）
 
-1. 公開鍵・秘密鍵を作成する
+予選・本戦を動かす人は、大会サーバに SSH で入れるようにします。
 
-    以下を参考に自分のPCで公開鍵・秘密鍵のペアを作成する\
-    参考: [SSH鍵を生成するコマンドと全手順解説](https://qiita.com/to3izo/items/9b5b80430e43cd3c4e3c)
-1. 人狼サーバに公開鍵を設置する
+1. 自分の PC で鍵のペアを作り、公開鍵を運営の人に渡します（参考: [SSH鍵を生成するコマンドと全手順解説](https://qiita.com/to3izo/items/9b5b80430e43cd3c4e3c)）。
+1. 運営の人が公開鍵をサーバの `~/.ssh/authorized_keys` に追記します。
+1. `~/.ssh/config` に次を書きます。IP アドレスは運営の人に聞いてください。
 
-    - 新しく参加する人の手順
-
-        作成した公開鍵を運営の人に何らかの方法で渡してください。
-
-    - 運営の手順
-
-    1. 新しく参加する人から公開鍵を受け取る
-    1. 人狼サーバに接続する
-    1. (新しくユーザの作成を行うなら、そのユーザの作成と切り替えを行う)
-
-        ユーザの作成: [Ubuntuでユーザを作成する方法](https://vpslife.server-memo.net/ubuntu_adduser/)\
-        ユーザの切り替え: [sudo suって？](https://qiita.com/takegons/items/adc79b83b3df7e632851)
-    1. 下記コマンド実行で公開鍵を配置する
-
-    ```bash
-    $ echo "[公開鍵]" >> ~/.ssh/authorized_keys
-    ```
-
-1. ssh接続が可能になるように設定ファイルを記述する
-
-    下記コマンドを実行し、次の内容を追記する
-
-    - 実行コマンド
-
-    ```bash
-    $ nano ~/.ssh/config
-    ```
-
-    - 追記する内容
-
-    ```bash
+    ```text
     Host aiwolf
-    HostName [人狼サーバのipアドレス (運営の人に聞いてください)]
-    User aiwolf (もし新しくユーザを作成したならそのユーザ名に変更)
-    IdentityFile ~/.ssh/[作成した公開鍵に対応する秘密鍵のファイル名]
+    HostName [人狼サーバの IP アドレス]
+    User aiwolf
+    IdentityFile ~/.ssh/[秘密鍵のファイル名]
     ```
 
-    参考: [~/.ssh/config](https://qiita.com/passol78/items/2ad123e39efeb1a5286b)
-
-1. ssh接続をテストする
-
-    下記コマンドを実行し、人狼サーバに接続ができることを確認する
-
-    ```bash
-    $ ssh aiwolf
-    ```
-
-### 人狼運営のGitHub Organizationに参加する
-<!-- ToDo -->
-
-<!-- このサイトを書くためにMarkDownLintの拡張機能を入れる説明も入れたい... -->
-
-[outlineへ戻る](./outline.md)
-[次: 人狼知能大会ウェブサイト更新](./edit_website.md)
+1. `ssh aiwolf` で接続できることを確かめます。
