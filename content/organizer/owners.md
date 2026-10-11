@@ -3,12 +3,12 @@ date: '2025-10-04T11:00:00+09:00'
 draft: false
 title: '担当者（Slack の通知先）の追加'
 category: organizer_guide
-weight: 6
+weight: 11
 ShowToc: true
 ---
 
 参加登録があると、その大会の**担当者**に Slack の DM で知らせが届きます（[参加登録が届いたら](./slack_invitation.md)）。
-運営メンバーが替わったときや、担当者を増やすときの手順です。
+運営メンバーが替わったときや、担当者を増やすときの手順です。この作業には organize-tool への push 権限が要ります。
 
 ## 1. Slack のメンバー ID を調べる
 

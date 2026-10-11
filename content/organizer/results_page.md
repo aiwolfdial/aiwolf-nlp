@@ -3,7 +3,7 @@ date: '2025-10-04T09:00:00+09:00'
 draft: false
 title: '結果・ログのページ'
 category: organizer_guide
-weight: 9
+weight: 17
 ShowToc: true
 ---
 

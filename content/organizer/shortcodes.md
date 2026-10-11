@@ -3,7 +3,7 @@ date: '2025-10-04T09:30:00+09:00'
 draft: false
 title: 'ショートコード一覧'
 category: organizer_guide
-weight: 8
+weight: 14
 ShowToc: true
 ---
 

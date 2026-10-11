@@ -1,9 +1,9 @@
 ---
 date: '2025-10-04T13:00:00+09:00'
 draft: false
-title: '大会定義シートの使い方'
+title: '大会定義シートの決まり'
 category: organizer_guide
-weight: 3
+weight: 12
 ShowToc: true
 ---
 
@@ -58,23 +58,13 @@ ShowToc: true
 メニュー「大会データ → 大会データを更新」を押すと、GitHub の aiwolf-nlp-contest-data が自動で更新されます（30 秒〜1 分）。
 終わるとダイアログに結果が出ます。
 
-- **更新しました**: 変わった大会が書かれます。続けて[サイトの更新](./edit_website.md)を行います。
+- **更新しました**: 変わった大会が書かれます。続けて[サイト更新](./edit_website.md)を行います。
 - **変更はありませんでした**: シートと大会データが同じです。
 - **注意**: 未記入の必須項目、読めない日付、登録締切が本戦より後、学会期間が本戦より前、などが出ます。シートを直してもう一度押してください。
 
 大会データが更新されても、**公開サイトはまだ変わりません**。サイトに反映するのは、サイト側で取り込んで確認したときです。
 
-### 更新ボタンの準備（初回だけ）
-
-ボタンは押す人の GitHub トークンで動きます。
-
-1. GitHub の Settings → Developer settings → Personal access tokens → **Fine-grained tokens** → Generate new token を開きます。
-1. Resource owner を `aiwolfdial`、Repository access を「Only select repositories」で `aiwolf-nlp-contest-data` だけにします。
-1. Permissions の Repository permissions で **Actions を Read and write** にします（ほかは触らない）。
-1. 作ったトークン（`github_pat_...`）をコピーし、シートのメニュー「大会データ → GitHub のトークンを設定」に貼ります。
-
-初回は Google の承認画面が出ます。「このアプリは Google で確認されていません」と出たら「詳細」→「移動」→「許可」で進めてください。
-トークンは本人専用の領域に保存され、ほかの人には見えません。期限が切れたら同じ手順で貼り直します。
+ボタンを使うには、押す人ごとに GitHub のトークンをシートに登録します（[準備](./preparing.md#シートから-githubaiwolf-nlp-contest-dataへ-push-できるように登録)）。
 
 ## よくある間違い
 

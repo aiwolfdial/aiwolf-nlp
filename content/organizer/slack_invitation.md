@@ -11,7 +11,8 @@ ShowToc: true
 
 ## 登録の通知を動かす
 
-担当者への DM は、運営の道具の `ops sync` が送ります。登録期間の始まりに、常に動いているマシンで起動しておきます。
+担当者への DM は、aiwolf-nlp-organize-tool の `ops sync` が送ります。登録期間の始まりに、常に動いているマシンで起動しておきます。
+回答シートの読み取りと Slack への送信に、[秘密情報](./secrets.md)（サービスアカウントの鍵と Slack Bot のトークン）が要ります。
 
 ```bash
 cd aiwolf-nlp-organize-tool
