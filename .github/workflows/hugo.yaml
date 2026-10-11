@@ -34,6 +34,8 @@ defaults:
 jobs:
   # Build job
   build:
+    # 公式リポジトリだけで動かす（試用や個人の複製では Pages が無く、毎朝の定期実行が失敗するため）
+    if: github.repository == 'aiwolfdial/aiwolf-nlp'
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: 0.147.7
