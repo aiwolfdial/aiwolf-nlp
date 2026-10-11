@@ -11,7 +11,7 @@ ShowToc: true
 
 👉 [大会定義シートを開く](https://docs.google.com/spreadsheets/d/1NzFe2zl2lPqE9MQSbj_PVA4LMDwuje9Uez7GmGDdORg/edit)
 
-閲覧は誰でもできます。編集するには管理者に権限をもらってください。
+シートは運営メンバーだけが開けます。管理者に共有（編集者）してもらってください。
 
 ## タブの構成
 

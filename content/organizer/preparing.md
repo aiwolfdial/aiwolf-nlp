@@ -7,7 +7,7 @@ weight: 2
 ShowToc: true
 ---
 
-運営に参加したら、最初に 1 回だけ行います。aiwolfdial の GitHub Organization に入れてもらい、[大会定義シート](https://docs.google.com/spreadsheets/d/1NzFe2zl2lPqE9MQSbj_PVA4LMDwuje9Uez7GmGDdORg/edit)の編集権限をもらっておいてください。
+運営に参加したら、最初に 1 回だけ行います。aiwolfdial の GitHub Organization に入れてもらい、[大会定義シート](https://docs.google.com/spreadsheets/d/1NzFe2zl2lPqE9MQSbj_PVA4LMDwuje9Uez7GmGDdORg/edit)を自分の Google アカウントに共有（編集者）してもらっておいてください。シートは非公開で、共有された人だけが開けます。
 
 ## リポジトリのクローン
 
