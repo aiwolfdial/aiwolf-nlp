@@ -2,7 +2,6 @@
 {{- $c := partial "contest/load.html" .Page -}}{{- $en := $c.en -}}
 {{- $indent := .Get "indent" | default "" -}}
 {{- with $c.contest.tracks -}}
-{{- range . }}
-{{ $indent }}- {{ cond $en (.name_en | default .name) .name }}
-{{- end }}
-{{ else -}}{{ partial "contest/tba.html" (dict "en" $en "inline" false) }}{{- end -}}
+{{- /* 前後に改行を出さない（空行ができると、外側の箇条書きが段落扱いになって行間が広がる） */ -}}
+{{- range $i, $t := . }}{{ if $i }}{{ "\n" }}{{ end }}{{ $indent }}- {{ cond $en ($t.name_en | default $t.name) $t.name }}{{ end -}}
+{{- else -}}{{ partial "contest/tba.html" (dict "en" $en "inline" false) }}{{- end -}}

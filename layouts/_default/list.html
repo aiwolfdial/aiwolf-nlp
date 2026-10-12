@@ -87,15 +87,15 @@
   {{- end }}{{ end }}
   {{- $upcoming := and $end (ge $end $today) }}
   {{- if and (not $divNextDone) $upcoming }}
-<article class="div-content-entry"><header class="entry-header"><h2 class="entry-hint-parent">----- {{ $labelNext }} -----</h2></header></article>
+<article class="div-content-entry"><header class="entry-header"><h2 class="entry-hint-parent">----- {{ $labelNext }} -----</h2></header><div class="entry-content"><p></p></div></article>
     {{- $divNextDone = true }}
   {{- else if and (not $divPastDone) (not $upcoming) }}
     {{- if not $divNextDone }}
-<article class="div-content-entry"><header class="entry-header"><h2 class="entry-hint-parent">----- {{ $labelNext }} -----</h2></header></article>
-<article class="div-content-entry"><header class="entry-header"><h2 class="entry-hint-parent">{{ $labelSoon }}</h2></header></article>
+<article class="div-content-entry"><header class="entry-header"><h2 class="entry-hint-parent">----- {{ $labelNext }} -----</h2></header><div class="entry-content"><p></p></div></article>
+<article class="div-content-entry"><header class="entry-header"><h2 class="entry-hint-parent">{{ $labelSoon }}</h2></header><div class="entry-content"><p></p></div></article>
       {{- $divNextDone = true }}
     {{- end }}
-<article class="div-content-entry"><header class="entry-header"><h2 class="entry-hint-parent">----- {{ $labelPast }} -----</h2></header></article>
+<article class="div-content-entry"><header class="entry-header"><h2 class="entry-hint-parent">----- {{ $labelPast }} -----</h2></header><div class="entry-content"><p></p></div></article>
     {{- $divPastDone = true }}
   {{- end }}
 {{- end }}
@@ -105,8 +105,7 @@
 {{- $user_preferred := or site.Params.disableSpecial1stPost site.Params.homeInfoParams }}
 {{- if .Param "divContent" }}
   {{- $class = "div-content-entry" }}
-{{- else if (and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0) (not $user_preferred)) }}
-  {{- $class = "first-entry" }}
+{{- /* テーマの「1 件目を大きく出す」書式は使わない（以前は 1 件目が仕切りのページだったので、大会はすべて普通のカードで出ていた） */}}
 {{- else if $term }}
   {{- $class = "post-entry tag-entry" }}
 {{- end }}
