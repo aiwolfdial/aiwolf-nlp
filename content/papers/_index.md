@@ -9,6 +9,22 @@ description: '人狼知能大会 自然言語部門のワークショップ論�
 
 INLG 併設ワークショップ AIWolfDial の論文集です。各年の大会概要論文（summary）と、参加チーム・関連研究の論文を収録しています。
 
+### AIWolfDial 2026（INLG 2026、ユトレヒト）
+
+論文は発表順です。
+
+- [Self-Improvement of AIWolf Agents Based on Self-Play Logs](/aiwolf-nlp/papers/2026/AIWolfDial2026_paper__01.pdf). Taku Umeda, Takao Endo, Jumpei Hato, Kotaro Otomura.
+- [Do Cross-Game Lessons Appear in Later Dialogue? A Controlled Measurement of Lesson Realization in Werewolf Dialogue Agents](/aiwolf-nlp/papers/2026/AIWolfDial2026_paper__02.pdf). Kota Munaoka, Yoshinobu Kano.
+- [The moon is new each night: enhancing reasoning with self-reflection in the game of Werewolf](/aiwolf-nlp/papers/2026/AIWolfDial2026_paper__03.pdf). Alicja Kasicka, Łukasz Krajewski, Bartosz Przybył, Natalia Krawczyk, Michał Szczerbak, Justyna Gromada.
+- [Power Play Instructions in LLM Werewolf: Cross-Request Execution and Game Outcomes](/aiwolf-nlp/papers/2026/AIWolfDial2026_paper__04.pdf). Shoma Yato, Ikumu Komatsu, Haruka Itakura, Daisuke Katagami.
+- [An AIWolf Agent for Consistent Dialogue with Role-Specific Strategies and Utterance Regeneration](/aiwolf-nlp/papers/2026/AIWolfDial2026_paper__05.pdf). Yuki Kubo, Taiga Sano, Eiji Kumakawa, Tae Sato.
+- [Improving Dialogues in LLM-Based AI Werewolf Agents With Few-Shot Discussion Examples](/aiwolf-nlp/papers/2026/AIWolfDial2026_paper__06.pdf). Yuya Harada, Yoshinobu Kano.
+- [Keeping a Public Story Straight: Memory Interventions for LLM Agents in AIWolf](/aiwolf-nlp/papers/2026/AIWolfDial2026_paper__07.pdf). Seungjae Ryan Lee.
+- [Beyond What to Say: Proactive Utterance Timing with Inner Thoughts for Werewolf Agents](/aiwolf-nlp/papers/2026/AIWolfDial2026_paper__08.pdf). Yoshiki Tanaka, Shuya Uchiyama, Daichi Hamaguchi, Michimasa Inaba.
+- [Preserving Character in Four Letters: Personality Information Compression in AIWolf Agents Using MBTI-like Labels](/aiwolf-nlp/papers/2026/AIWolfDial2026_paper__09.pdf). Ryosuke Sueyoshi, Kentaro Hoshi, Miyu Ueki, Chaeyoung Sung.
+- [Fine-Grained Absolute Evaluation of Utterance Naturalness in Japanese AIWolf Dialogue: An Agreement Analysis between Human Annotators and LLM Judges](/aiwolf-nlp/papers/2026/AIWolfDial2026_paper__10.pdf). Chaeyoung Sung, Ryosuke Sueyoshi, Kentaro Hoshi, Miyu Ueki, Masato Taki.
+- [What Breaks Prompt-Specified Settings in Multi-Turn Dialogue Attacks: Attack Type, Burst-Injection Granularity, and Role Boundaries](/aiwolf-nlp/papers/2026/AIWolfDial2026_paper__11.pdf). Yuki Shimoda, Yoshinobu Kano.
+
 ### AIWolfDial 2025（INLG 2025、ハノイ）
 
 [論文集 (ACL Anthology)](https://aclanthology.org/volumes/2025.aiwolfdial-1/)
